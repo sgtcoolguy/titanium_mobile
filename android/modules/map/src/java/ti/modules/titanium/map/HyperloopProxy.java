@@ -1,10 +1,14 @@
+
 package ti.modules.titanium.map;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.appcelerator.kroll.KrollDict;
@@ -23,393 +27,651 @@ import android.app.Activity;
 @Kroll.proxy(parentModule = HyperloopModule.class)
 public class HyperloopProxy extends TiViewProxy {
 
-	private class HyperloopView extends TiUIView {
-		public HyperloopView(TiViewProxy proxy) {
-			super(proxy);
-			LayoutArrangement arrangement = LayoutArrangement.DEFAULT;
+    private class HyperloopView extends TiUIView {
+        public HyperloopView(TiViewProxy proxy) {
+            super(proxy);
+            LayoutArrangement arrangement = LayoutArrangement.DEFAULT;
 
-			if (proxy.hasProperty(TiC.PROPERTY_LAYOUT)) {
-				String layoutProperty = TiConvert.toString(proxy.getProperty(TiC.PROPERTY_LAYOUT));
-				if (layoutProperty.equals(TiC.LAYOUT_HORIZONTAL)) {
-					arrangement = LayoutArrangement.HORIZONTAL;
-				} else if (layoutProperty.equals(TiC.LAYOUT_VERTICAL)) {
-					arrangement = LayoutArrangement.VERTICAL;
-				}
-			}
-			setNativeView(new TiCompositeLayout(proxy.getActivity(), arrangement));
-		}
+            if (proxy.hasProperty(TiC.PROPERTY_LAYOUT)) {
+                String layoutProperty = TiConvert.toString(proxy.getProperty(TiC.PROPERTY_LAYOUT));
+                if (layoutProperty.equals(TiC.LAYOUT_HORIZONTAL)) {
+                    arrangement = LayoutArrangement.HORIZONTAL;
+                } else if (layoutProperty.equals(TiC.LAYOUT_VERTICAL)) {
+                    arrangement = LayoutArrangement.VERTICAL;
+                }
+            }
+            setNativeView(new TiCompositeLayout(proxy.getActivity(), arrangement));
+        }
 
-		@Override
-		public void processProperties(KrollDict d) {
-			super.processProperties(d);
-		}
-	}
+        @Override
+        public void processProperties(KrollDict d) {
+            super.processProperties(d);
+        }
+    }
 
-	private static final String TAG = "TiHyperloopProxy";
-	
-	private Object nativeObject;
-	private String nativeClassName;
-	// private List<Object> cachedReturns; // Why do we need this? Shouldn't we
-	// just consult the keys of _instances?
-	// Map from native object we're wrapping, to the wrapping proxy object
-	// instance holding it
-	private static HashMap<Object, HyperloopProxy> _instances;
+    /**
+     * 
+     */
+    private static Map<Class<?>, Class<?>> BOX_TO_PRIMITIVES = new HashMap<Class<?>, Class<?>>();
 
-	// Constructor
-	public HyperloopProxy() {
-		super();
-	}
+    static {
+        BOX_TO_PRIMITIVES.put(Boolean.class, boolean.class);
+        BOX_TO_PRIMITIVES.put(Byte.class, byte.class);
+        // BOX_TO_PRIMITIVES.put(Character.class, char.class);
+        BOX_TO_PRIMITIVES.put(Double.class, double.class);
+        BOX_TO_PRIMITIVES.put(Float.class, float.class);
+        BOX_TO_PRIMITIVES.put(Integer.class, int.class);
+        BOX_TO_PRIMITIVES.put(Long.class, long.class);
+        BOX_TO_PRIMITIVES.put(Short.class, short.class);
+    }
 
-	@Override
-	public TiUIView createView(Activity activity) {
-		// TODO Create a HyperloopView that holds a standard UIView and the
-		// proxy object?
-		TiUIView view = new HyperloopView(this);
-		view.getLayoutParams().autoFillsHeight = true;
-		view.getLayoutParams().autoFillsWidth = true;
-		return view;
-	}
+    private static final String TAG = "TiHyperloopProxy";
 
-	// Handle creation options
-	// equivalent to iOS _initWithProperties
-	@Override
-	public void handleCreationDict(KrollDict options) {
-		String className = options.getString("class");
-		if (className == null) {
-			Log.e(TAG, "Missing 'class'");
-			return;
-		}
-		this.nativeClassName = className;
+    private Object nativeObject;
+    private String nativeClassName;
+    private Class<?> clazz;
 
-		try {
-			Class<?> c = Class.forName(className);
-			if (c == null) {
-				Log.e(TAG, "Class '" + className + "' not found");
-				return;
-			}
+    // Constructor
+    public HyperloopProxy() {
+        super();
+    }
 
-			Object[] initArgs = (Object[]) options.get("args");
-			if (initArgs == null) {
-				initArgs = new Object[0];
-			}
+    @Override
+    public TiUIView createView(Activity activity) {
+        TiUIView view = new HyperloopView(this);
+        view.getLayoutParams().autoFillsHeight = true;
+        view.getLayoutParams().autoFillsWidth = true;
+        return view;
+    }
 
-			// should we create an instance, or should we just hold onto the class?
-			boolean alloc = options.optBoolean("alloc", true);
+    // Handle creation options
+    // equivalent to iOS _initWithProperties
+    @Override
+    public void handleCreationDict(KrollDict options) {
+        String className = options.getString("class");
+        if (className == null) {
+            Log.e(TAG, "Missing 'class' value");
+            return;
+        }
+        this.nativeClassName = className;
 
-			if (alloc) {
-				Object instance = null;
-				Object[] convertedArgs = convertArgs(initArgs);
-				// TODO Need to lookup candidate for constructor based on the
-				// arguments
-				Constructor<?> cons = lookupConstructor(c, convertedArgs);
-				if (cons == null) {
-					Log.e(TAG, 
-							"Unable to find matching constructor for class: " + className + ", args: " + convertedArgs);
-					return;
-				}
+        try {
+            Class<?> c = Class.forName(className);
+            if (c == null) {
+                Log.e(TAG, "Class '" + className + "' not found");
+                return;
+            }
 
-				instance = cons.newInstance(convertedArgs);
-				this.setNativeObject(instance);
+            this.clazz = c;
 
-				if (this.nativeObject == null) {
-					Log.e(TAG, "Object " + className + " could not be created");
-					return;
-				}
-			}
+            Object[] initArgs = (Object[]) options.get("args");
+            if (initArgs == null) {
+                initArgs = new Object[0];
+            }
 
-			// wipe some props before passing on
-			options.remove("args");
-			options.remove("class");
+            // should we create an instance, or should we just hold onto the
+            // class?
+            boolean alloc = options.optBoolean("alloc", true);
 
-			super.handleCreationDict(options);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+            if (alloc) {
+                Object instance = null;
+                Object[] convertedArgs = convertArgs(initArgs);
+                Constructor<?> cons = resolveConstructor(c, convertedArgs);
+                if (cons == null) {
+                    Log.e(TAG,
+                            "Unable to find matching constructor for class: " + className
+                                    + ", args: " + convertedArgs);
+                    return;
+                }
 
-	private Object[] convertArgs(Object[] initArgs) {
-		Object[] convertedArgs = new Object[initArgs.length];
-		for (int i = 0; i < initArgs.length; i++) {
-			convertedArgs[i] = convertArgument(initArgs[i]);
-		}
-		return convertedArgs;
-	}
+                instance = cons.newInstance(convertedArgs);
+                this.setNativeObject(instance);
 
-	// TODO
-	// https://github.com/NativeScript/android-runtime/blob/master/src/src/com/tns/MethodResolver.java
-	private Constructor<?> lookupConstructor(Class<?> c, Object[] initArgs) {
-		Constructor<?>[] constructors = c.getConstructors();
-		if (constructors.length == 1) {
-			return constructors[0];
-		}
-		int argCount = (initArgs == null) ? 0 : initArgs.length;
-		// if no args, assume we want a no-arg constructor!
-		if (argCount == 0) {
-			try {
-				return c.getDeclaredConstructor();
-			} catch (NoSuchMethodException e) {
-				// TODO may be no no-arg constructors!
-				e.printStackTrace();
-			}
-		}
-		// Loop through constructors and find any that match by arg count? (what
-		// about varargs?)
-		for (Constructor<?> constructor : constructors) {
-			Class<?>[] params = constructor.getParameterTypes();
-			if (params.length == argCount) {
-				// TODO Determine viability of arg types (can we assign/cast the
-				// passed in arguments to the constructor's declared parameter
-				// type?)
-				// TODO Track how "close" of a match it is by how much we have
-				// to do to convert the arg?
-				return constructor;
-			}
-		}
-		return null;
-	}
+                if (this.nativeObject == null) {
+                    Log.e(TAG, "Object " + className + " could not be created");
+                    return;
+                }
+            }
 
-	private Method resolveMethod(Class<?> c, String name, Object[] initArgs, boolean instanceMethod) {
-		int argCount = (initArgs == null) ? 0 : initArgs.length;
-		// if no args, assume we want a no-arg constructor!
-		if (argCount == 0) {
-			try {
-				return c.getMethod(name);
-			} catch (NoSuchMethodException e) {
-				// TODO may be no no-arg method by that name!
-				e.printStackTrace();
-			}
-		}
+            // wipe some props before passing on
+            options.remove("args");
+            options.remove("class");
 
-		Method[] methods = c.getMethods();
-		if (methods.length == 1) {
-			return methods[0];
-		}
-		// Loop through methods and find any that match by arg count? (what
-		// about varargs?)
-		for (Method method : methods) {
-			Class<?>[] params = method.getParameterTypes();
-			if (params.length == argCount) {
-				// TODO Determine viability of arg types (can we assign/cast the
-				// passed in arguments to the constructor's declared parameter
-				// type?)
-				// TODO Track how "close" of a match it is by how much we have
-				// to do to convert the arg?
-				return method;
-			}
-		}
-		return null;
-	}
+            super.handleCreationDict(options);
+        } catch (ClassNotFoundException e) {
+            Log.e(TAG, "Class '" + className + "' not found", e);
+        } catch (InstantiationException e) {
+            Log.e(TAG, "Unable to instantiate class '" + className + "'", e);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access class '" + className + "'", e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Illegal arguments to instantiate class '" + className + "'", e);
+        } catch (InvocationTargetException e) {
+            Log.e(TAG, "Exception during instantiation of class '" + className + "'", e.getCause());
+        }
+    }
 
-	// Methods
-	@Kroll.method
-	public Object callNativeFunction(Object[] args) {
-		KrollDict dict;
-		if (args[0] instanceof KrollDict) {
-			dict = (KrollDict) args[0];
-		} else {
-			dict = new KrollDict((HashMap) args[0]);
-		}
-		String functionCall = dict.getString("func");
-		if (functionCall == null) {
-			// throw new Exception("'func' cannot be null");
-			return null;
-		}
+    /**
+     * Convert the "raw" args we received to unwrap proxies down to the object
+     * they hold.
+     * 
+     * @param initArgs
+     * @return
+     */
+    private Object[] convertArgs(Object[] initArgs) {
+        Object[] convertedArgs = new Object[initArgs.length];
+        for (int i = 0; i < initArgs.length; i++) {
+            convertedArgs[i] = convertArgument(initArgs[i]);
+        }
+        return convertedArgs;
+    }
 
-		Object[] functionArguments = (Object[]) dict.get("args");
-		boolean uiThread = dict.optBoolean("mainThread", false);
-		boolean uiThreadWait = dict.optBoolean("mainThreadWait", false);
-		boolean isInstanceMethod = dict.optBoolean("isInstanceMethod", false);
+    /**
+     * If the argument is a proxy, unwrapp the native object it holds.
+     * 
+     * @param object
+     * @return
+     */
+    private Object convertArgument(Object object) {
+        if (object == null) {
+            return null;
+        }
+        // If it's a proxy, unwrap the native object we're wrapping
+        if (HyperloopProxy.class.isAssignableFrom(object.getClass())) {
+            return ((HyperloopProxy) object).nativeObject;
+        }
+        // TODO Convert other types? Maybe KrollDict?
+        return object;
+    }
 
-		if (functionArguments == null) {
-			functionArguments = new Object[0];
-		}
+    private Constructor resolveConstructor(Class<?> c, Object[] arguments) {
+        int argCount = (arguments == null) ? 0 : arguments.length;
+        // if no args, assume we want a no-arg constructor!
+        if (argCount == 0) {
+            try {
+                return c.getConstructor();
+            } catch (NoSuchMethodException e) {
+                // TODO may be no no-arg constructor!
+                e.printStackTrace();
+            }
+        }
 
-		Object result = this.invokeSelector(functionCall, functionArguments, this.nativeObject, uiThread, uiThreadWait,
-				isInstanceMethod);
-		return HyperloopIdToJSObject(result, this, true);
-	}
+        Constructor<?>[] constructors = c.getConstructors();
+        if (constructors.length == 1) {
+            return constructors[0];
+        }
 
-	private Object HyperloopIdToJSObject(Object result, HyperloopProxy proxy, boolean acceptNil) {
-		if (result == null) {
-			return null;
-		}
-		if (HyperloopIsKnownType(result)) {
-			if (result.getClass().getCanonicalName().equals(proxy.nativeClassName) && result.equals(proxy.nativeObject)) {
-				return proxy;
-			}
-			return result;
-		}
-		if (result.getClass().isArray()) {
-			return HyperloopArrayToJSArray(proxy, result);
-		}
-		if (Map.class.isAssignableFrom(result.getClass())) {
-			return HyperloopMapToJSDictionary(proxy, result);
-		}
+        List<Match<Constructor>> matches = new ArrayList<Match<Constructor>>();
+        for (Constructor constructor : constructors) {
+            Class<?>[] params = constructor.getParameterTypes();
+            // TODO if varargs, check argCount >= (params.length - 1)
+            if (params.length == argCount) {
+                Match<Constructor> match = createMatch(constructor, params, arguments);
+                if (match != null) {
+                    // Shortcut if the distance is 0: That's an exact match...
+                    if (match.isExact()) {
+                        return match.method;
+                    }
+                    matches.add(match);
+                }
+            }
+        }
+        if (matches.isEmpty()) {
+            // Log something?
+            return null;
+        }
+        // Sort matches by distance (lowest wins)
+        Collections.sort(matches);
+        return matches.get(0).method;
+    }
 
-		if (_instances.containsKey(result)) {
-			HyperloopProxy p = _instances.get(result);
-			if (p != null)
-				return p;
-		}
+    /**
+     * Given a class, method name and some arguments - can we find the intended
+     * target method to call?
+     * 
+     * @param c
+     * @param name
+     * @param arguments
+     * @param instanceMethod
+     * @return
+     */
+    private Method resolveMethod(Class<?> c, String name, Object[] arguments,
+            boolean instanceMethod) {
+        int argCount = (arguments == null) ? 0 : arguments.length;
+        // if no args, assume we want a no-arg constructor!
+        if (argCount == 0) {
+            try {
+                return c.getMethod(name);
+            } catch (NoSuchMethodException e) {
+                // TODO may be no no-arg method by that name!
+                e.printStackTrace();
+            }
+        }
 
-		HyperloopProxy p = new HyperloopProxy();
-		p.setNativeObject(result);
-		return p;
-	}
+        Method[] methods = c.getMethods();
+        // TODO Filter by instance/static first?
+        if (methods.length == 1) {
+            return methods[0];
+        }
 
-	private HashMap<Object, Object> HyperloopMapToJSDictionary(HyperloopProxy proxy, Object result) {
-		HashMap<Object, Object> newDict = new HashMap<Object, Object>();
-		Map<Object, Object> map = (Map<Object, Object>) result;
-		for (Object key : map.keySet()) {
-			Object each = map.get(key);
+        List<Match<Method>> matches = new ArrayList<Match<Method>>();
+        for (Method method : methods) {
+            Class<?>[] params = method.getParameterTypes();
+            // TODO if varargs, check argCount >= (params.length - 1)
+            if (params.length == argCount) {
+                Match<Method> match = createMatch(method, params, arguments);
+                if (match != null) {
+                    // Shortcut if the distance is 0: That's an exact match...
+                    if (match.isExact()) {
+                        return match.method;
+                    }
+                    matches.add(match);
+                }
+            }
+        }
+        if (matches.isEmpty()) {
+            // Log something?
+            return null;
+        }
+        // Sort matches by distance (lowest wins)
+        Collections.sort(matches);
+        return matches.get(0).method;
+    }
 
-			if (HyperloopIsKnownType(each)) {
-				newDict.put(key, each);
-			} else {
-				if (each.getClass().isArray()) {
-					newDict.put(key, HyperloopArrayToJSArray(proxy, each));
-				} else if (Map.class.isAssignableFrom(each.getClass())) {
-					newDict.put(key, HyperloopMapToJSDictionary(proxy, each));
-				} else {
-					HyperloopProxy p = new HyperloopProxy();
-					p.setNativeObject(each);
-					newDict.put(key, p);
-				}
-			}
-		}
-		return newDict;
-	}
+    /**
+     * Determines if the method is a match. If not, this will return null. If it
+     * is, returns a Match object holding the method and the distance of the
+     * match.
+     * 
+     * @param m
+     * @param params
+     * @param arguments
+     * @return
+     */
+    private <T> Match<T> createMatch(T m, Class<?>[] params, Object[] arguments) {
+        int distance = Match.EXACT; // start as exact, increasing as we get
+                                    // further
+        for (int i = 0; i < params.length; i++) {
+            Object arg = arguments[i];
+            Class<?> param = params[i];
+            if (arg == null) {
+                // can't have a null primitive arg, no match
+                if (param.isPrimitive()) {
+                    return null;
+                }
+                // if null arg for a non-primitive, assume no distance change
+            } else {
+                int argDistance = distance(params[i], arguments[i].getClass());
+                if (argDistance >= 0) {
+                    distance += argDistance;
+                } else {
+                    // can't convert, no match
+                    return null;
+                }
+            }
+        }
+        return new Match<T>(m, distance);
+    }
 
-	private Object[] HyperloopArrayToJSArray(HyperloopProxy proxy, Object result) {
-		int length = Array.getLength(result);
-		Object[] newArray = new Object[length];
-		for (int index = 0; index < length; index++) {
-			Object each = Array.get(result, index);
-			if (HyperloopIsKnownType(each)) {
-				newArray[index] = each;
-			} else {
-				if (each.getClass().isArray()) {
-					newArray[index] = HyperloopArrayToJSArray(proxy, each);
-				} else if (Map.class.isAssignableFrom(each.getClass())) {
-					newArray[index] = HyperloopMapToJSDictionary(proxy, each);
-				} else {
-					HyperloopProxy p = new HyperloopProxy();
-					p.setNativeObject(each);
-					newArray[index] = p;
-				}
-			}
-		}
-		return newArray;
-	}
+    /**
+     * Determine the distance between the argument types and the intended
+     * parameter types. Returns -1 if no match.
+     * 
+     * @param target
+     * @param argument
+     * @return
+     */
+    private int distance(Class<?> target, Class<?> argument) {
+        // Primitives - we always have a boxed type for our argument
+        if (target.isPrimitive()) {
+            // https://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.3
+            // Says we can do primitive widening, as per:
+            // http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.1.2
+            // Widening
 
-	/**
-	 * Is this item a type that the JS engine can handle/convert on it's own? if
-	 * so, we don't need to worry about converting it. Also we've whitelisted
-	 * that it's ok to return.
-	 * 
-	 * @param item
-	 * @return
-	 */
-	private boolean HyperloopIsKnownType(Object item) {
-		if (item == null)
-			return true;
-		if (item.getClass() == String.class)
-			return true;
-		if (item.getClass() == Integer.class)
-			return true;
-		if (item.getClass() == Float.class)
-			return true;
-		if (item.getClass() == Byte.class)
-			return true;
-		if (item.getClass() == Long.class)
-			return true;
-		if (item.getClass() == Double.class)
-			return true;
-		if (item.getClass() == Boolean.class)
-			return true;
-		if (item.getClass() == Short.class)
-			return true;
-		if (KrollProxy.class.isAssignableFrom(item.getClass()))
-			return true;
+            // TODO How does the V8/Kroll layer convert numbers? This may lose
+            // precision about the underlying type we want to use. Will we need
+            // to provide a way
+            // to explicitly "cast" an arg for callers?
+            // It looks like it converts to int or double...
+            if (byte.class.equals(target)) {
+                if (Byte.class.equals(argument)) { // signed 8-bit
+                    return Match.EXACT;
+                }
+                if (Short.class.equals(argument)) { // signed 16-bit
+                    return 1;
+                }
+                if (Integer.class.equals(argument)) {
+                    return 3;
+                }
+                if (Long.class.equals(argument)) {
+                    return 4;
+                }
+                if (Float.class.equals(argument)) {
+                    return 5;
+                }
+                if (Double.class.equals(argument)) {
+                    return 6;
+                }
+            }
+            if (short.class.equals(target)) {
+                if (Short.class.equals(argument)) { // signed 16-bit
+                    return Match.EXACT;
+                }
+                if (Integer.class.equals(argument)) {
+                    return 1;
+                }
+                if (Long.class.equals(argument)) {
+                    return 2;
+                }
+                if (Float.class.equals(argument)) {
+                    return 3;
+                }
+                if (Double.class.equals(argument)) {
+                    return 4;
+                }
+            }
+            if (int.class.equals(target)) {
+                if (Integer.class.equals(argument)) {
+                    return Match.EXACT;
+                }
+                if (Long.class.equals(argument)) {
+                    return 1;
+                }
+                if (Float.class.equals(argument)) {
+                    return 2;
+                }
+                if (Double.class.equals(argument)) {
+                    return 3;
+                }
+            }
+            if (long.class.equals(target)) {
+                if (Long.class.equals(argument)) {
+                    return Match.EXACT;
+                }
+                if (Float.class.equals(argument)) {
+                    return 1;
+                }
+                if (Double.class.equals(argument)) {
+                    return 2;
+                }
+            }
+            if (float.class.equals(target)) {
+                if (Float.class.equals(argument)) {
+                    return Match.EXACT;
+                }
+                if (Double.class.equals(argument)) {
+                    return 1;
+                }
+            }
+            if (double.class.equals(target) && Double.class.equals(argument)) {
+                return Match.EXACT;
+            }
+            if (boolean.class.equals(target) && Boolean.class.equals(argument)) {
+                return Match.EXACT;
+            }
+            return Match.NO_MATCH;
+        }
 
-		return false;
-	}
+        // Non-primitives
+        if (!target.isAssignableFrom(argument)) {
+            return Match.NO_MATCH;
+        }
 
-	@Kroll.method
-	public void protect() {
-	}
+        // How far are the two types in the type hierarchy?
+        return 100 * hops(argument, target, 0);
+    }
 
-	@Kroll.method
-	public void unprotect() {
-	}
+    /**
+     * Try to use recursion to determine how many types away in the type
+     * hierarchy the target type is.
+     * 
+     * @param src
+     * @param target
+     * @param hops
+     * @return
+     */
+    private int hops(Class<?> src, Class<?> target, int hops) {
+        if (src == null) {
+            return -1; // end of recursion, no parent type!
+        }
 
-	public void setNativeObject(Object nativeObject) {
-		this.nativeObject = nativeObject;
-		if (_instances == null) {
-			_instances = new HashMap<Object, HyperloopProxy>();
-		}
-		// do we need this _instances map?
-		//_instances.put(this.nativeObject, this);
-		if (nativeObject == null) {
-			this.nativeClassName = "null";
-		} else {
-			this.nativeClassName = nativeObject.getClass().getCanonicalName();
-		}
-	}
+        // they're the same class, no hops up the hierarchy
+        if (target.equals(src)) {
+            return hops;
+        }
 
-	@Kroll.method
-	@Kroll.getProperty
-	public String getApiName() {
-		return nativeClassName;
-	}
+        // Take the least hops of traversing the parent type...
+        int result = hops(src.getSuperclass(), target, hops + 1);
 
-	private Object invokeSelector(String aSelector, Object[] args, Object obj, boolean mainThread, boolean wait,
-			boolean instanceMethod) {
-		Object[] convertedArgs = convertArgs(args);
-		Method m = resolveMethod(obj.getClass(), aSelector, convertedArgs, instanceMethod);
-		if (m == null) {
-			// throw new Exception("Unable to resolve method. Class: " +
-			// obj.getClass().getCanonicalName() + ", method: " + aSelector +
-			// ", args: " + args);
-			return null;
-		}
-		try {
-			return m.invoke(obj, convertedArgs);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+        // or the interfaces...
+        Class<?>[] interfaces = src.getInterfaces();
+        if (interfaces != null && interfaces.length > 0) {
+            for (int i = 0; i < interfaces.length; i++) {
+                int interfaceHops = hops(interfaces[i], target, hops + 1);
+                if (interfaceHops > -1 && interfaceHops < result) {
+                    // match up the interface hierarchy
+                    result = interfaceHops;
+                }
+            }
+        }
+        return result;
+    }
 
-	private Object convertArgument(Object object) {
-		if (object == null) {
-			return null;
-		}
-		// If it's a proxy, unwrap the native object we're wrapping
-		if (HyperloopProxy.class.isAssignableFrom(object.getClass())) {
-			return ((HyperloopProxy) object).nativeObject;
-		}
-		// TODO Convert other types? Maybe KrollDict?
-		return object;
-	}
+    // Methods
+    @Kroll.method
+    public Object callNativeFunction(Object[] args) {
+        // Expect a single "dictionary"/js object as arg
+        KrollDict dict;
+        if (args[0] instanceof KrollDict) {
+            dict = (KrollDict) args[0];
+        } else {
+            dict = new KrollDict((HashMap) args[0]);
+        }
+
+        String functionCall = dict.getString("func");
+        if (functionCall == null) {
+            Log.e(TAG, "'func' cannot be null");
+            return null;
+        }
+
+        Object[] functionArguments = (Object[]) dict.get("args");
+        if (functionArguments == null) {
+            functionArguments = new Object[0];
+        }
+
+        // assume instance methods. Does this even matter?
+        boolean isInstanceMethod = dict.optBoolean("isInstanceMethod", true);
+
+        Object result = this.invokeMethod(functionCall, functionArguments,
+                isInstanceMethod);
+        return wrapIfNecessary(result);
+    }
+
+    /**
+     * Wraps a return value in a proxy if necessary. if it's already a proxy or
+     * primitive, the framework will convert to JS for us.
+     * 
+     * @param result
+     * @return
+     */
+    private Object wrapIfNecessary(Object result) {
+        if (result == null) {
+            return null;
+        }
+
+        // is it a primitive, String or proxy already?
+        if (isKnownType(result)) {
+            // is it the same object this proxy holds? Return this proxy then
+            if (result.getClass().getCanonicalName().equals(this.nativeClassName)
+                    && result.equals(this.nativeObject)) {
+                return this;
+            }
+            return result;
+        }
+
+        // TODO Is this stuff necessary? I assume Kroll will convert arrays and
+        // map already?
+        // I think we just need to ensure we wrap any "unknown" types in proxies
+        // first?
+        if (result.getClass().isArray()) {
+            return javaArrayToJSArray(this, result);
+        }
+        if (Map.class.isAssignableFrom(result.getClass())) {
+            return HyperloopMapToJSDictionary(this, result);
+        }
+
+        // Wrap in proxy
+        HyperloopProxy p = new HyperloopProxy();
+        p.setNativeObject(result);
+        return p;
+    }
+
+    private HashMap<Object, Object> HyperloopMapToJSDictionary(HyperloopProxy proxy,
+            Object result) {
+        HashMap<Object, Object> newDict = new HashMap<Object, Object>();
+        Map<Object, Object> map = (Map<Object, Object>) result;
+        for (Object key : map.keySet()) {
+            Object each = map.get(key);
+
+            if (isKnownType(each)) {
+                newDict.put(key, each);
+            } else {
+                if (each.getClass().isArray()) {
+                    newDict.put(key, javaArrayToJSArray(proxy, each));
+                } else if (Map.class.isAssignableFrom(each.getClass())) {
+                    newDict.put(key, HyperloopMapToJSDictionary(proxy, each));
+                } else {
+                    HyperloopProxy p = new HyperloopProxy();
+                    p.setNativeObject(each);
+                    newDict.put(key, p);
+                }
+            }
+        }
+        return newDict;
+    }
+
+    private Object[] javaArrayToJSArray(HyperloopProxy proxy, Object result) {
+        int length = Array.getLength(result);
+        Object[] newArray = new Object[length];
+        for (int index = 0; index < length; index++) {
+            Object each = Array.get(result, index);
+            if (isKnownType(each)) {
+                newArray[index] = each;
+            } else {
+                if (each.getClass().isArray()) {
+                    newArray[index] = javaArrayToJSArray(proxy, each);
+                } else if (Map.class.isAssignableFrom(each.getClass())) {
+                    newArray[index] = HyperloopMapToJSDictionary(proxy, each);
+                } else {
+                    HyperloopProxy p = new HyperloopProxy();
+                    p.setNativeObject(each);
+                    newArray[index] = p;
+                }
+            }
+        }
+        return newArray;
+    }
+
+    /**
+     * Is this item a type that the JS engine can handle/convert on it's own? if
+     * so, we don't need to worry about converting it by wrapping with a proxy.
+     * Also we've whitelisted that it's ok to return.
+     * 
+     * @param item
+     * @return
+     */
+    private boolean isKnownType(Object item) {
+        if (item == null)
+            return true;
+        Class<?> klass = item.getClass();
+        if (BOX_TO_PRIMITIVES.containsKey(klass)) {
+            return true;
+        }
+        if (klass == String.class)
+            return true;
+        if (KrollProxy.class.isAssignableFrom(klass))
+            return true;
+
+        return false;
+    }
+
+    public void setNativeObject(Object nativeObject) {
+        this.nativeObject = nativeObject;
+        if (nativeObject == null) {
+            this.nativeClassName = "null";
+        } else {
+            this.nativeClassName = nativeObject.getClass().getCanonicalName();
+        }
+    }
+
+    @Kroll.method
+    @Kroll.getProperty
+    public String getApiName() {
+        return nativeClassName;
+    }
+
+    private Object invokeMethod(String methodName, Object[] args,
+            boolean instanceMethod) {
+        Object[] convertedArgs = convertArgs(args);
+        Object receiver;
+        Class<?> c;
+        if (!instanceMethod || this.nativeObject == null) {
+            c = clazz;
+            receiver = null;
+        } else {
+            receiver = this.nativeObject;
+            c = this.nativeObject.getClass();
+        }
+
+        Method m = resolveMethod(c, methodName, convertedArgs, instanceMethod);
+        if (m == null) {
+            Log.e(TAG, "Unable to resolve method call. Class: " + getApiName() + ", method name: "
+                    + methodName
+                    + ", args: " + args);
+            return null;
+        }
+        try {
+            return m.invoke(receiver, convertedArgs);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access method: " + m.toString(), e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: " + args, e);
+        } catch (InvocationTargetException e) {
+            Log.e(TAG, "Exception thrown during invokation of method: " + m.toString() + ", args: "
+                    + args,
+                    e.getCause());
+        }
+        return null;
+    }
+
+    /**
+     * Represents a Method match. Holds the method that matched along with an
+     * integer representing how close or distant the match is. Lower distance ==
+     * better match.
+     * 
+     * @author cwilliams
+     */
+    private static class Match<T> implements Comparable<Match<T>> {
+
+        public static final int NO_MATCH = -1;
+        public static final int EXACT = 0;
+
+        public int distance;
+        public T method;
+
+        Match(T m, int dist) {
+            this.distance = dist;
+            this.method = m;
+        }
+
+        public boolean isExact() {
+            return distance == EXACT;
+        }
+
+        @Override
+        public int compareTo(Match<T> another) {
+            return distance - another.distance;
+        }
+    }
 }
