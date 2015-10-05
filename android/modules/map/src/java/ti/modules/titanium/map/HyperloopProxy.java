@@ -1,3 +1,9 @@
+/**
+ * Appcelerator Titanium Mobile
+ * Copyright (c) 20015 by Appcelerator, Inc. All Rights Reserved.
+ * Licensed under the terms of the Apache Public License
+ * Please see the LICENSE included with this distribution for details.
+ */
 
 package ti.modules.titanium.map;
 
@@ -18,28 +24,6 @@ import org.appcelerator.kroll.common.Log;
 
 @Kroll.proxy(parentModule = HyperloopModule.class)
 public class HyperloopProxy extends KrollProxy {
-
-//    private class HyperloopView extends TiUIView {
-//        public HyperloopView(TiViewProxy proxy) {
-//            super(proxy);
-//            LayoutArrangement arrangement = LayoutArrangement.DEFAULT;
-//
-//            if (proxy.hasProperty(TiC.PROPERTY_LAYOUT)) {
-//                String layoutProperty = TiConvert.toString(proxy.getProperty(TiC.PROPERTY_LAYOUT));
-//                if (layoutProperty.equals(TiC.LAYOUT_HORIZONTAL)) {
-//                    arrangement = LayoutArrangement.HORIZONTAL;
-//                } else if (layoutProperty.equals(TiC.LAYOUT_VERTICAL)) {
-//                    arrangement = LayoutArrangement.VERTICAL;
-//                }
-//            }
-//            setNativeView(new TiCompositeLayout(proxy.getActivity(), arrangement));
-//        }
-//
-//        @Override
-//        public void processProperties(KrollDict d) {
-//            super.processProperties(d);
-//        }
-//    }
 
     /**
      * 
@@ -63,18 +47,9 @@ public class HyperloopProxy extends KrollProxy {
     private String nativeClassName;
     private Class<?> clazz;
 
-    // Constructor
     public HyperloopProxy() {
         super();
     }
-
-//    @Override
-//    public TiUIView createView(Activity activity) {
-//        TiUIView view = new HyperloopView(this);
-//        view.getLayoutParams().autoFillsHeight = true;
-//        view.getLayoutParams().autoFillsWidth = true;
-//        return view;
-//    }
 
     // Handle creation options
     // equivalent to iOS _initWithProperties
@@ -248,6 +223,9 @@ public class HyperloopProxy extends KrollProxy {
 
         List<Match<Method>> matches = new ArrayList<Match<Method>>();
         for (Method method : methods) {
+            if (!method.getName().equals(name)) {
+                continue;
+            }
             Class<?>[] params = method.getParameterTypes();
             // TODO if varargs, check argCount >= (params.length - 1)
             if (params.length == argCount) {
@@ -495,7 +473,8 @@ public class HyperloopProxy extends KrollProxy {
         // is it a primitive, String or proxy already?
         if (isKnownType(result)) {
             // is it the same object this proxy holds? Return this proxy then
-            if (result.getClass().getCanonicalName().equals(this.nativeClassName)
+            if (this.nativeObject != null
+                    && result.getClass().getCanonicalName().equals(this.nativeClassName)
                     && result.equals(this.nativeObject)) {
                 return this;
             }
