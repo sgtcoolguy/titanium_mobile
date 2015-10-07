@@ -28,12 +28,6 @@ public class HyperloopModule extends KrollModule
 	}
 	
 	@Kroll.method
-	public String hello()
-	{
-		return "world";
-	}
-	
-	@Kroll.method
 	public HyperloopProxy createProxy(Object[] args) {
 		KrollDict dict;
 		if (args[0] instanceof KrollDict) {
@@ -49,6 +43,6 @@ public class HyperloopModule extends KrollModule
 	@Override
 	public String getApiName()
 	{
-		return "Ti.Hyperloop";
+		return "Hyperloop";
 	}
 }

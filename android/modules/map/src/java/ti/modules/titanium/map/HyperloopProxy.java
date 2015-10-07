@@ -9,6 +9,7 @@ package ti.modules.titanium.map;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class HyperloopProxy extends KrollProxy {
         BOX_TO_PRIMITIVES.put(Short.class, short.class);
     }
 
-    private static final String TAG = "TiHyperloopProxy";
+    private static final String TAG = "HyperloopProxy";
 
     private Object nativeObject;
     private String nativeClassName;
@@ -428,7 +429,6 @@ public class HyperloopProxy extends KrollProxy {
         return result;
     }
 
-    // Methods
     @Kroll.method
     public Object callNativeFunction(Object[] args) {
         // Expect a single "dictionary"/js object as arg
@@ -456,6 +456,86 @@ public class HyperloopProxy extends KrollProxy {
         Object result = this.invokeMethod(functionCall, functionArguments,
                 isInstanceMethod);
         return wrapIfNecessary(result);
+    }
+
+    @Kroll.method
+    public Object getNativeField(Object[] args) {
+        // Expect a single "dictionary"/js object as arg
+        KrollDict dict;
+        if (args[0] instanceof KrollDict) {
+            dict = (KrollDict) args[0];
+        } else {
+            dict = new KrollDict((HashMap) args[0]);
+        }
+
+        String fieldName = dict.getString("field");
+        Field f = getField(fieldName);
+        if (f == null) {
+            return null;
+        }
+
+        try {
+            Object result = f.get(this.nativeObject);
+            return wrapIfNecessary(result);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access field: " + f.toString(), e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Receiving object is not an instance of the declaring type for field: "
+                    + f.toString(), e);
+        }
+        return null;
+    }
+
+    @Kroll.method
+    public void setNativeField(Object[] args) {
+        // Expect a single "dictionary"/js object as arg
+        KrollDict dict;
+        if (args[0] instanceof KrollDict) {
+            dict = (KrollDict) args[0];
+        } else {
+            dict = new KrollDict((HashMap) args[0]);
+        }
+
+        String fieldName = dict.getString("field");
+        Field f = getField(fieldName);
+        if (f == null) {
+            return;
+        }
+
+        Object newValue = dict.get("value");
+        try {
+            f.set(this.nativeObject, newValue);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access field: " + f.toString(), e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG,
+                    "Receiving object not an instance of declaring type, or failed to box/unbox primitive for field: "
+                            + f.toString(),
+                    e);
+        }
+    }
+
+    private Field getField(String fieldName) {
+        if (fieldName == null) {
+            Log.e(TAG, "'field' cannot be null");
+            return null;
+        }
+
+        // Access the field
+        Class<?> c;
+        if (this.nativeObject == null) {
+            c = clazz;
+        } else {
+            c = this.nativeObject.getClass();
+        }
+
+        try {
+            return c.getField(fieldName);
+        } catch (NoSuchFieldException e) {
+            Log.e(TAG, "No such field: Class: " + getApiName() + ", field name: "
+                    + fieldName, e);
+            return null;
+        }
     }
 
     /**
@@ -609,7 +689,7 @@ public class HyperloopProxy extends KrollProxy {
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: " + args, e);
         } catch (InvocationTargetException e) {
-            Log.e(TAG, "Exception thrown during invokation of method: " + m.toString() + ", args: "
+            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString() + ", args: "
                     + args,
                     e.getCause());
         }
