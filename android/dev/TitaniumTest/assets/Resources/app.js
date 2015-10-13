@@ -62,3 +62,18 @@ tabGroup.addTab(tab2);
 
 // open tab group
 tabGroup.open();
+
+
+// TODO Instantiate a Java interface anonymously:
+require('android.view.View.OnClickListener');
+var instance = new android.view.View.OnClickListener({
+    onClick: function() {
+        // Perform action on click
+        console.log("On click from JS!");
+        console.log("What is this? " + this.prototype);
+        console.log(this.apiName);
+        console.log(this.constructor);
+        this.barf();
+    }
+});
+instance.onClick();

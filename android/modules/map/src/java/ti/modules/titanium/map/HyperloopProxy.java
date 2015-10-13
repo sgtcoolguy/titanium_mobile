@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 20015 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2015 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -10,11 +10,14 @@ package ti.modules.titanium.map;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +27,7 @@ import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
 
 @Kroll.proxy(parentModule = HyperloopModule.class)
-public class HyperloopProxy extends KrollProxy {
+public class HyperloopProxy extends KrollProxy implements InvocationHandler {
 
     /**
      * 
@@ -47,12 +50,14 @@ public class HyperloopProxy extends KrollProxy {
     private Object nativeObject;
     private String nativeClassName;
     private Class<?> clazz;
+    private HashSet<String> overrides;
 
     public HyperloopProxy() {
         super();
     }
 
     // Handle creation options
+    @SuppressWarnings("unchecked")
     // equivalent to iOS _initWithProperties
     @Override
     public void handleCreationDict(KrollDict options) {
@@ -72,35 +77,47 @@ public class HyperloopProxy extends KrollProxy {
 
             this.clazz = c;
 
-            Object[] initArgs = (Object[]) options.get("args");
-            if (initArgs == null) {
-                initArgs = new Object[0];
-            }
+            if (this.clazz.isInterface()) {
+                // Generate a java.lang.reflect.Proxy instance for this
+                // interface
+                this.nativeObject = Proxy.newProxyInstance(this.getClass().getClassLoader(),
+                        new Class[] {
+                                this.clazz
+                }, this);
 
-            // should we create an instance, or should we just hold onto the
-            // class?
-            boolean alloc = options.optBoolean("alloc", true);
+                Object[] args = (Object[]) options.get("args");
+                HashMap<String, Object> overrides = (HashMap<String, Object>) args[0];
+                this.overrides = new HashSet<String>(overrides.keySet());
+            } else {
 
-            if (alloc) {
-                Object instance = null;
-                Object[] convertedArgs = convertArgs(initArgs);
-                Constructor<?> cons = resolveConstructor(c, convertedArgs);
-                if (cons == null) {
-                    Log.e(TAG,
-                            "Unable to find matching constructor for class: " + className
-                                    + ", args: " + convertedArgs);
-                    return;
+                // should we create an instance, or should we just hold onto the
+                // class?
+                boolean alloc = options.optBoolean("alloc", true);
+                if (alloc) {
+                    Object instance = null;
+
+                    Object[] initArgs = (Object[]) options.get("args");
+                    if (initArgs == null) {
+                        initArgs = new Object[0];
+                    }
+                    Object[] convertedArgs = convertArgs(initArgs);
+                    Constructor<?> cons = resolveConstructor(c, convertedArgs);
+                    if (cons == null) {
+                        Log.e(TAG,
+                                "Unable to find matching constructor for class: " + className
+                                        + ", args: " + convertedArgs);
+                        return;
+                    }
+
+                    instance = cons.newInstance(convertedArgs);
+                    this.setNativeObject(instance);
+
+                    if (this.nativeObject == null) {
+                        Log.e(TAG, "Object " + className + " could not be created");
+                        return;
+                    }
                 }
-
-                instance = cons.newInstance(convertedArgs);
-                this.setNativeObject(instance);
-
-                if (this.nativeObject == null) {
-                    Log.e(TAG, "Object " + className + " could not be created");
-                    return;
-                }
             }
-
             // wipe some props before passing on
             options.remove("args");
             options.remove("class");
@@ -724,5 +741,15 @@ public class HyperloopProxy extends KrollProxy {
         public int compareTo(Match<T> another) {
             return distance - another.distance;
         }
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (!overrides.contains(method.getName())) {
+            // no such method!
+            return null;
+        }
+
+        return getKrollObject().callProperty(method.getName(), args);
     }
 }
