@@ -24,7 +24,15 @@ import java.util.Map;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.kroll.common.AsyncResult;
 import org.appcelerator.kroll.common.Log;
+import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.proxy.ActivityProxy;
+import org.appcelerator.titanium.proxy.TiViewProxy;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
 
 @Kroll.proxy(parentModule = HyperloopModule.class)
 public class HyperloopProxy extends KrollProxy implements InvocationHandler {
@@ -89,32 +97,43 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                 HashMap<String, Object> overrides = (HashMap<String, Object>) args[0];
                 this.overrides = new HashSet<String>(overrides.keySet());
             } else {
-
                 // should we create an instance, or should we just hold onto the
                 // class?
                 boolean alloc = options.optBoolean("alloc", true);
                 if (alloc) {
-                    Object instance = null;
 
                     Object[] initArgs = (Object[]) options.get("args");
                     if (initArgs == null) {
                         initArgs = new Object[0];
                     }
                     Object[] convertedArgs = convertArgs(initArgs);
-                    Constructor<?> cons = resolveConstructor(c, convertedArgs);
-                    if (cons == null) {
-                        Log.e(TAG,
-                                "Unable to find matching constructor for class: " + className
-                                        + ", args: " + convertedArgs);
-                        return;
-                    }
+                    // If we get a single Titanium proxy, that's not a dynamic
+                    // hyperloop one (think ActivityProxy, or ButtonProxy)
+                    // Let's re-wrap the native object with a hyperloop proxy
+                    if (convertedArgs.length == 1 && convertedArgs[0] != null
+                            && c.isAssignableFrom(convertedArgs[0].getClass())
+                            && initArgs[0] instanceof KrollProxy
+                            && !(initArgs[0] instanceof HyperloopProxy)) {
+                        // Wrap it!
+                        this.setNativeObject(convertedArgs[0]);
+                    } else {
+                        // Use reflection to generate an instance of the class
+                        // based on the args
+                        Constructor<?> cons = resolveConstructor(c, convertedArgs);
+                        if (cons == null) {
+                            Log.e(TAG,
+                                    "Unable to find matching constructor for class: " + className
+                                            + ", args: " + convertedArgs);
+                            return;
+                        }
 
-                    instance = cons.newInstance(convertedArgs);
-                    this.setNativeObject(instance);
+                        Object instance = cons.newInstance(convertedArgs);
+                        this.setNativeObject(instance);
 
-                    if (this.nativeObject == null) {
-                        Log.e(TAG, "Object " + className + " could not be created");
-                        return;
+                        if (this.nativeObject == null) {
+                            Log.e(TAG, "Object " + className + " could not be created");
+                            return;
+                        }
                     }
                 }
             }
@@ -161,9 +180,29 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         if (object == null) {
             return null;
         }
+
+        // if it's a JS wrapper around proxy, grab the proxy
+        if (object instanceof HashMap) {
+            HashMap map = (HashMap) object;
+            if (map.containsKey("native")) {
+                object = map.get("native");
+            }
+        }
+
         // If it's a proxy, unwrap the native object we're wrapping
         if (HyperloopProxy.class.isAssignableFrom(object.getClass())) {
             return ((HyperloopProxy) object).nativeObject;
+        }
+
+        // Convert some of the titanium wrappers
+        if (object instanceof ActivityProxy) {
+            ActivityProxy ap = (ActivityProxy) object;
+            return ap.getActivity();
+        }
+        // Convert Ti.UI.View subclasses
+        if (object instanceof TiViewProxy) {
+            TiViewProxy tvp = (TiViewProxy) object;
+            return tvp.getOrCreateView().getNativeView();
         }
         // TODO Convert other types? Maybe KrollDict?
         return object;
@@ -233,6 +272,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
             }
         }
 
+        // TODO Is there a more performant way to search methods? This can result in a lot of methods for some types
         Method[] methods = c.getMethods();
         // TODO Filter by instance/static first?
         if (methods.length == 1) {
@@ -420,6 +460,9 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
      * @return
      */
     private int hops(Class<?> src, Class<?> target, int hops) {
+        // FIXME This is pretty slow and can result in some deep recursion in some cases...
+        // Can we do better?
+        // If we know the target is an interface, is there a point in searching super classes (other than looking at it's interfaces?)
         if (src == null) {
             return -1; // end of recursion, no parent type!
         }
@@ -437,7 +480,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         if (interfaces != null && interfaces.length > 0) {
             for (int i = 0; i < interfaces.length; i++) {
                 int interfaceHops = hops(interfaces[i], target, hops + 1);
-                if (interfaceHops > -1 && interfaceHops < result) {
+                if (interfaceHops > -1 && (result == -1 || interfaceHops < result)) {
                     // match up the interface hierarchy
                     result = interfaceHops;
                 }
@@ -664,12 +707,22 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         return false;
     }
 
+    /**
+     * Used to wrap a native Java object in this proxy. This can be done on the
+     * Java side, or from JS to re-wrap/convert proxies. This is useful for
+     * converting Titanium API proxies into hyperloop proxies for the underlying
+     * native object.
+     * 
+     * @param nativeObject
+     */
     public void setNativeObject(Object nativeObject) {
-        this.nativeObject = nativeObject;
-        if (nativeObject == null) {
+        Object converted = convertArgument(nativeObject);
+
+        this.nativeObject = converted;
+        if (converted == null) {
             this.nativeClassName = "null";
         } else {
-            this.nativeClassName = nativeObject.getClass().getCanonicalName();
+            this.nativeClassName = converted.getClass().getCanonicalName();
         }
     }
 
@@ -699,18 +752,80 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                     + ", args: " + args);
             return null;
         }
-        try {
-            return m.invoke(receiver, convertedArgs);
-        } catch (IllegalAccessException e) {
-            Log.e(TAG, "Unable to access method: " + m.toString(), e);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: " + args, e);
-        } catch (InvocationTargetException e) {
-            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString() + ", args: "
-                    + args,
-                    e.getCause());
+
+        // Set up invocation so we can do it on UI or non-UI thread the same.
+        final Method method = m;
+        final Object rec = receiver;
+        final Object[] finalArgs = convertedArgs;
+        final AsyncResult result = new AsyncResult();
+        Runnable r = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    result.setResult(method.invoke(rec, finalArgs));
+                    return;
+                } catch (IllegalAccessException e) {
+                    Log.e(TAG, "Unable to access method: " + method.toString(), e);
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "Bad argument for method: " + method.toString() + ", args: "
+                            + finalArgs, e);
+                } catch (InvocationTargetException e) {
+                    Log.e(TAG, "Exception thrown during invocation of method: " + method.toString()
+                            + ", args: "
+                            + finalArgs,
+                            e.getCause());
+                    result.setException(e);
+                }
+            }
+        };
+
+        if (TiApplication.isUIThread() || !shouldRunOnUIThread(c, method)) {
+            r.run();
+        } else {
+            getActivity().runOnUiThread(r);
         }
-        return null;
+        try {
+            return result.getResult();
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    /**
+     * Attempts to grab the activity for this proxy by looking at the native
+     * object we hold. if it's an activity, return it. If it's a subclass of
+     * view, get the Context object and return if it can be cast to an Activity.
+     */
+    @Override
+    public Activity getActivity() {
+        if (this.nativeObject instanceof Activity) {
+            return (Activity) this.nativeObject;
+        }
+        // If the native object has an accessor to the activity, we should
+        // return that...
+        if (this.nativeObject instanceof View) {
+            View v = (View) this.nativeObject;
+            Context c = v.getContext();
+            if (c instanceof Activity) {
+                return (Activity) c;
+            }
+        }
+        return super.getActivity();
+    }
+
+    /**
+     * Used to help determine if we should run method invocation on this
+     * class/instance on the UI thread. Right now it's dumb and just assumes any
+     * method call on any {@link Activity} subclass or any subclass of
+     * {@link View} is a call that should happen on the UI thread.
+     * 
+     * @param c
+     * @param method
+     * @return
+     */
+    private boolean shouldRunOnUIThread(Class<?> c, Method method) {
+        return View.class.isAssignableFrom(c) || Activity.class.isAssignableFrom(c);
     }
 
     /**
@@ -743,6 +858,11 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         }
     }
 
+    /**
+     * Used to invoke methods on interface proxies. When we get asked to invoke
+     * a method on an interface we've generated from JS, we call the overriding
+     * JS implementation.
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (!overrides.contains(method.getName())) {
