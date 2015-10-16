@@ -24,9 +24,7 @@ import java.util.Map;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.kroll.common.AsyncResult;
 import org.appcelerator.kroll.common.Log;
-import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.proxy.ActivityProxy;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 
@@ -272,7 +270,8 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
             }
         }
 
-        // TODO Is there a more performant way to search methods? This can result in a lot of methods for some types
+        // TODO Is there a more performant way to search methods? This can
+        // result in a lot of methods for some types
         Method[] methods = c.getMethods();
         // TODO Filter by instance/static first?
         if (methods.length == 1) {
@@ -357,11 +356,12 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
             // http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html#jls-5.1.2
             // Widening
 
-            // TODO How does the V8/Kroll layer convert numbers? This may lose
-            // precision about the underlying type we want to use. Will we need
-            // to provide a way
-            // to explicitly "cast" an arg for callers?
-            // It looks like it converts to int or double...
+            // We need to support more liberal conversion
+            // i.e. textView#setTextView(0, 60); should be ok (setTextView param
+            // types are (int, float))
+            // TODO Avoid matching byte if the arg is a number type that woudl
+            // overflow?
+            // Or at least increase distance?
             if (byte.class.equals(target)) {
                 if (Byte.class.equals(argument)) { // signed 8-bit
                     return Match.EXACT;
@@ -370,19 +370,22 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                     return 1;
                 }
                 if (Integer.class.equals(argument)) {
-                    return 3;
+                    return 2;
                 }
                 if (Long.class.equals(argument)) {
-                    return 4;
+                    return 3;
                 }
                 if (Float.class.equals(argument)) {
-                    return 5;
+                    return 4;
                 }
                 if (Double.class.equals(argument)) {
-                    return 6;
+                    return 5;
                 }
             }
             if (short.class.equals(target)) {
+                if (Byte.class.equals(argument)) {
+                    return 1;
+                }
                 if (Short.class.equals(argument)) { // signed 16-bit
                     return Match.EXACT;
                 }
@@ -400,6 +403,12 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                 }
             }
             if (int.class.equals(target)) {
+                if (Byte.class.equals(argument)) {
+                    return 2;
+                }
+                if (Short.class.equals(argument)) {
+                    return 1;
+                }
                 if (Integer.class.equals(argument)) {
                     return Match.EXACT;
                 }
@@ -414,6 +423,15 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                 }
             }
             if (long.class.equals(target)) {
+                if (Byte.class.equals(argument)) {
+                    return 3;
+                }
+                if (Short.class.equals(argument)) {
+                    return 2;
+                }
+                if (Integer.class.equals(argument)) {
+                    return 1;
+                }
                 if (Long.class.equals(argument)) {
                     return Match.EXACT;
                 }
@@ -425,6 +443,18 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                 }
             }
             if (float.class.equals(target)) {
+                if (Byte.class.equals(argument)) {
+                    return 4;
+                }
+                if (Short.class.equals(argument)) {
+                    return 3;
+                }
+                if (Integer.class.equals(argument)) {
+                    return 2;
+                }
+                if (Long.class.equals(argument)) {
+                    return 1;
+                }
                 if (Float.class.equals(argument)) {
                     return Match.EXACT;
                 }
@@ -432,8 +462,25 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                     return 1;
                 }
             }
-            if (double.class.equals(target) && Double.class.equals(argument)) {
-                return Match.EXACT;
+            if (double.class.equals(target)) {
+                if (Byte.class.equals(argument)) {
+                    return 5;
+                }
+                if (Short.class.equals(argument)) {
+                    return 4;
+                }
+                if (Integer.class.equals(argument)) {
+                    return 3;
+                }
+                if (Long.class.equals(argument)) {
+                    return 2;
+                }
+                if (Float.class.equals(argument)) {
+                    return 1;
+                }
+                if (Double.class.equals(argument)) {
+                    return Match.EXACT;
+                }
             }
             if (boolean.class.equals(target) && Boolean.class.equals(argument)) {
                 return Match.EXACT;
@@ -460,9 +507,11 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
      * @return
      */
     private int hops(Class<?> src, Class<?> target, int hops) {
-        // FIXME This is pretty slow and can result in some deep recursion in some cases...
+        // FIXME This is pretty slow and can result in some deep recursion in
+        // some cases...
         // Can we do better?
-        // If we know the target is an interface, is there a point in searching super classes (other than looking at it's interfaces?)
+        // If we know the target is an interface, is there a point in searching
+        // super classes (other than looking at it's interfaces?)
         if (src == null) {
             return -1; // end of recursion, no parent type!
         }
@@ -489,7 +538,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         return result;
     }
 
-    @Kroll.method
+    @Kroll.method(runOnUiThread = true)
     public Object callNativeFunction(Object[] args) {
         // Expect a single "dictionary"/js object as arg
         KrollDict dict;
@@ -752,44 +801,20 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                     + ", args: " + args);
             return null;
         }
-
-        // Set up invocation so we can do it on UI or non-UI thread the same.
-        final Method method = m;
-        final Object rec = receiver;
-        final Object[] finalArgs = convertedArgs;
-        final AsyncResult result = new AsyncResult();
-        Runnable r = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    result.setResult(method.invoke(rec, finalArgs));
-                    return;
-                } catch (IllegalAccessException e) {
-                    Log.e(TAG, "Unable to access method: " + method.toString(), e);
-                } catch (IllegalArgumentException e) {
-                    Log.e(TAG, "Bad argument for method: " + method.toString() + ", args: "
-                            + finalArgs, e);
-                } catch (InvocationTargetException e) {
-                    Log.e(TAG, "Exception thrown during invocation of method: " + method.toString()
-                            + ", args: "
-                            + finalArgs,
-                            e.getCause());
-                    result.setException(e);
-                }
-            }
-        };
-
-        if (TiApplication.isUIThread() || !shouldRunOnUIThread(c, method)) {
-            r.run();
-        } else {
-            getActivity().runOnUiThread(r);
-        }
         try {
-            return result.getResult();
-        } catch (Throwable t) {
-            return null;
+            return m.invoke(receiver, convertedArgs);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access method: " + m.toString(), e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
+                    + convertedArgs, e);
+        } catch (InvocationTargetException e) {
+            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
+                    + ", args: "
+                    + convertedArgs,
+                    e.getCause());
         }
+        return null;
     }
 
     /**
@@ -812,20 +837,6 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
             }
         }
         return super.getActivity();
-    }
-
-    /**
-     * Used to help determine if we should run method invocation on this
-     * class/instance on the UI thread. Right now it's dumb and just assumes any
-     * method call on any {@link Activity} subclass or any subclass of
-     * {@link View} is a call that should happen on the UI thread.
-     * 
-     * @param c
-     * @param method
-     * @return
-     */
-    private boolean shouldRunOnUIThread(Class<?> c, Method method) {
-        return View.class.isAssignableFrom(c) || Activity.class.isAssignableFrom(c);
     }
 
     /**
@@ -855,6 +866,11 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         @Override
         public int compareTo(Match<T> another) {
             return distance - another.distance;
+        }
+
+        @Override
+        public String toString() {
+            return method.toString() + ", distance: " + distance;
         }
     }
 
