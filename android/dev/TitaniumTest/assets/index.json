@@ -1,1 +1,17 @@
-{"Resources/app.js":1,"Resources/android.view.View.OnClickListener.js":1,"Resources/android.app.Activity.js":1,"Resources/android.widget.Button.js":1}
+{
+	"Resources/app.js":1,
+	"Resources/android.app.Activity.js":1,
+	"Resources/android.content.Context.js":1,
+	"Resources/android.content.ContextWrapper.js":1,
+	"Resources/android.graphics.Color.js":1,
+	"Resources/android.util.TypedValue.js":1,
+	"Resources/android.view.ContextThemeWrapper.js":1,
+	"Resources/android.view.Gravity.js":1,
+	"Resources/android.view.View.js":1,
+	"Resources/android.view.ViewGroup.js":1,
+	"Resources/android.view.View$OnClickListener.js":1,
+	"Resources/android.widget.Button.js":1,
+	"Resources/android.widget.RelativeLayout.js":1,
+	"Resources/android.widget.TextView.js":1,
+	"Resources/java.lang.Object.js":1
+}

@@ -5,28 +5,28 @@
  *
  * WARNING: This is generated code. Modify at your own risk and without support
  *
- * @module android.app.Activity
+ * @module android.widget.TextView
  */
 var Hyperloop = Ti.Hyperloop;
 
 global.android = global.android || {};
-global.android.app = global.android.app || {};
+global.android.widget = global.android.widget || {};
 
 /**
- * @class android.app.Activity
- * @extends android.view.ContextThemeWrapper  * @constructor
- * @see {@link http://developer.android.com/reference/android/app/Activity.html}
+ * @class android.widget.TextView
+ * @extends android.view.View  * @constructor
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html}
  **/
-android.app.Activity = function() {
+android.widget.TextView = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.Activity') {
+	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.TextView') {
 		result = arguments[0];
 	}
 	else {
 		result = Hyperloop.createProxy({
-			class: 'android.app.Activity',
+			class: 'android.widget.TextView',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
 		}); 
@@ -37,92 +37,16 @@ android.app.Activity = function() {
 	this._private = {};
 };
 
-var SuperClass = require('android.view.ContextThemeWrapper');
-android.app.Activity.prototype = Object.create(SuperClass.prototype);
-android.app.Activity.prototype.constructor = android.app.Activity;
+var SuperClass = require('android.view.View');
+android.widget.TextView.prototype = Object.create(SuperClass.prototype);
+android.widget.TextView.prototype.constructor = android.widget.TextView;
 
-android.app.Activity.className = "android.app.Activity";
-android.app.Activity.prototype.className = "android.app.Activity";
+android.widget.TextView.className = "android.widget.TextView";
+android.widget.TextView.prototype.className = "android.widget.TextView";
 
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#RESULT_CANCELED}
- */
-android.app.Activity.RESULT_CANCELED = 0;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#DEFAULT_KEYS_SEARCH_LOCAL}
- */
-android.app.Activity.DEFAULT_KEYS_SEARCH_LOCAL = 3;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#DEFAULT_KEYS_SHORTCUT}
- */
-android.app.Activity.DEFAULT_KEYS_SHORTCUT = 2;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#RESULT_OK}
- */
-android.app.Activity.RESULT_OK = -1;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#DEFAULT_KEYS_DIALER}
- */
-android.app.Activity.DEFAULT_KEYS_DIALER = 1;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#RESULT_FIRST_USER}
- */
-android.app.Activity.RESULT_FIRST_USER = 1;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#DEFAULT_KEYS_DISABLE}
- */
-android.app.Activity.DEFAULT_KEYS_DISABLE = 0;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#DEFAULT_KEYS_SEARCH_GLOBAL}
- */
-android.app.Activity.DEFAULT_KEYS_SEARCH_GLOBAL = 4;
 
 // Static fields
-// http://developer.android.com/reference/android/app/Activity.html#FOCUSED_STATE_SET
-Object.defineProperty(android.app.Activity, 'FOCUSED_STATE_SET', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'FOCUSED_STATE_SET'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'android.app.Activity') {
-				return new this(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Instance Fields
 
@@ -131,16 +55,16 @@ Object.defineProperty(android.app.Activity, 'FOCUSED_STATE_SET', {
 // Instance methods
 /**
  * TODO Fill out docs more...
- * @function onChildTitleChanged
+ * @function getSelectionStart
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onChildTitleChanged(android.app.Activity, java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getSelectionStart()}
  **/
-android.app.Activity.prototype.onChildTitleChanged = function() {
+android.widget.TextView.prototype.getSelectionStart = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onChildTitleChanged',
+		func: 'getSelectionStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -149,7 +73,7 @@ android.app.Activity.prototype.onChildTitleChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -160,16 +84,16 @@ android.app.Activity.prototype.onChildTitleChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getChangingConfigurations
+ * @function setEditableFactory
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getChangingConfigurations()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setEditableFactory(android.text.Editable$Factory)}
  **/
-android.app.Activity.prototype.getChangingConfigurations = function() {
+android.widget.TextView.prototype.setEditableFactory = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getChangingConfigurations',
+		func: 'setEditableFactory',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -178,7 +102,7 @@ android.app.Activity.prototype.getChangingConfigurations = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -189,17 +113,16 @@ android.app.Activity.prototype.getChangingConfigurations = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onSearchRequested
+ * @function onCommitCorrection
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onSearchRequested(android.view.SearchEvent)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onSearchRequested()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onCommitCorrection(android.view.inputmethod.CorrectionInfo)}
  **/
-android.app.Activity.prototype.onSearchRequested = function() {
+android.widget.TextView.prototype.onCommitCorrection = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onSearchRequested',
+		func: 'onCommitCorrection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -208,7 +131,7 @@ android.app.Activity.prototype.onSearchRequested = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -219,16 +142,16 @@ android.app.Activity.prototype.onSearchRequested = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function navigateUpToFromChild
+ * @function setIncludeFontPadding
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#navigateUpToFromChild(android.app.Activity, android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setIncludeFontPadding(boolean)}
  **/
-android.app.Activity.prototype.navigateUpToFromChild = function() {
+android.widget.TextView.prototype.setIncludeFontPadding = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'navigateUpToFromChild',
+		func: 'setIncludeFontPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -237,7 +160,7 @@ android.app.Activity.prototype.navigateUpToFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -248,16 +171,16 @@ android.app.Activity.prototype.navigateUpToFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function removeDialog
+ * @function setRawInputType
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#removeDialog(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setRawInputType(int)}
  **/
-android.app.Activity.prototype.removeDialog = function() {
+android.widget.TextView.prototype.setRawInputType = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'removeDialog',
+		func: 'setRawInputType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -266,7 +189,7 @@ android.app.Activity.prototype.removeDialog = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -277,16 +200,16 @@ android.app.Activity.prototype.removeDialog = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function postponeEnterTransition
+ * @function setOnEditorActionListener
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#postponeEnterTransition()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setOnEditorActionListener(android.widget.TextView$OnEditorActionListener)}
  **/
-android.app.Activity.prototype.postponeEnterTransition = function() {
+android.widget.TextView.prototype.setOnEditorActionListener = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'postponeEnterTransition',
+		func: 'setOnEditorActionListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -295,7 +218,7 @@ android.app.Activity.prototype.postponeEnterTransition = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -306,16 +229,16 @@ android.app.Activity.prototype.postponeEnterTransition = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setProgressBarIndeterminate
+ * @function getMarqueeRepeatLimit
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setProgressBarIndeterminate(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMarqueeRepeatLimit()}
  **/
-android.app.Activity.prototype.setProgressBarIndeterminate = function() {
+android.widget.TextView.prototype.getMarqueeRepeatLimit = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setProgressBarIndeterminate',
+		func: 'getMarqueeRepeatLimit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -324,7 +247,7 @@ android.app.Activity.prototype.setProgressBarIndeterminate = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -335,17 +258,16 @@ android.app.Activity.prototype.setProgressBarIndeterminate = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActivityFromFragment
+ * @function setCompoundDrawablePadding
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityFromFragment(android.app.Fragment, android.content.Intent, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityFromFragment(android.app.Fragment, android.content.Intent, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablePadding(int)}
  **/
-android.app.Activity.prototype.startActivityFromFragment = function() {
+android.widget.TextView.prototype.setCompoundDrawablePadding = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActivityFromFragment',
+		func: 'setCompoundDrawablePadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -354,7 +276,7 @@ android.app.Activity.prototype.startActivityFromFragment = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -365,16 +287,16 @@ android.app.Activity.prototype.startActivityFromFragment = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchGenericMotionEvent
+ * @function getMovementMethod
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchGenericMotionEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMovementMethod()}
  **/
-android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
+android.widget.TextView.prototype.getMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchGenericMotionEvent',
+		func: 'getMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -383,7 +305,7 @@ android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -394,16 +316,16 @@ android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setTaskDescription
+ * @function setTextScaleX
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setTaskDescription(android.app.ActivityManager$TaskDescription)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextScaleX(float)}
  **/
-android.app.Activity.prototype.setTaskDescription = function() {
+android.widget.TextView.prototype.setTextScaleX = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setTaskDescription',
+		func: 'setTextScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -412,7 +334,7 @@ android.app.Activity.prototype.setTaskDescription = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -423,16 +345,16 @@ android.app.Activity.prototype.setTaskDescription = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onBackPressed
+ * @function setMaxEms
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onBackPressed()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMaxEms(int)}
  **/
-android.app.Activity.prototype.onBackPressed = function() {
+android.widget.TextView.prototype.setMaxEms = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onBackPressed',
+		func: 'setMaxEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -441,7 +363,7 @@ android.app.Activity.prototype.onBackPressed = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -452,16 +374,16 @@ android.app.Activity.prototype.onBackPressed = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onRestart
+ * @function setCompoundDrawablesRelative
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onRestart()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablesRelative(android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.onRestart = function() {
+android.widget.TextView.prototype.setCompoundDrawablesRelative = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onRestart',
+		func: 'setCompoundDrawablesRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -470,7 +392,7 @@ android.app.Activity.prototype.onRestart = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -481,16 +403,16 @@ android.app.Activity.prototype.onRestart = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function shouldUpRecreateTask
+ * @function getMinHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#shouldUpRecreateTask(android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMinHeight()}
  **/
-android.app.Activity.prototype.shouldUpRecreateTask = function() {
+android.widget.TextView.prototype.getMinHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'shouldUpRecreateTask',
+		func: 'getMinHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -499,7 +421,7 @@ android.app.Activity.prototype.shouldUpRecreateTask = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -510,16 +432,16 @@ android.app.Activity.prototype.shouldUpRecreateTask = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishAffinity
+ * @function getLineCount
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishAffinity()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLineCount()}
  **/
-android.app.Activity.prototype.finishAffinity = function() {
+android.widget.TextView.prototype.getLineCount = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishAffinity',
+		func: 'getLineCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -528,7 +450,7 @@ android.app.Activity.prototype.finishAffinity = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -539,16 +461,16 @@ android.app.Activity.prototype.finishAffinity = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setIntent
+ * @function getShadowRadius
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setIntent(android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getShadowRadius()}
  **/
-android.app.Activity.prototype.setIntent = function() {
+android.widget.TextView.prototype.getShadowRadius = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setIntent',
+		func: 'getShadowRadius',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -557,7 +479,7 @@ android.app.Activity.prototype.setIntent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -568,16 +490,16 @@ android.app.Activity.prototype.setIntent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchPopulateAccessibilityEvent
+ * @function jumpDrawablesToCurrentState
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#jumpDrawablesToCurrentState()}
  **/
-android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
+android.widget.TextView.prototype.jumpDrawablesToCurrentState = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchPopulateAccessibilityEvent',
+		func: 'jumpDrawablesToCurrentState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -586,7 +508,7 @@ android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -597,16 +519,16 @@ android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getLoaderManager
+ * @function setMinHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getLoaderManager()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMinHeight(int)}
  **/
-android.app.Activity.prototype.getLoaderManager = function() {
+android.widget.TextView.prototype.setMinHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getLoaderManager',
+		func: 'setMinHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -615,7 +537,7 @@ android.app.Activity.prototype.getLoaderManager = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -626,16 +548,16 @@ android.app.Activity.prototype.getLoaderManager = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setActionBar
+ * @function setCursorVisible
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setActionBar(android.widget.Toolbar)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCursorVisible(boolean)}
  **/
-android.app.Activity.prototype.setActionBar = function() {
+android.widget.TextView.prototype.setCursorVisible = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setActionBar',
+		func: 'setCursorVisible',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -644,7 +566,7 @@ android.app.Activity.prototype.setActionBar = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -655,17 +577,16 @@ android.app.Activity.prototype.setActionBar = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startIntentSender
+ * @function setMovementMethod
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSender(android.content.IntentSender, android.content.Intent, int, int, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSender(android.content.IntentSender, android.content.Intent, int, int, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMovementMethod(android.text.method.MovementMethod)}
  **/
-android.app.Activity.prototype.startIntentSender = function() {
+android.widget.TextView.prototype.setMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startIntentSender',
+		func: 'setMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -674,7 +595,7 @@ android.app.Activity.prototype.startIntentSender = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -685,16 +606,16 @@ android.app.Activity.prototype.startIntentSender = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function showAssist
+ * @function setSelectAllOnFocus
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#showAssist(android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setSelectAllOnFocus(boolean)}
  **/
-android.app.Activity.prototype.showAssist = function() {
+android.widget.TextView.prototype.setSelectAllOnFocus = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'showAssist',
+		func: 'setSelectAllOnFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -703,7 +624,7 @@ android.app.Activity.prototype.showAssist = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -714,16 +635,16 @@ android.app.Activity.prototype.showAssist = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function closeOptionsMenu
+ * @function onCreateDrawableState
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#closeOptionsMenu()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onCreateDrawableState(int)}
  **/
-android.app.Activity.prototype.closeOptionsMenu = function() {
+android.widget.TextView.prototype.onCreateDrawableState = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'closeOptionsMenu',
+		func: 'onCreateDrawableState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -732,7 +653,7 @@ android.app.Activity.prototype.closeOptionsMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -743,16 +664,16 @@ android.app.Activity.prototype.closeOptionsMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function openOptionsMenu
+ * @function getText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#openOptionsMenu()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getText()}
  **/
-android.app.Activity.prototype.openOptionsMenu = function() {
+android.widget.TextView.prototype.getText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'openOptionsMenu',
+		func: 'getText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -761,7 +682,7 @@ android.app.Activity.prototype.openOptionsMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -772,16 +693,16 @@ android.app.Activity.prototype.openOptionsMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getCallingActivity
+ * @function setEllipsize
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getCallingActivity()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setEllipsize(android.text.TextUtils$TruncateAt)}
  **/
-android.app.Activity.prototype.getCallingActivity = function() {
+android.widget.TextView.prototype.setEllipsize = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getCallingActivity',
+		func: 'setEllipsize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -790,7 +711,7 @@ android.app.Activity.prototype.getCallingActivity = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -801,16 +722,16 @@ android.app.Activity.prototype.getCallingActivity = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onWindowAttributesChanged
+ * @function setScroller
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onWindowAttributesChanged(android.view.WindowManager$LayoutParams)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setScroller(android.widget.Scroller)}
  **/
-android.app.Activity.prototype.onWindowAttributesChanged = function() {
+android.widget.TextView.prototype.setScroller = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onWindowAttributesChanged',
+		func: 'setScroller',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -819,7 +740,7 @@ android.app.Activity.prototype.onWindowAttributesChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -830,16 +751,16 @@ android.app.Activity.prototype.onWindowAttributesChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function invalidateOptionsMenu
+ * @function getPaintFlags
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#invalidateOptionsMenu()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getPaintFlags()}
  **/
-android.app.Activity.prototype.invalidateOptionsMenu = function() {
+android.widget.TextView.prototype.getPaintFlags = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'invalidateOptionsMenu',
+		func: 'getPaintFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -848,7 +769,7 @@ android.app.Activity.prototype.invalidateOptionsMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -859,16 +780,16 @@ android.app.Activity.prototype.invalidateOptionsMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setProgressBarVisibility
+ * @function getLeftPaddingOffset
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setProgressBarVisibility(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLeftPaddingOffset()}
  **/
-android.app.Activity.prototype.setProgressBarVisibility = function() {
+android.widget.TextView.prototype.getLeftPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setProgressBarVisibility',
+		func: 'getLeftPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -877,7 +798,7 @@ android.app.Activity.prototype.setProgressBarVisibility = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -888,16 +809,16 @@ android.app.Activity.prototype.setProgressBarVisibility = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateNavigateUpTaskStack
+ * @function getKeyListener
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateNavigateUpTaskStack(android.app.TaskStackBuilder)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getKeyListener()}
  **/
-android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
+android.widget.TextView.prototype.getKeyListener = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateNavigateUpTaskStack',
+		func: 'getKeyListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -906,7 +827,7 @@ android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -917,16 +838,17 @@ android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getCurrentFocus
+ * @function setCompoundDrawablesRelativeWithIntrinsicBounds
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getCurrentFocus()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablesRelativeWithIntrinsicBounds(int, int, int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablesRelativeWithIntrinsicBounds(android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.getCurrentFocus = function() {
+android.widget.TextView.prototype.setCompoundDrawablesRelativeWithIntrinsicBounds = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getCurrentFocus',
+		func: 'setCompoundDrawablesRelativeWithIntrinsicBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -935,7 +857,7 @@ android.app.Activity.prototype.getCurrentFocus = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -946,16 +868,16 @@ android.app.Activity.prototype.getCurrentFocus = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchKeyEvent
+ * @function getError
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchKeyEvent(android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getError()}
  **/
-android.app.Activity.prototype.dispatchKeyEvent = function() {
+android.widget.TextView.prototype.getError = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchKeyEvent',
+		func: 'getError',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -964,7 +886,7 @@ android.app.Activity.prototype.dispatchKeyEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -975,16 +897,16 @@ android.app.Activity.prototype.dispatchKeyEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setProgress
+ * @function setTextIsSelectable
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setProgress(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextIsSelectable(boolean)}
  **/
-android.app.Activity.prototype.setProgress = function() {
+android.widget.TextView.prototype.setTextIsSelectable = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setProgress',
+		func: 'setTextIsSelectable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -993,7 +915,7 @@ android.app.Activity.prototype.setProgress = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1004,16 +926,17 @@ android.app.Activity.prototype.setProgress = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setVolumeControlStream
+ * @function setError
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setVolumeControlStream(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setError(java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setError(java.lang.CharSequence, android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.setVolumeControlStream = function() {
+android.widget.TextView.prototype.setError = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setVolumeControlStream',
+		func: 'setError',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1022,7 +945,7 @@ android.app.Activity.prototype.setVolumeControlStream = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1033,16 +956,16 @@ android.app.Activity.prototype.setVolumeControlStream = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onOptionsMenuClosed
+ * @function getTotalPaddingBottom
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onOptionsMenuClosed(android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingBottom()}
  **/
-android.app.Activity.prototype.onOptionsMenuClosed = function() {
+android.widget.TextView.prototype.getTotalPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onOptionsMenuClosed',
+		func: 'getTotalPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1051,7 +974,7 @@ android.app.Activity.prototype.onOptionsMenuClosed = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1062,16 +985,16 @@ android.app.Activity.prototype.onOptionsMenuClosed = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setFinishOnTouchOutside
+ * @function beginBatchEdit
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setFinishOnTouchOutside(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#beginBatchEdit()}
  **/
-android.app.Activity.prototype.setFinishOnTouchOutside = function() {
+android.widget.TextView.prototype.beginBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setFinishOnTouchOutside',
+		func: 'beginBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1080,7 +1003,560 @@ android.app.Activity.prototype.setFinishOnTouchOutside = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setHint
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHint(java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHint(int)}
+ **/
+android.widget.TextView.prototype.setHint = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setHint',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCustomSelectionActionModeCallback
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCustomSelectionActionModeCallback()}
+ **/
+android.widget.TextView.prototype.getCustomSelectionActionModeCallback = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getCustomSelectionActionModeCallback',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getTextSize
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTextSize()}
+ **/
+android.widget.TextView.prototype.getTextSize = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getTextSize',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setLinkTextColor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLinkTextColor(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLinkTextColor(android.content.res.ColorStateList)}
+ **/
+android.widget.TextView.prototype.setLinkTextColor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setLinkTextColor',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getInputType
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getInputType()}
+ **/
+android.widget.TextView.prototype.getInputType = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getInputType',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onPrivateIMECommand
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onPrivateIMECommand(java.lang.String, android.os.Bundle)}
+ **/
+android.widget.TextView.prototype.onPrivateIMECommand = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onPrivateIMECommand',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function computeScroll
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#computeScroll()}
+ **/
+android.widget.TextView.prototype.computeScroll = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'computeScroll',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setHyphenationFrequency
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHyphenationFrequency(int)}
+ **/
+android.widget.TextView.prototype.setHyphenationFrequency = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setHyphenationFrequency',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setSpannableFactory
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setSpannableFactory(android.text.Spannable$Factory)}
+ **/
+android.widget.TextView.prototype.setSpannableFactory = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setSpannableFactory',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getTotalPaddingLeft
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingLeft()}
+ **/
+android.widget.TextView.prototype.getTotalPaddingLeft = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getTotalPaddingLeft',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function didTouchFocusSelect
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#didTouchFocusSelect()}
+ **/
+android.widget.TextView.prototype.didTouchFocusSelect = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'didTouchFocusSelect',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getTopPaddingOffset
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTopPaddingOffset()}
+ **/
+android.widget.TextView.prototype.getTopPaddingOffset = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getTopPaddingOffset',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onKeyPreIme
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onKeyPreIme(int, android.view.KeyEvent)}
+ **/
+android.widget.TextView.prototype.onKeyPreIme = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onKeyPreIme',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getFocusedRect
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getFocusedRect(android.graphics.Rect)}
+ **/
+android.widget.TextView.prototype.getFocusedRect = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getFocusedRect',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function findViewsWithText
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#findViewsWithText(java.util.ArrayList, java.lang.CharSequence, int)}
+ **/
+android.widget.TextView.prototype.findViewsWithText = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'findViewsWithText',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onDraw
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onDraw(android.graphics.Canvas)}
+ **/
+android.widget.TextView.prototype.onDraw = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onDraw',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setMinEms
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMinEms(int)}
+ **/
+android.widget.TextView.prototype.setMinEms = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setMinEms',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getPaint
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getPaint()}
+ **/
+android.widget.TextView.prototype.getPaint = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getPaint',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setAutoLinkMask
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setAutoLinkMask(int)}
+ **/
+android.widget.TextView.prototype.setAutoLinkMask = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setAutoLinkMask',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1094,9 +1570,9 @@ android.app.Activity.prototype.setFinishOnTouchOutside = function() {
  * @function onAttachedToWindow
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onAttachedToWindow()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onAttachedToWindow()}
  **/
-android.app.Activity.prototype.onAttachedToWindow = function() {
+android.widget.TextView.prototype.onAttachedToWindow = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -1109,7 +1585,7 @@ android.app.Activity.prototype.onAttachedToWindow = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1120,16 +1596,16 @@ android.app.Activity.prototype.onAttachedToWindow = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getApplication
+ * @function setPadding
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getApplication()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setPadding(int, int, int, int)}
  **/
-android.app.Activity.prototype.getApplication = function() {
+android.widget.TextView.prototype.setPadding = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getApplication',
+		func: 'setPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1138,7 +1614,7 @@ android.app.Activity.prototype.getApplication = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1149,16 +1625,16 @@ android.app.Activity.prototype.getApplication = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPrepareOptionsMenu
+ * @function computeHorizontalScrollRange
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPrepareOptionsMenu(android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#computeHorizontalScrollRange()}
  **/
-android.app.Activity.prototype.onPrepareOptionsMenu = function() {
+android.widget.TextView.prototype.computeHorizontalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPrepareOptionsMenu',
+		func: 'computeHorizontalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1167,7 +1643,7 @@ android.app.Activity.prototype.onPrepareOptionsMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1178,16 +1654,16 @@ android.app.Activity.prototype.onPrepareOptionsMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setProgressBarIndeterminateVisibility
+ * @function onTextContextMenuItem
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setProgressBarIndeterminateVisibility(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onTextContextMenuItem(int)}
  **/
-android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function() {
+android.widget.TextView.prototype.onTextContextMenuItem = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setProgressBarIndeterminateVisibility',
+		func: 'onTextContextMenuItem',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1196,7 +1672,7 @@ android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function(
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1207,16 +1683,16 @@ android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function(
 };
 /**
  * TODO Fill out docs more...
- * @function getComponentName
+ * @function getCurrentTextColor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getComponentName()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCurrentTextColor()}
  **/
-android.app.Activity.prototype.getComponentName = function() {
+android.widget.TextView.prototype.getCurrentTextColor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getComponentName',
+		func: 'getCurrentTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1225,7 +1701,7 @@ android.app.Activity.prototype.getComponentName = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1236,16 +1712,16 @@ android.app.Activity.prototype.getComponentName = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getParent
+ * @function getLineBounds
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getParent()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLineBounds(int, android.graphics.Rect)}
  **/
-android.app.Activity.prototype.getParent = function() {
+android.widget.TextView.prototype.getLineBounds = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getParent',
+		func: 'getLineBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1254,7 +1730,7 @@ android.app.Activity.prototype.getParent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1265,16 +1741,16 @@ android.app.Activity.prototype.getParent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function stopManagingCursor
+ * @function getBreakStrategy
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#stopManagingCursor(android.database.Cursor)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getBreakStrategy()}
  **/
-android.app.Activity.prototype.stopManagingCursor = function() {
+android.widget.TextView.prototype.getBreakStrategy = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'stopManagingCursor',
+		func: 'getBreakStrategy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1283,7 +1759,7 @@ android.app.Activity.prototype.stopManagingCursor = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1294,16 +1770,16 @@ android.app.Activity.prototype.stopManagingCursor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onTrimMemory
+ * @function getTotalPaddingEnd
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onTrimMemory(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingEnd()}
  **/
-android.app.Activity.prototype.onTrimMemory = function() {
+android.widget.TextView.prototype.getTotalPaddingEnd = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onTrimMemory',
+		func: 'getTotalPaddingEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1312,7 +1788,7 @@ android.app.Activity.prototype.onTrimMemory = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1323,16 +1799,16 @@ android.app.Activity.prototype.onTrimMemory = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getParentActivityIntent
+ * @function getMaxLines
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getParentActivityIntent()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMaxLines()}
  **/
-android.app.Activity.prototype.getParentActivityIntent = function() {
+android.widget.TextView.prototype.getMaxLines = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getParentActivityIntent',
+		func: 'getMaxLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1341,7 +1817,7 @@ android.app.Activity.prototype.getParentActivityIntent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1352,16 +1828,16 @@ android.app.Activity.prototype.getParentActivityIntent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onActionModeFinished
+ * @function onVisibilityChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onActionModeFinished(android.view.ActionMode)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onVisibilityChanged(android.view.View, int)}
  **/
-android.app.Activity.prototype.onActionModeFinished = function() {
+android.widget.TextView.prototype.onVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onActionModeFinished',
+		func: 'onVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1370,7 +1846,7 @@ android.app.Activity.prototype.onActionModeFinished = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1381,16 +1857,16 @@ android.app.Activity.prototype.onActionModeFinished = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function recreate
+ * @function getDefaultMovementMethod
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#recreate()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getDefaultMovementMethod()}
  **/
-android.app.Activity.prototype.recreate = function() {
+android.widget.TextView.prototype.getDefaultMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'recreate',
+		func: 'getDefaultMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1399,7 +1875,7 @@ android.app.Activity.prototype.recreate = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1410,17 +1886,16 @@ android.app.Activity.prototype.recreate = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateDialog
+ * @function setPaintFlags
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateDialog(int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateDialog(int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setPaintFlags(int)}
  **/
-android.app.Activity.prototype.onCreateDialog = function() {
+android.widget.TextView.prototype.setPaintFlags = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateDialog',
+		func: 'setPaintFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1429,7 +1904,7 @@ android.app.Activity.prototype.onCreateDialog = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1440,17 +1915,16 @@ android.app.Activity.prototype.onCreateDialog = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActivityForResult
+ * @function getPrivateImeOptions
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getPrivateImeOptions()}
  **/
-android.app.Activity.prototype.startActivityForResult = function() {
+android.widget.TextView.prototype.getPrivateImeOptions = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActivityForResult',
+		func: 'getPrivateImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1459,7 +1933,7 @@ android.app.Activity.prototype.startActivityForResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1470,16 +1944,16 @@ android.app.Activity.prototype.startActivityForResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onTitleChanged
+ * @function onFocusChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onTitleChanged(java.lang.CharSequence, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onFocusChanged(boolean, int, android.graphics.Rect)}
  **/
-android.app.Activity.prototype.onTitleChanged = function() {
+android.widget.TextView.prototype.onFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onTitleChanged',
+		func: 'onFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1488,7 +1962,7 @@ android.app.Activity.prototype.onTitleChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1499,16 +1973,16 @@ android.app.Activity.prototype.onTitleChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onActivityReenter
+ * @function getInputExtras
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onActivityReenter(int, android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getInputExtras(boolean)}
  **/
-android.app.Activity.prototype.onActivityReenter = function() {
+android.widget.TextView.prototype.getInputExtras = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onActivityReenter',
+		func: 'getInputExtras',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1517,7 +1991,7 @@ android.app.Activity.prototype.onActivityReenter = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1528,16 +2002,16 @@ android.app.Activity.prototype.onActivityReenter = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onEnterAnimationComplete
+ * @function setGravity
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onEnterAnimationComplete()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setGravity(int)}
  **/
-android.app.Activity.prototype.onEnterAnimationComplete = function() {
+android.widget.TextView.prototype.setGravity = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onEnterAnimationComplete',
+		func: 'setGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1546,94 +2020,7 @@ android.app.Activity.prototype.onEnterAnimationComplete = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function onNewIntent
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onNewIntent(android.content.Intent)}
- **/
-android.app.Activity.prototype.onNewIntent = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'onNewIntent',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getActionBar
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getActionBar()}
- **/
-android.app.Activity.prototype.getActionBar = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'getActionBar',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function onCreatePanelView
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreatePanelView(int)}
- **/
-android.app.Activity.prototype.onCreatePanelView = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'onCreatePanelView',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1647,9 +2034,9 @@ android.app.Activity.prototype.onCreatePanelView = function() {
  * @function onKeyMultiple
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onKeyMultiple(int, int, android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onKeyMultiple(int, int, android.view.KeyEvent)}
  **/
-android.app.Activity.prototype.onKeyMultiple = function() {
+android.widget.TextView.prototype.onKeyMultiple = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -1662,7 +2049,7 @@ android.app.Activity.prototype.onKeyMultiple = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1673,16 +2060,16 @@ android.app.Activity.prototype.onKeyMultiple = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getFragmentManager
+ * @function getCompoundPaddingEnd
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getFragmentManager()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingEnd()}
  **/
-android.app.Activity.prototype.getFragmentManager = function() {
+android.widget.TextView.prototype.getCompoundPaddingEnd = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getFragmentManager',
+		func: 'getCompoundPaddingEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1691,7 +2078,7 @@ android.app.Activity.prototype.getFragmentManager = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1702,16 +2089,16 @@ android.app.Activity.prototype.getFragmentManager = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPanelClosed
+ * @function getTextScaleX
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPanelClosed(int, android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTextScaleX()}
  **/
-android.app.Activity.prototype.onPanelClosed = function() {
+android.widget.TextView.prototype.getTextScaleX = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPanelClosed',
+		func: 'getTextScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1720,7 +2107,36 @@ android.app.Activity.prototype.onPanelClosed = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getMinLines
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMinLines()}
+ **/
+android.widget.TextView.prototype.getMinLines = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getMinLines',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1734,9 +2150,9 @@ android.app.Activity.prototype.onPanelClosed = function() {
  * @function onKeyShortcut
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onKeyShortcut(int, android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onKeyShortcut(int, android.view.KeyEvent)}
  **/
-android.app.Activity.prototype.onKeyShortcut = function() {
+android.widget.TextView.prototype.onKeyShortcut = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -1749,7 +2165,7 @@ android.app.Activity.prototype.onKeyShortcut = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1760,16 +2176,16 @@ android.app.Activity.prototype.onKeyShortcut = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchTrackballEvent
+ * @function setSelected
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchTrackballEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setSelected(boolean)}
  **/
-android.app.Activity.prototype.dispatchTrackballEvent = function() {
+android.widget.TextView.prototype.setSelected = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchTrackballEvent',
+		func: 'setSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1778,7 +2194,7 @@ android.app.Activity.prototype.dispatchTrackballEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1789,16 +2205,16 @@ android.app.Activity.prototype.dispatchTrackballEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setFeatureDrawableAlpha
+ * @function onProvideStructure
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setFeatureDrawableAlpha(int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onProvideStructure(android.view.ViewStructure)}
  **/
-android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
+android.widget.TextView.prototype.onProvideStructure = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setFeatureDrawableAlpha',
+		func: 'onProvideStructure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1807,7 +2223,7 @@ android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1818,16 +2234,16 @@ android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onVisibleBehindCanceled
+ * @function setElegantTextHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onVisibleBehindCanceled()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setElegantTextHeight(boolean)}
  **/
-android.app.Activity.prototype.onVisibleBehindCanceled = function() {
+android.widget.TextView.prototype.setElegantTextHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onVisibleBehindCanceled',
+		func: 'setElegantTextHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1836,7 +2252,7 @@ android.app.Activity.prototype.onVisibleBehindCanceled = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1847,16 +2263,17 @@ android.app.Activity.prototype.onVisibleBehindCanceled = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function addContentView
+ * @function setSingleLine
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#addContentView(android.view.View, android.view.ViewGroup$LayoutParams)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setSingleLine()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setSingleLine(boolean)}
  **/
-android.app.Activity.prototype.addContentView = function() {
+android.widget.TextView.prototype.setSingleLine = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'addContentView',
+		func: 'setSingleLine',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1865,7 +2282,7 @@ android.app.Activity.prototype.addContentView = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1876,16 +2293,16 @@ android.app.Activity.prototype.addContentView = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onActivityResult
+ * @function onDragEvent
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onDragEvent(android.view.DragEvent)}
  **/
-android.app.Activity.prototype.onActivityResult = function() {
+android.widget.TextView.prototype.onDragEvent = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onActivityResult',
+		func: 'onDragEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1894,7 +2311,7 @@ android.app.Activity.prototype.onActivityResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1905,16 +2322,16 @@ android.app.Activity.prototype.onActivityResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getWindowManager
+ * @function getAutoLinkMask
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getWindowManager()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getAutoLinkMask()}
  **/
-android.app.Activity.prototype.getWindowManager = function() {
+android.widget.TextView.prototype.getAutoLinkMask = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getWindowManager',
+		func: 'getAutoLinkMask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1923,7 +2340,7 @@ android.app.Activity.prototype.getWindowManager = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1934,16 +2351,16 @@ android.app.Activity.prototype.getWindowManager = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getRequestedOrientation
+ * @function invalidateDrawable
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getRequestedOrientation()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#invalidateDrawable(android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.getRequestedOrientation = function() {
+android.widget.TextView.prototype.invalidateDrawable = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getRequestedOrientation',
+		func: 'invalidateDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1952,7 +2369,7 @@ android.app.Activity.prototype.getRequestedOrientation = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1963,16 +2380,16 @@ android.app.Activity.prototype.getRequestedOrientation = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function triggerSearch
+ * @function getCustomInsertionActionModeCallback
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#triggerSearch(java.lang.String, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCustomInsertionActionModeCallback()}
  **/
-android.app.Activity.prototype.triggerSearch = function() {
+android.widget.TextView.prototype.getCustomInsertionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'triggerSearch',
+		func: 'getCustomInsertionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1981,7 +2398,7 @@ android.app.Activity.prototype.triggerSearch = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -1992,16 +2409,16 @@ android.app.Activity.prototype.triggerSearch = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finish
+ * @function getCompoundDrawablesRelative
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finish()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundDrawablesRelative()}
  **/
-android.app.Activity.prototype.finish = function() {
+android.widget.TextView.prototype.getCompoundDrawablesRelative = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finish',
+		func: 'getCompoundDrawablesRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2010,7 +2427,7 @@ android.app.Activity.prototype.finish = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2021,16 +2438,16 @@ android.app.Activity.prototype.finish = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isChild
+ * @function getCurrentHintTextColor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isChild()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCurrentHintTextColor()}
  **/
-android.app.Activity.prototype.isChild = function() {
+android.widget.TextView.prototype.getCurrentHintTextColor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isChild',
+		func: 'getCurrentHintTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2039,7 +2456,7 @@ android.app.Activity.prototype.isChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2050,16 +2467,16 @@ android.app.Activity.prototype.isChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isVoiceInteraction
+ * @function getImeActionId
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isVoiceInteraction()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getImeActionId()}
  **/
-android.app.Activity.prototype.isVoiceInteraction = function() {
+android.widget.TextView.prototype.getImeActionId = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isVoiceInteraction',
+		func: 'getImeActionId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2068,7 +2485,7 @@ android.app.Activity.prototype.isVoiceInteraction = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2079,16 +2496,16 @@ android.app.Activity.prototype.isVoiceInteraction = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isVoiceInteractionRoot
+ * @function getGravity
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isVoiceInteractionRoot()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getGravity()}
  **/
-android.app.Activity.prototype.isVoiceInteractionRoot = function() {
+android.widget.TextView.prototype.getGravity = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isVoiceInteractionRoot',
+		func: 'getGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2097,7 +2514,7 @@ android.app.Activity.prototype.isVoiceInteractionRoot = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2108,16 +2525,16 @@ android.app.Activity.prototype.isVoiceInteractionRoot = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchKeyShortcutEvent
+ * @function setInputType
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchKeyShortcutEvent(android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setInputType(int)}
  **/
-android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
+android.widget.TextView.prototype.setInputType = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchKeyShortcutEvent',
+		func: 'setInputType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2126,7 +2543,7 @@ android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2137,16 +2554,16 @@ android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onProvideReferrer
+ * @function setTransformationMethod
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onProvideReferrer()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTransformationMethod(android.text.method.TransformationMethod)}
  **/
-android.app.Activity.prototype.onProvideReferrer = function() {
+android.widget.TextView.prototype.setTransformationMethod = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onProvideReferrer',
+		func: 'setTransformationMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2155,7 +2572,7 @@ android.app.Activity.prototype.onProvideReferrer = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2166,16 +2583,16 @@ android.app.Activity.prototype.onProvideReferrer = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setVisible
+ * @function onCommitCompletion
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setVisible(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onCommitCompletion(android.view.inputmethod.CompletionInfo)}
  **/
-android.app.Activity.prototype.setVisible = function() {
+android.widget.TextView.prototype.onCommitCompletion = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setVisible',
+		func: 'onCommitCompletion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2184,7 +2601,7 @@ android.app.Activity.prototype.setVisible = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2195,16 +2612,16 @@ android.app.Activity.prototype.setVisible = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isDestroyed
+ * @function getShowSoftInputOnFocus
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isDestroyed()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getShowSoftInputOnFocus()}
  **/
-android.app.Activity.prototype.isDestroyed = function() {
+android.widget.TextView.prototype.getShowSoftInputOnFocus = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isDestroyed',
+		func: 'getShowSoftInputOnFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2213,7 +2630,7 @@ android.app.Activity.prototype.isDestroyed = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2224,17 +2641,16 @@ android.app.Activity.prototype.isDestroyed = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setTitle
+ * @function getCompoundPaddingBottom
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setTitle(java.lang.CharSequence)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setTitle(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingBottom()}
  **/
-android.app.Activity.prototype.setTitle = function() {
+android.widget.TextView.prototype.getCompoundPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setTitle',
+		func: 'getCompoundPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2243,7 +2659,7 @@ android.app.Activity.prototype.setTitle = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2254,16 +2670,16 @@ android.app.Activity.prototype.setTitle = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getVoiceInteractor
+ * @function getLetterSpacing
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getVoiceInteractor()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLetterSpacing()}
  **/
-android.app.Activity.prototype.getVoiceInteractor = function() {
+android.widget.TextView.prototype.getLetterSpacing = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getVoiceInteractor',
+		func: 'getLetterSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2272,7 +2688,7 @@ android.app.Activity.prototype.getVoiceInteractor = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2283,16 +2699,16 @@ android.app.Activity.prototype.getVoiceInteractor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function stopLockTask
+ * @function setLineSpacing
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#stopLockTask()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLineSpacing(float, float)}
  **/
-android.app.Activity.prototype.stopLockTask = function() {
+android.widget.TextView.prototype.setLineSpacing = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'stopLockTask',
+		func: 'setLineSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2301,95 +2717,7 @@ android.app.Activity.prototype.stopLockTask = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function startActivities
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivities(android.content.Intent[])}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivities(android.content.Intent[], android.os.Bundle)}
- **/
-android.app.Activity.prototype.startActivities = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'startActivities',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function onKeyLongPress
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onKeyLongPress(int, android.view.KeyEvent)}
- **/
-android.app.Activity.prototype.onKeyLongPress = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'onKeyLongPress',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function startLockTask
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startLockTask()}
- **/
-android.app.Activity.prototype.startLockTask = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'startLockTask',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2403,9 +2731,9 @@ android.app.Activity.prototype.startLockTask = function() {
  * @function onGenericMotionEvent
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onGenericMotionEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onGenericMotionEvent(android.view.MotionEvent)}
  **/
-android.app.Activity.prototype.onGenericMotionEvent = function() {
+android.widget.TextView.prototype.onGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -2418,7 +2746,7 @@ android.app.Activity.prototype.onGenericMotionEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2429,16 +2757,16 @@ android.app.Activity.prototype.onGenericMotionEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getMenuInflater
+ * @function getLeftFadingEdgeStrength
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getMenuInflater()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLeftFadingEdgeStrength()}
  **/
-android.app.Activity.prototype.getMenuInflater = function() {
+android.widget.TextView.prototype.getLeftFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getMenuInflater',
+		func: 'getLeftFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2447,181 +2775,7 @@ android.app.Activity.prototype.getMenuInflater = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isChangingConfigurations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isChangingConfigurations()}
- **/
-android.app.Activity.prototype.isChangingConfigurations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'isChangingConfigurations',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isImmersive
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isImmersive()}
- **/
-android.app.Activity.prototype.isImmersive = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'isImmersive',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setRequestedOrientation
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setRequestedOrientation(int)}
- **/
-android.app.Activity.prototype.setRequestedOrientation = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'setRequestedOrientation',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setEnterSharedElementCallback
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setEnterSharedElementCallback(android.app.SharedElementCallback)}
- **/
-android.app.Activity.prototype.setEnterSharedElementCallback = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'setEnterSharedElementCallback',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function dismissDialog
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dismissDialog(int)}
- **/
-android.app.Activity.prototype.dismissDialog = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'dismissDialog',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getWindow
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getWindow()}
- **/
-android.app.Activity.prototype.getWindow = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'getWindow',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2635,10 +2789,9 @@ android.app.Activity.prototype.getWindow = function() {
  * @function onRestoreInstanceState
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onRestoreInstanceState(android.os.Bundle)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onRestoreInstanceState(android.os.Bundle, android.os.PersistableBundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onRestoreInstanceState(android.os.Parcelable)}
  **/
-android.app.Activity.prototype.onRestoreInstanceState = function() {
+android.widget.TextView.prototype.onRestoreInstanceState = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -2651,7 +2804,7 @@ android.app.Activity.prototype.onRestoreInstanceState = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2662,16 +2815,16 @@ android.app.Activity.prototype.onRestoreInstanceState = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getLocalClassName
+ * @function getBottomPaddingOffset
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getLocalClassName()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getBottomPaddingOffset()}
  **/
-android.app.Activity.prototype.getLocalClassName = function() {
+android.widget.TextView.prototype.getBottomPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getLocalClassName',
+		func: 'getBottomPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2680,7 +2833,7 @@ android.app.Activity.prototype.getLocalClassName = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2691,16 +2844,16 @@ android.app.Activity.prototype.getLocalClassName = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onRequestPermissionsResult
+ * @function isInputMethodTarget
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onRequestPermissionsResult(int, java.lang.String[], int[])}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#isInputMethodTarget()}
  **/
-android.app.Activity.prototype.onRequestPermissionsResult = function() {
+android.widget.TextView.prototype.isInputMethodTarget = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onRequestPermissionsResult',
+		func: 'isInputMethodTarget',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2709,7 +2862,7 @@ android.app.Activity.prototype.onRequestPermissionsResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2720,16 +2873,17 @@ android.app.Activity.prototype.onRequestPermissionsResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setTitleColor
+ * @function setHintTextColor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setTitleColor(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHintTextColor(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHintTextColor(android.content.res.ColorStateList)}
  **/
-android.app.Activity.prototype.setTitleColor = function() {
+android.widget.TextView.prototype.setHintTextColor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setTitleColor',
+		func: 'setHintTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2738,7 +2892,7 @@ android.app.Activity.prototype.setTitleColor = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2749,16 +2903,16 @@ android.app.Activity.prototype.setTitleColor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function closeContextMenu
+ * @function isTextSelectable
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#closeContextMenu()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#isTextSelectable()}
  **/
-android.app.Activity.prototype.closeContextMenu = function() {
+android.widget.TextView.prototype.isTextSelectable = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'closeContextMenu',
+		func: 'isTextSelectable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2767,7 +2921,7 @@ android.app.Activity.prototype.closeContextMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2778,16 +2932,16 @@ android.app.Activity.prototype.closeContextMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function moveTaskToBack
+ * @function getEditableText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#moveTaskToBack(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getEditableText()}
  **/
-android.app.Activity.prototype.moveTaskToBack = function() {
+android.widget.TextView.prototype.getEditableText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'moveTaskToBack',
+		func: 'getEditableText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2796,7 +2950,7 @@ android.app.Activity.prototype.moveTaskToBack = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2807,16 +2961,16 @@ android.app.Activity.prototype.moveTaskToBack = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dispatchTouchEvent
+ * @function getLayout
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dispatchTouchEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLayout()}
  **/
-android.app.Activity.prototype.dispatchTouchEvent = function() {
+android.widget.TextView.prototype.getLayout = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dispatchTouchEvent',
+		func: 'getLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2825,7 +2979,7 @@ android.app.Activity.prototype.dispatchTouchEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2836,16 +2990,16 @@ android.app.Activity.prototype.dispatchTouchEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onActionModeStarted
+ * @function setFrame
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onActionModeStarted(android.view.ActionMode)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setFrame(int, int, int, int)}
  **/
-android.app.Activity.prototype.onActionModeStarted = function() {
+android.widget.TextView.prototype.setFrame = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onActionModeStarted',
+		func: 'setFrame',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2854,7 +3008,7 @@ android.app.Activity.prototype.onActionModeStarted = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2865,17 +3019,16 @@ android.app.Activity.prototype.onActionModeStarted = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPostCreate
+ * @function setMaxHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPostCreate(android.os.Bundle)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPostCreate(android.os.Bundle, android.os.PersistableBundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMaxHeight(int)}
  **/
-android.app.Activity.prototype.onPostCreate = function() {
+android.widget.TextView.prototype.setMaxHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPostCreate',
+		func: 'setMaxHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2884,7 +3037,7 @@ android.app.Activity.prototype.onPostCreate = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2895,17 +3048,16 @@ android.app.Activity.prototype.onPostCreate = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function showDialog
+ * @function endBatchEdit
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#showDialog(int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#showDialog(int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#endBatchEdit()}
  **/
-android.app.Activity.prototype.showDialog = function() {
+android.widget.TextView.prototype.endBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'showDialog',
+		func: 'endBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2914,7 +3066,7 @@ android.app.Activity.prototype.showDialog = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2925,16 +3077,16 @@ android.app.Activity.prototype.showDialog = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getSearchEvent
+ * @function getUrls
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getSearchEvent()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getUrls()}
  **/
-android.app.Activity.prototype.getSearchEvent = function() {
+android.widget.TextView.prototype.getUrls = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getSearchEvent',
+		func: 'getUrls',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2943,7 +3095,7 @@ android.app.Activity.prototype.getSearchEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2954,16 +3106,16 @@ android.app.Activity.prototype.getSearchEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getTaskId
+ * @function setBreakStrategy
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getTaskId()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setBreakStrategy(int)}
  **/
-android.app.Activity.prototype.getTaskId = function() {
+android.widget.TextView.prototype.setBreakStrategy = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getTaskId',
+		func: 'setBreakStrategy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2972,7 +3124,7 @@ android.app.Activity.prototype.getTaskId = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -2983,16 +3135,16 @@ android.app.Activity.prototype.getTaskId = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function navigateUpTo
+ * @function getCompoundDrawableTintMode
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#navigateUpTo(android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundDrawableTintMode()}
  **/
-android.app.Activity.prototype.navigateUpTo = function() {
+android.widget.TextView.prototype.getCompoundDrawableTintMode = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'navigateUpTo',
+		func: 'getCompoundDrawableTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3001,7 +3153,7 @@ android.app.Activity.prototype.navigateUpTo = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3012,16 +3164,16 @@ android.app.Activity.prototype.navigateUpTo = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getTitleColor
+ * @function getExtendedPaddingTop
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getTitleColor()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getExtendedPaddingTop()}
  **/
-android.app.Activity.prototype.getTitleColor = function() {
+android.widget.TextView.prototype.getExtendedPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getTitleColor',
+		func: 'getExtendedPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3030,7 +3182,7 @@ android.app.Activity.prototype.getTitleColor = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3041,16 +3193,16 @@ android.app.Activity.prototype.getTitleColor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setFeatureDrawable
+ * @function isCursorVisible
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setFeatureDrawable(int, android.graphics.drawable.Drawable)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#isCursorVisible()}
  **/
-android.app.Activity.prototype.setFeatureDrawable = function() {
+android.widget.TextView.prototype.isCursorVisible = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setFeatureDrawable',
+		func: 'isCursorVisible',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3059,7 +3211,7 @@ android.app.Activity.prototype.setFeatureDrawable = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3070,16 +3222,16 @@ android.app.Activity.prototype.setFeatureDrawable = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function requestWindowFeature
+ * @function getTotalPaddingTop
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#requestWindowFeature(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingTop()}
  **/
-android.app.Activity.prototype.requestWindowFeature = function() {
+android.widget.TextView.prototype.getTotalPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'requestWindowFeature',
+		func: 'getTotalPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3088,7 +3240,7 @@ android.app.Activity.prototype.requestWindowFeature = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3099,16 +3251,16 @@ android.app.Activity.prototype.requestWindowFeature = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishActivity
+ * @function getLinkTextColors
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishActivity(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLinkTextColors()}
  **/
-android.app.Activity.prototype.finishActivity = function() {
+android.widget.TextView.prototype.getLinkTextColors = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishActivity',
+		func: 'getLinkTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3117,7 +3269,7 @@ android.app.Activity.prototype.finishActivity = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3128,16 +3280,16 @@ android.app.Activity.prototype.finishActivity = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function managedQuery
+ * @function bringPointIntoView
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#managedQuery(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#bringPointIntoView(int)}
  **/
-android.app.Activity.prototype.managedQuery = function() {
+android.widget.TextView.prototype.bringPointIntoView = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'managedQuery',
+		func: 'bringPointIntoView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3146,7 +3298,7 @@ android.app.Activity.prototype.managedQuery = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3157,16 +3309,16 @@ android.app.Activity.prototype.managedQuery = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishFromChild
+ * @function length
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishFromChild(android.app.Activity)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#length()}
  **/
-android.app.Activity.prototype.finishFromChild = function() {
+android.widget.TextView.prototype.length = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishFromChild',
+		func: 'length',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3175,7 +3327,7 @@ android.app.Activity.prototype.finishFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3186,16 +3338,16 @@ android.app.Activity.prototype.finishFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function takeKeyEvents
+ * @function hasSelection
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#takeKeyEvents(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#hasSelection()}
  **/
-android.app.Activity.prototype.takeKeyEvents = function() {
+android.widget.TextView.prototype.hasSelection = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'takeKeyEvents',
+		func: 'hasSelection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3204,7 +3356,7 @@ android.app.Activity.prototype.takeKeyEvents = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3215,16 +3367,16 @@ android.app.Activity.prototype.takeKeyEvents = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function overridePendingTransition
+ * @function setCompoundDrawableTintList
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawableTintList(android.content.res.ColorStateList)}
  **/
-android.app.Activity.prototype.overridePendingTransition = function() {
+android.widget.TextView.prototype.setCompoundDrawableTintList = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'overridePendingTransition',
+		func: 'setCompoundDrawableTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3233,7 +3385,7 @@ android.app.Activity.prototype.overridePendingTransition = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3244,16 +3396,16 @@ android.app.Activity.prototype.overridePendingTransition = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function unregisterForContextMenu
+ * @function drawableHotspotChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#unregisterForContextMenu(android.view.View)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#drawableHotspotChanged(float, float)}
  **/
-android.app.Activity.prototype.unregisterForContextMenu = function() {
+android.widget.TextView.prototype.drawableHotspotChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'unregisterForContextMenu',
+		func: 'drawableHotspotChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3262,7 +3414,7 @@ android.app.Activity.prototype.unregisterForContextMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3273,16 +3425,16 @@ android.app.Activity.prototype.unregisterForContextMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function findViewById
+ * @function onFinishTemporaryDetach
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#findViewById(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onFinishTemporaryDetach()}
  **/
-android.app.Activity.prototype.findViewById = function() {
+android.widget.TextView.prototype.onFinishTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'findViewById',
+		func: 'onFinishTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3291,7 +3443,7 @@ android.app.Activity.prototype.findViewById = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3302,16 +3454,16 @@ android.app.Activity.prototype.findViewById = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onNavigateUp
+ * @function getHyphenationFrequency
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onNavigateUp()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getHyphenationFrequency()}
  **/
-android.app.Activity.prototype.onNavigateUp = function() {
+android.widget.TextView.prototype.getHyphenationFrequency = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onNavigateUp',
+		func: 'getHyphenationFrequency',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3320,7 +3472,7 @@ android.app.Activity.prototype.onNavigateUp = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3331,16 +3483,16 @@ android.app.Activity.prototype.onNavigateUp = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function requestPermissions
+ * @function setLines
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#requestPermissions(java.lang.String[], int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLines(int)}
  **/
-android.app.Activity.prototype.requestPermissions = function() {
+android.widget.TextView.prototype.setLines = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'requestPermissions',
+		func: 'setLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3349,7 +3501,7 @@ android.app.Activity.prototype.requestPermissions = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3360,16 +3512,16 @@ android.app.Activity.prototype.requestPermissions = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onNavigateUpFromChild
+ * @function getBaseline
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onNavigateUpFromChild(android.app.Activity)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getBaseline()}
  **/
-android.app.Activity.prototype.onNavigateUpFromChild = function() {
+android.widget.TextView.prototype.getBaseline = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onNavigateUpFromChild',
+		func: 'getBaseline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3378,7 +3530,7 @@ android.app.Activity.prototype.onNavigateUpFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3389,16 +3541,16 @@ android.app.Activity.prototype.onNavigateUpFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function shouldShowRequestPermissionRationale
+ * @function getCompoundPaddingTop
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#shouldShowRequestPermissionRationale(java.lang.String)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingTop()}
  **/
-android.app.Activity.prototype.shouldShowRequestPermissionRationale = function() {
+android.widget.TextView.prototype.getCompoundPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'shouldShowRequestPermissionRationale',
+		func: 'getCompoundPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3407,7 +3559,7 @@ android.app.Activity.prototype.shouldShowRequestPermissionRationale = function()
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3418,16 +3570,16 @@ android.app.Activity.prototype.shouldShowRequestPermissionRationale = function()
 };
 /**
  * TODO Fill out docs more...
- * @function isTaskRoot
+ * @function getImeActionLabel
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isTaskRoot()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getImeActionLabel()}
  **/
-android.app.Activity.prototype.isTaskRoot = function() {
+android.widget.TextView.prototype.getImeActionLabel = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isTaskRoot',
+		func: 'getImeActionLabel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3436,7 +3588,7 @@ android.app.Activity.prototype.isTaskRoot = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3447,16 +3599,17 @@ android.app.Activity.prototype.isTaskRoot = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onProvideAssistData
+ * @function append
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onProvideAssistData(android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#append(java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#append(java.lang.CharSequence, int, int)}
  **/
-android.app.Activity.prototype.onProvideAssistData = function() {
+android.widget.TextView.prototype.append = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onProvideAssistData',
+		func: 'append',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3465,7 +3618,7 @@ android.app.Activity.prototype.onProvideAssistData = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3476,16 +3629,16 @@ android.app.Activity.prototype.onProvideAssistData = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isFinishing
+ * @function setImeActionLabel
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#isFinishing()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setImeActionLabel(java.lang.CharSequence, int)}
  **/
-android.app.Activity.prototype.isFinishing = function() {
+android.widget.TextView.prototype.setImeActionLabel = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'isFinishing',
+		func: 'setImeActionLabel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3494,7 +3647,7 @@ android.app.Activity.prototype.isFinishing = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3505,16 +3658,20 @@ android.app.Activity.prototype.isFinishing = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getIntent
+ * @function setText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getIntent()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setText(java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setText(java.lang.CharSequence, android.widget.TextView$BufferType)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setText(char[], int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setText(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setText(int, android.widget.TextView$BufferType)}
  **/
-android.app.Activity.prototype.getIntent = function() {
+android.widget.TextView.prototype.setText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getIntent',
+		func: 'setText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3523,7 +3680,7 @@ android.app.Activity.prototype.getIntent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3534,16 +3691,16 @@ android.app.Activity.prototype.getIntent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onStop
+ * @function onSelectionChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onStop()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onSelectionChanged(int, int)}
  **/
-android.app.Activity.prototype.onStop = function() {
+android.widget.TextView.prototype.onSelectionChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onStop',
+		func: 'onSelectionChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3552,7 +3709,7 @@ android.app.Activity.prototype.onStop = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3563,17 +3720,16 @@ android.app.Activity.prototype.onStop = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onWindowStartingActionMode
+ * @function hasOverlappingRendering
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onWindowStartingActionMode(android.view.ActionMode$Callback)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onWindowStartingActionMode(android.view.ActionMode$Callback, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#hasOverlappingRendering()}
  **/
-android.app.Activity.prototype.onWindowStartingActionMode = function() {
+android.widget.TextView.prototype.hasOverlappingRendering = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onWindowStartingActionMode',
+		func: 'hasOverlappingRendering',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3582,7 +3738,7 @@ android.app.Activity.prototype.onWindowStartingActionMode = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3593,17 +3749,16 @@ android.app.Activity.prototype.onWindowStartingActionMode = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActivityIfNeeded
+ * @function moveCursorToVisibleOffset
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityIfNeeded(android.content.Intent, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityIfNeeded(android.content.Intent, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#moveCursorToVisibleOffset()}
  **/
-android.app.Activity.prototype.startActivityIfNeeded = function() {
+android.widget.TextView.prototype.moveCursorToVisibleOffset = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActivityIfNeeded',
+		func: 'moveCursorToVisibleOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3612,7 +3767,7 @@ android.app.Activity.prototype.startActivityIfNeeded = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3623,16 +3778,16 @@ android.app.Activity.prototype.startActivityIfNeeded = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setExitSharedElementCallback
+ * @function setEms
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setExitSharedElementCallback(android.app.SharedElementCallback)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setEms(int)}
  **/
-android.app.Activity.prototype.setExitSharedElementCallback = function() {
+android.widget.TextView.prototype.setEms = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setExitSharedElementCallback',
+		func: 'setEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3641,7 +3796,7 @@ android.app.Activity.prototype.setExitSharedElementCallback = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3652,16 +3807,16 @@ android.app.Activity.prototype.setExitSharedElementCallback = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPostResume
+ * @function getAccessibilityClassName
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPostResume()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getAccessibilityClassName()}
  **/
-android.app.Activity.prototype.onPostResume = function() {
+android.widget.TextView.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPostResume',
+		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3670,7 +3825,7 @@ android.app.Activity.prototype.onPostResume = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3681,16 +3836,16 @@ android.app.Activity.prototype.onPostResume = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreatePanelMenu
+ * @function onEditorAction
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreatePanelMenu(int, android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onEditorAction(int)}
  **/
-android.app.Activity.prototype.onCreatePanelMenu = function() {
+android.widget.TextView.prototype.onEditorAction = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreatePanelMenu',
+		func: 'onEditorAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3699,7 +3854,7 @@ android.app.Activity.prototype.onCreatePanelMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3710,16 +3865,16 @@ android.app.Activity.prototype.onCreatePanelMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPreparePanel
+ * @function performLongClick
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPreparePanel(int, android.view.View, android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#performLongClick()}
  **/
-android.app.Activity.prototype.onPreparePanel = function() {
+android.widget.TextView.prototype.performLongClick = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPreparePanel',
+		func: 'performLongClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3728,7 +3883,7 @@ android.app.Activity.prototype.onPreparePanel = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3739,16 +3894,16 @@ android.app.Activity.prototype.onPreparePanel = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setSecondaryProgress
+ * @function getFontFeatureSettings
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setSecondaryProgress(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getFontFeatureSettings()}
  **/
-android.app.Activity.prototype.setSecondaryProgress = function() {
+android.widget.TextView.prototype.getFontFeatureSettings = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setSecondaryProgress',
+		func: 'getFontFeatureSettings',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3757,7 +3912,7 @@ android.app.Activity.prototype.setSecondaryProgress = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3768,16 +3923,16 @@ android.app.Activity.prototype.setSecondaryProgress = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getSystemService
+ * @function getMaxEms
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getSystemService(java.lang.String)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMaxEms()}
  **/
-android.app.Activity.prototype.getSystemService = function() {
+android.widget.TextView.prototype.getMaxEms = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getSystemService',
+		func: 'getMaxEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3786,7 +3941,7 @@ android.app.Activity.prototype.getSystemService = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3797,16 +3952,16 @@ android.app.Activity.prototype.getSystemService = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startSearch
+ * @function getFilters
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startSearch(java.lang.String, boolean, android.os.Bundle, boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getFilters()}
  **/
-android.app.Activity.prototype.startSearch = function() {
+android.widget.TextView.prototype.getFilters = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startSearch',
+		func: 'getFilters',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3815,7 +3970,7 @@ android.app.Activity.prototype.startSearch = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3826,16 +3981,16 @@ android.app.Activity.prototype.startSearch = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setDefaultKeyMode
+ * @function addTextChangedListener
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setDefaultKeyMode(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#addTextChangedListener(android.text.TextWatcher)}
  **/
-android.app.Activity.prototype.setDefaultKeyMode = function() {
+android.widget.TextView.prototype.addTextChangedListener = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setDefaultKeyMode',
+		func: 'addTextChangedListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3844,7 +3999,7 @@ android.app.Activity.prototype.setDefaultKeyMode = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3855,16 +4010,16 @@ android.app.Activity.prototype.setDefaultKeyMode = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onContextItemSelected
+ * @function onStartTemporaryDetach
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onContextItemSelected(android.view.MenuItem)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onStartTemporaryDetach()}
  **/
-android.app.Activity.prototype.onContextItemSelected = function() {
+android.widget.TextView.prototype.onStartTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onContextItemSelected',
+		func: 'onStartTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3873,7 +4028,7 @@ android.app.Activity.prototype.onContextItemSelected = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3884,16 +4039,17 @@ android.app.Activity.prototype.onContextItemSelected = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPause
+ * @function setCompoundDrawablesWithIntrinsicBounds
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPause()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablesWithIntrinsicBounds(int, int, int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawablesWithIntrinsicBounds(android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.onPause = function() {
+android.widget.TextView.prototype.setCompoundDrawablesWithIntrinsicBounds = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPause',
+		func: 'setCompoundDrawablesWithIntrinsicBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3902,7 +4058,7 @@ android.app.Activity.prototype.onPause = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3913,16 +4069,16 @@ android.app.Activity.prototype.onPause = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onApplyThemeResource
+ * @function getMinEms
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onApplyThemeResource(android.content.res.Resources$Theme, int, boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMinEms()}
  **/
-android.app.Activity.prototype.onApplyThemeResource = function() {
+android.widget.TextView.prototype.getMinEms = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onApplyThemeResource',
+		func: 'getMinEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3931,7 +4087,7 @@ android.app.Activity.prototype.onApplyThemeResource = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3942,16 +4098,16 @@ android.app.Activity.prototype.onApplyThemeResource = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onProvideAssistContent
+ * @function onLayout
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onProvideAssistContent(android.app.assist.AssistContent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onLayout(boolean, int, int, int, int)}
  **/
-android.app.Activity.prototype.onProvideAssistContent = function() {
+android.widget.TextView.prototype.onLayout = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onProvideAssistContent',
+		func: 'onLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3960,7 +4116,7 @@ android.app.Activity.prototype.onProvideAssistContent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -3971,16 +4127,16 @@ android.app.Activity.prototype.onProvideAssistContent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishActivityFromChild
+ * @function onEndBatchEdit
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishActivityFromChild(android.app.Activity, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onEndBatchEdit()}
  **/
-android.app.Activity.prototype.finishActivityFromChild = function() {
+android.widget.TextView.prototype.onEndBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishActivityFromChild',
+		func: 'onEndBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3989,7 +4145,7 @@ android.app.Activity.prototype.finishActivityFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4000,17 +4156,16 @@ android.app.Activity.prototype.finishActivityFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActivity
+ * @function computeVerticalScrollRange
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#computeVerticalScrollRange()}
  **/
-android.app.Activity.prototype.startActivity = function() {
+android.widget.TextView.prototype.computeVerticalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActivity',
+		func: 'computeVerticalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4019,7 +4174,7 @@ android.app.Activity.prototype.startActivity = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4030,16 +4185,16 @@ android.app.Activity.prototype.startActivity = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setContentTransitionManager
+ * @function setMaxWidth
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setContentTransitionManager(android.transition.TransitionManager)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMaxWidth(int)}
  **/
-android.app.Activity.prototype.setContentTransitionManager = function() {
+android.widget.TextView.prototype.setMaxWidth = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setContentTransitionManager',
+		func: 'setMaxWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4048,7 +4203,7 @@ android.app.Activity.prototype.setContentTransitionManager = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4059,16 +4214,16 @@ android.app.Activity.prototype.setContentTransitionManager = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function reportFullyDrawn
+ * @function onPreDraw
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#reportFullyDrawn()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onPreDraw()}
  **/
-android.app.Activity.prototype.reportFullyDrawn = function() {
+android.widget.TextView.prototype.onPreDraw = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'reportFullyDrawn',
+		func: 'onPreDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4077,7 +4232,7 @@ android.app.Activity.prototype.reportFullyDrawn = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4088,16 +4243,16 @@ android.app.Activity.prototype.reportFullyDrawn = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getLayoutInflater
+ * @function verifyDrawable
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getLayoutInflater()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#verifyDrawable(android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.getLayoutInflater = function() {
+android.widget.TextView.prototype.verifyDrawable = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getLayoutInflater',
+		func: 'verifyDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4106,7 +4261,7 @@ android.app.Activity.prototype.getLayoutInflater = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4117,17 +4272,16 @@ android.app.Activity.prototype.getLayoutInflater = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActionMode
+ * @function setEnabled
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActionMode(android.view.ActionMode$Callback)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActionMode(android.view.ActionMode$Callback, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setEnabled(boolean)}
  **/
-android.app.Activity.prototype.startActionMode = function() {
+android.widget.TextView.prototype.setEnabled = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActionMode',
+		func: 'setEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4136,7 +4290,7 @@ android.app.Activity.prototype.startActionMode = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4147,16 +4301,16 @@ android.app.Activity.prototype.startActionMode = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onRetainNonConfigurationInstance
+ * @function setExtractedText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onRetainNonConfigurationInstance()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setExtractedText(android.view.inputmethod.ExtractedText)}
  **/
-android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
+android.widget.TextView.prototype.setExtractedText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onRetainNonConfigurationInstance',
+		func: 'setExtractedText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4165,7 +4319,7 @@ android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4176,16 +4330,16 @@ android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getReferrer
+ * @function setFreezesText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getReferrer()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setFreezesText(boolean)}
  **/
-android.app.Activity.prototype.getReferrer = function() {
+android.widget.TextView.prototype.setFreezesText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getReferrer',
+		func: 'setFreezesText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4194,7 +4348,7 @@ android.app.Activity.prototype.getReferrer = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4205,16 +4359,16 @@ android.app.Activity.prototype.getReferrer = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onDestroy
+ * @function getIncludeFontPadding
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onDestroy()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getIncludeFontPadding()}
  **/
-android.app.Activity.prototype.onDestroy = function() {
+android.widget.TextView.prototype.getIncludeFontPadding = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onDestroy',
+		func: 'getIncludeFontPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4223,7 +4377,356 @@ android.app.Activity.prototype.onDestroy = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onBeginBatchEdit
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onBeginBatchEdit()}
+ **/
+android.widget.TextView.prototype.onBeginBatchEdit = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onBeginBatchEdit',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isSuggestionsEnabled
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#isSuggestionsEnabled()}
+ **/
+android.widget.TextView.prototype.isSuggestionsEnabled = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'isSuggestionsEnabled',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setLinksClickable
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLinksClickable(boolean)}
+ **/
+android.widget.TextView.prototype.setLinksClickable = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setLinksClickable',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getLinksClickable
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLinksClickable()}
+ **/
+android.widget.TextView.prototype.getLinksClickable = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getLinksClickable',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCompoundPaddingRight
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingRight()}
+ **/
+android.widget.TextView.prototype.getCompoundPaddingRight = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getCompoundPaddingRight',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setKeyListener
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setKeyListener(android.text.method.KeyListener)}
+ **/
+android.widget.TextView.prototype.setKeyListener = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setKeyListener',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCompoundPaddingLeft
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingLeft()}
+ **/
+android.widget.TextView.prototype.getCompoundPaddingLeft = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getCompoundPaddingLeft',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onRtlPropertiesChanged
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onRtlPropertiesChanged(int)}
+ **/
+android.widget.TextView.prototype.onRtlPropertiesChanged = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onRtlPropertiesChanged',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setTypeface
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTypeface(android.graphics.Typeface, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTypeface(android.graphics.Typeface)}
+ **/
+android.widget.TextView.prototype.setTypeface = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setTypeface',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getExtendedPaddingBottom
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getExtendedPaddingBottom()}
+ **/
+android.widget.TextView.prototype.getExtendedPaddingBottom = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getExtendedPaddingBottom',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setInputExtras
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setInputExtras(int)}
+ **/
+android.widget.TextView.prototype.setInputExtras = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setInputExtras',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setShowSoftInputOnFocus
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setShowSoftInputOnFocus(boolean)}
+ **/
+android.widget.TextView.prototype.setShowSoftInputOnFocus = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setShowSoftInputOnFocus',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4237,9 +4740,9 @@ android.app.Activity.prototype.onDestroy = function() {
  * @function onKeyUp
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onKeyUp(int, android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onKeyUp(int, android.view.KeyEvent)}
  **/
-android.app.Activity.prototype.onKeyUp = function() {
+android.widget.TextView.prototype.onKeyUp = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -4252,7 +4755,7 @@ android.app.Activity.prototype.onKeyUp = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4263,16 +4766,16 @@ android.app.Activity.prototype.onKeyUp = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onMenuOpened
+ * @function removeTextChangedListener
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onMenuOpened(int, android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#removeTextChangedListener(android.text.TextWatcher)}
  **/
-android.app.Activity.prototype.onMenuOpened = function() {
+android.widget.TextView.prototype.removeTextChangedListener = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onMenuOpened',
+		func: 'removeTextChangedListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4281,7 +4784,7 @@ android.app.Activity.prototype.onMenuOpened = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4292,16 +4795,16 @@ android.app.Activity.prototype.onMenuOpened = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishAfterTransition
+ * @function clearComposingText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishAfterTransition()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#clearComposingText()}
  **/
-android.app.Activity.prototype.finishAfterTransition = function() {
+android.widget.TextView.prototype.clearComposingText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishAfterTransition',
+		func: 'clearComposingText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4310,7 +4813,7 @@ android.app.Activity.prototype.finishAfterTransition = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4321,16 +4824,16 @@ android.app.Activity.prototype.finishAfterTransition = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startManagingCursor
+ * @function setWidth
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startManagingCursor(android.database.Cursor)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setWidth(int)}
  **/
-android.app.Activity.prototype.startManagingCursor = function() {
+android.widget.TextView.prototype.setWidth = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startManagingCursor',
+		func: 'setWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4339,7 +4842,7 @@ android.app.Activity.prototype.startManagingCursor = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4350,17 +4853,16 @@ android.app.Activity.prototype.startManagingCursor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPrepareDialog
+ * @function setPrivateImeOptions
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPrepareDialog(int, android.app.Dialog)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPrepareDialog(int, android.app.Dialog, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setPrivateImeOptions(java.lang.String)}
  **/
-android.app.Activity.prototype.onPrepareDialog = function() {
+android.widget.TextView.prototype.setPrivateImeOptions = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPrepareDialog',
+		func: 'setPrivateImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4369,7 +4871,7 @@ android.app.Activity.prototype.onPrepareDialog = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4380,16 +4882,16 @@ android.app.Activity.prototype.onPrepareDialog = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function openContextMenu
+ * @function getLineSpacingMultiplier
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#openContextMenu(android.view.View)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLineSpacingMultiplier()}
  **/
-android.app.Activity.prototype.openContextMenu = function() {
+android.widget.TextView.prototype.getLineSpacingMultiplier = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'openContextMenu',
+		func: 'getLineSpacingMultiplier',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4398,7 +4900,7 @@ android.app.Activity.prototype.openContextMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4409,16 +4911,16 @@ android.app.Activity.prototype.openContextMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getCallingPackage
+ * @function setTextLocale
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getCallingPackage()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextLocale(java.util.Locale)}
  **/
-android.app.Activity.prototype.getCallingPackage = function() {
+android.widget.TextView.prototype.setTextLocale = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getCallingPackage',
+		func: 'setTextLocale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4427,7 +4929,7 @@ android.app.Activity.prototype.getCallingPackage = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4438,16 +4940,16 @@ android.app.Activity.prototype.getCallingPackage = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setMediaController
+ * @function getDefaultEditable
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setMediaController(android.media.session.MediaController)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getDefaultEditable()}
  **/
-android.app.Activity.prototype.setMediaController = function() {
+android.widget.TextView.prototype.getDefaultEditable = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setMediaController',
+		func: 'getDefaultEditable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4456,7 +4958,7 @@ android.app.Activity.prototype.setMediaController = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4467,16 +4969,16 @@ android.app.Activity.prototype.setMediaController = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onAttachFragment
+ * @function onScreenStateChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onAttachFragment(android.app.Fragment)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onScreenStateChanged(int)}
  **/
-android.app.Activity.prototype.onAttachFragment = function() {
+android.widget.TextView.prototype.onScreenStateChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onAttachFragment',
+		func: 'onScreenStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4485,7 +4987,65 @@ android.app.Activity.prototype.onAttachFragment = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getLineSpacingExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLineSpacingExtra()}
+ **/
+android.widget.TextView.prototype.getLineSpacingExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getLineSpacingExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setFilters
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setFilters(android.text.InputFilter[])}
+ **/
+android.widget.TextView.prototype.setFilters = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setFilters',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4499,10 +5059,9 @@ android.app.Activity.prototype.onAttachFragment = function() {
  * @function onSaveInstanceState
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle, android.os.PersistableBundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onSaveInstanceState()}
  **/
-android.app.Activity.prototype.onSaveInstanceState = function() {
+android.widget.TextView.prototype.onSaveInstanceState = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -4515,7 +5074,7 @@ android.app.Activity.prototype.onSaveInstanceState = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4526,16 +5085,16 @@ android.app.Activity.prototype.onSaveInstanceState = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function hasWindowFocus
+ * @function getHint
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#hasWindowFocus()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getHint()}
  **/
-android.app.Activity.prototype.hasWindowFocus = function() {
+android.widget.TextView.prototype.getHint = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'hasWindowFocus',
+		func: 'getHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4544,7 +5103,7 @@ android.app.Activity.prototype.hasWindowFocus = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4555,16 +5114,16 @@ android.app.Activity.prototype.hasWindowFocus = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateOptionsMenu
+ * @function setCompoundDrawables
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateOptionsMenu(android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawables(android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.drawable.Drawable)}
  **/
-android.app.Activity.prototype.onCreateOptionsMenu = function() {
+android.widget.TextView.prototype.setCompoundDrawables = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateOptionsMenu',
+		func: 'setCompoundDrawables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4573,7 +5132,7 @@ android.app.Activity.prototype.onCreateOptionsMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4584,16 +5143,16 @@ android.app.Activity.prototype.onCreateOptionsMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getVolumeControlStream
+ * @function setMinWidth
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getVolumeControlStream()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMinWidth(int)}
  **/
-android.app.Activity.prototype.getVolumeControlStream = function() {
+android.widget.TextView.prototype.setMinWidth = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getVolumeControlStream',
+		func: 'setMinWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4602,7 +5161,7 @@ android.app.Activity.prototype.getVolumeControlStream = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4613,17 +5172,16 @@ android.app.Activity.prototype.getVolumeControlStream = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setResult
+ * @function getImeOptions
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setResult(int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setResult(int, android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getImeOptions()}
  **/
-android.app.Activity.prototype.setResult = function() {
+android.widget.TextView.prototype.getImeOptions = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setResult',
+		func: 'getImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4632,7 +5190,7 @@ android.app.Activity.prototype.setResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4643,17 +5201,16 @@ android.app.Activity.prototype.setResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startIntentSenderForResult
+ * @function getShadowDx
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSenderForResult(android.content.IntentSender, int, android.content.Intent, int, int, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSenderForResult(android.content.IntentSender, int, android.content.Intent, int, int, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getShadowDx()}
  **/
-android.app.Activity.prototype.startIntentSenderForResult = function() {
+android.widget.TextView.prototype.getShadowDx = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startIntentSenderForResult',
+		func: 'getShadowDx',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4662,7 +5219,7 @@ android.app.Activity.prototype.startIntentSenderForResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4673,16 +5230,16 @@ android.app.Activity.prototype.startIntentSenderForResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onLowMemory
+ * @function getCompoundPaddingStart
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onLowMemory()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundPaddingStart()}
  **/
-android.app.Activity.prototype.onLowMemory = function() {
+android.widget.TextView.prototype.getCompoundPaddingStart = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onLowMemory',
+		func: 'getCompoundPaddingStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4691,7 +5248,7 @@ android.app.Activity.prototype.onLowMemory = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4702,16 +5259,16 @@ android.app.Activity.prototype.onLowMemory = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onOptionsItemSelected
+ * @function getShadowDy
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onOptionsItemSelected(android.view.MenuItem)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getShadowDy()}
  **/
-android.app.Activity.prototype.onOptionsItemSelected = function() {
+android.widget.TextView.prototype.getShadowDy = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onOptionsItemSelected',
+		func: 'getShadowDy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4720,7 +5277,7 @@ android.app.Activity.prototype.onOptionsItemSelected = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4731,16 +5288,16 @@ android.app.Activity.prototype.onOptionsItemSelected = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateThumbnail
+ * @function getMaxWidth
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateThumbnail(android.graphics.Bitmap, android.graphics.Canvas)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMaxWidth()}
  **/
-android.app.Activity.prototype.onCreateThumbnail = function() {
+android.widget.TextView.prototype.getMaxWidth = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateThumbnail',
+		func: 'getMaxWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4749,7 +5306,7 @@ android.app.Activity.prototype.onCreateThumbnail = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4760,16 +5317,16 @@ android.app.Activity.prototype.onCreateThumbnail = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onStart
+ * @function getRightPaddingOffset
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onStart()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getRightPaddingOffset()}
  **/
-android.app.Activity.prototype.onStart = function() {
+android.widget.TextView.prototype.getRightPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onStart',
+		func: 'getRightPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4778,7 +5335,7 @@ android.app.Activity.prototype.onStart = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4789,16 +5346,16 @@ android.app.Activity.prototype.onStart = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getTitle
+ * @function cancelLongPress
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getTitle()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#cancelLongPress()}
  **/
-android.app.Activity.prototype.getTitle = function() {
+android.widget.TextView.prototype.cancelLongPress = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getTitle',
+		func: 'cancelLongPress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4807,7 +5364,7 @@ android.app.Activity.prototype.getTitle = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4818,17 +5375,16 @@ android.app.Activity.prototype.getTitle = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startNextMatchingActivity
+ * @function getMaxHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startNextMatchingActivity(android.content.Intent)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startNextMatchingActivity(android.content.Intent, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMaxHeight()}
  **/
-android.app.Activity.prototype.startNextMatchingActivity = function() {
+android.widget.TextView.prototype.getMaxHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startNextMatchingActivity',
+		func: 'getMaxHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4837,7 +5393,7 @@ android.app.Activity.prototype.startNextMatchingActivity = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4848,16 +5404,16 @@ android.app.Activity.prototype.startNextMatchingActivity = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function releaseInstance
+ * @function getTypeface
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#releaseInstance()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTypeface()}
  **/
-android.app.Activity.prototype.releaseInstance = function() {
+android.widget.TextView.prototype.getTypeface = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'releaseInstance',
+		func: 'getTypeface',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4866,7 +5422,7 @@ android.app.Activity.prototype.releaseInstance = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4877,16 +5433,16 @@ android.app.Activity.prototype.releaseInstance = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onUserInteraction
+ * @function getCompoundDrawables
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onUserInteraction()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundDrawables()}
  **/
-android.app.Activity.prototype.onUserInteraction = function() {
+android.widget.TextView.prototype.getCompoundDrawables = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onUserInteraction',
+		func: 'getCompoundDrawables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4895,7 +5451,36 @@ android.app.Activity.prototype.onUserInteraction = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setImeOptions
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setImeOptions(int)}
+ **/
+android.widget.TextView.prototype.setImeOptions = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setImeOptions',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4909,9 +5494,9 @@ android.app.Activity.prototype.onUserInteraction = function() {
  * @function onTrackballEvent
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onTrackballEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onTrackballEvent(android.view.MotionEvent)}
  **/
-android.app.Activity.prototype.onTrackballEvent = function() {
+android.widget.TextView.prototype.onTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -4924,7 +5509,36 @@ android.app.Activity.prototype.onTrackballEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onCreateInputConnection
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onCreateInputConnection(android.view.inputmethod.EditorInfo)}
+ **/
+android.widget.TextView.prototype.onCreateInputConnection = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onCreateInputConnection',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4938,9 +5552,9 @@ android.app.Activity.prototype.onTrackballEvent = function() {
  * @function onTouchEvent
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onTouchEvent(android.view.MotionEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onTouchEvent(android.view.MotionEvent)}
  **/
-android.app.Activity.prototype.onTouchEvent = function() {
+android.widget.TextView.prototype.onTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -4953,7 +5567,7 @@ android.app.Activity.prototype.onTouchEvent = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4964,16 +5578,16 @@ android.app.Activity.prototype.onTouchEvent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onUserLeaveHint
+ * @function drawableStateChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onUserLeaveHint()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#drawableStateChanged()}
  **/
-android.app.Activity.prototype.onUserLeaveHint = function() {
+android.widget.TextView.prototype.drawableStateChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onUserLeaveHint',
+		func: 'drawableStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4982,7 +5596,7 @@ android.app.Activity.prototype.onUserLeaveHint = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -4993,16 +5607,17 @@ android.app.Activity.prototype.onUserLeaveHint = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onResume
+ * @function setTextColor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onResume()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextColor(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextColor(android.content.res.ColorStateList)}
  **/
-android.app.Activity.prototype.onResume = function() {
+android.widget.TextView.prototype.setTextColor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onResume',
+		func: 'setTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5011,7 +5626,7 @@ android.app.Activity.prototype.onResume = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5022,16 +5637,16 @@ android.app.Activity.prototype.onResume = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getPreferences
+ * @function setMaxLines
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getPreferences(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMaxLines(int)}
  **/
-android.app.Activity.prototype.getPreferences = function() {
+android.widget.TextView.prototype.setMaxLines = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getPreferences',
+		func: 'setMaxLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5040,7 +5655,7 @@ android.app.Activity.prototype.getPreferences = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5051,16 +5666,16 @@ android.app.Activity.prototype.getPreferences = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getContentTransitionManager
+ * @function setHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getContentTransitionManager()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHeight(int)}
  **/
-android.app.Activity.prototype.getContentTransitionManager = function() {
+android.widget.TextView.prototype.setHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getContentTransitionManager',
+		func: 'setHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5069,7 +5684,7 @@ android.app.Activity.prototype.getContentTransitionManager = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5080,16 +5695,16 @@ android.app.Activity.prototype.getContentTransitionManager = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onContextMenuClosed
+ * @function getLineHeight
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onContextMenuClosed(android.view.Menu)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getLineHeight()}
  **/
-android.app.Activity.prototype.onContextMenuClosed = function() {
+android.widget.TextView.prototype.getLineHeight = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onContextMenuClosed',
+		func: 'getLineHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5098,7 +5713,7 @@ android.app.Activity.prototype.onContextMenuClosed = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5109,17 +5724,16 @@ android.app.Activity.prototype.onContextMenuClosed = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateView
+ * @function getCompoundDrawablePadding
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateView(java.lang.String, android.content.Context, android.util.AttributeSet)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateView(android.view.View, java.lang.String, android.content.Context, android.util.AttributeSet)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundDrawablePadding()}
  **/
-android.app.Activity.prototype.onCreateView = function() {
+android.widget.TextView.prototype.getCompoundDrawablePadding = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateView',
+		func: 'getCompoundDrawablePadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5128,7 +5742,7 @@ android.app.Activity.prototype.onCreateView = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5139,16 +5753,16 @@ android.app.Activity.prototype.onCreateView = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getMediaController
+ * @function getOffsetForPosition
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getMediaController()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getOffsetForPosition(float, float)}
  **/
-android.app.Activity.prototype.getMediaController = function() {
+android.widget.TextView.prototype.getOffsetForPosition = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getMediaController',
+		func: 'getOffsetForPosition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5157,7 +5771,94 @@ android.app.Activity.prototype.getMediaController = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setAllCaps
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setAllCaps(boolean)}
+ **/
+android.widget.TextView.prototype.setAllCaps = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setAllCaps',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getTotalPaddingRight
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingRight()}
+ **/
+android.widget.TextView.prototype.getTotalPaddingRight = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getTotalPaddingRight',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setMinLines
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMinLines(int)}
+ **/
+android.widget.TextView.prototype.setMinLines = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setMinLines',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5171,9 +5872,9 @@ android.app.Activity.prototype.getMediaController = function() {
  * @function onConfigurationChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onConfigurationChanged(android.content.res.Configuration)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onConfigurationChanged(android.content.res.Configuration)}
  **/
-android.app.Activity.prototype.onConfigurationChanged = function() {
+android.widget.TextView.prototype.onConfigurationChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -5186,7 +5887,7 @@ android.app.Activity.prototype.onConfigurationChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5197,16 +5898,16 @@ android.app.Activity.prototype.onConfigurationChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onContentChanged
+ * @function setPaddingRelative
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onContentChanged()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setPaddingRelative(int, int, int, int)}
  **/
-android.app.Activity.prototype.onContentChanged = function() {
+android.widget.TextView.prototype.setPaddingRelative = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onContentChanged',
+		func: 'setPaddingRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5215,7 +5916,7 @@ android.app.Activity.prototype.onContentChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5226,16 +5927,16 @@ android.app.Activity.prototype.onContentChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setFeatureDrawableResource
+ * @function setShadowLayer
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setFeatureDrawableResource(int, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setShadowLayer(float, float, float, int)}
  **/
-android.app.Activity.prototype.setFeatureDrawableResource = function() {
+android.widget.TextView.prototype.setShadowLayer = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setFeatureDrawableResource',
+		func: 'setShadowLayer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5244,7 +5945,7 @@ android.app.Activity.prototype.setFeatureDrawableResource = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5255,16 +5956,16 @@ android.app.Activity.prototype.setFeatureDrawableResource = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateContextMenu
+ * @function getTextLocale
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu$ContextMenuInfo)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTextLocale()}
  **/
-android.app.Activity.prototype.onCreateContextMenu = function() {
+android.widget.TextView.prototype.getTextLocale = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateContextMenu',
+		func: 'getTextLocale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5273,7 +5974,7 @@ android.app.Activity.prototype.onCreateContextMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5284,16 +5985,16 @@ android.app.Activity.prototype.onCreateContextMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onPrepareNavigateUpTaskStack
+ * @function setFontFeatureSettings
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onPrepareNavigateUpTaskStack(android.app.TaskStackBuilder)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setFontFeatureSettings(java.lang.String)}
  **/
-android.app.Activity.prototype.onPrepareNavigateUpTaskStack = function() {
+android.widget.TextView.prototype.setFontFeatureSettings = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onPrepareNavigateUpTaskStack',
+		func: 'setFontFeatureSettings',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5302,36 +6003,7 @@ android.app.Activity.prototype.onPrepareNavigateUpTaskStack = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getLastNonConfigurationInstance
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getLastNonConfigurationInstance()}
- **/
-android.app.Activity.prototype.getLastNonConfigurationInstance = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.native.callNativeFunction({
-		func: 'getLastNonConfigurationInstance',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5345,9 +6017,9 @@ android.app.Activity.prototype.getLastNonConfigurationInstance = function() {
  * @function onKeyDown
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onKeyDown(int, android.view.KeyEvent)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onKeyDown(int, android.view.KeyEvent)}
  **/
-android.app.Activity.prototype.onKeyDown = function() {
+android.widget.TextView.prototype.onKeyDown = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -5360,7 +6032,7 @@ android.app.Activity.prototype.onKeyDown = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5371,16 +6043,16 @@ android.app.Activity.prototype.onKeyDown = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setFeatureDrawableUri
+ * @function computeVerticalScrollExtent
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setFeatureDrawableUri(int, android.net.Uri)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#computeVerticalScrollExtent()}
  **/
-android.app.Activity.prototype.setFeatureDrawableUri = function() {
+android.widget.TextView.prototype.computeVerticalScrollExtent = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setFeatureDrawableUri',
+		func: 'computeVerticalScrollExtent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5389,7 +6061,7 @@ android.app.Activity.prototype.setFeatureDrawableUri = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5400,16 +6072,16 @@ android.app.Activity.prototype.setFeatureDrawableUri = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function createPendingResult
+ * @function getEllipsize
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#createPendingResult(int, android.content.Intent, int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getEllipsize()}
  **/
-android.app.Activity.prototype.createPendingResult = function() {
+android.widget.TextView.prototype.getEllipsize = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'createPendingResult',
+		func: 'getEllipsize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5418,7 +6090,7 @@ android.app.Activity.prototype.createPendingResult = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5429,16 +6101,16 @@ android.app.Activity.prototype.createPendingResult = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function registerForContextMenu
+ * @function setCustomSelectionActionModeCallback
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#registerForContextMenu(android.view.View)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCustomSelectionActionModeCallback(android.view.ActionMode$Callback)}
  **/
-android.app.Activity.prototype.registerForContextMenu = function() {
+android.widget.TextView.prototype.setCustomSelectionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'registerForContextMenu',
+		func: 'setCustomSelectionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5447,7 +6119,7 @@ android.app.Activity.prototype.registerForContextMenu = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5458,16 +6130,16 @@ android.app.Activity.prototype.registerForContextMenu = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function dump
+ * @function getMinWidth
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#dump(java.lang.String, java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[])}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getMinWidth()}
  **/
-android.app.Activity.prototype.dump = function() {
+android.widget.TextView.prototype.getMinWidth = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'dump',
+		func: 'getMinWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5476,7 +6148,7 @@ android.app.Activity.prototype.dump = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5487,16 +6159,16 @@ android.app.Activity.prototype.dump = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function showLockTaskEscapeMessage
+ * @function getHighlightColor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#showLockTaskEscapeMessage()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getHighlightColor()}
  **/
-android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
+android.widget.TextView.prototype.getHighlightColor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'showLockTaskEscapeMessage',
+		func: 'getHighlightColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5505,7 +6177,7 @@ android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5516,16 +6188,17 @@ android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getContentScene
+ * @function setTextKeepState
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#getContentScene()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextKeepState(java.lang.CharSequence)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextKeepState(java.lang.CharSequence, android.widget.TextView$BufferType)}
  **/
-android.app.Activity.prototype.getContentScene = function() {
+android.widget.TextView.prototype.setTextKeepState = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'getContentScene',
+		func: 'setTextKeepState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5534,7 +6207,7 @@ android.app.Activity.prototype.getContentScene = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5545,17 +6218,16 @@ android.app.Activity.prototype.getContentScene = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startIntentSenderFromChild
+ * @function getTransformationMethod
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSenderFromChild(android.app.Activity, android.content.IntentSender, int, android.content.Intent, int, int, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startIntentSenderFromChild(android.app.Activity, android.content.IntentSender, int, android.content.Intent, int, int, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTransformationMethod()}
  **/
-android.app.Activity.prototype.startIntentSenderFromChild = function() {
+android.widget.TextView.prototype.getTransformationMethod = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startIntentSenderFromChild',
+		func: 'getTransformationMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5564,7 +6236,7 @@ android.app.Activity.prototype.startIntentSenderFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5575,17 +6247,16 @@ android.app.Activity.prototype.startIntentSenderFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreate
+ * @function getCompoundDrawableTintList
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle, android.os.PersistableBundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getCompoundDrawableTintList()}
  **/
-android.app.Activity.prototype.onCreate = function() {
+android.widget.TextView.prototype.getCompoundDrawableTintList = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreate',
+		func: 'getCompoundDrawableTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5594,7 +6265,7 @@ android.app.Activity.prototype.onCreate = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5605,16 +6276,16 @@ android.app.Activity.prototype.onCreate = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startPostponedEnterTransition
+ * @function getHintTextColors
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startPostponedEnterTransition()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getHintTextColors()}
  **/
-android.app.Activity.prototype.startPostponedEnterTransition = function() {
+android.widget.TextView.prototype.getHintTextColors = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startPostponedEnterTransition',
+		func: 'getHintTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5623,7 +6294,210 @@ android.app.Activity.prototype.startPostponedEnterTransition = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setHighlightColor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHighlightColor(int)}
+ **/
+android.widget.TextView.prototype.setHighlightColor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setHighlightColor',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setHorizontallyScrolling
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setHorizontallyScrolling(boolean)}
+ **/
+android.widget.TextView.prototype.setHorizontallyScrolling = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setHorizontallyScrolling',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getFreezesText
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getFreezesText()}
+ **/
+android.widget.TextView.prototype.getFreezesText = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getFreezesText',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onTextChanged
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onTextChanged(java.lang.CharSequence, int, int, int)}
+ **/
+android.widget.TextView.prototype.onTextChanged = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onTextChanged',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function onCheckIsTextEditor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onCheckIsTextEditor()}
+ **/
+android.widget.TextView.prototype.onCheckIsTextEditor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'onCheckIsTextEditor',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function debug
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#debug(int)}
+ **/
+android.widget.TextView.prototype.debug = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'debug',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setMarqueeRepeatLimit
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setMarqueeRepeatLimit(int)}
+ **/
+android.widget.TextView.prototype.setMarqueeRepeatLimit = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setMarqueeRepeatLimit',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5637,9 +6511,9 @@ android.app.Activity.prototype.startPostponedEnterTransition = function() {
  * @function onWindowFocusChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onWindowFocusChanged(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onWindowFocusChanged(boolean)}
  **/
-android.app.Activity.prototype.onWindowFocusChanged = function() {
+android.widget.TextView.prototype.onWindowFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
@@ -5652,7 +6526,7 @@ android.app.Activity.prototype.onWindowFocusChanged = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5663,17 +6537,16 @@ android.app.Activity.prototype.onWindowFocusChanged = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function startActivityFromChild
+ * @function onScrollChanged
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityFromChild(android.app.Activity, android.content.Intent, int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#startActivityFromChild(android.app.Activity, android.content.Intent, int, android.os.Bundle)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onScrollChanged(int, int, int, int)}
  **/
-android.app.Activity.prototype.startActivityFromChild = function() {
+android.widget.TextView.prototype.onScrollChanged = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'startActivityFromChild',
+		func: 'onScrollChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5682,7 +6555,7 @@ android.app.Activity.prototype.startActivityFromChild = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5693,16 +6566,16 @@ android.app.Activity.prototype.startActivityFromChild = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onMenuItemSelected
+ * @function extractText
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onMenuItemSelected(int, android.view.MenuItem)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#extractText(android.view.inputmethod.ExtractedTextRequest, android.view.inputmethod.ExtractedText)}
  **/
-android.app.Activity.prototype.onMenuItemSelected = function() {
+android.widget.TextView.prototype.extractText = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onMenuItemSelected',
+		func: 'extractText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5711,7 +6584,7 @@ android.app.Activity.prototype.onMenuItemSelected = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5722,16 +6595,16 @@ android.app.Activity.prototype.onMenuItemSelected = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onCreateDescription
+ * @function getTotalPaddingStart
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onCreateDescription()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTotalPaddingStart()}
  **/
-android.app.Activity.prototype.onCreateDescription = function() {
+android.widget.TextView.prototype.getTotalPaddingStart = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onCreateDescription',
+		func: 'getTotalPaddingStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5740,7 +6613,7 @@ android.app.Activity.prototype.onCreateDescription = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5751,16 +6624,16 @@ android.app.Activity.prototype.onCreateDescription = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function requestVisibleBehind
+ * @function onMeasure
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#requestVisibleBehind(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#onMeasure(int, int)}
  **/
-android.app.Activity.prototype.requestVisibleBehind = function() {
+android.widget.TextView.prototype.onMeasure = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'requestVisibleBehind',
+		func: 'onMeasure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5769,7 +6642,7 @@ android.app.Activity.prototype.requestVisibleBehind = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5780,16 +6653,16 @@ android.app.Activity.prototype.requestVisibleBehind = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function runOnUiThread
+ * @function getRightFadingEdgeStrength
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#runOnUiThread(java.lang.Runnable)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getRightFadingEdgeStrength()}
  **/
-android.app.Activity.prototype.runOnUiThread = function() {
+android.widget.TextView.prototype.getRightFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'runOnUiThread',
+		func: 'getRightFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5798,7 +6671,7 @@ android.app.Activity.prototype.runOnUiThread = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5809,18 +6682,17 @@ android.app.Activity.prototype.runOnUiThread = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setContentView
+ * @function setTextSize
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setContentView(int)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setContentView(android.view.View)}
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setContentView(android.view.View, android.view.ViewGroup$LayoutParams)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextSize(float)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextSize(int, float)}
  **/
-android.app.Activity.prototype.setContentView = function() {
+android.widget.TextView.prototype.setTextSize = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setContentView',
+		func: 'setTextSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5829,7 +6701,7 @@ android.app.Activity.prototype.setContentView = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5840,16 +6712,16 @@ android.app.Activity.prototype.setContentView = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setImmersive
+ * @function setLetterSpacing
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#setImmersive(boolean)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setLetterSpacing(float)}
  **/
-android.app.Activity.prototype.setImmersive = function() {
+android.widget.TextView.prototype.setLetterSpacing = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'setImmersive',
+		func: 'setLetterSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5858,7 +6730,7 @@ android.app.Activity.prototype.setImmersive = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5869,16 +6741,16 @@ android.app.Activity.prototype.setImmersive = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onDetachedFromWindow
+ * @function setCustomInsertionActionModeCallback
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onDetachedFromWindow()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCustomInsertionActionModeCallback(android.view.ActionMode$Callback)}
  **/
-android.app.Activity.prototype.onDetachedFromWindow = function() {
+android.widget.TextView.prototype.setCustomInsertionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onDetachedFromWindow',
+		func: 'setCustomInsertionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5887,7 +6759,7 @@ android.app.Activity.prototype.onDetachedFromWindow = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5898,16 +6770,16 @@ android.app.Activity.prototype.onDetachedFromWindow = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function finishAndRemoveTask
+ * @function getTextColors
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#finishAndRemoveTask()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getTextColors()}
  **/
-android.app.Activity.prototype.finishAndRemoveTask = function() {
+android.widget.TextView.prototype.getTextColors = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'finishAndRemoveTask',
+		func: 'getTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5916,7 +6788,7 @@ android.app.Activity.prototype.finishAndRemoveTask = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5927,16 +6799,16 @@ android.app.Activity.prototype.finishAndRemoveTask = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function onStateNotSaved
+ * @function setCompoundDrawableTintMode
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/android/app/Activity.html#onStateNotSaved()}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setCompoundDrawableTintMode(android.graphics.PorterDuff$Mode)}
  **/
-android.app.Activity.prototype.onStateNotSaved = function() {
+android.widget.TextView.prototype.setCompoundDrawableTintMode = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.native.callNativeFunction({
-		func: 'onStateNotSaved',
+		func: 'setCompoundDrawableTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -5945,7 +6817,124 @@ android.app.Activity.prototype.onStateNotSaved = function() {
 	}
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
-		if (result.apiName === 'android.app.Activity') {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getShadowColor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getShadowColor()}
+ **/
+android.widget.TextView.prototype.getShadowColor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getShadowColor',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setTextAppearance
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextAppearance(int)}
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#setTextAppearance(android.content.Context, int)}
+ **/
+android.widget.TextView.prototype.setTextAppearance = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'setTextAppearance',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getSelectionEnd
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#getSelectionEnd()}
+ **/
+android.widget.TextView.prototype.getSelectionEnd = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'getSelectionEnd',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
+			return new this(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isPaddingOffsetRequired
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/widget/TextView.html#isPaddingOffsetRequired()}
+ **/
+android.widget.TextView.prototype.isPaddingOffsetRequired = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.native.callNativeFunction({
+		func: 'isPaddingOffsetRequired',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.widget.TextView') {
 			return new this(result);
 		} else {
 			var ctor = require(result.apiName);
@@ -5956,4 +6945,4 @@ android.app.Activity.prototype.onStateNotSaved = function() {
 };
 
 // export the class
-module.exports = android.app.Activity;
+module.exports = android.widget.TextView;

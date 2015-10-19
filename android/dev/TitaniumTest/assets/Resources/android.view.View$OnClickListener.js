@@ -24,12 +24,11 @@ android.view.View.OnClickListener = function() {
 	}
 	else {
 		result = Hyperloop.createProxy({
-			wrapper: this,
 			class: 'android.view.View$OnClickListener',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
 		});
-		
+
 		var instance = this,
 			overrides = arguments[0];
 		Object.keys(overrides).forEach(function (each) {
@@ -42,7 +41,7 @@ android.view.View.OnClickListener = function() {
 			}
 		});
 	}
-	
+
 	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -53,11 +52,10 @@ android.view.View.OnClickListener.toString = function() {
 };
 
 android.view.View.OnClickListener.prototype.toString = function() {
-	return "JS instance of OnClickListener";
-};
-
-android.view.View.OnClickListener.prototype.barf = function() {
-	console.log("BARF!");
+	if (this._hasPointer) {
+		return "[object " + this.className + "]";
+	}
+	return null;
 };
 
 android.view.View.OnClickListener.isInstanceOf = function (self, cls) {
