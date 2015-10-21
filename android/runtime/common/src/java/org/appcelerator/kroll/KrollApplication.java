@@ -17,7 +17,9 @@ import android.app.Activity;
  */
 public interface KrollApplication
 {
-	public int getThreadStackSize();
+	boolean DEFAULT_RUN_ON_MAIN_THREAD = true;
+
+    public int getThreadStackSize();
 
 	public Activity getCurrentActivity();
 
@@ -32,6 +34,8 @@ public interface KrollApplication
 	public String getAppGUID();
 
 	public boolean isDebuggerEnabled();
+	
+	public boolean runOnMainThread();
 
 	public void dispose();
 	

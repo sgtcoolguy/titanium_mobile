@@ -23,6 +23,7 @@ import java.util.Map;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollProxy;
+import org.appcelerator.kroll.KrollRuntime;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.AsyncResult;
 import org.appcelerator.kroll.common.Log;
@@ -710,22 +711,62 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
             return null;
         }
 
-        try {
-            return m.invoke(receiver, convertedArgs);
-        } catch (IllegalAccessException e) {
-            Log.e(TAG, "Unable to access method: " + m.toString(), e);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
-                    + stringify(convertedArgs), e);
-        } catch (InvocationTargetException e) {
-            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
-                    + ", args: "
-                    + stringify(convertedArgs),
-                    e.getCause());
-        } catch (Throwable t) {
-            // should never happen
+        if (KrollRuntime.getInstance().getKrollApplication().runOnMainThread()) {
+            try {
+                return m.invoke(receiver, convertedArgs);
+            } catch (IllegalAccessException e) {
+                Log.e(TAG, "Unable to access method: " + m.toString(), e);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
+                        + stringify(convertedArgs), e);
+            } catch (InvocationTargetException e) {
+                Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
+                        + ", args: "
+                        + stringify(convertedArgs),
+                        e.getCause());
+            } catch (Throwable t) {
+                // should never happen
+            }
+            return null;
+        } else {
+            // Run on UI/main thread synchronously
+            final Method method = m;
+            final Object[] arguments = convertedArgs;
+            final Object rec = receiver;
+            final AsyncResult result = new AsyncResult();
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        result.setResult(method.invoke(rec, arguments));
+                    } catch (Throwable t) {
+                        result.setException(t);
+                    }
+                }
+            };
+            getActivity().runOnUiThread(r);
+            try {
+                try {
+                    return result.getResult();
+                } catch (RuntimeException re) {
+                    throw re.getCause();
+                }
+            } catch (IllegalAccessException e) {
+                Log.e(TAG, "Unable to access method: " + m.toString(), e);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
+                        + stringify(convertedArgs), e);
+            } catch (InvocationTargetException e) {
+                Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
+                        + ", args: "
+                        + stringify(convertedArgs),
+                        e.getCause());
+            } catch (Throwable t) {
+                // should never happen
+            }
+            return null;
         }
-        return null;
+
     }
 
     private String stringify(Object[] arguments) {

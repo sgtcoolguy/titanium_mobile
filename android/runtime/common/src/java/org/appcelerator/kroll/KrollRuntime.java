@@ -48,7 +48,7 @@ public abstract class KrollRuntime implements Handler.Callback
 	private static int serviceReceiverRefCount = 0;
 
 	private WeakReference<KrollApplication> krollApplication;
-	//private KrollRuntimeThread thread;
+	private KrollRuntimeThread thread;
 	private long threadId;
 	private CountDownLatch initLatch = new CountDownLatch(1);
 	private KrollEvaluator evaluator;
@@ -80,21 +80,26 @@ public abstract class KrollRuntime implements Handler.Callback
 		private static final String TAG = "KrollRuntimeThread";
 
 		private KrollRuntime runtime = null;
+        private boolean runOnMain;
 
-		public KrollRuntimeThread(KrollRuntime runtime, int stackSize)
+		public KrollRuntimeThread(KrollRuntime runtime, int stackSize, boolean onMainThread)
 		{
 			super(null, null, TAG, stackSize);
 			this.runtime = runtime;
+			this.runOnMain = onMainThread;
 		}
 
 		public void run()
 		{
 			Looper looper;
-
-			Looper.prepare();
-			synchronized (this) {
-				looper = Looper.myLooper();
-				notifyAll();
+			if (runOnMain) {
+			    looper = Looper.getMainLooper();
+			} else {
+    			Looper.prepare();
+    			synchronized (this) {
+    				looper = Looper.myLooper();
+    				notifyAll();
+    			}
 			}
 
 			// initialize the runtime instance
@@ -108,8 +113,10 @@ public abstract class KrollRuntime implements Handler.Callback
 			// initialize the runtime
 			runtime.doInit();
 
-			// start handling messages for this thread
-			Looper.loop();
+			if (!runOnMain) {
+			    // start handling messages for this thread
+			    Looper.loop();
+			}
 		}
 	}
 
@@ -118,26 +125,30 @@ public abstract class KrollRuntime implements Handler.Callback
 	    KrollAssetHelper.init(context);
 		// Initialized the runtime if it isn't already initialized
 		if (runtimeState != State.INITIALIZED) {
-			//int stackSize = runtime.getThreadStackSize(context);
-			runtime.krollApplication = new WeakReference<KrollApplication>((KrollApplication) context);
-			runtime.exceptionHandlers = new HashMap<String, KrollExceptionHandler>();
-
-			instance = runtime; // make sure this is set before the runtime thread is started
-
-			 // initialize the runtime instance
-            runtime.threadId = Looper.getMainLooper().getThread().getId();
-            runtime.handler = new Handler(Looper.getMainLooper(), runtime);
-
-            // initialize the TiMessenger instance for the runtime thread
-            // NOTE: this must occur after threadId is set and before initRuntime() is called
-            TiMessenger.getMessenger();
-
-            // initialize the runtime
-            runtime.doInit();
+		    boolean onMainThread = runtime.runOnMainThread(context);
+		    int stackSize = runtime.getThreadStackSize(context);
+            runtime.krollApplication = new WeakReference<KrollApplication>((KrollApplication) context);
+            runtime.thread = new KrollRuntimeThread(runtime, stackSize, onMainThread);
+            runtime.exceptionHandlers = new HashMap<String, KrollExceptionHandler>();
+         
+            instance = runtime; // make sure this is set before the runtime thread is started
+            if (onMainThread) {
+                runtime.thread.run();
+            } else {
+                runtime.thread.start();
+            }
 		}
 	}
 
-	public static KrollRuntime getInstance()
+	private boolean runOnMainThread(Context context) {
+        if (context instanceof KrollApplication) {
+            KrollApplication ka = (KrollApplication) context;
+            return ka.runOnMainThread();
+        }
+        return KrollApplication.DEFAULT_RUN_ON_MAIN_THREAD;
+    }
+
+    public static KrollRuntime getInstance()
 	{
 		return instance;
 	}
