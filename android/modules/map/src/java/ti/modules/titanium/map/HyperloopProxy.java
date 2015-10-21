@@ -122,7 +122,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                         if (cons == null) {
                             Log.e(TAG,
                                     "Unable to find matching constructor for class: " + className
-                                            + ", args: " + convertedArgs);
+                                            + ", args: " + stringify(convertedArgs));
                             return;
                         }
 
@@ -706,44 +706,39 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         if (m == null) {
             Log.e(TAG, "Unable to resolve method call. Class: " + getApiName() + ", method name: "
                     + methodName
-                    + ", args: " + args);
+                    + ", args: " + stringify(args));
             return null;
         }
 
-        final Method method = m;
-        final Object[] arguments = convertedArgs;
-        final Object rec = receiver;
-        final AsyncResult result = new AsyncResult();
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    result.setResult(method.invoke(rec, arguments));
-                } catch (Throwable e) {
-                    result.setException(e);
-                }
-            }
-        });
         try {
-            try {
-                return result.getResult();
-            } catch (RuntimeException re) {
-                throw re.getCause();
-            }
+            return m.invoke(receiver, convertedArgs);
         } catch (IllegalAccessException e) {
-            Log.e(TAG, "Unable to access method: " + method.toString(), e);
+            Log.e(TAG, "Unable to access method: " + m.toString(), e);
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Bad argument for method: " + method.toString() + ", args: "
-                    + arguments, e);
+            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
+                    + stringify(convertedArgs), e);
         } catch (InvocationTargetException e) {
-            Log.e(TAG, "Exception thrown during invocation of method: " + method.toString()
+            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
                     + ", args: "
-                    + arguments,
+                    + stringify(convertedArgs),
                     e.getCause());
         } catch (Throwable t) {
             // should never happen
         }
         return null;
+    }
+
+    private String stringify(Object[] arguments) {
+        StringBuilder builder = new StringBuilder("[");
+        final int argCount = (arguments == null) ? 0 : arguments.length;
+        if (argCount > 0) {
+            builder.append(arguments[0].toString());
+            for (int i = 1; i < argCount; i++) {
+                builder.append(", ").append(arguments[i].toString());
+            }
+        }
+        builder.append("]");
+        return builder.toString();
     }
 
     /**
@@ -884,6 +879,9 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         // button later for a callback?
         HyperloopProxy p = new HyperloopProxy();
         p.setNativeObject(result);
+        // FIXME We need some way to make sure the JS object is an instance of
+        // the same type!!!
+
         return p;
     }
 

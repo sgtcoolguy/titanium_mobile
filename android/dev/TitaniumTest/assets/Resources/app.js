@@ -15,6 +15,8 @@ var FrameLayout = require('android.widget.FrameLayout'),
 	Activity = require('android.app.Activity'),
 	activity = new Activity(Ti.Android.currentActivity);
 
+console.log("hi there!");
+
 var drag = new OnTouchListener({
 	onTouch: function(v, event) {
 		console.log("onTouch!");
@@ -67,3 +69,5 @@ main.addView(blue);
 main.addView(red);
 
 activity.setContentView(main);
+
+console.log("Done!");
