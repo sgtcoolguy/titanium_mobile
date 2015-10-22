@@ -6164,7 +6164,7 @@ android.view.View.prototype.getLayoutParams = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

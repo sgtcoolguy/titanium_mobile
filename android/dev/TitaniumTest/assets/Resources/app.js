@@ -15,24 +15,17 @@ var FrameLayout = require('android.widget.FrameLayout'),
 	Activity = require('android.app.Activity'),
 	activity = new Activity(Ti.Android.currentActivity);
 
-console.log("hi there!");
-
 var drag = new OnTouchListener({
 	onTouch: function(v, event) {
-		console.log("onTouch!");
         // start timer for iteration
         var params,
         	action = event.getAction();
         if (action == MotionEvent.ACTION_MOVE || action == MotionEvent.ACTION_UP) {
-        	console.log("action: moving/up");
         	params = v.getLayoutParams();
             params.topMargin = event.getRawY() - v.getHeight();
-            console.log("topMargin: " + params.topMargin);
             params.leftMargin = event.getRawX() - (v.getWidth() / 2);
-            console.log("leftMargin: " + params.topMargin);
             v.setLayoutParams(params);
         }
-        console.log("done onTouch");
         return true;
 	}
 });
@@ -44,30 +37,27 @@ main.setBackgroundColor(Color.BLACK);
 var mainParams = new LayoutParams(ViewGroupLayoutParams.MATCH_PARENT, ViewGroupLayoutParams.MATCH_PARENT, Gravity.TOP);
 main.setLayoutParams(mainParams);
 
-var red = new View(activity);
-red.setBackgroundColor(Color.RED);
-var redParams = new LayoutParams(50, 50, Gravity.TOP);
-red.setLayoutParams(redParams);
-red.setOnTouchListener(drag);
+var colors = [
+Color.BLUE,
+Color.CYAN,
+Color.DKGRAY,
+Color.GRAY,
+Color.GREEN,
+Color.LTGRAY,
+Color.MAGENTA,
+Color.RED,
+Color.WHITE,
+Color.YELLOW
+];
 
-var blue = new View(activity);
-blue.setBackgroundColor(Color.BLUE);
-var blueParams = new LayoutParams(50, 50, Gravity.TOP);
-blueParams.setMargins(0, 100, 0, 0);
-blue.setLayoutParams(blueParams);
-blue.setOnTouchListener(drag);
-
-var yellow = new View(activity);
-yellow.setBackgroundColor(Color.YELLOW);
-var yellowParams = new LayoutParams(50, 50, Gravity.TOP);
-yellowParams.setMargins(0, 200, 0, 0);
-yellow.setLayoutParams(yellowParams);
-yellow.setOnTouchListener(drag);
-
-main.addView(yellow);
-main.addView(blue);
-main.addView(red);
+for (var i = 0; i < colors.length; i++) {
+	var temp = new View(activity);
+	temp.setBackgroundColor(colors[i]);
+	var layoutParams = new LayoutParams(50, 50, Gravity.TOP);
+	layoutParams.setMargins(0, i * 50, 0, 0);
+	temp.setLayoutParams(layoutParams);
+	temp.setOnTouchListener(drag);
+	main.addView(temp);
+}
 
 activity.setContentView(main);
-
-console.log("Done!");
