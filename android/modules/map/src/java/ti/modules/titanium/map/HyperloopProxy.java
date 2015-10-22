@@ -561,7 +561,11 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         }
 
         Object newValue = dict.get("value");
+        newValue = unwrap(newValue);
+        newValue = convertTo(newValue, f.getType());
         try {
+            f.setAccessible(true); // should offer perf boost since doesn't have
+                                   // to check security
             f.set(this.nativeObject, newValue);
         } catch (IllegalAccessException e) {
             Log.e(TAG, "Unable to access field: " + f.toString(), e);
@@ -571,6 +575,38 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                             + f.toString(),
                     e);
         }
+    }
+
+    private Object convertTo(Object newValue, Class<?> target) {
+        // FIXME Need to handle converting args of differing types! i.e. if we
+        // get a "double" from JS code and need to set it on an "int" field,
+        // this fails.
+        if (target.isPrimitive()) {
+            // uh oh!
+            if (newValue == null) {
+                return null;
+            }
+            if (newValue instanceof Number) {
+                Number num = (Number) newValue;
+                if (byte.class.equals(target)) {
+                    return num.byteValue();
+                } else if (int.class.equals(target)) {
+                    return num.intValue();
+                } else if (double.class.equals(target)) {
+                    return num.doubleValue();
+                } else if (float.class.equals(target)) {
+                    return num.floatValue();
+                } else if (short.class.equals(target)) {
+                    return num.shortValue();
+                } else if (long.class.equals(target)) {
+                    return num.longValue();
+                }
+            }
+            // Probably a big no-no...
+            return newValue;
+        }
+        // Not a primitive... So, just hope it's the right type?
+        return newValue;
     }
 
     private Field getField(String fieldName) {
@@ -680,7 +716,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         if (converted == null) {
             this.nativeClassName = "null";
         } else {
-            this.nativeClassName = converted.getClass().getCanonicalName();
+            this.nativeClassName = converted.getClass().getName();
         }
     }
 
@@ -710,63 +746,48 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                     + ", args: " + stringify(args));
             return null;
         }
+        m.setAccessible(true); // should offer perf boost since doesn't have to
+                               // check security
 
-        if (KrollRuntime.getInstance().getKrollApplication().runOnMainThread()) {
-            try {
-                return m.invoke(receiver, convertedArgs);
-            } catch (IllegalAccessException e) {
-                Log.e(TAG, "Unable to access method: " + m.toString(), e);
-            } catch (IllegalArgumentException e) {
-                Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
-                        + stringify(convertedArgs), e);
-            } catch (InvocationTargetException e) {
-                Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
-                        + ", args: "
-                        + stringify(convertedArgs),
-                        e.getCause());
-            } catch (Throwable t) {
-                // should never happen
-            }
-            return null;
-        } else {
-            // Run on UI/main thread synchronously
-            final Method method = m;
-            final Object[] arguments = convertedArgs;
-            final Object rec = receiver;
-            final AsyncResult result = new AsyncResult();
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        result.setResult(method.invoke(rec, arguments));
-                    } catch (Throwable t) {
-                        result.setException(t);
-                    }
-                }
-            };
-            getActivity().runOnUiThread(r);
-            try {
+        final Method method = m;
+        final Object[] arguments = convertedArgs;
+        final Object rec = receiver;
+        final AsyncResult result = new AsyncResult();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
                 try {
-                    return result.getResult();
-                } catch (RuntimeException re) {
-                    throw re.getCause();
+                    result.setResult(method.invoke(rec, arguments));
+                } catch (Throwable t) {
+                    result.setException(t);
                 }
-            } catch (IllegalAccessException e) {
-                Log.e(TAG, "Unable to access method: " + m.toString(), e);
-            } catch (IllegalArgumentException e) {
-                Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
-                        + stringify(convertedArgs), e);
-            } catch (InvocationTargetException e) {
-                Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
-                        + ", args: "
-                        + stringify(convertedArgs),
-                        e.getCause());
-            } catch (Throwable t) {
-                // should never happen
             }
-            return null;
+        };
+        if (KrollRuntime.getInstance().getKrollApplication().runOnMainThread()) {
+            r.run();
+        } else {
+            getActivity().runOnUiThread(r);
         }
-
+        try {
+            try {
+                return result.getResult();
+            } catch (RuntimeException re) {
+                throw re.getCause();
+            }
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "Unable to access method: " + m.toString(), e);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Bad argument for method: " + m.toString() + ", args: "
+                    + stringify(convertedArgs), e);
+        } catch (InvocationTargetException e) {
+            Log.e(TAG, "Exception thrown during invocation of method: " + m.toString()
+                    + ", args: "
+                    + stringify(convertedArgs),
+                    e.getCause());
+        } catch (Throwable t) {
+            // should never happen
+        }
+        return null;
     }
 
     private String stringify(Object[] arguments) {
