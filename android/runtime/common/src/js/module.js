@@ -277,7 +277,7 @@ Module.prototype.require = function (request, context, useCache) {
 	}
 
 	if (!located) {
-		throw new Error("Requested module not found: " + request);
+		throw new Error("Requested module not found: " + request + ", from source: " + this.id);
 	}
 
 	if (kroll.DBG) {
