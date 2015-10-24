@@ -3,6 +3,7 @@
 	"Resources/android.app.Activity.js":1,
 	"Resources/android.content.Context.js":1,
 	"Resources/android.content.ContextWrapper.js":1,
+	"Resources/android.content.Intent.js":1,
 	"Resources/android.graphics.Color.js":1,
 	"Resources/android.util.Log.js":1,
 	"Resources/android.util.TypedValue.js":1,
