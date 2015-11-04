@@ -34,7 +34,7 @@ android.widget.FrameLayout.LayoutParams = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(android.widget.FrameLayout.LayoutParams.prototype, 'gravit
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'gravity'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(android.widget.FrameLayout.LayoutParams.prototype, 'gravit
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'gravity',
 			value: newValue
 		});

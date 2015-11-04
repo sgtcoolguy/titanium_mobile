@@ -32,7 +32,7 @@ android.widget.TextView = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -63,7 +63,7 @@ android.widget.TextView.prototype.className = "android.widget.TextView";
 android.widget.TextView.prototype.getSelectionStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSelectionStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -92,7 +92,7 @@ android.widget.TextView.prototype.getSelectionStart = function() {
 android.widget.TextView.prototype.setEditableFactory = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEditableFactory',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -121,7 +121,7 @@ android.widget.TextView.prototype.setEditableFactory = function() {
 android.widget.TextView.prototype.onCommitCorrection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCommitCorrection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -150,7 +150,7 @@ android.widget.TextView.prototype.onCommitCorrection = function() {
 android.widget.TextView.prototype.setIncludeFontPadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setIncludeFontPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -179,7 +179,7 @@ android.widget.TextView.prototype.setIncludeFontPadding = function() {
 android.widget.TextView.prototype.setRawInputType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRawInputType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -208,7 +208,7 @@ android.widget.TextView.prototype.setRawInputType = function() {
 android.widget.TextView.prototype.setOnEditorActionListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnEditorActionListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -237,7 +237,7 @@ android.widget.TextView.prototype.setOnEditorActionListener = function() {
 android.widget.TextView.prototype.getMarqueeRepeatLimit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMarqueeRepeatLimit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -266,7 +266,7 @@ android.widget.TextView.prototype.getMarqueeRepeatLimit = function() {
 android.widget.TextView.prototype.setCompoundDrawablePadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawablePadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -295,7 +295,7 @@ android.widget.TextView.prototype.setCompoundDrawablePadding = function() {
 android.widget.TextView.prototype.getMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -324,7 +324,7 @@ android.widget.TextView.prototype.getMovementMethod = function() {
 android.widget.TextView.prototype.setTextScaleX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -353,7 +353,7 @@ android.widget.TextView.prototype.setTextScaleX = function() {
 android.widget.TextView.prototype.setMaxEms = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMaxEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -382,7 +382,7 @@ android.widget.TextView.prototype.setMaxEms = function() {
 android.widget.TextView.prototype.setCompoundDrawablesRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawablesRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -411,7 +411,7 @@ android.widget.TextView.prototype.setCompoundDrawablesRelative = function() {
 android.widget.TextView.prototype.getMinHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -440,7 +440,7 @@ android.widget.TextView.prototype.getMinHeight = function() {
 android.widget.TextView.prototype.getLineCount = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLineCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -469,7 +469,7 @@ android.widget.TextView.prototype.getLineCount = function() {
 android.widget.TextView.prototype.getShadowRadius = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getShadowRadius',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -498,7 +498,7 @@ android.widget.TextView.prototype.getShadowRadius = function() {
 android.widget.TextView.prototype.jumpDrawablesToCurrentState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'jumpDrawablesToCurrentState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -527,7 +527,7 @@ android.widget.TextView.prototype.jumpDrawablesToCurrentState = function() {
 android.widget.TextView.prototype.setMinHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -556,7 +556,7 @@ android.widget.TextView.prototype.setMinHeight = function() {
 android.widget.TextView.prototype.setCursorVisible = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCursorVisible',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -585,7 +585,7 @@ android.widget.TextView.prototype.setCursorVisible = function() {
 android.widget.TextView.prototype.setMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -614,7 +614,7 @@ android.widget.TextView.prototype.setMovementMethod = function() {
 android.widget.TextView.prototype.setSelectAllOnFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSelectAllOnFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -643,7 +643,7 @@ android.widget.TextView.prototype.setSelectAllOnFocus = function() {
 android.widget.TextView.prototype.onCreateDrawableState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateDrawableState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -672,7 +672,7 @@ android.widget.TextView.prototype.onCreateDrawableState = function() {
 android.widget.TextView.prototype.getText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -701,7 +701,7 @@ android.widget.TextView.prototype.getText = function() {
 android.widget.TextView.prototype.setEllipsize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEllipsize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -730,7 +730,7 @@ android.widget.TextView.prototype.setEllipsize = function() {
 android.widget.TextView.prototype.setScroller = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScroller',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -759,7 +759,7 @@ android.widget.TextView.prototype.setScroller = function() {
 android.widget.TextView.prototype.getPaintFlags = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaintFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -788,7 +788,7 @@ android.widget.TextView.prototype.getPaintFlags = function() {
 android.widget.TextView.prototype.getLeftPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLeftPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -817,7 +817,7 @@ android.widget.TextView.prototype.getLeftPaddingOffset = function() {
 android.widget.TextView.prototype.getKeyListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getKeyListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -847,7 +847,7 @@ android.widget.TextView.prototype.getKeyListener = function() {
 android.widget.TextView.prototype.setCompoundDrawablesRelativeWithIntrinsicBounds = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawablesRelativeWithIntrinsicBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -876,7 +876,7 @@ android.widget.TextView.prototype.setCompoundDrawablesRelativeWithIntrinsicBound
 android.widget.TextView.prototype.getError = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getError',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -905,7 +905,7 @@ android.widget.TextView.prototype.getError = function() {
 android.widget.TextView.prototype.setTextIsSelectable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextIsSelectable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -935,7 +935,7 @@ android.widget.TextView.prototype.setTextIsSelectable = function() {
 android.widget.TextView.prototype.setError = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setError',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -964,7 +964,7 @@ android.widget.TextView.prototype.setError = function() {
 android.widget.TextView.prototype.getTotalPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -993,7 +993,7 @@ android.widget.TextView.prototype.getTotalPaddingBottom = function() {
 android.widget.TextView.prototype.beginBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'beginBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1023,7 +1023,7 @@ android.widget.TextView.prototype.beginBatchEdit = function() {
 android.widget.TextView.prototype.setHint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1052,7 +1052,7 @@ android.widget.TextView.prototype.setHint = function() {
 android.widget.TextView.prototype.getCustomSelectionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCustomSelectionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1081,7 +1081,7 @@ android.widget.TextView.prototype.getCustomSelectionActionModeCallback = functio
 android.widget.TextView.prototype.getTextSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1111,7 +1111,7 @@ android.widget.TextView.prototype.getTextSize = function() {
 android.widget.TextView.prototype.setLinkTextColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLinkTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1140,7 +1140,7 @@ android.widget.TextView.prototype.setLinkTextColor = function() {
 android.widget.TextView.prototype.getInputType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getInputType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1169,7 +1169,7 @@ android.widget.TextView.prototype.getInputType = function() {
 android.widget.TextView.prototype.onPrivateIMECommand = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPrivateIMECommand',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1198,7 +1198,7 @@ android.widget.TextView.prototype.onPrivateIMECommand = function() {
 android.widget.TextView.prototype.computeScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1227,7 +1227,7 @@ android.widget.TextView.prototype.computeScroll = function() {
 android.widget.TextView.prototype.setHyphenationFrequency = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHyphenationFrequency',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1256,7 +1256,7 @@ android.widget.TextView.prototype.setHyphenationFrequency = function() {
 android.widget.TextView.prototype.setSpannableFactory = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSpannableFactory',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1285,7 +1285,7 @@ android.widget.TextView.prototype.setSpannableFactory = function() {
 android.widget.TextView.prototype.getTotalPaddingLeft = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingLeft',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1314,7 +1314,7 @@ android.widget.TextView.prototype.getTotalPaddingLeft = function() {
 android.widget.TextView.prototype.didTouchFocusSelect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'didTouchFocusSelect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1343,7 +1343,7 @@ android.widget.TextView.prototype.didTouchFocusSelect = function() {
 android.widget.TextView.prototype.getTopPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTopPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1372,7 +1372,7 @@ android.widget.TextView.prototype.getTopPaddingOffset = function() {
 android.widget.TextView.prototype.onKeyPreIme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyPreIme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1401,7 +1401,7 @@ android.widget.TextView.prototype.onKeyPreIme = function() {
 android.widget.TextView.prototype.getFocusedRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFocusedRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1430,7 +1430,7 @@ android.widget.TextView.prototype.getFocusedRect = function() {
 android.widget.TextView.prototype.findViewsWithText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findViewsWithText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1459,7 +1459,7 @@ android.widget.TextView.prototype.findViewsWithText = function() {
 android.widget.TextView.prototype.onDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1488,7 +1488,7 @@ android.widget.TextView.prototype.onDraw = function() {
 android.widget.TextView.prototype.setMinEms = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1517,7 +1517,7 @@ android.widget.TextView.prototype.setMinEms = function() {
 android.widget.TextView.prototype.getPaint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1546,7 +1546,7 @@ android.widget.TextView.prototype.getPaint = function() {
 android.widget.TextView.prototype.setAutoLinkMask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAutoLinkMask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1575,7 +1575,7 @@ android.widget.TextView.prototype.setAutoLinkMask = function() {
 android.widget.TextView.prototype.onAttachedToWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAttachedToWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1604,7 +1604,7 @@ android.widget.TextView.prototype.onAttachedToWindow = function() {
 android.widget.TextView.prototype.setPadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1633,7 +1633,7 @@ android.widget.TextView.prototype.setPadding = function() {
 android.widget.TextView.prototype.computeHorizontalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeHorizontalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1662,7 +1662,7 @@ android.widget.TextView.prototype.computeHorizontalScrollRange = function() {
 android.widget.TextView.prototype.onTextContextMenuItem = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTextContextMenuItem',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1691,7 +1691,7 @@ android.widget.TextView.prototype.onTextContextMenuItem = function() {
 android.widget.TextView.prototype.getCurrentTextColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCurrentTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1720,7 +1720,7 @@ android.widget.TextView.prototype.getCurrentTextColor = function() {
 android.widget.TextView.prototype.getLineBounds = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLineBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1749,7 +1749,7 @@ android.widget.TextView.prototype.getLineBounds = function() {
 android.widget.TextView.prototype.getBreakStrategy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBreakStrategy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1778,7 +1778,7 @@ android.widget.TextView.prototype.getBreakStrategy = function() {
 android.widget.TextView.prototype.getTotalPaddingEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1807,7 +1807,7 @@ android.widget.TextView.prototype.getTotalPaddingEnd = function() {
 android.widget.TextView.prototype.getMaxLines = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMaxLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1836,7 +1836,7 @@ android.widget.TextView.prototype.getMaxLines = function() {
 android.widget.TextView.prototype.onVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1865,7 +1865,7 @@ android.widget.TextView.prototype.onVisibilityChanged = function() {
 android.widget.TextView.prototype.getDefaultMovementMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDefaultMovementMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1894,7 +1894,7 @@ android.widget.TextView.prototype.getDefaultMovementMethod = function() {
 android.widget.TextView.prototype.setPaintFlags = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPaintFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1923,7 +1923,7 @@ android.widget.TextView.prototype.setPaintFlags = function() {
 android.widget.TextView.prototype.getPrivateImeOptions = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPrivateImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1952,7 +1952,7 @@ android.widget.TextView.prototype.getPrivateImeOptions = function() {
 android.widget.TextView.prototype.onFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1981,7 +1981,7 @@ android.widget.TextView.prototype.onFocusChanged = function() {
 android.widget.TextView.prototype.getInputExtras = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getInputExtras',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2010,7 +2010,7 @@ android.widget.TextView.prototype.getInputExtras = function() {
 android.widget.TextView.prototype.setGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2039,7 +2039,7 @@ android.widget.TextView.prototype.setGravity = function() {
 android.widget.TextView.prototype.onKeyMultiple = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyMultiple',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2068,7 +2068,7 @@ android.widget.TextView.prototype.onKeyMultiple = function() {
 android.widget.TextView.prototype.getCompoundPaddingEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2097,7 +2097,7 @@ android.widget.TextView.prototype.getCompoundPaddingEnd = function() {
 android.widget.TextView.prototype.getTextScaleX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2126,7 +2126,7 @@ android.widget.TextView.prototype.getTextScaleX = function() {
 android.widget.TextView.prototype.getMinLines = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2155,7 +2155,7 @@ android.widget.TextView.prototype.getMinLines = function() {
 android.widget.TextView.prototype.onKeyShortcut = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyShortcut',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2184,7 +2184,7 @@ android.widget.TextView.prototype.onKeyShortcut = function() {
 android.widget.TextView.prototype.setSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2213,7 +2213,7 @@ android.widget.TextView.prototype.setSelected = function() {
 android.widget.TextView.prototype.onProvideStructure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideStructure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2242,7 +2242,7 @@ android.widget.TextView.prototype.onProvideStructure = function() {
 android.widget.TextView.prototype.setElegantTextHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setElegantTextHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2272,7 +2272,7 @@ android.widget.TextView.prototype.setElegantTextHeight = function() {
 android.widget.TextView.prototype.setSingleLine = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSingleLine',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2301,7 +2301,7 @@ android.widget.TextView.prototype.setSingleLine = function() {
 android.widget.TextView.prototype.onDragEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDragEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2330,7 +2330,7 @@ android.widget.TextView.prototype.onDragEvent = function() {
 android.widget.TextView.prototype.getAutoLinkMask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAutoLinkMask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2359,7 +2359,7 @@ android.widget.TextView.prototype.getAutoLinkMask = function() {
 android.widget.TextView.prototype.invalidateDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'invalidateDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2388,7 +2388,7 @@ android.widget.TextView.prototype.invalidateDrawable = function() {
 android.widget.TextView.prototype.getCustomInsertionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCustomInsertionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2417,7 +2417,7 @@ android.widget.TextView.prototype.getCustomInsertionActionModeCallback = functio
 android.widget.TextView.prototype.getCompoundDrawablesRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundDrawablesRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2446,7 +2446,7 @@ android.widget.TextView.prototype.getCompoundDrawablesRelative = function() {
 android.widget.TextView.prototype.getCurrentHintTextColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCurrentHintTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2475,7 +2475,7 @@ android.widget.TextView.prototype.getCurrentHintTextColor = function() {
 android.widget.TextView.prototype.getImeActionId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getImeActionId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2504,7 +2504,7 @@ android.widget.TextView.prototype.getImeActionId = function() {
 android.widget.TextView.prototype.getGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2533,7 +2533,7 @@ android.widget.TextView.prototype.getGravity = function() {
 android.widget.TextView.prototype.setInputType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setInputType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2562,7 +2562,7 @@ android.widget.TextView.prototype.setInputType = function() {
 android.widget.TextView.prototype.setTransformationMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTransformationMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2591,7 +2591,7 @@ android.widget.TextView.prototype.setTransformationMethod = function() {
 android.widget.TextView.prototype.onCommitCompletion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCommitCompletion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2620,7 +2620,7 @@ android.widget.TextView.prototype.onCommitCompletion = function() {
 android.widget.TextView.prototype.getShowSoftInputOnFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getShowSoftInputOnFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2649,7 +2649,7 @@ android.widget.TextView.prototype.getShowSoftInputOnFocus = function() {
 android.widget.TextView.prototype.getCompoundPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2678,7 +2678,7 @@ android.widget.TextView.prototype.getCompoundPaddingBottom = function() {
 android.widget.TextView.prototype.getLetterSpacing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLetterSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2707,7 +2707,7 @@ android.widget.TextView.prototype.getLetterSpacing = function() {
 android.widget.TextView.prototype.setLineSpacing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLineSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2736,7 +2736,7 @@ android.widget.TextView.prototype.setLineSpacing = function() {
 android.widget.TextView.prototype.onGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onGenericMotionEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2765,7 +2765,7 @@ android.widget.TextView.prototype.onGenericMotionEvent = function() {
 android.widget.TextView.prototype.getLeftFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLeftFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2794,7 +2794,7 @@ android.widget.TextView.prototype.getLeftFadingEdgeStrength = function() {
 android.widget.TextView.prototype.onRestoreInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRestoreInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2823,7 +2823,7 @@ android.widget.TextView.prototype.onRestoreInstanceState = function() {
 android.widget.TextView.prototype.getBottomPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBottomPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2852,7 +2852,7 @@ android.widget.TextView.prototype.getBottomPaddingOffset = function() {
 android.widget.TextView.prototype.isInputMethodTarget = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isInputMethodTarget',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2882,7 +2882,7 @@ android.widget.TextView.prototype.isInputMethodTarget = function() {
 android.widget.TextView.prototype.setHintTextColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHintTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2911,7 +2911,7 @@ android.widget.TextView.prototype.setHintTextColor = function() {
 android.widget.TextView.prototype.isTextSelectable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isTextSelectable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2940,7 +2940,7 @@ android.widget.TextView.prototype.isTextSelectable = function() {
 android.widget.TextView.prototype.getEditableText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getEditableText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2969,7 +2969,7 @@ android.widget.TextView.prototype.getEditableText = function() {
 android.widget.TextView.prototype.getLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2998,7 +2998,7 @@ android.widget.TextView.prototype.getLayout = function() {
 android.widget.TextView.prototype.setFrame = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFrame',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3027,7 +3027,7 @@ android.widget.TextView.prototype.setFrame = function() {
 android.widget.TextView.prototype.setMaxHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMaxHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3056,7 +3056,7 @@ android.widget.TextView.prototype.setMaxHeight = function() {
 android.widget.TextView.prototype.endBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'endBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3085,7 +3085,7 @@ android.widget.TextView.prototype.endBatchEdit = function() {
 android.widget.TextView.prototype.getUrls = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getUrls',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3114,7 +3114,7 @@ android.widget.TextView.prototype.getUrls = function() {
 android.widget.TextView.prototype.setBreakStrategy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBreakStrategy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3143,7 +3143,7 @@ android.widget.TextView.prototype.setBreakStrategy = function() {
 android.widget.TextView.prototype.getCompoundDrawableTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundDrawableTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3172,7 +3172,7 @@ android.widget.TextView.prototype.getCompoundDrawableTintMode = function() {
 android.widget.TextView.prototype.getExtendedPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExtendedPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3201,7 +3201,7 @@ android.widget.TextView.prototype.getExtendedPaddingTop = function() {
 android.widget.TextView.prototype.isCursorVisible = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isCursorVisible',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3230,7 +3230,7 @@ android.widget.TextView.prototype.isCursorVisible = function() {
 android.widget.TextView.prototype.getTotalPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3259,7 +3259,7 @@ android.widget.TextView.prototype.getTotalPaddingTop = function() {
 android.widget.TextView.prototype.getLinkTextColors = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLinkTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3288,7 +3288,7 @@ android.widget.TextView.prototype.getLinkTextColors = function() {
 android.widget.TextView.prototype.bringPointIntoView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'bringPointIntoView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3317,7 +3317,7 @@ android.widget.TextView.prototype.bringPointIntoView = function() {
 android.widget.TextView.prototype.length = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'length',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3346,7 +3346,7 @@ android.widget.TextView.prototype.length = function() {
 android.widget.TextView.prototype.hasSelection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasSelection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3375,7 +3375,7 @@ android.widget.TextView.prototype.hasSelection = function() {
 android.widget.TextView.prototype.setCompoundDrawableTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawableTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3404,7 +3404,7 @@ android.widget.TextView.prototype.setCompoundDrawableTintList = function() {
 android.widget.TextView.prototype.drawableHotspotChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'drawableHotspotChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3433,7 +3433,7 @@ android.widget.TextView.prototype.drawableHotspotChanged = function() {
 android.widget.TextView.prototype.onFinishTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFinishTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3462,7 +3462,7 @@ android.widget.TextView.prototype.onFinishTemporaryDetach = function() {
 android.widget.TextView.prototype.getHyphenationFrequency = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHyphenationFrequency',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3491,7 +3491,7 @@ android.widget.TextView.prototype.getHyphenationFrequency = function() {
 android.widget.TextView.prototype.setLines = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3520,7 +3520,7 @@ android.widget.TextView.prototype.setLines = function() {
 android.widget.TextView.prototype.getBaseline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBaseline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3549,7 +3549,7 @@ android.widget.TextView.prototype.getBaseline = function() {
 android.widget.TextView.prototype.getCompoundPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3578,7 +3578,7 @@ android.widget.TextView.prototype.getCompoundPaddingTop = function() {
 android.widget.TextView.prototype.getImeActionLabel = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getImeActionLabel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3608,7 +3608,7 @@ android.widget.TextView.prototype.getImeActionLabel = function() {
 android.widget.TextView.prototype.append = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'append',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3637,7 +3637,7 @@ android.widget.TextView.prototype.append = function() {
 android.widget.TextView.prototype.setImeActionLabel = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setImeActionLabel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3670,7 +3670,7 @@ android.widget.TextView.prototype.setImeActionLabel = function() {
 android.widget.TextView.prototype.setText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3699,7 +3699,7 @@ android.widget.TextView.prototype.setText = function() {
 android.widget.TextView.prototype.onSelectionChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSelectionChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3728,7 +3728,7 @@ android.widget.TextView.prototype.onSelectionChanged = function() {
 android.widget.TextView.prototype.hasOverlappingRendering = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasOverlappingRendering',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3757,7 +3757,7 @@ android.widget.TextView.prototype.hasOverlappingRendering = function() {
 android.widget.TextView.prototype.moveCursorToVisibleOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'moveCursorToVisibleOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3786,7 +3786,7 @@ android.widget.TextView.prototype.moveCursorToVisibleOffset = function() {
 android.widget.TextView.prototype.setEms = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3815,7 +3815,7 @@ android.widget.TextView.prototype.setEms = function() {
 android.widget.TextView.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3844,7 +3844,7 @@ android.widget.TextView.prototype.getAccessibilityClassName = function() {
 android.widget.TextView.prototype.onEditorAction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onEditorAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3873,7 +3873,7 @@ android.widget.TextView.prototype.onEditorAction = function() {
 android.widget.TextView.prototype.performLongClick = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performLongClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3902,7 +3902,7 @@ android.widget.TextView.prototype.performLongClick = function() {
 android.widget.TextView.prototype.getFontFeatureSettings = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFontFeatureSettings',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3931,7 +3931,7 @@ android.widget.TextView.prototype.getFontFeatureSettings = function() {
 android.widget.TextView.prototype.getMaxEms = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMaxEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3960,7 +3960,7 @@ android.widget.TextView.prototype.getMaxEms = function() {
 android.widget.TextView.prototype.getFilters = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFilters',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3989,7 +3989,7 @@ android.widget.TextView.prototype.getFilters = function() {
 android.widget.TextView.prototype.addTextChangedListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addTextChangedListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4018,7 +4018,7 @@ android.widget.TextView.prototype.addTextChangedListener = function() {
 android.widget.TextView.prototype.onStartTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onStartTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4048,7 +4048,7 @@ android.widget.TextView.prototype.onStartTemporaryDetach = function() {
 android.widget.TextView.prototype.setCompoundDrawablesWithIntrinsicBounds = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawablesWithIntrinsicBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4077,7 +4077,7 @@ android.widget.TextView.prototype.setCompoundDrawablesWithIntrinsicBounds = func
 android.widget.TextView.prototype.getMinEms = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinEms',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4106,7 +4106,7 @@ android.widget.TextView.prototype.getMinEms = function() {
 android.widget.TextView.prototype.onLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4135,7 +4135,7 @@ android.widget.TextView.prototype.onLayout = function() {
 android.widget.TextView.prototype.onEndBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onEndBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4164,7 +4164,7 @@ android.widget.TextView.prototype.onEndBatchEdit = function() {
 android.widget.TextView.prototype.computeVerticalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeVerticalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4193,7 +4193,7 @@ android.widget.TextView.prototype.computeVerticalScrollRange = function() {
 android.widget.TextView.prototype.setMaxWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMaxWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4222,7 +4222,7 @@ android.widget.TextView.prototype.setMaxWidth = function() {
 android.widget.TextView.prototype.onPreDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPreDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4251,7 +4251,7 @@ android.widget.TextView.prototype.onPreDraw = function() {
 android.widget.TextView.prototype.verifyDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'verifyDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4280,7 +4280,7 @@ android.widget.TextView.prototype.verifyDrawable = function() {
 android.widget.TextView.prototype.setEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4309,7 +4309,7 @@ android.widget.TextView.prototype.setEnabled = function() {
 android.widget.TextView.prototype.setExtractedText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setExtractedText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4338,7 +4338,7 @@ android.widget.TextView.prototype.setExtractedText = function() {
 android.widget.TextView.prototype.setFreezesText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFreezesText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4367,7 +4367,7 @@ android.widget.TextView.prototype.setFreezesText = function() {
 android.widget.TextView.prototype.getIncludeFontPadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getIncludeFontPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4396,7 +4396,7 @@ android.widget.TextView.prototype.getIncludeFontPadding = function() {
 android.widget.TextView.prototype.onBeginBatchEdit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onBeginBatchEdit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4425,7 +4425,7 @@ android.widget.TextView.prototype.onBeginBatchEdit = function() {
 android.widget.TextView.prototype.isSuggestionsEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isSuggestionsEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4454,7 +4454,7 @@ android.widget.TextView.prototype.isSuggestionsEnabled = function() {
 android.widget.TextView.prototype.setLinksClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLinksClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4483,7 +4483,7 @@ android.widget.TextView.prototype.setLinksClickable = function() {
 android.widget.TextView.prototype.getLinksClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLinksClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4512,7 +4512,7 @@ android.widget.TextView.prototype.getLinksClickable = function() {
 android.widget.TextView.prototype.getCompoundPaddingRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4541,7 +4541,7 @@ android.widget.TextView.prototype.getCompoundPaddingRight = function() {
 android.widget.TextView.prototype.setKeyListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setKeyListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4570,7 +4570,7 @@ android.widget.TextView.prototype.setKeyListener = function() {
 android.widget.TextView.prototype.getCompoundPaddingLeft = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingLeft',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4599,7 +4599,7 @@ android.widget.TextView.prototype.getCompoundPaddingLeft = function() {
 android.widget.TextView.prototype.onRtlPropertiesChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRtlPropertiesChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4629,7 +4629,7 @@ android.widget.TextView.prototype.onRtlPropertiesChanged = function() {
 android.widget.TextView.prototype.setTypeface = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTypeface',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4658,7 +4658,7 @@ android.widget.TextView.prototype.setTypeface = function() {
 android.widget.TextView.prototype.getExtendedPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExtendedPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4687,7 +4687,7 @@ android.widget.TextView.prototype.getExtendedPaddingBottom = function() {
 android.widget.TextView.prototype.setInputExtras = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setInputExtras',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4716,7 +4716,7 @@ android.widget.TextView.prototype.setInputExtras = function() {
 android.widget.TextView.prototype.setShowSoftInputOnFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setShowSoftInputOnFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4745,7 +4745,7 @@ android.widget.TextView.prototype.setShowSoftInputOnFocus = function() {
 android.widget.TextView.prototype.onKeyUp = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyUp',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4774,7 +4774,7 @@ android.widget.TextView.prototype.onKeyUp = function() {
 android.widget.TextView.prototype.removeTextChangedListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeTextChangedListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4803,7 +4803,7 @@ android.widget.TextView.prototype.removeTextChangedListener = function() {
 android.widget.TextView.prototype.clearComposingText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'clearComposingText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4832,7 +4832,7 @@ android.widget.TextView.prototype.clearComposingText = function() {
 android.widget.TextView.prototype.setWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4861,7 +4861,7 @@ android.widget.TextView.prototype.setWidth = function() {
 android.widget.TextView.prototype.setPrivateImeOptions = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPrivateImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4890,7 +4890,7 @@ android.widget.TextView.prototype.setPrivateImeOptions = function() {
 android.widget.TextView.prototype.getLineSpacingMultiplier = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLineSpacingMultiplier',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4919,7 +4919,7 @@ android.widget.TextView.prototype.getLineSpacingMultiplier = function() {
 android.widget.TextView.prototype.setTextLocale = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextLocale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4948,7 +4948,7 @@ android.widget.TextView.prototype.setTextLocale = function() {
 android.widget.TextView.prototype.getDefaultEditable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDefaultEditable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4977,7 +4977,7 @@ android.widget.TextView.prototype.getDefaultEditable = function() {
 android.widget.TextView.prototype.onScreenStateChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onScreenStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5006,7 +5006,7 @@ android.widget.TextView.prototype.onScreenStateChanged = function() {
 android.widget.TextView.prototype.getLineSpacingExtra = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLineSpacingExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5035,7 +5035,7 @@ android.widget.TextView.prototype.getLineSpacingExtra = function() {
 android.widget.TextView.prototype.setFilters = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFilters',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5064,7 +5064,7 @@ android.widget.TextView.prototype.setFilters = function() {
 android.widget.TextView.prototype.onSaveInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSaveInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5093,7 +5093,7 @@ android.widget.TextView.prototype.onSaveInstanceState = function() {
 android.widget.TextView.prototype.getHint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5122,7 +5122,7 @@ android.widget.TextView.prototype.getHint = function() {
 android.widget.TextView.prototype.setCompoundDrawables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5151,7 +5151,7 @@ android.widget.TextView.prototype.setCompoundDrawables = function() {
 android.widget.TextView.prototype.setMinWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5180,7 +5180,7 @@ android.widget.TextView.prototype.setMinWidth = function() {
 android.widget.TextView.prototype.getImeOptions = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5209,7 +5209,7 @@ android.widget.TextView.prototype.getImeOptions = function() {
 android.widget.TextView.prototype.getShadowDx = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getShadowDx',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5238,7 +5238,7 @@ android.widget.TextView.prototype.getShadowDx = function() {
 android.widget.TextView.prototype.getCompoundPaddingStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundPaddingStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5267,7 +5267,7 @@ android.widget.TextView.prototype.getCompoundPaddingStart = function() {
 android.widget.TextView.prototype.getShadowDy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getShadowDy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5296,7 +5296,7 @@ android.widget.TextView.prototype.getShadowDy = function() {
 android.widget.TextView.prototype.getMaxWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMaxWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5325,7 +5325,7 @@ android.widget.TextView.prototype.getMaxWidth = function() {
 android.widget.TextView.prototype.getRightPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRightPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5354,7 +5354,7 @@ android.widget.TextView.prototype.getRightPaddingOffset = function() {
 android.widget.TextView.prototype.cancelLongPress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'cancelLongPress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5383,7 +5383,7 @@ android.widget.TextView.prototype.cancelLongPress = function() {
 android.widget.TextView.prototype.getMaxHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMaxHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5412,7 +5412,7 @@ android.widget.TextView.prototype.getMaxHeight = function() {
 android.widget.TextView.prototype.getTypeface = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTypeface',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5441,7 +5441,7 @@ android.widget.TextView.prototype.getTypeface = function() {
 android.widget.TextView.prototype.getCompoundDrawables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundDrawables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5470,7 +5470,7 @@ android.widget.TextView.prototype.getCompoundDrawables = function() {
 android.widget.TextView.prototype.setImeOptions = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setImeOptions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5499,7 +5499,7 @@ android.widget.TextView.prototype.setImeOptions = function() {
 android.widget.TextView.prototype.onTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTrackballEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5528,7 +5528,7 @@ android.widget.TextView.prototype.onTrackballEvent = function() {
 android.widget.TextView.prototype.onCreateInputConnection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateInputConnection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5557,7 +5557,7 @@ android.widget.TextView.prototype.onCreateInputConnection = function() {
 android.widget.TextView.prototype.onTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTouchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5586,7 +5586,7 @@ android.widget.TextView.prototype.onTouchEvent = function() {
 android.widget.TextView.prototype.drawableStateChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'drawableStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5616,7 +5616,7 @@ android.widget.TextView.prototype.drawableStateChanged = function() {
 android.widget.TextView.prototype.setTextColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5645,7 +5645,7 @@ android.widget.TextView.prototype.setTextColor = function() {
 android.widget.TextView.prototype.setMaxLines = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMaxLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5674,7 +5674,7 @@ android.widget.TextView.prototype.setMaxLines = function() {
 android.widget.TextView.prototype.setHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5703,7 +5703,7 @@ android.widget.TextView.prototype.setHeight = function() {
 android.widget.TextView.prototype.getLineHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLineHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5732,7 +5732,7 @@ android.widget.TextView.prototype.getLineHeight = function() {
 android.widget.TextView.prototype.getCompoundDrawablePadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundDrawablePadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5761,7 +5761,7 @@ android.widget.TextView.prototype.getCompoundDrawablePadding = function() {
 android.widget.TextView.prototype.getOffsetForPosition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOffsetForPosition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5790,7 +5790,7 @@ android.widget.TextView.prototype.getOffsetForPosition = function() {
 android.widget.TextView.prototype.setAllCaps = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAllCaps',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5819,7 +5819,7 @@ android.widget.TextView.prototype.setAllCaps = function() {
 android.widget.TextView.prototype.getTotalPaddingRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5848,7 +5848,7 @@ android.widget.TextView.prototype.getTotalPaddingRight = function() {
 android.widget.TextView.prototype.setMinLines = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinLines',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5877,7 +5877,7 @@ android.widget.TextView.prototype.setMinLines = function() {
 android.widget.TextView.prototype.onConfigurationChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onConfigurationChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5906,7 +5906,7 @@ android.widget.TextView.prototype.onConfigurationChanged = function() {
 android.widget.TextView.prototype.setPaddingRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPaddingRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5935,7 +5935,7 @@ android.widget.TextView.prototype.setPaddingRelative = function() {
 android.widget.TextView.prototype.setShadowLayer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setShadowLayer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5964,7 +5964,7 @@ android.widget.TextView.prototype.setShadowLayer = function() {
 android.widget.TextView.prototype.getTextLocale = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextLocale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5993,7 +5993,7 @@ android.widget.TextView.prototype.getTextLocale = function() {
 android.widget.TextView.prototype.setFontFeatureSettings = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFontFeatureSettings',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6022,7 +6022,7 @@ android.widget.TextView.prototype.setFontFeatureSettings = function() {
 android.widget.TextView.prototype.onKeyDown = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyDown',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6051,7 +6051,7 @@ android.widget.TextView.prototype.onKeyDown = function() {
 android.widget.TextView.prototype.computeVerticalScrollExtent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeVerticalScrollExtent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6080,7 +6080,7 @@ android.widget.TextView.prototype.computeVerticalScrollExtent = function() {
 android.widget.TextView.prototype.getEllipsize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getEllipsize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6109,7 +6109,7 @@ android.widget.TextView.prototype.getEllipsize = function() {
 android.widget.TextView.prototype.setCustomSelectionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCustomSelectionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6138,7 +6138,7 @@ android.widget.TextView.prototype.setCustomSelectionActionModeCallback = functio
 android.widget.TextView.prototype.getMinWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6167,7 +6167,7 @@ android.widget.TextView.prototype.getMinWidth = function() {
 android.widget.TextView.prototype.getHighlightColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHighlightColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6197,7 +6197,7 @@ android.widget.TextView.prototype.getHighlightColor = function() {
 android.widget.TextView.prototype.setTextKeepState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextKeepState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6226,7 +6226,7 @@ android.widget.TextView.prototype.setTextKeepState = function() {
 android.widget.TextView.prototype.getTransformationMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTransformationMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6255,7 +6255,7 @@ android.widget.TextView.prototype.getTransformationMethod = function() {
 android.widget.TextView.prototype.getCompoundDrawableTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCompoundDrawableTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6284,7 +6284,7 @@ android.widget.TextView.prototype.getCompoundDrawableTintList = function() {
 android.widget.TextView.prototype.getHintTextColors = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHintTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6313,7 +6313,7 @@ android.widget.TextView.prototype.getHintTextColors = function() {
 android.widget.TextView.prototype.setHighlightColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHighlightColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6342,7 +6342,7 @@ android.widget.TextView.prototype.setHighlightColor = function() {
 android.widget.TextView.prototype.setHorizontallyScrolling = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHorizontallyScrolling',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6371,7 +6371,7 @@ android.widget.TextView.prototype.setHorizontallyScrolling = function() {
 android.widget.TextView.prototype.getFreezesText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFreezesText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6400,7 +6400,7 @@ android.widget.TextView.prototype.getFreezesText = function() {
 android.widget.TextView.prototype.onTextChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTextChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6429,7 +6429,7 @@ android.widget.TextView.prototype.onTextChanged = function() {
 android.widget.TextView.prototype.onCheckIsTextEditor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCheckIsTextEditor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6458,7 +6458,7 @@ android.widget.TextView.prototype.onCheckIsTextEditor = function() {
 android.widget.TextView.prototype.debug = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'debug',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6487,7 +6487,7 @@ android.widget.TextView.prototype.debug = function() {
 android.widget.TextView.prototype.setMarqueeRepeatLimit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMarqueeRepeatLimit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6516,7 +6516,7 @@ android.widget.TextView.prototype.setMarqueeRepeatLimit = function() {
 android.widget.TextView.prototype.onWindowFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6545,7 +6545,7 @@ android.widget.TextView.prototype.onWindowFocusChanged = function() {
 android.widget.TextView.prototype.onScrollChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onScrollChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6574,7 +6574,7 @@ android.widget.TextView.prototype.onScrollChanged = function() {
 android.widget.TextView.prototype.extractText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'extractText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6603,7 +6603,7 @@ android.widget.TextView.prototype.extractText = function() {
 android.widget.TextView.prototype.getTotalPaddingStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTotalPaddingStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6632,7 +6632,7 @@ android.widget.TextView.prototype.getTotalPaddingStart = function() {
 android.widget.TextView.prototype.onMeasure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMeasure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6661,7 +6661,7 @@ android.widget.TextView.prototype.onMeasure = function() {
 android.widget.TextView.prototype.getRightFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRightFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6691,7 +6691,7 @@ android.widget.TextView.prototype.getRightFadingEdgeStrength = function() {
 android.widget.TextView.prototype.setTextSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6720,7 +6720,7 @@ android.widget.TextView.prototype.setTextSize = function() {
 android.widget.TextView.prototype.setLetterSpacing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLetterSpacing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6749,7 +6749,7 @@ android.widget.TextView.prototype.setLetterSpacing = function() {
 android.widget.TextView.prototype.setCustomInsertionActionModeCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCustomInsertionActionModeCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6778,7 +6778,7 @@ android.widget.TextView.prototype.setCustomInsertionActionModeCallback = functio
 android.widget.TextView.prototype.getTextColors = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextColors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6807,7 +6807,7 @@ android.widget.TextView.prototype.getTextColors = function() {
 android.widget.TextView.prototype.setCompoundDrawableTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCompoundDrawableTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6836,7 +6836,7 @@ android.widget.TextView.prototype.setCompoundDrawableTintMode = function() {
 android.widget.TextView.prototype.getShadowColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getShadowColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6866,7 +6866,7 @@ android.widget.TextView.prototype.getShadowColor = function() {
 android.widget.TextView.prototype.setTextAppearance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextAppearance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6895,7 +6895,7 @@ android.widget.TextView.prototype.setTextAppearance = function() {
 android.widget.TextView.prototype.getSelectionEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSelectionEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6924,7 +6924,7 @@ android.widget.TextView.prototype.getSelectionEnd = function() {
 android.widget.TextView.prototype.isPaddingOffsetRequired = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isPaddingOffsetRequired',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

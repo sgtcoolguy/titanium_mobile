@@ -32,7 +32,7 @@ android.view.View = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -2061,7 +2061,7 @@ android.view.View.mergeDrawableStates = function() {
 android.view.View.prototype.getHorizontalFadingEdgeLength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHorizontalFadingEdgeLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2090,7 +2090,7 @@ android.view.View.prototype.getHorizontalFadingEdgeLength = function() {
 android.view.View.prototype.dispatchDisplayHint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchDisplayHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2119,7 +2119,7 @@ android.view.View.prototype.dispatchDisplayHint = function() {
 android.view.View.prototype.setY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2148,7 +2148,7 @@ android.view.View.prototype.setY = function() {
 android.view.View.prototype.setX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2177,7 +2177,7 @@ android.view.View.prototype.setX = function() {
 android.view.View.prototype.scrollBy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'scrollBy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2206,7 +2206,7 @@ android.view.View.prototype.scrollBy = function() {
 android.view.View.prototype.getDrawableState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawableState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2235,7 +2235,7 @@ android.view.View.prototype.getDrawableState = function() {
 android.view.View.prototype.setOnFocusChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnFocusChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2264,7 +2264,7 @@ android.view.View.prototype.setOnFocusChangeListener = function() {
 android.view.View.prototype.setOnLongClickListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnLongClickListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2293,7 +2293,7 @@ android.view.View.prototype.setOnLongClickListener = function() {
 android.view.View.prototype.setOnDragListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnDragListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2322,7 +2322,7 @@ android.view.View.prototype.setOnDragListener = function() {
 android.view.View.prototype.getHandler = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHandler',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2351,7 +2351,7 @@ android.view.View.prototype.getHandler = function() {
 android.view.View.prototype.isNestedScrollingEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isNestedScrollingEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2380,7 +2380,7 @@ android.view.View.prototype.isNestedScrollingEnabled = function() {
 android.view.View.prototype.setTextAlignment = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextAlignment',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2409,7 +2409,7 @@ android.view.View.prototype.setTextAlignment = function() {
 android.view.View.prototype.setZ = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setZ',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2438,7 +2438,7 @@ android.view.View.prototype.setZ = function() {
 android.view.View.prototype.isVerticalFadingEdgeEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isVerticalFadingEdgeEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2467,7 +2467,7 @@ android.view.View.prototype.isVerticalFadingEdgeEnabled = function() {
 android.view.View.prototype.postOnAnimationDelayed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postOnAnimationDelayed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2497,7 +2497,7 @@ android.view.View.prototype.postOnAnimationDelayed = function() {
 android.view.View.prototype.postInvalidate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postInvalidate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2526,7 +2526,7 @@ android.view.View.prototype.postInvalidate = function() {
 android.view.View.prototype.getScrollIndicators = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollIndicators',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2555,7 +2555,7 @@ android.view.View.prototype.getScrollIndicators = function() {
 android.view.View.prototype.setLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2584,7 +2584,7 @@ android.view.View.prototype.setLayoutDirection = function() {
 android.view.View.prototype.isFocusableInTouchMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isFocusableInTouchMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2613,7 +2613,7 @@ android.view.View.prototype.isFocusableInTouchMode = function() {
 android.view.View.prototype.dispatchApplyWindowInsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchApplyWindowInsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2642,7 +2642,7 @@ android.view.View.prototype.dispatchApplyWindowInsets = function() {
 android.view.View.prototype.stopNestedScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'stopNestedScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2671,7 +2671,7 @@ android.view.View.prototype.stopNestedScroll = function() {
 android.view.View.prototype.onCreateDrawableState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateDrawableState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2700,7 +2700,7 @@ android.view.View.prototype.onCreateDrawableState = function() {
 android.view.View.prototype.addChildrenForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addChildrenForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2729,7 +2729,7 @@ android.view.View.prototype.addChildrenForAccessibility = function() {
 android.view.View.prototype.dispatchPopulateAccessibilityEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchPopulateAccessibilityEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2758,7 +2758,7 @@ android.view.View.prototype.dispatchPopulateAccessibilityEvent = function() {
 android.view.View.prototype.refreshDrawableState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'refreshDrawableState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2787,7 +2787,7 @@ android.view.View.prototype.refreshDrawableState = function() {
 android.view.View.prototype.isLayoutRequested = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isLayoutRequested',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2816,7 +2816,7 @@ android.view.View.prototype.isLayoutRequested = function() {
 android.view.View.prototype.setFilterTouchesWhenObscured = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFilterTouchesWhenObscured',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2845,7 +2845,7 @@ android.view.View.prototype.setFilterTouchesWhenObscured = function() {
 android.view.View.prototype.isDuplicateParentStateEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isDuplicateParentStateEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2874,7 +2874,7 @@ android.view.View.prototype.isDuplicateParentStateEnabled = function() {
 android.view.View.prototype.getKeepScreenOn = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getKeepScreenOn',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2903,7 +2903,7 @@ android.view.View.prototype.getKeepScreenOn = function() {
 android.view.View.prototype.onFilterTouchEventForSecurity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFilterTouchEventForSecurity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2932,7 +2932,7 @@ android.view.View.prototype.onFilterTouchEventForSecurity = function() {
 android.view.View.prototype.getForegroundTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getForegroundTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2961,7 +2961,7 @@ android.view.View.prototype.getForegroundTintMode = function() {
 android.view.View.prototype.requestLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2990,7 +2990,7 @@ android.view.View.prototype.requestLayout = function() {
 android.view.View.prototype.onHoverEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onHoverEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3019,7 +3019,7 @@ android.view.View.prototype.onHoverEvent = function() {
 android.view.View.prototype.setSaveEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSaveEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3048,7 +3048,7 @@ android.view.View.prototype.setSaveEnabled = function() {
 android.view.View.prototype.isScrollbarFadingEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isScrollbarFadingEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3077,7 +3077,7 @@ android.view.View.prototype.isScrollbarFadingEnabled = function() {
 android.view.View.prototype.isLayoutDirectionResolved = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isLayoutDirectionResolved',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3106,7 +3106,7 @@ android.view.View.prototype.isLayoutDirectionResolved = function() {
 android.view.View.prototype.getApplicationWindowToken = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getApplicationWindowToken',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3135,7 +3135,7 @@ android.view.View.prototype.getApplicationWindowToken = function() {
 android.view.View.prototype.isInTouchMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isInTouchMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3164,7 +3164,7 @@ android.view.View.prototype.isInTouchMode = function() {
 android.view.View.prototype.getMeasuredHeightAndState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasuredHeightAndState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3193,7 +3193,7 @@ android.view.View.prototype.getMeasuredHeightAndState = function() {
 android.view.View.prototype.performContextClick = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performContextClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3222,7 +3222,7 @@ android.view.View.prototype.performContextClick = function() {
 android.view.View.prototype.getFocusables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFocusables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3251,7 +3251,7 @@ android.view.View.prototype.getFocusables = function() {
 android.view.View.prototype.dispatchKeyEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchKeyEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3280,7 +3280,7 @@ android.view.View.prototype.dispatchKeyEvent = function() {
 android.view.View.prototype.getWindowVisibleDisplayFrame = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowVisibleDisplayFrame',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3309,7 +3309,7 @@ android.view.View.prototype.getWindowVisibleDisplayFrame = function() {
 android.view.View.prototype.getSuggestedMinimumWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSuggestedMinimumWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3338,7 +3338,7 @@ android.view.View.prototype.getSuggestedMinimumWidth = function() {
 android.view.View.prototype.setScrollBarFadeDuration = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollBarFadeDuration',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3367,7 +3367,7 @@ android.view.View.prototype.setScrollBarFadeDuration = function() {
 android.view.View.prototype.performClick = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3396,7 +3396,7 @@ android.view.View.prototype.performClick = function() {
 android.view.View.prototype.getHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3425,7 +3425,7 @@ android.view.View.prototype.getHeight = function() {
 android.view.View.prototype.hasNestedScrollingParent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasNestedScrollingParent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3454,7 +3454,7 @@ android.view.View.prototype.hasNestedScrollingParent = function() {
 android.view.View.prototype.onKeyPreIme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyPreIme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3483,7 +3483,7 @@ android.view.View.prototype.onKeyPreIme = function() {
 android.view.View.prototype.fitSystemWindows = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'fitSystemWindows',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3512,7 +3512,7 @@ android.view.View.prototype.fitSystemWindows = function() {
 android.view.View.prototype.findViewsWithText = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findViewsWithText',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3541,7 +3541,7 @@ android.view.View.prototype.findViewsWithText = function() {
 android.view.View.prototype.setBackgroundTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackgroundTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3570,7 +3570,7 @@ android.view.View.prototype.setBackgroundTintMode = function() {
 android.view.View.prototype.onDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3599,7 +3599,7 @@ android.view.View.prototype.onDraw = function() {
 android.view.View.prototype.onAttachedToWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAttachedToWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3628,7 +3628,7 @@ android.view.View.prototype.onAttachedToWindow = function() {
 android.view.View.prototype.setActivated = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setActivated',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3657,7 +3657,7 @@ android.view.View.prototype.setActivated = function() {
 android.view.View.prototype.isImportantForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isImportantForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3686,7 +3686,7 @@ android.view.View.prototype.isImportantForAccessibility = function() {
 android.view.View.prototype.setPadding = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPadding',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3715,7 +3715,7 @@ android.view.View.prototype.setPadding = function() {
 android.view.View.prototype.dispatchSaveInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchSaveInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3744,7 +3744,7 @@ android.view.View.prototype.dispatchSaveInstanceState = function() {
 android.view.View.prototype.computeHorizontalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeHorizontalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3773,7 +3773,7 @@ android.view.View.prototype.computeHorizontalScrollRange = function() {
 android.view.View.prototype.clearFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'clearFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3802,7 +3802,7 @@ android.view.View.prototype.clearFocus = function() {
 android.view.View.prototype.setOnScrollChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnScrollChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3831,7 +3831,7 @@ android.view.View.prototype.setOnScrollChangeListener = function() {
 android.view.View.prototype.callOnClick = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'callOnClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3860,7 +3860,7 @@ android.view.View.prototype.callOnClick = function() {
 android.view.View.prototype.willNotCacheDrawing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'willNotCacheDrawing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3889,7 +3889,7 @@ android.view.View.prototype.willNotCacheDrawing = function() {
 android.view.View.prototype.onVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3918,7 +3918,7 @@ android.view.View.prototype.onVisibilityChanged = function() {
 android.view.View.prototype.invalidateOutline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'invalidateOutline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3947,7 +3947,7 @@ android.view.View.prototype.invalidateOutline = function() {
 android.view.View.prototype.setAccessibilityLiveRegion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAccessibilityLiveRegion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3976,7 +3976,7 @@ android.view.View.prototype.setAccessibilityLiveRegion = function() {
 android.view.View.prototype.onDrawScrollBars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDrawScrollBars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4005,7 +4005,7 @@ android.view.View.prototype.onDrawScrollBars = function() {
 android.view.View.prototype.dispatchSetActivated = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchSetActivated',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4034,7 +4034,7 @@ android.view.View.prototype.dispatchSetActivated = function() {
 android.view.View.prototype.onFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4063,7 +4063,7 @@ android.view.View.prototype.onFocusChanged = function() {
 android.view.View.prototype.hasTransientState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasTransientState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4092,7 +4092,7 @@ android.view.View.prototype.hasTransientState = function() {
 android.view.View.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4121,7 +4121,7 @@ android.view.View.prototype.toString = function() {
 android.view.View.prototype.setMeasuredDimension = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMeasuredDimension',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4150,7 +4150,7 @@ android.view.View.prototype.setMeasuredDimension = function() {
 android.view.View.prototype.setScrollX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4179,7 +4179,7 @@ android.view.View.prototype.setScrollX = function() {
 android.view.View.prototype.getPaddingRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4208,7 +4208,7 @@ android.view.View.prototype.getPaddingRight = function() {
 android.view.View.prototype.setSystemUiVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSystemUiVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4237,7 +4237,7 @@ android.view.View.prototype.setSystemUiVisibility = function() {
 android.view.View.prototype.setScrollY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4266,7 +4266,7 @@ android.view.View.prototype.setScrollY = function() {
 android.view.View.prototype.dispatchRestoreInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchRestoreInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4295,7 +4295,7 @@ android.view.View.prototype.dispatchRestoreInstanceState = function() {
 android.view.View.prototype.setAccessibilityTraversalAfter = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAccessibilityTraversalAfter',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4324,7 +4324,7 @@ android.view.View.prototype.setAccessibilityTraversalAfter = function() {
 android.view.View.prototype.onKeyShortcut = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyShortcut',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4353,7 +4353,7 @@ android.view.View.prototype.onKeyShortcut = function() {
 android.view.View.prototype.onProvideStructure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideStructure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4382,7 +4382,7 @@ android.view.View.prototype.onProvideStructure = function() {
 android.view.View.prototype.setSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4411,7 +4411,7 @@ android.view.View.prototype.setSelected = function() {
 android.view.View.prototype.onApplyWindowInsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onApplyWindowInsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4440,7 +4440,7 @@ android.view.View.prototype.onApplyWindowInsets = function() {
 android.view.View.prototype.getPaddingBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4469,7 +4469,7 @@ android.view.View.prototype.getPaddingBottom = function() {
 android.view.View.prototype.onDragEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDragEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4498,7 +4498,7 @@ android.view.View.prototype.onDragEvent = function() {
 android.view.View.prototype.getAccessibilityTraversalBefore = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityTraversalBefore',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4527,7 +4527,7 @@ android.view.View.prototype.getAccessibilityTraversalBefore = function() {
 android.view.View.prototype.restoreHierarchyState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'restoreHierarchyState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4556,7 +4556,7 @@ android.view.View.prototype.restoreHierarchyState = function() {
 android.view.View.prototype.dispatchWindowFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchWindowFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4585,7 +4585,7 @@ android.view.View.prototype.dispatchWindowFocusChanged = function() {
 android.view.View.prototype.getElevation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getElevation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4614,7 +4614,7 @@ android.view.View.prototype.getElevation = function() {
 android.view.View.prototype.announceForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'announceForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4643,7 +4643,7 @@ android.view.View.prototype.announceForAccessibility = function() {
 android.view.View.prototype.getAccessibilityLiveRegion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityLiveRegion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4672,7 +4672,7 @@ android.view.View.prototype.getAccessibilityLiveRegion = function() {
 android.view.View.prototype.invalidateDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'invalidateDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4701,7 +4701,7 @@ android.view.View.prototype.invalidateDrawable = function() {
 android.view.View.prototype.setBackgroundResource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackgroundResource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4730,7 +4730,7 @@ android.view.View.prototype.setBackgroundResource = function() {
 android.view.View.prototype.setFocusableInTouchMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFocusableInTouchMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4759,7 +4759,7 @@ android.view.View.prototype.setFocusableInTouchMode = function() {
 android.view.View.prototype.post = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'post',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4788,7 +4788,7 @@ android.view.View.prototype.post = function() {
 android.view.View.prototype.setClipBounds = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setClipBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4818,7 +4818,7 @@ android.view.View.prototype.setClipBounds = function() {
 android.view.View.prototype.getClipBounds = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getClipBounds',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4847,7 +4847,7 @@ android.view.View.prototype.getClipBounds = function() {
 android.view.View.prototype.isSaveFromParentEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isSaveFromParentEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4876,7 +4876,7 @@ android.view.View.prototype.isSaveFromParentEnabled = function() {
 android.view.View.prototype.dispatchVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4906,7 +4906,7 @@ android.view.View.prototype.dispatchVisibilityChanged = function() {
 android.view.View.prototype.buildDrawingCache = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'buildDrawingCache',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4935,7 +4935,7 @@ android.view.View.prototype.buildDrawingCache = function() {
 android.view.View.prototype.onOverScrolled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onOverScrolled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4964,7 +4964,7 @@ android.view.View.prototype.onOverScrolled = function() {
 android.view.View.prototype.getBottomFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBottomFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4993,7 +4993,7 @@ android.view.View.prototype.getBottomFadingEdgeStrength = function() {
 android.view.View.prototype.getPaddingEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5022,7 +5022,7 @@ android.view.View.prototype.getPaddingEnd = function() {
 android.view.View.prototype.getTextAlignment = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextAlignment',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5051,7 +5051,7 @@ android.view.View.prototype.getTextAlignment = function() {
 android.view.View.prototype.setAccessibilityTraversalBefore = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAccessibilityTraversalBefore',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5080,7 +5080,7 @@ android.view.View.prototype.setAccessibilityTraversalBefore = function() {
 android.view.View.prototype.setTextDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTextDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5109,7 +5109,7 @@ android.view.View.prototype.setTextDirection = function() {
 android.view.View.prototype.setAlpha = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAlpha',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5138,7 +5138,7 @@ android.view.View.prototype.setAlpha = function() {
 android.view.View.prototype.onKeyLongPress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyLongPress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5167,7 +5167,7 @@ android.view.View.prototype.onKeyLongPress = function() {
 android.view.View.prototype.onGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onGenericMotionEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5196,7 +5196,7 @@ android.view.View.prototype.onGenericMotionEvent = function() {
 android.view.View.prototype.setCameraDistance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setCameraDistance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5225,7 +5225,7 @@ android.view.View.prototype.setCameraDistance = function() {
 android.view.View.prototype.isHorizontalFadingEdgeEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isHorizontalFadingEdgeEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5254,7 +5254,7 @@ android.view.View.prototype.isHorizontalFadingEdgeEnabled = function() {
 android.view.View.prototype.setDuplicateParentStateEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setDuplicateParentStateEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5283,7 +5283,7 @@ android.view.View.prototype.setDuplicateParentStateEnabled = function() {
 android.view.View.prototype.dispatchSetSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchSetSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5312,7 +5312,7 @@ android.view.View.prototype.dispatchSetSelected = function() {
 android.view.View.prototype.getCameraDistance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCameraDistance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5341,7 +5341,7 @@ android.view.View.prototype.getCameraDistance = function() {
 android.view.View.prototype.onRestoreInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRestoreInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5370,7 +5370,7 @@ android.view.View.prototype.onRestoreInstanceState = function() {
 android.view.View.prototype.getBottomPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBottomPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5399,7 +5399,7 @@ android.view.View.prototype.getBottomPaddingOffset = function() {
 android.view.View.prototype.getContentDescription = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContentDescription',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5428,7 +5428,7 @@ android.view.View.prototype.getContentDescription = function() {
 android.view.View.prototype.setOverScrollMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOverScrollMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5457,7 +5457,7 @@ android.view.View.prototype.setOverScrollMode = function() {
 android.view.View.prototype.startAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5486,7 +5486,7 @@ android.view.View.prototype.startAnimation = function() {
 android.view.View.prototype.setOnTouchListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnTouchListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5515,7 +5515,7 @@ android.view.View.prototype.setOnTouchListener = function() {
 android.view.View.prototype.saveHierarchyState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'saveHierarchyState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5544,7 +5544,7 @@ android.view.View.prototype.saveHierarchyState = function() {
 android.view.View.prototype.isTextAlignmentResolved = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isTextAlignmentResolved',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5573,7 +5573,7 @@ android.view.View.prototype.isTextAlignmentResolved = function() {
 android.view.View.prototype.getBackgroundTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBackgroundTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5602,7 +5602,7 @@ android.view.View.prototype.getBackgroundTintList = function() {
 android.view.View.prototype.setNextFocusDownId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNextFocusDownId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5631,7 +5631,7 @@ android.view.View.prototype.setNextFocusDownId = function() {
 android.view.View.prototype.getMinimumWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinimumWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5660,7 +5660,7 @@ android.view.View.prototype.getMinimumWidth = function() {
 android.view.View.prototype.setScrollBarStyle = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollBarStyle',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5689,7 +5689,7 @@ android.view.View.prototype.setScrollBarStyle = function() {
 android.view.View.prototype.willNotDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'willNotDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5718,7 +5718,7 @@ android.view.View.prototype.willNotDraw = function() {
 android.view.View.prototype.getOverlay = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOverlay',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5747,7 +5747,7 @@ android.view.View.prototype.getOverlay = function() {
 android.view.View.prototype.getScrollBarStyle = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollBarStyle',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5776,7 +5776,7 @@ android.view.View.prototype.getScrollBarStyle = function() {
 android.view.View.prototype.setHorizontalScrollBarEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHorizontalScrollBarEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5805,7 +5805,7 @@ android.view.View.prototype.setHorizontalScrollBarEnabled = function() {
 android.view.View.prototype.setHapticFeedbackEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHapticFeedbackEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5834,7 +5834,7 @@ android.view.View.prototype.setHapticFeedbackEnabled = function() {
 android.view.View.prototype.hasFocusable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasFocusable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5863,7 +5863,7 @@ android.view.View.prototype.hasFocusable = function() {
 android.view.View.prototype.onDrawForeground = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDrawForeground',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5892,7 +5892,7 @@ android.view.View.prototype.onDrawForeground = function() {
 android.view.View.prototype.getPaddingTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5921,7 +5921,7 @@ android.view.View.prototype.getPaddingTop = function() {
 android.view.View.prototype.isHorizontalScrollBarEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isHorizontalScrollBarEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5950,7 +5950,7 @@ android.view.View.prototype.isHorizontalScrollBarEnabled = function() {
 android.view.View.prototype.postDelayed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postDelayed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5979,7 +5979,7 @@ android.view.View.prototype.postDelayed = function() {
 android.view.View.prototype.setAccessibilityDelegate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAccessibilityDelegate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6008,7 +6008,7 @@ android.view.View.prototype.setAccessibilityDelegate = function() {
 android.view.View.prototype.getContextMenuInfo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContextMenuInfo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6037,7 +6037,7 @@ android.view.View.prototype.getContextMenuInfo = function() {
 android.view.View.prototype.setOutlineProvider = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOutlineProvider',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6066,7 +6066,7 @@ android.view.View.prototype.setOutlineProvider = function() {
 android.view.View.prototype.setBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6095,7 +6095,7 @@ android.view.View.prototype.setBottom = function() {
 android.view.View.prototype.onProvideVirtualStructure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideVirtualStructure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6124,7 +6124,7 @@ android.view.View.prototype.onProvideVirtualStructure = function() {
 android.view.View.prototype.destroyDrawingCache = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'destroyDrawingCache',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6153,7 +6153,7 @@ android.view.View.prototype.destroyDrawingCache = function() {
 android.view.View.prototype.getLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6183,7 +6183,7 @@ android.view.View.prototype.getLayoutParams = function() {
 android.view.View.prototype.setScrollIndicators = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollIndicators',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6212,7 +6212,7 @@ android.view.View.prototype.setScrollIndicators = function() {
 android.view.View.prototype.hasOverlappingRendering = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasOverlappingRendering',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6241,7 +6241,7 @@ android.view.View.prototype.hasOverlappingRendering = function() {
 android.view.View.prototype.onAnimationEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAnimationEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6270,7 +6270,7 @@ android.view.View.prototype.onAnimationEnd = function() {
 android.view.View.prototype.getMeasuredWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasuredWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6299,7 +6299,7 @@ android.view.View.prototype.getMeasuredWidth = function() {
 android.view.View.prototype.setVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6328,7 +6328,7 @@ android.view.View.prototype.setVisibility = function() {
 android.view.View.prototype.getRotationX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRotationX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6357,7 +6357,7 @@ android.view.View.prototype.getRotationX = function() {
 android.view.View.prototype.getRootWindowInsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRootWindowInsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6386,7 +6386,7 @@ android.view.View.prototype.getRootWindowInsets = function() {
 android.view.View.prototype.getRotationY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRotationY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6415,7 +6415,7 @@ android.view.View.prototype.getRotationY = function() {
 android.view.View.prototype.setSoundEffectsEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSoundEffectsEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6444,7 +6444,7 @@ android.view.View.prototype.setSoundEffectsEnabled = function() {
 android.view.View.prototype.onStartTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onStartTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6473,7 +6473,7 @@ android.view.View.prototype.onStartTemporaryDetach = function() {
 android.view.View.prototype.dispatchNestedPreFling = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchNestedPreFling',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6502,7 +6502,7 @@ android.view.View.prototype.dispatchNestedPreFling = function() {
 android.view.View.prototype.onAnimationStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAnimationStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6531,7 +6531,7 @@ android.view.View.prototype.onAnimationStart = function() {
 android.view.View.prototype.getAccessibilityTraversalAfter = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityTraversalAfter',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6560,7 +6560,7 @@ android.view.View.prototype.getAccessibilityTraversalAfter = function() {
 android.view.View.prototype.onLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6589,7 +6589,7 @@ android.view.View.prototype.onLayout = function() {
 android.view.View.prototype.setLongClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLongClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6619,7 +6619,7 @@ android.view.View.prototype.setLongClickable = function() {
 android.view.View.prototype.postInvalidateDelayed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postInvalidateDelayed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6648,7 +6648,7 @@ android.view.View.prototype.postInvalidateDelayed = function() {
 android.view.View.prototype.clearAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'clearAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6677,7 +6677,7 @@ android.view.View.prototype.clearAnimation = function() {
 android.view.View.prototype.getOverScrollMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOverScrollMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6706,7 +6706,7 @@ android.view.View.prototype.getOverScrollMode = function() {
 android.view.View.prototype.getParentForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getParentForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6735,7 +6735,7 @@ android.view.View.prototype.getParentForAccessibility = function() {
 android.view.View.prototype.verifyDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'verifyDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6764,7 +6764,7 @@ android.view.View.prototype.verifyDrawable = function() {
 android.view.View.prototype.setBackgroundDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackgroundDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6793,7 +6793,7 @@ android.view.View.prototype.setBackgroundDrawable = function() {
 android.view.View.prototype.setOnClickListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnClickListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6822,7 +6822,7 @@ android.view.View.prototype.setOnClickListener = function() {
 android.view.View.prototype.setEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6851,7 +6851,7 @@ android.view.View.prototype.setEnabled = function() {
 android.view.View.prototype.dispatchGenericPointerEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchGenericPointerEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6880,7 +6880,7 @@ android.view.View.prototype.dispatchGenericPointerEvent = function() {
 android.view.View.prototype.requestFocusFromTouch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestFocusFromTouch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6909,7 +6909,7 @@ android.view.View.prototype.requestFocusFromTouch = function() {
 android.view.View.prototype.getForegroundTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getForegroundTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6938,7 +6938,7 @@ android.view.View.prototype.getForegroundTintList = function() {
 android.view.View.prototype.onSizeChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSizeChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6967,7 +6967,7 @@ android.view.View.prototype.onSizeChanged = function() {
 android.view.View.prototype.getDrawingCacheQuality = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawingCacheQuality',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -6996,7 +6996,7 @@ android.view.View.prototype.getDrawingCacheQuality = function() {
 android.view.View.prototype.dispatchGenericFocusedEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchGenericFocusedEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7025,7 +7025,7 @@ android.view.View.prototype.dispatchGenericFocusedEvent = function() {
 android.view.View.prototype.dispatchNestedFling = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchNestedFling',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7054,7 +7054,7 @@ android.view.View.prototype.dispatchNestedFling = function() {
 android.view.View.prototype.isHovered = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isHovered',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7084,7 +7084,7 @@ android.view.View.prototype.isHovered = function() {
 android.view.View.prototype.requestRectangleOnScreen = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestRectangleOnScreen',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7113,7 +7113,7 @@ android.view.View.prototype.requestRectangleOnScreen = function() {
 android.view.View.prototype.getLocationOnScreen = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLocationOnScreen',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7142,7 +7142,7 @@ android.view.View.prototype.getLocationOnScreen = function() {
 android.view.View.prototype.getWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7171,7 +7171,7 @@ android.view.View.prototype.getWidth = function() {
 android.view.View.prototype.getLayerType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayerType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7200,7 +7200,7 @@ android.view.View.prototype.getLayerType = function() {
 android.view.View.prototype.dispatchDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7229,7 +7229,7 @@ android.view.View.prototype.dispatchDraw = function() {
 android.view.View.prototype.getTransitionName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTransitionName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7258,7 +7258,7 @@ android.view.View.prototype.getTransitionName = function() {
 android.view.View.prototype.getTouchables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTouchables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7287,7 +7287,7 @@ android.view.View.prototype.getTouchables = function() {
 android.view.View.prototype.setScrollbarFadingEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollbarFadingEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7317,7 +7317,7 @@ android.view.View.prototype.setScrollbarFadingEnabled = function() {
 android.view.View.prototype.startActionMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActionMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7346,7 +7346,7 @@ android.view.View.prototype.startActionMode = function() {
 android.view.View.prototype.isLaidOut = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isLaidOut',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7375,7 +7375,7 @@ android.view.View.prototype.isLaidOut = function() {
 android.view.View.prototype.hasFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7404,7 +7404,7 @@ android.view.View.prototype.hasFocus = function() {
 android.view.View.prototype.isDrawingCacheEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isDrawingCacheEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7433,7 +7433,7 @@ android.view.View.prototype.isDrawingCacheEnabled = function() {
 android.view.View.prototype.setKeepScreenOn = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setKeepScreenOn',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7462,7 +7462,7 @@ android.view.View.prototype.setKeepScreenOn = function() {
 android.view.View.prototype.onKeyUp = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyUp',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7491,7 +7491,7 @@ android.view.View.prototype.onKeyUp = function() {
 android.view.View.prototype.setLayerType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLayerType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7520,7 +7520,7 @@ android.view.View.prototype.setLayerType = function() {
 android.view.View.prototype.buildLayer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'buildLayer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7549,7 +7549,7 @@ android.view.View.prototype.buildLayer = function() {
 android.view.View.prototype.isShown = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isShown',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7578,7 +7578,7 @@ android.view.View.prototype.isShown = function() {
 android.view.View.prototype.dispatchHoverEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchHoverEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7607,7 +7607,7 @@ android.view.View.prototype.dispatchHoverEvent = function() {
 android.view.View.prototype.getDrawingCacheBackgroundColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawingCacheBackgroundColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7636,7 +7636,7 @@ android.view.View.prototype.getDrawingCacheBackgroundColor = function() {
 android.view.View.prototype.getClipToOutline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getClipToOutline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7665,7 +7665,7 @@ android.view.View.prototype.getClipToOutline = function() {
 android.view.View.prototype.draw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'draw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7694,7 +7694,7 @@ android.view.View.prototype.draw = function() {
 android.view.View.prototype.isAttachedToWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isAttachedToWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7723,7 +7723,7 @@ android.view.View.prototype.isAttachedToWindow = function() {
 android.view.View.prototype.onScreenStateChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onScreenStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7752,7 +7752,7 @@ android.view.View.prototype.onScreenStateChanged = function() {
 android.view.View.prototype.getRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7781,7 +7781,7 @@ android.view.View.prototype.getRight = function() {
 android.view.View.prototype.getPivotX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPivotX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7810,7 +7810,7 @@ android.view.View.prototype.getPivotX = function() {
 android.view.View.prototype.getPivotY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPivotY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7839,7 +7839,7 @@ android.view.View.prototype.getPivotY = function() {
 android.view.View.prototype.setRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7868,7 +7868,7 @@ android.view.View.prototype.setRight = function() {
 android.view.View.prototype.hasWindowFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasWindowFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7897,7 +7897,7 @@ android.view.View.prototype.hasWindowFocus = function() {
 android.view.View.prototype.setScaleX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7926,7 +7926,7 @@ android.view.View.prototype.setScaleX = function() {
 android.view.View.prototype.onSaveInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSaveInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7955,7 +7955,7 @@ android.view.View.prototype.onSaveInstanceState = function() {
 android.view.View.prototype.setScaleY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScaleY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -7984,7 +7984,7 @@ android.view.View.prototype.setScaleY = function() {
 android.view.View.prototype.setDrawingCacheEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setDrawingCacheEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8013,7 +8013,7 @@ android.view.View.prototype.setDrawingCacheEnabled = function() {
 android.view.View.prototype.getTextDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTextDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8042,7 +8042,7 @@ android.view.View.prototype.getTextDirection = function() {
 android.view.View.prototype.setNextFocusUpId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNextFocusUpId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8071,7 +8071,7 @@ android.view.View.prototype.setNextFocusUpId = function() {
 android.view.View.prototype.setForegroundGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setForegroundGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8100,7 +8100,7 @@ android.view.View.prototype.setForegroundGravity = function() {
 android.view.View.prototype.bringToFront = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'bringToFront',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8129,7 +8129,7 @@ android.view.View.prototype.bringToFront = function() {
 android.view.View.prototype.getRotation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRotation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8158,7 +8158,7 @@ android.view.View.prototype.getRotation = function() {
 android.view.View.prototype.dispatchProvideStructure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchProvideStructure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8187,7 +8187,7 @@ android.view.View.prototype.dispatchProvideStructure = function() {
 android.view.View.prototype.dispatchDrawableHotspotChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchDrawableHotspotChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8216,7 +8216,7 @@ android.view.View.prototype.dispatchDrawableHotspotChanged = function() {
 android.view.View.prototype.setNestedScrollingEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNestedScrollingEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8245,7 +8245,7 @@ android.view.View.prototype.setNestedScrollingEnabled = function() {
 android.view.View.prototype.setTransitionName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTransitionName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8274,7 +8274,7 @@ android.view.View.prototype.setTransitionName = function() {
 android.view.View.prototype.dispatchKeyEventPreIme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchKeyEventPreIme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8303,7 +8303,7 @@ android.view.View.prototype.dispatchKeyEventPreIme = function() {
 android.view.View.prototype.onTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTrackballEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8332,7 +8332,7 @@ android.view.View.prototype.onTrackballEvent = function() {
 android.view.View.prototype.onCreateInputConnection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateInputConnection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8361,7 +8361,7 @@ android.view.View.prototype.onCreateInputConnection = function() {
 android.view.View.prototype.getDrawingTime = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawingTime',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8390,7 +8390,7 @@ android.view.View.prototype.getDrawingTime = function() {
 android.view.View.prototype.findViewWithTag = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findViewWithTag',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8419,7 +8419,7 @@ android.view.View.prototype.findViewWithTag = function() {
 android.view.View.prototype.drawableStateChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'drawableStateChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8448,7 +8448,7 @@ android.view.View.prototype.drawableStateChanged = function() {
 android.view.View.prototype.setFadingEdgeLength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFadingEdgeLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8477,7 +8477,7 @@ android.view.View.prototype.setFadingEdgeLength = function() {
 android.view.View.prototype.sendAccessibilityEventUnchecked = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendAccessibilityEventUnchecked',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8506,7 +8506,7 @@ android.view.View.prototype.sendAccessibilityEventUnchecked = function() {
 android.view.View.prototype.isActivated = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isActivated',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8535,7 +8535,7 @@ android.view.View.prototype.isActivated = function() {
 android.view.View.prototype.setHorizontalFadingEdgeEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHorizontalFadingEdgeEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8564,7 +8564,7 @@ android.view.View.prototype.setHorizontalFadingEdgeEnabled = function() {
 android.view.View.prototype.getScaleY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScaleY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8593,7 +8593,7 @@ android.view.View.prototype.getScaleY = function() {
 android.view.View.prototype.getForeground = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getForeground',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8622,7 +8622,7 @@ android.view.View.prototype.getForeground = function() {
 android.view.View.prototype.getScaleX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScaleX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8651,7 +8651,7 @@ android.view.View.prototype.getScaleX = function() {
 android.view.View.prototype.isAccessibilityFocused = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isAccessibilityFocused',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8680,7 +8680,7 @@ android.view.View.prototype.isAccessibilityFocused = function() {
 android.view.View.prototype.startDrag = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startDrag',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8709,7 +8709,7 @@ android.view.View.prototype.startDrag = function() {
 android.view.View.prototype.isInLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isInLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8738,7 +8738,7 @@ android.view.View.prototype.isInLayout = function() {
 android.view.View.prototype.getLabelFor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLabelFor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8767,7 +8767,7 @@ android.view.View.prototype.getLabelFor = function() {
 android.view.View.prototype.setMinimumWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinimumWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8796,7 +8796,7 @@ android.view.View.prototype.setMinimumWidth = function() {
 android.view.View.prototype.onConfigurationChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onConfigurationChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8825,7 +8825,7 @@ android.view.View.prototype.onConfigurationChanged = function() {
 android.view.View.prototype.performAccessibilityAction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performAccessibilityAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8854,7 +8854,7 @@ android.view.View.prototype.performAccessibilityAction = function() {
 android.view.View.prototype.onDisplayHint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDisplayHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8883,7 +8883,7 @@ android.view.View.prototype.onDisplayHint = function() {
 android.view.View.prototype.setPaddingRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPaddingRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8912,7 +8912,7 @@ android.view.View.prototype.setPaddingRelative = function() {
 android.view.View.prototype.onCreateContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8941,7 +8941,7 @@ android.view.View.prototype.onCreateContextMenu = function() {
 android.view.View.prototype.computeHorizontalScrollExtent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeHorizontalScrollExtent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8970,7 +8970,7 @@ android.view.View.prototype.computeHorizontalScrollExtent = function() {
 android.view.View.prototype.setLeft = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLeft',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -8999,7 +8999,7 @@ android.view.View.prototype.setLeft = function() {
 android.view.View.prototype.setDrawingCacheBackgroundColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setDrawingCacheBackgroundColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9028,7 +9028,7 @@ android.view.View.prototype.setDrawingCacheBackgroundColor = function() {
 android.view.View.prototype.dispatchDragEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchDragEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9057,7 +9057,7 @@ android.view.View.prototype.dispatchDragEvent = function() {
 android.view.View.prototype.setVerticalFadingEdgeEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVerticalFadingEdgeEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9087,7 +9087,7 @@ android.view.View.prototype.setVerticalFadingEdgeEnabled = function() {
 android.view.View.prototype.getDrawingCache = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawingCache',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9116,7 +9116,7 @@ android.view.View.prototype.getDrawingCache = function() {
 android.view.View.prototype.computeVerticalScrollExtent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeVerticalScrollExtent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9146,7 +9146,7 @@ android.view.View.prototype.computeVerticalScrollExtent = function() {
 android.view.View.prototype.performHapticFeedback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performHapticFeedback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9175,7 +9175,7 @@ android.view.View.prototype.performHapticFeedback = function() {
 android.view.View.prototype.getTranslationY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTranslationY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9204,7 +9204,7 @@ android.view.View.prototype.getTranslationY = function() {
 android.view.View.prototype.getTranslationZ = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTranslationZ',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9234,7 +9234,7 @@ android.view.View.prototype.getTranslationZ = function() {
 android.view.View.prototype.setTag = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTag',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9263,7 +9263,7 @@ android.view.View.prototype.setTag = function() {
 android.view.View.prototype.getTranslationX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTranslationX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9292,7 +9292,7 @@ android.view.View.prototype.getTranslationX = function() {
 android.view.View.prototype.setOnContextClickListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnContextClickListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9321,7 +9321,7 @@ android.view.View.prototype.setOnContextClickListener = function() {
 android.view.View.prototype.sendAccessibilityEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendAccessibilityEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9350,7 +9350,7 @@ android.view.View.prototype.sendAccessibilityEvent = function() {
 android.view.View.prototype.isPressed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isPressed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9379,7 +9379,7 @@ android.view.View.prototype.isPressed = function() {
 android.view.View.prototype.setBackgroundColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackgroundColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9408,7 +9408,7 @@ android.view.View.prototype.setBackgroundColor = function() {
 android.view.View.prototype.getForegroundGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getForegroundGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9437,7 +9437,7 @@ android.view.View.prototype.getForegroundGravity = function() {
 android.view.View.prototype.getKeyDispatcherState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getKeyDispatcherState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9466,7 +9466,7 @@ android.view.View.prototype.getKeyDispatcherState = function() {
 android.view.View.prototype.onScrollChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onScrollChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9495,7 +9495,7 @@ android.view.View.prototype.onScrollChanged = function() {
 android.view.View.prototype.dispatchWindowVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchWindowVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9524,7 +9524,7 @@ android.view.View.prototype.dispatchWindowVisibilityChanged = function() {
 android.view.View.prototype.setForeground = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setForeground',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9553,7 +9553,7 @@ android.view.View.prototype.setForeground = function() {
 android.view.View.prototype.getScrollBarFadeDuration = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollBarFadeDuration',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9582,7 +9582,7 @@ android.view.View.prototype.getScrollBarFadeDuration = function() {
 android.view.View.prototype.getWindowToken = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowToken',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9612,7 +9612,7 @@ android.view.View.prototype.getWindowToken = function() {
 android.view.View.prototype.getTag = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTag',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9641,7 +9641,7 @@ android.view.View.prototype.getTag = function() {
 android.view.View.prototype.onMeasure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMeasure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9670,7 +9670,7 @@ android.view.View.prototype.onMeasure = function() {
 android.view.View.prototype.getRightFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRightFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9699,7 +9699,7 @@ android.view.View.prototype.getRightFadingEdgeStrength = function() {
 android.view.View.prototype.setOnApplyWindowInsetsListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnApplyWindowInsetsListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9728,7 +9728,7 @@ android.view.View.prototype.setOnApplyWindowInsetsListener = function() {
 android.view.View.prototype.offsetLeftAndRight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'offsetLeftAndRight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9757,7 +9757,7 @@ android.view.View.prototype.offsetLeftAndRight = function() {
 android.view.View.prototype.getRootView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRootView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9786,7 +9786,7 @@ android.view.View.prototype.getRootView = function() {
 android.view.View.prototype.isClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9815,7 +9815,7 @@ android.view.View.prototype.isClickable = function() {
 android.view.View.prototype.onDetachedFromWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDetachedFromWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9844,7 +9844,7 @@ android.view.View.prototype.onDetachedFromWindow = function() {
 android.view.View.prototype.getDisplay = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDisplay',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9873,7 +9873,7 @@ android.view.View.prototype.getDisplay = function() {
 android.view.View.prototype.isPaddingOffsetRequired = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isPaddingOffsetRequired',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9902,7 +9902,7 @@ android.view.View.prototype.isPaddingOffsetRequired = function() {
 android.view.View.prototype.playSoundEffect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'playSoundEffect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9931,7 +9931,7 @@ android.view.View.prototype.playSoundEffect = function() {
 android.view.View.prototype.getTouchDelegate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTouchDelegate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9960,7 +9960,7 @@ android.view.View.prototype.getTouchDelegate = function() {
 android.view.View.prototype.getMinimumHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMinimumHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -9989,7 +9989,7 @@ android.view.View.prototype.getMinimumHeight = function() {
 android.view.View.prototype.removeOnAttachStateChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeOnAttachStateChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10018,7 +10018,7 @@ android.view.View.prototype.removeOnAttachStateChangeListener = function() {
 android.view.View.prototype.isOpaque = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isOpaque',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10047,7 +10047,7 @@ android.view.View.prototype.isOpaque = function() {
 android.view.View.prototype.setClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10076,7 +10076,7 @@ android.view.View.prototype.setClickable = function() {
 android.view.View.prototype.getMeasuredState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasuredState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10105,7 +10105,7 @@ android.view.View.prototype.getMeasuredState = function() {
 android.view.View.prototype.isLongClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isLongClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10134,7 +10134,7 @@ android.view.View.prototype.isLongClickable = function() {
 android.view.View.prototype.animate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'animate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10163,7 +10163,7 @@ android.view.View.prototype.animate = function() {
 android.view.View.prototype.setStateListAnimator = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setStateListAnimator',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10192,7 +10192,7 @@ android.view.View.prototype.setStateListAnimator = function() {
 android.view.View.prototype.getMatrix = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMatrix',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10221,7 +10221,7 @@ android.view.View.prototype.getMatrix = function() {
 android.view.View.prototype.isHapticFeedbackEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isHapticFeedbackEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10250,7 +10250,7 @@ android.view.View.prototype.isHapticFeedbackEnabled = function() {
 android.view.View.prototype.jumpDrawablesToCurrentState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'jumpDrawablesToCurrentState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10279,7 +10279,7 @@ android.view.View.prototype.jumpDrawablesToCurrentState = function() {
 android.view.View.prototype.dispatchGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchGenericMotionEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10308,7 +10308,7 @@ android.view.View.prototype.dispatchGenericMotionEvent = function() {
 android.view.View.prototype.getTopFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTopFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10337,7 +10337,7 @@ android.view.View.prototype.getTopFadingEdgeStrength = function() {
 android.view.View.prototype.getLeftPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLeftPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10366,7 +10366,7 @@ android.view.View.prototype.getLeftPaddingOffset = function() {
 android.view.View.prototype.setRotation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRotation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10395,7 +10395,7 @@ android.view.View.prototype.setRotation = function() {
 android.view.View.prototype.scrollTo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'scrollTo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10424,7 +10424,7 @@ android.view.View.prototype.scrollTo = function() {
 android.view.View.prototype.setPivotX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPivotX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10453,7 +10453,7 @@ android.view.View.prototype.setPivotX = function() {
 android.view.View.prototype.dispatchSetPressed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchSetPressed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10482,7 +10482,7 @@ android.view.View.prototype.dispatchSetPressed = function() {
 android.view.View.prototype.setPivotY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPivotY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10511,7 +10511,7 @@ android.view.View.prototype.setPivotY = function() {
 android.view.View.prototype.overScrollBy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'overScrollBy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10540,7 +10540,7 @@ android.view.View.prototype.overScrollBy = function() {
 android.view.View.prototype.startNestedScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startNestedScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10569,7 +10569,7 @@ android.view.View.prototype.startNestedScroll = function() {
 android.view.View.prototype.setWillNotCacheDrawing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setWillNotCacheDrawing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10598,7 +10598,7 @@ android.view.View.prototype.setWillNotCacheDrawing = function() {
 android.view.View.prototype.setScrollBarSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollBarSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10627,7 +10627,7 @@ android.view.View.prototype.setScrollBarSize = function() {
 android.view.View.prototype.onInitializeAccessibilityEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onInitializeAccessibilityEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10656,7 +10656,7 @@ android.view.View.prototype.onInitializeAccessibilityEvent = function() {
 android.view.View.prototype.computeScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10685,7 +10685,7 @@ android.view.View.prototype.computeScroll = function() {
 android.view.View.prototype.isScrollContainer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isScrollContainer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10714,7 +10714,7 @@ android.view.View.prototype.isScrollContainer = function() {
 android.view.View.prototype.getScrollX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10743,7 +10743,7 @@ android.view.View.prototype.getScrollX = function() {
 android.view.View.prototype.getTopPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTopPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10772,7 +10772,7 @@ android.view.View.prototype.getTopPaddingOffset = function() {
 android.view.View.prototype.getScrollY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10801,7 +10801,7 @@ android.view.View.prototype.getScrollY = function() {
 android.view.View.prototype.isDirty = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isDirty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10830,7 +10830,7 @@ android.view.View.prototype.isDirty = function() {
 android.view.View.prototype.setForegroundTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setForegroundTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10859,7 +10859,7 @@ android.view.View.prototype.setForegroundTintList = function() {
 android.view.View.prototype.isSaveEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isSaveEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10888,7 +10888,7 @@ android.view.View.prototype.isSaveEnabled = function() {
 android.view.View.prototype.getResources = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getResources',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10917,7 +10917,7 @@ android.view.View.prototype.getResources = function() {
 android.view.View.prototype.setOnKeyListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnKeyListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10946,7 +10946,7 @@ android.view.View.prototype.setOnKeyListener = function() {
 android.view.View.prototype.offsetTopAndBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'offsetTopAndBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -10975,7 +10975,7 @@ android.view.View.prototype.offsetTopAndBottom = function() {
 android.view.View.prototype.setWillNotDraw = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setWillNotDraw',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11004,7 +11004,7 @@ android.view.View.prototype.setWillNotDraw = function() {
 android.view.View.prototype.isSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11033,7 +11033,7 @@ android.view.View.prototype.isSelected = function() {
 android.view.View.prototype.getFocusedRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFocusedRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11062,7 +11062,7 @@ android.view.View.prototype.getFocusedRect = function() {
 android.view.View.prototype.dispatchWindowSystemUiVisiblityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchWindowSystemUiVisiblityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11091,7 +11091,7 @@ android.view.View.prototype.dispatchWindowSystemUiVisiblityChanged = function() 
 android.view.View.prototype.getWindowAttachCount = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowAttachCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11120,7 +11120,7 @@ android.view.View.prototype.getWindowAttachCount = function() {
 android.view.View.prototype.cancelPendingInputEvents = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'cancelPendingInputEvents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11149,7 +11149,7 @@ android.view.View.prototype.cancelPendingInputEvents = function() {
 android.view.View.prototype.setMinimumHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMinimumHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11178,7 +11178,7 @@ android.view.View.prototype.setMinimumHeight = function() {
 android.view.View.prototype.getParent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getParent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11207,7 +11207,7 @@ android.view.View.prototype.getParent = function() {
 android.view.View.prototype.getWindowVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11236,7 +11236,7 @@ android.view.View.prototype.getWindowVisibility = function() {
 android.view.View.prototype.forceLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'forceLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11265,7 +11265,7 @@ android.view.View.prototype.forceLayout = function() {
 android.view.View.prototype.dispatchSystemUiVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchSystemUiVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11294,7 +11294,7 @@ android.view.View.prototype.dispatchSystemUiVisibilityChanged = function() {
 android.view.View.prototype.onKeyMultiple = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyMultiple',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11323,7 +11323,7 @@ android.view.View.prototype.onKeyMultiple = function() {
 android.view.View.prototype.onWindowSystemUiVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowSystemUiVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11352,7 +11352,7 @@ android.view.View.prototype.onWindowSystemUiVisibilityChanged = function() {
 android.view.View.prototype.onInitializeAccessibilityNodeInfo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onInitializeAccessibilityNodeInfo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11381,7 +11381,7 @@ android.view.View.prototype.onInitializeAccessibilityNodeInfo = function() {
 android.view.View.prototype.setLabelFor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLabelFor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11410,7 +11410,7 @@ android.view.View.prototype.setLabelFor = function() {
 android.view.View.prototype.setVerticalScrollbarPosition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVerticalScrollbarPosition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11439,7 +11439,7 @@ android.view.View.prototype.setVerticalScrollbarPosition = function() {
 android.view.View.prototype.focusSearch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'focusSearch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11468,7 +11468,7 @@ android.view.View.prototype.focusSearch = function() {
 android.view.View.prototype.dispatchTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchTrackballEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11497,7 +11497,7 @@ android.view.View.prototype.dispatchTrackballEvent = function() {
 android.view.View.prototype.getOutlineProvider = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOutlineProvider',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11526,7 +11526,7 @@ android.view.View.prototype.getOutlineProvider = function() {
 android.view.View.prototype.getNextFocusForwardId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNextFocusForwardId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11555,7 +11555,7 @@ android.view.View.prototype.getNextFocusForwardId = function() {
 android.view.View.prototype.getLocalVisibleRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLocalVisibleRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11584,7 +11584,7 @@ android.view.View.prototype.getLocalVisibleRect = function() {
 android.view.View.prototype.canResolveTextDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'canResolveTextDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11613,7 +11613,7 @@ android.view.View.prototype.canResolveTextDirection = function() {
 android.view.View.prototype.getImportantForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getImportantForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11642,7 +11642,7 @@ android.view.View.prototype.getImportantForAccessibility = function() {
 android.view.View.prototype.getDrawingRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDrawingRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11671,7 +11671,7 @@ android.view.View.prototype.getDrawingRect = function() {
 android.view.View.prototype.dispatchKeyShortcutEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchKeyShortcutEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11700,7 +11700,7 @@ android.view.View.prototype.dispatchKeyShortcutEvent = function() {
 android.view.View.prototype.getVerticalFadingEdgeLength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVerticalFadingEdgeLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11729,7 +11729,7 @@ android.view.View.prototype.getVerticalFadingEdgeLength = function() {
 android.view.View.prototype.getOnFocusChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOnFocusChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11758,7 +11758,7 @@ android.view.View.prototype.getOnFocusChangeListener = function() {
 android.view.View.prototype.isFocused = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isFocused',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11787,7 +11787,7 @@ android.view.View.prototype.isFocused = function() {
 android.view.View.prototype.isTextDirectionResolved = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isTextDirectionResolved',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11816,7 +11816,7 @@ android.view.View.prototype.isTextDirectionResolved = function() {
 android.view.View.prototype.getNextFocusDownId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNextFocusDownId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11845,7 +11845,7 @@ android.view.View.prototype.getNextFocusDownId = function() {
 android.view.View.prototype.measure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'measure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11874,7 +11874,7 @@ android.view.View.prototype.measure = function() {
 android.view.View.prototype.setClipToOutline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setClipToOutline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11903,7 +11903,7 @@ android.view.View.prototype.setClipToOutline = function() {
 android.view.View.prototype.isVerticalScrollBarEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isVerticalScrollBarEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11932,7 +11932,7 @@ android.view.View.prototype.isVerticalScrollBarEnabled = function() {
 android.view.View.prototype.setNextFocusRightId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNextFocusRightId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11961,7 +11961,7 @@ android.view.View.prototype.setNextFocusRightId = function() {
 android.view.View.prototype.getLeftFadingEdgeStrength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLeftFadingEdgeStrength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -11991,7 +11991,7 @@ android.view.View.prototype.getLeftFadingEdgeStrength = function() {
 android.view.View.prototype.unscheduleDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'unscheduleDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12020,7 +12020,7 @@ android.view.View.prototype.unscheduleDrawable = function() {
 android.view.View.prototype.onFinishInflate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFinishInflate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12049,7 +12049,7 @@ android.view.View.prototype.onFinishInflate = function() {
 android.view.View.prototype.requestApplyInsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestApplyInsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12080,7 +12080,7 @@ android.view.View.prototype.requestApplyInsets = function() {
 android.view.View.prototype.awakenScrollBars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'awakenScrollBars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12109,7 +12109,7 @@ android.view.View.prototype.awakenScrollBars = function() {
 android.view.View.prototype.setHovered = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHovered',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12138,7 +12138,7 @@ android.view.View.prototype.setHovered = function() {
 android.view.View.prototype.getId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12167,7 +12167,7 @@ android.view.View.prototype.getId = function() {
 android.view.View.prototype.setSaveFromParentEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSaveFromParentEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12196,7 +12196,7 @@ android.view.View.prototype.setSaveFromParentEnabled = function() {
 android.view.View.prototype.getStateListAnimator = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getStateListAnimator',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12225,7 +12225,7 @@ android.view.View.prototype.getStateListAnimator = function() {
 android.view.View.prototype.getScrollBarDefaultDelayBeforeFade = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollBarDefaultDelayBeforeFade',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12254,7 +12254,7 @@ android.view.View.prototype.getScrollBarDefaultDelayBeforeFade = function() {
 android.view.View.prototype.dispatchTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchTouchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12283,7 +12283,7 @@ android.view.View.prototype.dispatchTouchEvent = function() {
 android.view.View.prototype.onSetAlpha = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSetAlpha',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12312,7 +12312,7 @@ android.view.View.prototype.onSetAlpha = function() {
 android.view.View.prototype.getPaddingStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12341,7 +12341,7 @@ android.view.View.prototype.getPaddingStart = function() {
 android.view.View.prototype.getAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12370,7 +12370,7 @@ android.view.View.prototype.getAnimation = function() {
 android.view.View.prototype.getMeasuredWidthAndState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasuredWidthAndState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12399,7 +12399,7 @@ android.view.View.prototype.getMeasuredWidthAndState = function() {
 android.view.View.prototype.setImportantForAccessibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setImportantForAccessibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12428,7 +12428,7 @@ android.view.View.prototype.setImportantForAccessibility = function() {
 android.view.View.prototype.getPaddingLeft = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPaddingLeft',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12457,7 +12457,7 @@ android.view.View.prototype.getPaddingLeft = function() {
 android.view.View.prototype.addOnLayoutChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addOnLayoutChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12486,7 +12486,7 @@ android.view.View.prototype.addOnLayoutChangeListener = function() {
 android.view.View.prototype.findFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12515,7 +12515,7 @@ android.view.View.prototype.findFocus = function() {
 android.view.View.prototype.canScrollHorizontally = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'canScrollHorizontally',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12544,7 +12544,7 @@ android.view.View.prototype.canScrollHorizontally = function() {
 android.view.View.prototype.onWindowVisibilityChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowVisibilityChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12573,7 +12573,7 @@ android.view.View.prototype.onWindowVisibilityChanged = function() {
 android.view.View.prototype.onPopulateAccessibilityEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPopulateAccessibilityEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12602,7 +12602,7 @@ android.view.View.prototype.onPopulateAccessibilityEvent = function() {
 android.view.View.prototype.getHitRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHitRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12631,7 +12631,7 @@ android.view.View.prototype.getHitRect = function() {
 android.view.View.prototype.removeOnLayoutChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeOnLayoutChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12660,7 +12660,7 @@ android.view.View.prototype.removeOnLayoutChangeListener = function() {
 android.view.View.prototype.onFinishTemporaryDetach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onFinishTemporaryDetach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12689,7 +12689,7 @@ android.view.View.prototype.onFinishTemporaryDetach = function() {
 android.view.View.prototype.drawableHotspotChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'drawableHotspotChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12718,7 +12718,7 @@ android.view.View.prototype.drawableHotspotChanged = function() {
 android.view.View.prototype.getLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12747,7 +12747,7 @@ android.view.View.prototype.getLayoutDirection = function() {
 android.view.View.prototype.layout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'layout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12776,7 +12776,7 @@ android.view.View.prototype.layout = function() {
 android.view.View.prototype.getBaseline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBaseline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12806,7 +12806,7 @@ android.view.View.prototype.getBaseline = function() {
 android.view.View.prototype.getGlobalVisibleRect = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getGlobalVisibleRect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12835,7 +12835,7 @@ android.view.View.prototype.getGlobalVisibleRect = function() {
 android.view.View.prototype.setDrawingCacheQuality = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setDrawingCacheQuality',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12864,7 +12864,7 @@ android.view.View.prototype.setDrawingCacheQuality = function() {
 android.view.View.prototype.isHardwareAccelerated = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isHardwareAccelerated',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12893,7 +12893,7 @@ android.view.View.prototype.isHardwareAccelerated = function() {
 android.view.View.prototype.requestUnbufferedDispatch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestUnbufferedDispatch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12922,7 +12922,7 @@ android.view.View.prototype.requestUnbufferedDispatch = function() {
 android.view.View.prototype.setHasTransientState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHasTransientState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12952,7 +12952,7 @@ android.view.View.prototype.setHasTransientState = function() {
 android.view.View.prototype.postInvalidateOnAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postInvalidateOnAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -12981,7 +12981,7 @@ android.view.View.prototype.postInvalidateOnAnimation = function() {
 android.view.View.prototype.scheduleDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'scheduleDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13010,7 +13010,7 @@ android.view.View.prototype.scheduleDrawable = function() {
 android.view.View.prototype.addOnAttachStateChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addOnAttachStateChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13039,7 +13039,7 @@ android.view.View.prototype.addOnAttachStateChangeListener = function() {
 android.view.View.prototype.getVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13068,7 +13068,7 @@ android.view.View.prototype.getVisibility = function() {
 android.view.View.prototype.getHorizontalScrollbarHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHorizontalScrollbarHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13097,7 +13097,7 @@ android.view.View.prototype.getHorizontalScrollbarHeight = function() {
 android.view.View.prototype.computeHorizontalScrollOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeHorizontalScrollOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13126,7 +13126,7 @@ android.view.View.prototype.computeHorizontalScrollOffset = function() {
 android.view.View.prototype.findViewById = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findViewById',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13155,7 +13155,7 @@ android.view.View.prototype.findViewById = function() {
 android.view.View.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13184,7 +13184,7 @@ android.view.View.prototype.getAccessibilityClassName = function() {
 android.view.View.prototype.setOnSystemUiVisibilityChangeListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnSystemUiVisibilityChangeListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13213,7 +13213,7 @@ android.view.View.prototype.setOnSystemUiVisibilityChangeListener = function() {
 android.view.View.prototype.removeCallbacks = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeCallbacks',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13242,7 +13242,7 @@ android.view.View.prototype.removeCallbacks = function() {
 android.view.View.prototype.performLongClick = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'performLongClick',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13271,7 +13271,7 @@ android.view.View.prototype.performLongClick = function() {
 android.view.View.prototype.setRotationX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRotationX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13300,7 +13300,7 @@ android.view.View.prototype.setRotationX = function() {
 android.view.View.prototype.setRotationY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRotationY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13329,7 +13329,7 @@ android.view.View.prototype.setRotationY = function() {
 android.view.View.prototype.requestFitSystemWindows = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestFitSystemWindows',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13358,7 +13358,7 @@ android.view.View.prototype.requestFitSystemWindows = function() {
 android.view.View.prototype.setLayerPaint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLayerPaint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13387,7 +13387,7 @@ android.view.View.prototype.setLayerPaint = function() {
 android.view.View.prototype.showContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'showContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13416,7 +13416,7 @@ android.view.View.prototype.showContextMenu = function() {
 android.view.View.prototype.setPressed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setPressed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13445,7 +13445,7 @@ android.view.View.prototype.setPressed = function() {
 android.view.View.prototype.onCancelPendingInputEvents = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCancelPendingInputEvents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13474,7 +13474,7 @@ android.view.View.prototype.onCancelPendingInputEvents = function() {
 android.view.View.prototype.hasOnClickListeners = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasOnClickListeners',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13503,7 +13503,7 @@ android.view.View.prototype.hasOnClickListeners = function() {
 android.view.View.prototype.setFocusable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFocusable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13532,7 +13532,7 @@ android.view.View.prototype.setFocusable = function() {
 android.view.View.prototype.computeVerticalScrollRange = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeVerticalScrollRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13561,7 +13561,7 @@ android.view.View.prototype.computeVerticalScrollRange = function() {
 android.view.View.prototype.setScrollContainer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollContainer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13590,7 +13590,7 @@ android.view.View.prototype.setScrollContainer = function() {
 android.view.View.prototype.getBackgroundTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBackgroundTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13619,7 +13619,7 @@ android.view.View.prototype.getBackgroundTintMode = function() {
 android.view.View.prototype.setAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13648,7 +13648,7 @@ android.view.View.prototype.setAnimation = function() {
 android.view.View.prototype.dispatchNestedScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchNestedScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13678,7 +13678,7 @@ android.view.View.prototype.dispatchNestedScroll = function() {
 android.view.View.prototype.addFocusables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addFocusables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13707,7 +13707,7 @@ android.view.View.prototype.addFocusables = function() {
 android.view.View.prototype.isContextClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isContextClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13736,7 +13736,7 @@ android.view.View.prototype.isContextClickable = function() {
 android.view.View.prototype.getSystemUiVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSystemUiVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13765,7 +13765,7 @@ android.view.View.prototype.getSystemUiVisibility = function() {
 android.view.View.prototype.isEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13794,7 +13794,7 @@ android.view.View.prototype.isEnabled = function() {
 android.view.View.prototype.computeVerticalScrollOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeVerticalScrollOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13823,7 +13823,7 @@ android.view.View.prototype.computeVerticalScrollOffset = function() {
 android.view.View.prototype.setOnGenericMotionListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnGenericMotionListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13852,7 +13852,7 @@ android.view.View.prototype.setOnGenericMotionListener = function() {
 android.view.View.prototype.setNextFocusLeftId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNextFocusLeftId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13881,7 +13881,7 @@ android.view.View.prototype.setNextFocusLeftId = function() {
 android.view.View.prototype.onRtlPropertiesChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRtlPropertiesChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13910,7 +13910,7 @@ android.view.View.prototype.onRtlPropertiesChanged = function() {
 android.view.View.prototype.setLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13939,7 +13939,7 @@ android.view.View.prototype.setLayoutParams = function() {
 android.view.View.prototype.computeSystemWindowInsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'computeSystemWindowInsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13968,7 +13968,7 @@ android.view.View.prototype.computeSystemWindowInsets = function() {
 android.view.View.prototype.getVerticalScrollbarWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVerticalScrollbarWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -13997,7 +13997,7 @@ android.view.View.prototype.getVerticalScrollbarWidth = function() {
 android.view.View.prototype.setContentDescription = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setContentDescription',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14026,7 +14026,7 @@ android.view.View.prototype.setContentDescription = function() {
 android.view.View.prototype.setOnCreateContextMenuListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnCreateContextMenuListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14055,7 +14055,7 @@ android.view.View.prototype.setOnCreateContextMenuListener = function() {
 android.view.View.prototype.setBackgroundTintList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackgroundTintList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14084,7 +14084,7 @@ android.view.View.prototype.setBackgroundTintList = function() {
 android.view.View.prototype.isPaddingRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isPaddingRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14113,7 +14113,7 @@ android.view.View.prototype.isPaddingRelative = function() {
 android.view.View.prototype.setTranslationZ = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTranslationZ',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14142,7 +14142,7 @@ android.view.View.prototype.setTranslationZ = function() {
 android.view.View.prototype.setElevation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setElevation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14171,7 +14171,7 @@ android.view.View.prototype.setElevation = function() {
 android.view.View.prototype.setTranslationY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTranslationY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14200,7 +14200,7 @@ android.view.View.prototype.setTranslationY = function() {
 android.view.View.prototype.canResolveLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'canResolveLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14229,7 +14229,7 @@ android.view.View.prototype.canResolveLayoutDirection = function() {
 android.view.View.prototype.getNextFocusUpId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNextFocusUpId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14258,7 +14258,7 @@ android.view.View.prototype.getNextFocusUpId = function() {
 android.view.View.prototype.setTranslationX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTranslationX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14287,7 +14287,7 @@ android.view.View.prototype.setTranslationX = function() {
 android.view.View.prototype.postOnAnimation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postOnAnimation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14316,7 +14316,7 @@ android.view.View.prototype.postOnAnimation = function() {
 android.view.View.prototype.dispatchUnhandledMove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchUnhandledMove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14345,7 +14345,7 @@ android.view.View.prototype.dispatchUnhandledMove = function() {
 android.view.View.prototype.setForegroundTintMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setForegroundTintMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14374,7 +14374,7 @@ android.view.View.prototype.setForegroundTintMode = function() {
 android.view.View.prototype.getViewTreeObserver = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getViewTreeObserver',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14403,7 +14403,7 @@ android.view.View.prototype.getViewTreeObserver = function() {
 android.view.View.prototype.isFocusable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isFocusable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14432,7 +14432,7 @@ android.view.View.prototype.isFocusable = function() {
 android.view.View.prototype.canScrollVertically = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'canScrollVertically',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14461,7 +14461,7 @@ android.view.View.prototype.canScrollVertically = function() {
 android.view.View.prototype.setContextClickable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setContextClickable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14490,7 +14490,7 @@ android.view.View.prototype.setContextClickable = function() {
 android.view.View.prototype.getFilterTouchesWhenObscured = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFilterTouchesWhenObscured',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14519,7 +14519,7 @@ android.view.View.prototype.getFilterTouchesWhenObscured = function() {
 android.view.View.prototype.getBottom = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBottom',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14548,7 +14548,7 @@ android.view.View.prototype.getBottom = function() {
 android.view.View.prototype.isSoundEffectsEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isSoundEffectsEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14577,7 +14577,7 @@ android.view.View.prototype.isSoundEffectsEnabled = function() {
 android.view.View.prototype.getSolidColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSolidColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14606,7 +14606,7 @@ android.view.View.prototype.getSolidColor = function() {
 android.view.View.prototype.getAlpha = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAlpha',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14635,7 +14635,7 @@ android.view.View.prototype.getAlpha = function() {
 android.view.View.prototype.getSuggestedMinimumHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSuggestedMinimumHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14664,7 +14664,7 @@ android.view.View.prototype.getSuggestedMinimumHeight = function() {
 android.view.View.prototype.setTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14693,7 +14693,7 @@ android.view.View.prototype.setTop = function() {
 android.view.View.prototype.getRightPaddingOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRightPaddingOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14722,7 +14722,7 @@ android.view.View.prototype.getRightPaddingOffset = function() {
 android.view.View.prototype.cancelLongPress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'cancelLongPress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14751,7 +14751,7 @@ android.view.View.prototype.cancelLongPress = function() {
 android.view.View.prototype.getTop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14780,7 +14780,7 @@ android.view.View.prototype.getTop = function() {
 android.view.View.prototype.setId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14809,7 +14809,7 @@ android.view.View.prototype.setId = function() {
 android.view.View.prototype.isInEditMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isInEditMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14838,7 +14838,7 @@ android.view.View.prototype.isInEditMode = function() {
 android.view.View.prototype.onTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTouchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14867,7 +14867,7 @@ android.view.View.prototype.onTouchEvent = function() {
 android.view.View.prototype.setTouchDelegate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTouchDelegate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14896,7 +14896,7 @@ android.view.View.prototype.setTouchDelegate = function() {
 android.view.View.prototype.onHoverChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onHoverChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14925,7 +14925,7 @@ android.view.View.prototype.onHoverChanged = function() {
 android.view.View.prototype.getNextFocusRightId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNextFocusRightId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14954,7 +14954,7 @@ android.view.View.prototype.getNextFocusRightId = function() {
 android.view.View.prototype.setNextFocusForwardId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setNextFocusForwardId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -14983,7 +14983,7 @@ android.view.View.prototype.setNextFocusForwardId = function() {
 android.view.View.prototype.getMeasuredHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasuredHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15012,7 +15012,7 @@ android.view.View.prototype.getMeasuredHeight = function() {
 android.view.View.prototype.dispatchNestedPrePerformAccessibilityAction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchNestedPrePerformAccessibilityAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15041,7 +15041,7 @@ android.view.View.prototype.dispatchNestedPrePerformAccessibilityAction = functi
 android.view.View.prototype.setVerticalScrollBarEnabled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVerticalScrollBarEnabled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15070,7 +15070,7 @@ android.view.View.prototype.setVerticalScrollBarEnabled = function() {
 android.view.View.prototype.dispatchConfigurationChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchConfigurationChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15099,7 +15099,7 @@ android.view.View.prototype.dispatchConfigurationChanged = function() {
 android.view.View.prototype.getScrollBarSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getScrollBarSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15128,7 +15128,7 @@ android.view.View.prototype.getScrollBarSize = function() {
 android.view.View.prototype.getVerticalScrollbarPosition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVerticalScrollbarPosition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15157,7 +15157,7 @@ android.view.View.prototype.getVerticalScrollbarPosition = function() {
 android.view.View.prototype.onKeyDown = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyDown',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15188,7 +15188,7 @@ android.view.View.prototype.onKeyDown = function() {
 android.view.View.prototype.requestFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15217,7 +15217,7 @@ android.view.View.prototype.requestFocus = function() {
 android.view.View.prototype.getWindowSystemUiVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowSystemUiVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15246,7 +15246,7 @@ android.view.View.prototype.getWindowSystemUiVisibility = function() {
 android.view.View.prototype.setBackground = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBackground',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15275,7 +15275,7 @@ android.view.View.prototype.setBackground = function() {
 android.view.View.prototype.getLocationInWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLocationInWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15304,7 +15304,7 @@ android.view.View.prototype.getLocationInWindow = function() {
 android.view.View.prototype.setOnHoverListener = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setOnHoverListener',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15333,7 +15333,7 @@ android.view.View.prototype.setOnHoverListener = function() {
 android.view.View.prototype.getAccessibilityNodeProvider = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityNodeProvider',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15362,7 +15362,7 @@ android.view.View.prototype.getAccessibilityNodeProvider = function() {
 android.view.View.prototype.setScrollBarDefaultDelayBeforeFade = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setScrollBarDefaultDelayBeforeFade',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15391,7 +15391,7 @@ android.view.View.prototype.setScrollBarDefaultDelayBeforeFade = function() {
 android.view.View.prototype.createAccessibilityNodeInfo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createAccessibilityNodeInfo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15420,7 +15420,7 @@ android.view.View.prototype.createAccessibilityNodeInfo = function() {
 android.view.View.prototype.getNextFocusLeftId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNextFocusLeftId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15449,7 +15449,7 @@ android.view.View.prototype.getNextFocusLeftId = function() {
 android.view.View.prototype.checkInputConnectionProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkInputConnectionProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15478,7 +15478,7 @@ android.view.View.prototype.checkInputConnectionProxy = function() {
 android.view.View.prototype.onCheckIsTextEditor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCheckIsTextEditor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15507,7 +15507,7 @@ android.view.View.prototype.onCheckIsTextEditor = function() {
 android.view.View.prototype.onWindowFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15536,7 +15536,7 @@ android.view.View.prototype.onWindowFocusChanged = function() {
 android.view.View.prototype.setFitsSystemWindows = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFitsSystemWindows',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15565,7 +15565,7 @@ android.view.View.prototype.setFitsSystemWindows = function() {
 android.view.View.prototype.createContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15596,7 +15596,7 @@ android.view.View.prototype.createContextMenu = function() {
 android.view.View.prototype.invalidate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'invalidate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15625,7 +15625,7 @@ android.view.View.prototype.invalidate = function() {
 android.view.View.prototype.addTouchables = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addTouchables',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15654,7 +15654,7 @@ android.view.View.prototype.addTouchables = function() {
 android.view.View.prototype.getX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15683,7 +15683,7 @@ android.view.View.prototype.getX = function() {
 android.view.View.prototype.getY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15712,7 +15712,7 @@ android.view.View.prototype.getY = function() {
 android.view.View.prototype.getZ = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getZ',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15741,7 +15741,7 @@ android.view.View.prototype.getZ = function() {
 android.view.View.prototype.canResolveTextAlignment = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'canResolveTextAlignment',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15770,7 +15770,7 @@ android.view.View.prototype.canResolveTextAlignment = function() {
 android.view.View.prototype.dispatchNestedPreScroll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchNestedPreScroll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15799,7 +15799,7 @@ android.view.View.prototype.dispatchNestedPreScroll = function() {
 android.view.View.prototype.getContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15828,7 +15828,7 @@ android.view.View.prototype.getContext = function() {
 android.view.View.prototype.getBackground = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBackground',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15857,7 +15857,7 @@ android.view.View.prototype.getBackground = function() {
 android.view.View.prototype.getFitsSystemWindows = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFitsSystemWindows',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15886,7 +15886,7 @@ android.view.View.prototype.getFitsSystemWindows = function() {
 android.view.View.prototype.getLeft = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLeft',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -15915,7 +15915,7 @@ android.view.View.prototype.getLeft = function() {
 android.view.View.prototype.getWindowId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

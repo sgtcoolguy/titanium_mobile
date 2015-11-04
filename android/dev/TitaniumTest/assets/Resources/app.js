@@ -10,10 +10,24 @@ var FrameLayout = require('android.widget.FrameLayout'),
 	Log = require('android.util.Log'),
 	Color = require('android.graphics.Color'),
 	View = require('android.view.View'),
+	ViewGroup = require('android.view.ViewGroup'),
 	OnTouchListener = require('android.view.View$OnTouchListener'),
 	MotionEvent = require('android.view.MotionEvent'),
 	Activity = require('android.app.Activity'),
-	activity = new Activity(Ti.Android.currentActivity);
+	activity = new Activity(Ti.Android.currentActivity),
+	win = Ti.UI.createWindow({}),
+	view = Ti.UI.createView({
+		layout: 'vertical',
+		top: 20,
+		right: 20,
+		bottom: 20,
+		left: 20,
+		height: Ti.UI.FILL,
+		width: Ti.UI.FILL
+	});
+	//viewGroup = new ViewGroup(view);
+
+win.add(view);
 
 var drag = new OnTouchListener({
 	onTouch: function(v, event) {
@@ -31,23 +45,23 @@ var drag = new OnTouchListener({
 });
     
 var main = new FrameLayout(activity);
-main.setBackgroundColor(Color.BLACK);
+//main.setBackgroundColor(Color.BLACK);
 // FIXME Tried to access LayoutParams.MATCH_PARENT and it was null, because the constant is actually defined on ViewGroupLayoutParams
 // But that should work, because it does in Java!
 var mainParams = new LayoutParams(ViewGroupLayoutParams.MATCH_PARENT, ViewGroupLayoutParams.MATCH_PARENT, Gravity.TOP);
 main.setLayoutParams(mainParams);
 
 var colors = [
-Color.BLUE,
-Color.CYAN,
-Color.DKGRAY,
-Color.GRAY,
-Color.GREEN,
-Color.LTGRAY,
-Color.MAGENTA,
-Color.RED,
-Color.WHITE,
-Color.YELLOW
+	Color.BLUE,
+	Color.CYAN,
+	Color.DKGRAY,
+	Color.GRAY,
+	Color.GREEN,
+	Color.LTGRAY,
+	Color.MAGENTA,
+	Color.RED,
+	Color.WHITE,
+	Color.YELLOW
 ];
 
 for (var i = 0; i < colors.length; i++) {
@@ -60,4 +74,8 @@ for (var i = 0; i < colors.length; i++) {
 	main.addView(temp);
 }
 
-activity.setContentView(main);
+view.add(main);
+
+//activity.setContentView(main);
+
+win.open();

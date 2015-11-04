@@ -32,7 +32,7 @@ android.view.ContextThemeWrapper = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -63,7 +63,7 @@ android.view.ContextThemeWrapper.prototype.className = "android.view.ContextThem
 android.view.ContextThemeWrapper.prototype.getTheme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTheme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -92,7 +92,7 @@ android.view.ContextThemeWrapper.prototype.getTheme = function() {
 android.view.ContextThemeWrapper.prototype.getSystemService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSystemService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -121,7 +121,7 @@ android.view.ContextThemeWrapper.prototype.getSystemService = function() {
 android.view.ContextThemeWrapper.prototype.getResources = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getResources',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -150,7 +150,7 @@ android.view.ContextThemeWrapper.prototype.getResources = function() {
 android.view.ContextThemeWrapper.prototype.setTheme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTheme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -179,7 +179,7 @@ android.view.ContextThemeWrapper.prototype.setTheme = function() {
 android.view.ContextThemeWrapper.prototype.attachBaseContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'attachBaseContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -208,7 +208,7 @@ android.view.ContextThemeWrapper.prototype.attachBaseContext = function() {
 android.view.ContextThemeWrapper.prototype.onApplyThemeResource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onApplyThemeResource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -237,7 +237,7 @@ android.view.ContextThemeWrapper.prototype.onApplyThemeResource = function() {
 android.view.ContextThemeWrapper.prototype.applyOverrideConfiguration = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'applyOverrideConfiguration',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -32,7 +32,7 @@ android.app.Activity = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -139,7 +139,7 @@ Object.defineProperty(android.app.Activity, 'FOCUSED_STATE_SET', {
 android.app.Activity.prototype.onChildTitleChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onChildTitleChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -168,7 +168,7 @@ android.app.Activity.prototype.onChildTitleChanged = function() {
 android.app.Activity.prototype.getChangingConfigurations = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getChangingConfigurations',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -198,7 +198,7 @@ android.app.Activity.prototype.getChangingConfigurations = function() {
 android.app.Activity.prototype.onSearchRequested = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSearchRequested',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -227,7 +227,7 @@ android.app.Activity.prototype.onSearchRequested = function() {
 android.app.Activity.prototype.navigateUpToFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'navigateUpToFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -256,7 +256,7 @@ android.app.Activity.prototype.navigateUpToFromChild = function() {
 android.app.Activity.prototype.removeDialog = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeDialog',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -285,7 +285,7 @@ android.app.Activity.prototype.removeDialog = function() {
 android.app.Activity.prototype.postponeEnterTransition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'postponeEnterTransition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -314,7 +314,7 @@ android.app.Activity.prototype.postponeEnterTransition = function() {
 android.app.Activity.prototype.setProgressBarIndeterminate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setProgressBarIndeterminate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -344,7 +344,7 @@ android.app.Activity.prototype.setProgressBarIndeterminate = function() {
 android.app.Activity.prototype.startActivityFromFragment = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivityFromFragment',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -373,7 +373,7 @@ android.app.Activity.prototype.startActivityFromFragment = function() {
 android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchGenericMotionEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -402,7 +402,7 @@ android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
 android.app.Activity.prototype.setTaskDescription = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTaskDescription',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -431,7 +431,7 @@ android.app.Activity.prototype.setTaskDescription = function() {
 android.app.Activity.prototype.onBackPressed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onBackPressed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -460,7 +460,7 @@ android.app.Activity.prototype.onBackPressed = function() {
 android.app.Activity.prototype.onRestart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRestart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -489,7 +489,7 @@ android.app.Activity.prototype.onRestart = function() {
 android.app.Activity.prototype.shouldUpRecreateTask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'shouldUpRecreateTask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -518,7 +518,7 @@ android.app.Activity.prototype.shouldUpRecreateTask = function() {
 android.app.Activity.prototype.finishAffinity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishAffinity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -547,7 +547,7 @@ android.app.Activity.prototype.finishAffinity = function() {
 android.app.Activity.prototype.setIntent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setIntent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -576,7 +576,7 @@ android.app.Activity.prototype.setIntent = function() {
 android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchPopulateAccessibilityEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -605,7 +605,7 @@ android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
 android.app.Activity.prototype.getLoaderManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLoaderManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -634,7 +634,7 @@ android.app.Activity.prototype.getLoaderManager = function() {
 android.app.Activity.prototype.setActionBar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setActionBar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -664,7 +664,7 @@ android.app.Activity.prototype.setActionBar = function() {
 android.app.Activity.prototype.startIntentSender = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startIntentSender',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -693,7 +693,7 @@ android.app.Activity.prototype.startIntentSender = function() {
 android.app.Activity.prototype.showAssist = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'showAssist',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -722,7 +722,7 @@ android.app.Activity.prototype.showAssist = function() {
 android.app.Activity.prototype.closeOptionsMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'closeOptionsMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -751,7 +751,7 @@ android.app.Activity.prototype.closeOptionsMenu = function() {
 android.app.Activity.prototype.openOptionsMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'openOptionsMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -780,7 +780,7 @@ android.app.Activity.prototype.openOptionsMenu = function() {
 android.app.Activity.prototype.getCallingActivity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCallingActivity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -809,7 +809,7 @@ android.app.Activity.prototype.getCallingActivity = function() {
 android.app.Activity.prototype.onWindowAttributesChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowAttributesChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -838,7 +838,7 @@ android.app.Activity.prototype.onWindowAttributesChanged = function() {
 android.app.Activity.prototype.invalidateOptionsMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'invalidateOptionsMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -867,7 +867,7 @@ android.app.Activity.prototype.invalidateOptionsMenu = function() {
 android.app.Activity.prototype.setProgressBarVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setProgressBarVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -896,7 +896,7 @@ android.app.Activity.prototype.setProgressBarVisibility = function() {
 android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateNavigateUpTaskStack',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -925,7 +925,7 @@ android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
 android.app.Activity.prototype.getCurrentFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCurrentFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -954,7 +954,7 @@ android.app.Activity.prototype.getCurrentFocus = function() {
 android.app.Activity.prototype.dispatchKeyEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchKeyEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -983,7 +983,7 @@ android.app.Activity.prototype.dispatchKeyEvent = function() {
 android.app.Activity.prototype.setProgress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setProgress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1012,7 +1012,7 @@ android.app.Activity.prototype.setProgress = function() {
 android.app.Activity.prototype.setVolumeControlStream = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVolumeControlStream',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1041,7 +1041,7 @@ android.app.Activity.prototype.setVolumeControlStream = function() {
 android.app.Activity.prototype.onOptionsMenuClosed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onOptionsMenuClosed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1070,7 +1070,7 @@ android.app.Activity.prototype.onOptionsMenuClosed = function() {
 android.app.Activity.prototype.setFinishOnTouchOutside = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFinishOnTouchOutside',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1099,7 +1099,7 @@ android.app.Activity.prototype.setFinishOnTouchOutside = function() {
 android.app.Activity.prototype.onAttachedToWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAttachedToWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1128,7 +1128,7 @@ android.app.Activity.prototype.onAttachedToWindow = function() {
 android.app.Activity.prototype.getApplication = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getApplication',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1157,7 +1157,7 @@ android.app.Activity.prototype.getApplication = function() {
 android.app.Activity.prototype.onPrepareOptionsMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPrepareOptionsMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1186,7 +1186,7 @@ android.app.Activity.prototype.onPrepareOptionsMenu = function() {
 android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setProgressBarIndeterminateVisibility',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1215,7 +1215,7 @@ android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function(
 android.app.Activity.prototype.getComponentName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getComponentName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1244,7 +1244,7 @@ android.app.Activity.prototype.getComponentName = function() {
 android.app.Activity.prototype.getParent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getParent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1273,7 +1273,7 @@ android.app.Activity.prototype.getParent = function() {
 android.app.Activity.prototype.stopManagingCursor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'stopManagingCursor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1302,7 +1302,7 @@ android.app.Activity.prototype.stopManagingCursor = function() {
 android.app.Activity.prototype.onTrimMemory = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTrimMemory',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1331,7 +1331,7 @@ android.app.Activity.prototype.onTrimMemory = function() {
 android.app.Activity.prototype.getParentActivityIntent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getParentActivityIntent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1360,7 +1360,7 @@ android.app.Activity.prototype.getParentActivityIntent = function() {
 android.app.Activity.prototype.onActionModeFinished = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onActionModeFinished',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1389,7 +1389,7 @@ android.app.Activity.prototype.onActionModeFinished = function() {
 android.app.Activity.prototype.recreate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'recreate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1419,7 +1419,7 @@ android.app.Activity.prototype.recreate = function() {
 android.app.Activity.prototype.onCreateDialog = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateDialog',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1449,7 +1449,7 @@ android.app.Activity.prototype.onCreateDialog = function() {
 android.app.Activity.prototype.startActivityForResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivityForResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1478,7 +1478,7 @@ android.app.Activity.prototype.startActivityForResult = function() {
 android.app.Activity.prototype.onTitleChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTitleChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1507,7 +1507,7 @@ android.app.Activity.prototype.onTitleChanged = function() {
 android.app.Activity.prototype.onActivityReenter = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onActivityReenter',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1536,7 +1536,7 @@ android.app.Activity.prototype.onActivityReenter = function() {
 android.app.Activity.prototype.onEnterAnimationComplete = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onEnterAnimationComplete',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1565,7 +1565,7 @@ android.app.Activity.prototype.onEnterAnimationComplete = function() {
 android.app.Activity.prototype.onNewIntent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onNewIntent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1594,7 +1594,7 @@ android.app.Activity.prototype.onNewIntent = function() {
 android.app.Activity.prototype.getActionBar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getActionBar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1623,7 +1623,7 @@ android.app.Activity.prototype.getActionBar = function() {
 android.app.Activity.prototype.onCreatePanelView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreatePanelView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1652,7 +1652,7 @@ android.app.Activity.prototype.onCreatePanelView = function() {
 android.app.Activity.prototype.onKeyMultiple = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyMultiple',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1681,7 +1681,7 @@ android.app.Activity.prototype.onKeyMultiple = function() {
 android.app.Activity.prototype.getFragmentManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFragmentManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1710,7 +1710,7 @@ android.app.Activity.prototype.getFragmentManager = function() {
 android.app.Activity.prototype.onPanelClosed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPanelClosed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1739,7 +1739,7 @@ android.app.Activity.prototype.onPanelClosed = function() {
 android.app.Activity.prototype.onKeyShortcut = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyShortcut',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1768,7 +1768,7 @@ android.app.Activity.prototype.onKeyShortcut = function() {
 android.app.Activity.prototype.dispatchTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchTrackballEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1797,7 +1797,7 @@ android.app.Activity.prototype.dispatchTrackballEvent = function() {
 android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFeatureDrawableAlpha',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1826,7 +1826,7 @@ android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
 android.app.Activity.prototype.onVisibleBehindCanceled = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onVisibleBehindCanceled',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1855,7 +1855,7 @@ android.app.Activity.prototype.onVisibleBehindCanceled = function() {
 android.app.Activity.prototype.addContentView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addContentView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1884,7 +1884,7 @@ android.app.Activity.prototype.addContentView = function() {
 android.app.Activity.prototype.onActivityResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onActivityResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1913,7 +1913,7 @@ android.app.Activity.prototype.onActivityResult = function() {
 android.app.Activity.prototype.getWindowManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindowManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1942,7 +1942,7 @@ android.app.Activity.prototype.getWindowManager = function() {
 android.app.Activity.prototype.getRequestedOrientation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRequestedOrientation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1971,7 +1971,7 @@ android.app.Activity.prototype.getRequestedOrientation = function() {
 android.app.Activity.prototype.triggerSearch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'triggerSearch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2000,7 +2000,7 @@ android.app.Activity.prototype.triggerSearch = function() {
 android.app.Activity.prototype.finish = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finish',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2029,7 +2029,7 @@ android.app.Activity.prototype.finish = function() {
 android.app.Activity.prototype.isChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2058,7 +2058,7 @@ android.app.Activity.prototype.isChild = function() {
 android.app.Activity.prototype.isVoiceInteraction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isVoiceInteraction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2087,7 +2087,7 @@ android.app.Activity.prototype.isVoiceInteraction = function() {
 android.app.Activity.prototype.isVoiceInteractionRoot = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isVoiceInteractionRoot',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2116,7 +2116,7 @@ android.app.Activity.prototype.isVoiceInteractionRoot = function() {
 android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchKeyShortcutEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2145,7 +2145,7 @@ android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
 android.app.Activity.prototype.onProvideReferrer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideReferrer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2174,7 +2174,7 @@ android.app.Activity.prototype.onProvideReferrer = function() {
 android.app.Activity.prototype.setVisible = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVisible',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2203,7 +2203,7 @@ android.app.Activity.prototype.setVisible = function() {
 android.app.Activity.prototype.isDestroyed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isDestroyed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2233,7 +2233,7 @@ android.app.Activity.prototype.isDestroyed = function() {
 android.app.Activity.prototype.setTitle = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTitle',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2262,7 +2262,7 @@ android.app.Activity.prototype.setTitle = function() {
 android.app.Activity.prototype.getVoiceInteractor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVoiceInteractor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2291,7 +2291,7 @@ android.app.Activity.prototype.getVoiceInteractor = function() {
 android.app.Activity.prototype.stopLockTask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'stopLockTask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2321,7 +2321,7 @@ android.app.Activity.prototype.stopLockTask = function() {
 android.app.Activity.prototype.startActivities = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivities',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2350,7 +2350,7 @@ android.app.Activity.prototype.startActivities = function() {
 android.app.Activity.prototype.onKeyLongPress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyLongPress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2379,7 +2379,7 @@ android.app.Activity.prototype.onKeyLongPress = function() {
 android.app.Activity.prototype.startLockTask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startLockTask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2408,7 +2408,7 @@ android.app.Activity.prototype.startLockTask = function() {
 android.app.Activity.prototype.onGenericMotionEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onGenericMotionEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2437,7 +2437,7 @@ android.app.Activity.prototype.onGenericMotionEvent = function() {
 android.app.Activity.prototype.getMenuInflater = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMenuInflater',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2466,7 +2466,7 @@ android.app.Activity.prototype.getMenuInflater = function() {
 android.app.Activity.prototype.isChangingConfigurations = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isChangingConfigurations',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2495,7 +2495,7 @@ android.app.Activity.prototype.isChangingConfigurations = function() {
 android.app.Activity.prototype.isImmersive = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isImmersive',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2524,7 +2524,7 @@ android.app.Activity.prototype.isImmersive = function() {
 android.app.Activity.prototype.setRequestedOrientation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setRequestedOrientation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2553,7 +2553,7 @@ android.app.Activity.prototype.setRequestedOrientation = function() {
 android.app.Activity.prototype.setEnterSharedElementCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEnterSharedElementCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2582,7 +2582,7 @@ android.app.Activity.prototype.setEnterSharedElementCallback = function() {
 android.app.Activity.prototype.dismissDialog = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dismissDialog',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2611,7 +2611,7 @@ android.app.Activity.prototype.dismissDialog = function() {
 android.app.Activity.prototype.getWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2641,7 +2641,7 @@ android.app.Activity.prototype.getWindow = function() {
 android.app.Activity.prototype.onRestoreInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRestoreInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2670,7 +2670,7 @@ android.app.Activity.prototype.onRestoreInstanceState = function() {
 android.app.Activity.prototype.getLocalClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLocalClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2699,7 +2699,7 @@ android.app.Activity.prototype.getLocalClassName = function() {
 android.app.Activity.prototype.onRequestPermissionsResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRequestPermissionsResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2728,7 +2728,7 @@ android.app.Activity.prototype.onRequestPermissionsResult = function() {
 android.app.Activity.prototype.setTitleColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTitleColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2757,7 +2757,7 @@ android.app.Activity.prototype.setTitleColor = function() {
 android.app.Activity.prototype.closeContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'closeContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2786,7 +2786,7 @@ android.app.Activity.prototype.closeContextMenu = function() {
 android.app.Activity.prototype.moveTaskToBack = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'moveTaskToBack',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2815,7 +2815,7 @@ android.app.Activity.prototype.moveTaskToBack = function() {
 android.app.Activity.prototype.dispatchTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dispatchTouchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2844,7 +2844,7 @@ android.app.Activity.prototype.dispatchTouchEvent = function() {
 android.app.Activity.prototype.onActionModeStarted = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onActionModeStarted',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2874,7 +2874,7 @@ android.app.Activity.prototype.onActionModeStarted = function() {
 android.app.Activity.prototype.onPostCreate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPostCreate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2904,7 +2904,7 @@ android.app.Activity.prototype.onPostCreate = function() {
 android.app.Activity.prototype.showDialog = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'showDialog',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2933,7 +2933,7 @@ android.app.Activity.prototype.showDialog = function() {
 android.app.Activity.prototype.getSearchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSearchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2962,7 +2962,7 @@ android.app.Activity.prototype.getSearchEvent = function() {
 android.app.Activity.prototype.getTaskId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTaskId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2991,7 +2991,7 @@ android.app.Activity.prototype.getTaskId = function() {
 android.app.Activity.prototype.navigateUpTo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'navigateUpTo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3020,7 +3020,7 @@ android.app.Activity.prototype.navigateUpTo = function() {
 android.app.Activity.prototype.getTitleColor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTitleColor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3049,7 +3049,7 @@ android.app.Activity.prototype.getTitleColor = function() {
 android.app.Activity.prototype.setFeatureDrawable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFeatureDrawable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3078,7 +3078,7 @@ android.app.Activity.prototype.setFeatureDrawable = function() {
 android.app.Activity.prototype.requestWindowFeature = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestWindowFeature',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3107,7 +3107,7 @@ android.app.Activity.prototype.requestWindowFeature = function() {
 android.app.Activity.prototype.finishActivity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishActivity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3136,7 +3136,7 @@ android.app.Activity.prototype.finishActivity = function() {
 android.app.Activity.prototype.managedQuery = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'managedQuery',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3165,7 +3165,7 @@ android.app.Activity.prototype.managedQuery = function() {
 android.app.Activity.prototype.finishFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3194,7 +3194,7 @@ android.app.Activity.prototype.finishFromChild = function() {
 android.app.Activity.prototype.takeKeyEvents = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'takeKeyEvents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3223,7 +3223,7 @@ android.app.Activity.prototype.takeKeyEvents = function() {
 android.app.Activity.prototype.overridePendingTransition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'overridePendingTransition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3252,7 +3252,7 @@ android.app.Activity.prototype.overridePendingTransition = function() {
 android.app.Activity.prototype.unregisterForContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'unregisterForContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3281,7 +3281,7 @@ android.app.Activity.prototype.unregisterForContextMenu = function() {
 android.app.Activity.prototype.findViewById = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findViewById',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3310,7 +3310,7 @@ android.app.Activity.prototype.findViewById = function() {
 android.app.Activity.prototype.onNavigateUp = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onNavigateUp',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3339,7 +3339,7 @@ android.app.Activity.prototype.onNavigateUp = function() {
 android.app.Activity.prototype.requestPermissions = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestPermissions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3368,7 +3368,7 @@ android.app.Activity.prototype.requestPermissions = function() {
 android.app.Activity.prototype.onNavigateUpFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onNavigateUpFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3397,7 +3397,7 @@ android.app.Activity.prototype.onNavigateUpFromChild = function() {
 android.app.Activity.prototype.shouldShowRequestPermissionRationale = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'shouldShowRequestPermissionRationale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3426,7 +3426,7 @@ android.app.Activity.prototype.shouldShowRequestPermissionRationale = function()
 android.app.Activity.prototype.isTaskRoot = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isTaskRoot',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3455,7 +3455,7 @@ android.app.Activity.prototype.isTaskRoot = function() {
 android.app.Activity.prototype.onProvideAssistData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideAssistData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3484,7 +3484,7 @@ android.app.Activity.prototype.onProvideAssistData = function() {
 android.app.Activity.prototype.isFinishing = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isFinishing',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3513,7 +3513,7 @@ android.app.Activity.prototype.isFinishing = function() {
 android.app.Activity.prototype.getIntent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getIntent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3542,7 +3542,7 @@ android.app.Activity.prototype.getIntent = function() {
 android.app.Activity.prototype.onStop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onStop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3572,7 +3572,7 @@ android.app.Activity.prototype.onStop = function() {
 android.app.Activity.prototype.onWindowStartingActionMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowStartingActionMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3602,7 +3602,7 @@ android.app.Activity.prototype.onWindowStartingActionMode = function() {
 android.app.Activity.prototype.startActivityIfNeeded = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivityIfNeeded',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3631,7 +3631,7 @@ android.app.Activity.prototype.startActivityIfNeeded = function() {
 android.app.Activity.prototype.setExitSharedElementCallback = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setExitSharedElementCallback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3660,7 +3660,7 @@ android.app.Activity.prototype.setExitSharedElementCallback = function() {
 android.app.Activity.prototype.onPostResume = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPostResume',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3689,7 +3689,7 @@ android.app.Activity.prototype.onPostResume = function() {
 android.app.Activity.prototype.onCreatePanelMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreatePanelMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3718,7 +3718,7 @@ android.app.Activity.prototype.onCreatePanelMenu = function() {
 android.app.Activity.prototype.onPreparePanel = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPreparePanel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3747,7 +3747,7 @@ android.app.Activity.prototype.onPreparePanel = function() {
 android.app.Activity.prototype.setSecondaryProgress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSecondaryProgress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3776,7 +3776,7 @@ android.app.Activity.prototype.setSecondaryProgress = function() {
 android.app.Activity.prototype.getSystemService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSystemService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3805,7 +3805,7 @@ android.app.Activity.prototype.getSystemService = function() {
 android.app.Activity.prototype.startSearch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startSearch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3834,7 +3834,7 @@ android.app.Activity.prototype.startSearch = function() {
 android.app.Activity.prototype.setDefaultKeyMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setDefaultKeyMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3863,7 +3863,7 @@ android.app.Activity.prototype.setDefaultKeyMode = function() {
 android.app.Activity.prototype.onContextItemSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onContextItemSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3892,7 +3892,7 @@ android.app.Activity.prototype.onContextItemSelected = function() {
 android.app.Activity.prototype.onPause = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPause',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3921,7 +3921,7 @@ android.app.Activity.prototype.onPause = function() {
 android.app.Activity.prototype.onApplyThemeResource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onApplyThemeResource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3950,7 +3950,7 @@ android.app.Activity.prototype.onApplyThemeResource = function() {
 android.app.Activity.prototype.onProvideAssistContent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onProvideAssistContent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -3979,7 +3979,7 @@ android.app.Activity.prototype.onProvideAssistContent = function() {
 android.app.Activity.prototype.finishActivityFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishActivityFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4009,7 +4009,7 @@ android.app.Activity.prototype.finishActivityFromChild = function() {
 android.app.Activity.prototype.startActivity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4038,7 +4038,7 @@ android.app.Activity.prototype.startActivity = function() {
 android.app.Activity.prototype.setContentTransitionManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setContentTransitionManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4067,7 +4067,7 @@ android.app.Activity.prototype.setContentTransitionManager = function() {
 android.app.Activity.prototype.reportFullyDrawn = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'reportFullyDrawn',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4096,7 +4096,7 @@ android.app.Activity.prototype.reportFullyDrawn = function() {
 android.app.Activity.prototype.getLayoutInflater = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayoutInflater',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4126,7 +4126,7 @@ android.app.Activity.prototype.getLayoutInflater = function() {
 android.app.Activity.prototype.startActionMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActionMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4155,7 +4155,7 @@ android.app.Activity.prototype.startActionMode = function() {
 android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onRetainNonConfigurationInstance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4184,7 +4184,7 @@ android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
 android.app.Activity.prototype.getReferrer = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getReferrer',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4213,7 +4213,7 @@ android.app.Activity.prototype.getReferrer = function() {
 android.app.Activity.prototype.onDestroy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDestroy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4242,7 +4242,7 @@ android.app.Activity.prototype.onDestroy = function() {
 android.app.Activity.prototype.onKeyUp = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyUp',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4271,7 +4271,7 @@ android.app.Activity.prototype.onKeyUp = function() {
 android.app.Activity.prototype.onMenuOpened = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMenuOpened',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4300,7 +4300,7 @@ android.app.Activity.prototype.onMenuOpened = function() {
 android.app.Activity.prototype.finishAfterTransition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishAfterTransition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4329,7 +4329,7 @@ android.app.Activity.prototype.finishAfterTransition = function() {
 android.app.Activity.prototype.startManagingCursor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startManagingCursor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4359,7 +4359,7 @@ android.app.Activity.prototype.startManagingCursor = function() {
 android.app.Activity.prototype.onPrepareDialog = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPrepareDialog',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4388,7 +4388,7 @@ android.app.Activity.prototype.onPrepareDialog = function() {
 android.app.Activity.prototype.openContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'openContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4417,7 +4417,7 @@ android.app.Activity.prototype.openContextMenu = function() {
 android.app.Activity.prototype.getCallingPackage = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCallingPackage',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4446,7 +4446,7 @@ android.app.Activity.prototype.getCallingPackage = function() {
 android.app.Activity.prototype.setMediaController = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMediaController',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4475,7 +4475,7 @@ android.app.Activity.prototype.setMediaController = function() {
 android.app.Activity.prototype.onAttachFragment = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onAttachFragment',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4505,7 +4505,7 @@ android.app.Activity.prototype.onAttachFragment = function() {
 android.app.Activity.prototype.onSaveInstanceState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onSaveInstanceState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4534,7 +4534,7 @@ android.app.Activity.prototype.onSaveInstanceState = function() {
 android.app.Activity.prototype.hasWindowFocus = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hasWindowFocus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4563,7 +4563,7 @@ android.app.Activity.prototype.hasWindowFocus = function() {
 android.app.Activity.prototype.onCreateOptionsMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateOptionsMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4592,7 +4592,7 @@ android.app.Activity.prototype.onCreateOptionsMenu = function() {
 android.app.Activity.prototype.getVolumeControlStream = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getVolumeControlStream',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4622,7 +4622,7 @@ android.app.Activity.prototype.getVolumeControlStream = function() {
 android.app.Activity.prototype.setResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4652,7 +4652,7 @@ android.app.Activity.prototype.setResult = function() {
 android.app.Activity.prototype.startIntentSenderForResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startIntentSenderForResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4681,7 +4681,7 @@ android.app.Activity.prototype.startIntentSenderForResult = function() {
 android.app.Activity.prototype.onLowMemory = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onLowMemory',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4710,7 +4710,7 @@ android.app.Activity.prototype.onLowMemory = function() {
 android.app.Activity.prototype.onOptionsItemSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onOptionsItemSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4739,7 +4739,7 @@ android.app.Activity.prototype.onOptionsItemSelected = function() {
 android.app.Activity.prototype.onCreateThumbnail = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateThumbnail',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4768,7 +4768,7 @@ android.app.Activity.prototype.onCreateThumbnail = function() {
 android.app.Activity.prototype.onStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4797,7 +4797,7 @@ android.app.Activity.prototype.onStart = function() {
 android.app.Activity.prototype.getTitle = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTitle',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4827,7 +4827,7 @@ android.app.Activity.prototype.getTitle = function() {
 android.app.Activity.prototype.startNextMatchingActivity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startNextMatchingActivity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4856,7 +4856,7 @@ android.app.Activity.prototype.startNextMatchingActivity = function() {
 android.app.Activity.prototype.releaseInstance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'releaseInstance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4885,7 +4885,7 @@ android.app.Activity.prototype.releaseInstance = function() {
 android.app.Activity.prototype.onUserInteraction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onUserInteraction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4914,7 +4914,7 @@ android.app.Activity.prototype.onUserInteraction = function() {
 android.app.Activity.prototype.onTrackballEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTrackballEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4943,7 +4943,7 @@ android.app.Activity.prototype.onTrackballEvent = function() {
 android.app.Activity.prototype.onTouchEvent = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onTouchEvent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -4972,7 +4972,7 @@ android.app.Activity.prototype.onTouchEvent = function() {
 android.app.Activity.prototype.onUserLeaveHint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onUserLeaveHint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5001,7 +5001,7 @@ android.app.Activity.prototype.onUserLeaveHint = function() {
 android.app.Activity.prototype.onResume = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onResume',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5030,7 +5030,7 @@ android.app.Activity.prototype.onResume = function() {
 android.app.Activity.prototype.getPreferences = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPreferences',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5059,7 +5059,7 @@ android.app.Activity.prototype.getPreferences = function() {
 android.app.Activity.prototype.getContentTransitionManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContentTransitionManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5088,7 +5088,7 @@ android.app.Activity.prototype.getContentTransitionManager = function() {
 android.app.Activity.prototype.onContextMenuClosed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onContextMenuClosed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5118,7 +5118,7 @@ android.app.Activity.prototype.onContextMenuClosed = function() {
 android.app.Activity.prototype.onCreateView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5147,7 +5147,7 @@ android.app.Activity.prototype.onCreateView = function() {
 android.app.Activity.prototype.getMediaController = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMediaController',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5176,7 +5176,7 @@ android.app.Activity.prototype.getMediaController = function() {
 android.app.Activity.prototype.onConfigurationChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onConfigurationChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5205,7 +5205,7 @@ android.app.Activity.prototype.onConfigurationChanged = function() {
 android.app.Activity.prototype.onContentChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onContentChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5234,7 +5234,7 @@ android.app.Activity.prototype.onContentChanged = function() {
 android.app.Activity.prototype.setFeatureDrawableResource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFeatureDrawableResource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5263,7 +5263,7 @@ android.app.Activity.prototype.setFeatureDrawableResource = function() {
 android.app.Activity.prototype.onCreateContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5292,7 +5292,7 @@ android.app.Activity.prototype.onCreateContextMenu = function() {
 android.app.Activity.prototype.onPrepareNavigateUpTaskStack = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onPrepareNavigateUpTaskStack',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5321,7 +5321,7 @@ android.app.Activity.prototype.onPrepareNavigateUpTaskStack = function() {
 android.app.Activity.prototype.getLastNonConfigurationInstance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLastNonConfigurationInstance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5350,7 +5350,7 @@ android.app.Activity.prototype.getLastNonConfigurationInstance = function() {
 android.app.Activity.prototype.onKeyDown = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onKeyDown',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5379,7 +5379,7 @@ android.app.Activity.prototype.onKeyDown = function() {
 android.app.Activity.prototype.setFeatureDrawableUri = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setFeatureDrawableUri',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5408,7 +5408,7 @@ android.app.Activity.prototype.setFeatureDrawableUri = function() {
 android.app.Activity.prototype.createPendingResult = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createPendingResult',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5437,7 +5437,7 @@ android.app.Activity.prototype.createPendingResult = function() {
 android.app.Activity.prototype.registerForContextMenu = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'registerForContextMenu',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5466,7 +5466,7 @@ android.app.Activity.prototype.registerForContextMenu = function() {
 android.app.Activity.prototype.dump = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'dump',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5495,7 +5495,7 @@ android.app.Activity.prototype.dump = function() {
 android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'showLockTaskEscapeMessage',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5524,7 +5524,7 @@ android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
 android.app.Activity.prototype.getContentScene = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContentScene',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5554,7 +5554,7 @@ android.app.Activity.prototype.getContentScene = function() {
 android.app.Activity.prototype.startIntentSenderFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startIntentSenderFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5584,7 +5584,7 @@ android.app.Activity.prototype.startIntentSenderFromChild = function() {
 android.app.Activity.prototype.onCreate = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreate',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5613,7 +5613,7 @@ android.app.Activity.prototype.onCreate = function() {
 android.app.Activity.prototype.startPostponedEnterTransition = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startPostponedEnterTransition',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5642,7 +5642,7 @@ android.app.Activity.prototype.startPostponedEnterTransition = function() {
 android.app.Activity.prototype.onWindowFocusChanged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onWindowFocusChanged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5672,7 +5672,7 @@ android.app.Activity.prototype.onWindowFocusChanged = function() {
 android.app.Activity.prototype.startActivityFromChild = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivityFromChild',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5701,7 +5701,7 @@ android.app.Activity.prototype.startActivityFromChild = function() {
 android.app.Activity.prototype.onMenuItemSelected = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMenuItemSelected',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5730,7 +5730,7 @@ android.app.Activity.prototype.onMenuItemSelected = function() {
 android.app.Activity.prototype.onCreateDescription = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onCreateDescription',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5759,7 +5759,7 @@ android.app.Activity.prototype.onCreateDescription = function() {
 android.app.Activity.prototype.requestVisibleBehind = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestVisibleBehind',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5788,7 +5788,7 @@ android.app.Activity.prototype.requestVisibleBehind = function() {
 android.app.Activity.prototype.runOnUiThread = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'runOnUiThread',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5819,7 +5819,7 @@ android.app.Activity.prototype.runOnUiThread = function() {
 android.app.Activity.prototype.setContentView = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setContentView',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5848,7 +5848,7 @@ android.app.Activity.prototype.setContentView = function() {
 android.app.Activity.prototype.setImmersive = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setImmersive',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5877,7 +5877,7 @@ android.app.Activity.prototype.setImmersive = function() {
 android.app.Activity.prototype.onDetachedFromWindow = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onDetachedFromWindow',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5906,7 +5906,7 @@ android.app.Activity.prototype.onDetachedFromWindow = function() {
 android.app.Activity.prototype.finishAndRemoveTask = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finishAndRemoveTask',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -5935,7 +5935,7 @@ android.app.Activity.prototype.finishAndRemoveTask = function() {
 android.app.Activity.prototype.onStateNotSaved = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onStateNotSaved',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

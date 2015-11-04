@@ -32,7 +32,7 @@ android.util.TypedValue = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -294,7 +294,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'resourceId', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'resourceId'
 		});
 		if (!result) {
@@ -314,7 +314,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'resourceId', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'resourceId',
 			value: newValue
 		});
@@ -326,7 +326,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'data', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'data'
 		});
 		if (!result) {
@@ -346,7 +346,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'data', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'data',
 			value: newValue
 		});
@@ -358,7 +358,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'string', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'string'
 		});
 		if (!result) {
@@ -378,7 +378,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'string', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'string',
 			value: newValue
 		});
@@ -390,7 +390,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'assetCookie', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'assetCookie'
 		});
 		if (!result) {
@@ -410,7 +410,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'assetCookie', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'assetCookie',
 			value: newValue
 		});
@@ -422,7 +422,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'type', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'type'
 		});
 		if (!result) {
@@ -442,7 +442,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'type', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'type',
 			value: newValue
 		});
@@ -454,7 +454,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'density', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'density'
 		});
 		if (!result) {
@@ -474,7 +474,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'density', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'density',
 			value: newValue
 		});
@@ -486,7 +486,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'changingConfigurations
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'changingConfigurations'
 		});
 		if (!result) {
@@ -506,7 +506,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'changingConfigurations
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'changingConfigurations',
 			value: newValue
 		});
@@ -765,7 +765,7 @@ android.util.TypedValue.complexToDimension = function() {
 android.util.TypedValue.prototype.getFloat = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFloat',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -794,7 +794,7 @@ android.util.TypedValue.prototype.getFloat = function() {
 android.util.TypedValue.prototype.getDimension = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDimension',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -823,7 +823,7 @@ android.util.TypedValue.prototype.getDimension = function() {
 android.util.TypedValue.prototype.setTo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -852,7 +852,7 @@ android.util.TypedValue.prototype.setTo = function() {
 android.util.TypedValue.prototype.getComplexUnit = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getComplexUnit',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -881,7 +881,7 @@ android.util.TypedValue.prototype.getComplexUnit = function() {
 android.util.TypedValue.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -910,7 +910,7 @@ android.util.TypedValue.prototype.toString = function() {
 android.util.TypedValue.prototype.coerceToString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'coerceToString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -939,7 +939,7 @@ android.util.TypedValue.prototype.coerceToString = function() {
 android.util.TypedValue.prototype.getFraction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFraction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

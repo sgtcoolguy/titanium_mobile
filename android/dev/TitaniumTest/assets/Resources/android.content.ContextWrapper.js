@@ -32,7 +32,7 @@ android.content.ContextWrapper = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ android.content.ContextWrapper.prototype.className = "android.content.ContextWra
 android.content.ContextWrapper.prototype.sendOrderedBroadcast = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendOrderedBroadcast',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -93,7 +93,7 @@ android.content.ContextWrapper.prototype.sendOrderedBroadcast = function() {
 android.content.ContextWrapper.prototype.getExternalFilesDirs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExternalFilesDirs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -122,7 +122,7 @@ android.content.ContextWrapper.prototype.getExternalFilesDirs = function() {
 android.content.ContextWrapper.prototype.enforceCallingPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforceCallingPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -151,7 +151,7 @@ android.content.ContextWrapper.prototype.enforceCallingPermission = function() {
 android.content.ContextWrapper.prototype.getObbDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getObbDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -181,7 +181,7 @@ android.content.ContextWrapper.prototype.getObbDir = function() {
 android.content.ContextWrapper.prototype.sendBroadcastAsUser = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendBroadcastAsUser',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -210,7 +210,7 @@ android.content.ContextWrapper.prototype.sendBroadcastAsUser = function() {
 android.content.ContextWrapper.prototype.attachBaseContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'attachBaseContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -239,7 +239,7 @@ android.content.ContextWrapper.prototype.attachBaseContext = function() {
 android.content.ContextWrapper.prototype.getExternalCacheDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExternalCacheDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -268,7 +268,7 @@ android.content.ContextWrapper.prototype.getExternalCacheDir = function() {
 android.content.ContextWrapper.prototype.deleteDatabase = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'deleteDatabase',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -297,7 +297,7 @@ android.content.ContextWrapper.prototype.deleteDatabase = function() {
 android.content.ContextWrapper.prototype.checkSelfPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkSelfPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -326,7 +326,7 @@ android.content.ContextWrapper.prototype.checkSelfPermission = function() {
 android.content.ContextWrapper.prototype.enforceCallingOrSelfPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforceCallingOrSelfPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -355,7 +355,7 @@ android.content.ContextWrapper.prototype.enforceCallingOrSelfPermission = functi
 android.content.ContextWrapper.prototype.openFileInput = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'openFileInput',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -384,7 +384,7 @@ android.content.ContextWrapper.prototype.openFileInput = function() {
 android.content.ContextWrapper.prototype.removeStickyBroadcastAsUser = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeStickyBroadcastAsUser',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -413,7 +413,7 @@ android.content.ContextWrapper.prototype.removeStickyBroadcastAsUser = function(
 android.content.ContextWrapper.prototype.checkPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -443,7 +443,7 @@ android.content.ContextWrapper.prototype.checkPermission = function() {
 android.content.ContextWrapper.prototype.enforceUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforceUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -472,7 +472,7 @@ android.content.ContextWrapper.prototype.enforceUriPermission = function() {
 android.content.ContextWrapper.prototype.getContentResolver = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getContentResolver',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -501,7 +501,7 @@ android.content.ContextWrapper.prototype.getContentResolver = function() {
 android.content.ContextWrapper.prototype.getPackageResourcePath = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPackageResourcePath',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -530,7 +530,7 @@ android.content.ContextWrapper.prototype.getPackageResourcePath = function() {
 android.content.ContextWrapper.prototype.databaseList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'databaseList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -559,7 +559,7 @@ android.content.ContextWrapper.prototype.databaseList = function() {
 android.content.ContextWrapper.prototype.getFilesDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFilesDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -588,7 +588,7 @@ android.content.ContextWrapper.prototype.getFilesDir = function() {
 android.content.ContextWrapper.prototype.sendStickyOrderedBroadcastAsUser = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendStickyOrderedBroadcastAsUser',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -617,7 +617,7 @@ android.content.ContextWrapper.prototype.sendStickyOrderedBroadcastAsUser = func
 android.content.ContextWrapper.prototype.fileList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'fileList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -646,7 +646,7 @@ android.content.ContextWrapper.prototype.fileList = function() {
 android.content.ContextWrapper.prototype.getExternalMediaDirs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExternalMediaDirs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -675,7 +675,7 @@ android.content.ContextWrapper.prototype.getExternalMediaDirs = function() {
 android.content.ContextWrapper.prototype.getWallpaper = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWallpaper',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -704,7 +704,7 @@ android.content.ContextWrapper.prototype.getWallpaper = function() {
 android.content.ContextWrapper.prototype.getDatabasePath = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDatabasePath',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -733,7 +733,7 @@ android.content.ContextWrapper.prototype.getDatabasePath = function() {
 android.content.ContextWrapper.prototype.enforceCallingOrSelfUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforceCallingOrSelfUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -762,7 +762,7 @@ android.content.ContextWrapper.prototype.enforceCallingOrSelfUriPermission = fun
 android.content.ContextWrapper.prototype.getTheme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTheme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -791,7 +791,7 @@ android.content.ContextWrapper.prototype.getTheme = function() {
 android.content.ContextWrapper.prototype.getCacheDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCacheDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -820,7 +820,7 @@ android.content.ContextWrapper.prototype.getCacheDir = function() {
 android.content.ContextWrapper.prototype.getExternalCacheDirs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExternalCacheDirs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -850,7 +850,7 @@ android.content.ContextWrapper.prototype.getExternalCacheDirs = function() {
 android.content.ContextWrapper.prototype.startIntentSender = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startIntentSender',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -879,7 +879,7 @@ android.content.ContextWrapper.prototype.startIntentSender = function() {
 android.content.ContextWrapper.prototype.checkCallingOrSelfPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkCallingOrSelfPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -908,7 +908,7 @@ android.content.ContextWrapper.prototype.checkCallingOrSelfPermission = function
 android.content.ContextWrapper.prototype.getSystemServiceName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSystemServiceName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -937,7 +937,7 @@ android.content.ContextWrapper.prototype.getSystemServiceName = function() {
 android.content.ContextWrapper.prototype.getCodeCacheDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getCodeCacheDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -967,7 +967,7 @@ android.content.ContextWrapper.prototype.getCodeCacheDir = function() {
 android.content.ContextWrapper.prototype.openOrCreateDatabase = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'openOrCreateDatabase',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -996,7 +996,7 @@ android.content.ContextWrapper.prototype.openOrCreateDatabase = function() {
 android.content.ContextWrapper.prototype.getFileStreamPath = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFileStreamPath',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1026,7 +1026,7 @@ android.content.ContextWrapper.prototype.getFileStreamPath = function() {
 android.content.ContextWrapper.prototype.startActivities = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivities',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1055,7 +1055,7 @@ android.content.ContextWrapper.prototype.startActivities = function() {
 android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumHeight = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWallpaperDesiredMinimumHeight',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1084,7 +1084,7 @@ android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumHeight = func
 android.content.ContextWrapper.prototype.startService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1114,7 +1114,7 @@ android.content.ContextWrapper.prototype.startService = function() {
 android.content.ContextWrapper.prototype.registerReceiver = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'registerReceiver',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1143,7 +1143,7 @@ android.content.ContextWrapper.prototype.registerReceiver = function() {
 android.content.ContextWrapper.prototype.setTheme = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setTheme',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1172,7 +1172,7 @@ android.content.ContextWrapper.prototype.setTheme = function() {
 android.content.ContextWrapper.prototype.getPackageManager = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPackageManager',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1201,7 +1201,7 @@ android.content.ContextWrapper.prototype.getPackageManager = function() {
 android.content.ContextWrapper.prototype.sendOrderedBroadcastAsUser = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendOrderedBroadcastAsUser',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1230,7 +1230,7 @@ android.content.ContextWrapper.prototype.sendOrderedBroadcastAsUser = function()
 android.content.ContextWrapper.prototype.getPackageName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPackageName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1259,7 +1259,7 @@ android.content.ContextWrapper.prototype.getPackageName = function() {
 android.content.ContextWrapper.prototype.bindService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'bindService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1288,7 +1288,7 @@ android.content.ContextWrapper.prototype.bindService = function() {
 android.content.ContextWrapper.prototype.isRestricted = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isRestricted',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1317,7 +1317,7 @@ android.content.ContextWrapper.prototype.isRestricted = function() {
 android.content.ContextWrapper.prototype.getObbDirs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getObbDirs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1346,7 +1346,7 @@ android.content.ContextWrapper.prototype.getObbDirs = function() {
 android.content.ContextWrapper.prototype.enforceCallingUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforceCallingUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1375,7 +1375,7 @@ android.content.ContextWrapper.prototype.enforceCallingUriPermission = function(
 android.content.ContextWrapper.prototype.checkCallingUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkCallingUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1405,7 +1405,7 @@ android.content.ContextWrapper.prototype.checkCallingUriPermission = function() 
 android.content.ContextWrapper.prototype.sendBroadcast = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendBroadcast',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1434,7 +1434,7 @@ android.content.ContextWrapper.prototype.sendBroadcast = function() {
 android.content.ContextWrapper.prototype.getSystemService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSystemService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1463,7 +1463,7 @@ android.content.ContextWrapper.prototype.getSystemService = function() {
 android.content.ContextWrapper.prototype.unbindService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'unbindService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1492,7 +1492,7 @@ android.content.ContextWrapper.prototype.unbindService = function() {
 android.content.ContextWrapper.prototype.removeStickyBroadcast = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'removeStickyBroadcast',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1521,7 +1521,7 @@ android.content.ContextWrapper.prototype.removeStickyBroadcast = function() {
 android.content.ContextWrapper.prototype.checkCallingOrSelfUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkCallingOrSelfUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1550,7 +1550,7 @@ android.content.ContextWrapper.prototype.checkCallingOrSelfUriPermission = funct
 android.content.ContextWrapper.prototype.getPackageCodePath = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPackageCodePath',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1579,7 +1579,7 @@ android.content.ContextWrapper.prototype.getPackageCodePath = function() {
 android.content.ContextWrapper.prototype.peekWallpaper = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'peekWallpaper',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1608,7 +1608,7 @@ android.content.ContextWrapper.prototype.peekWallpaper = function() {
 android.content.ContextWrapper.prototype.getClassLoader = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getClassLoader',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1637,7 +1637,7 @@ android.content.ContextWrapper.prototype.getClassLoader = function() {
 android.content.ContextWrapper.prototype.createConfigurationContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createConfigurationContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1666,7 +1666,7 @@ android.content.ContextWrapper.prototype.createConfigurationContext = function()
 android.content.ContextWrapper.prototype.openFileOutput = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'openFileOutput',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1696,7 +1696,7 @@ android.content.ContextWrapper.prototype.openFileOutput = function() {
 android.content.ContextWrapper.prototype.startActivity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startActivity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1725,7 +1725,7 @@ android.content.ContextWrapper.prototype.startActivity = function() {
 android.content.ContextWrapper.prototype.createPackageContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createPackageContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1754,7 +1754,7 @@ android.content.ContextWrapper.prototype.createPackageContext = function() {
 android.content.ContextWrapper.prototype.getBaseContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBaseContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1783,7 +1783,7 @@ android.content.ContextWrapper.prototype.getBaseContext = function() {
 android.content.ContextWrapper.prototype.getApplicationContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getApplicationContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1812,7 +1812,7 @@ android.content.ContextWrapper.prototype.getApplicationContext = function() {
 android.content.ContextWrapper.prototype.sendStickyBroadcast = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendStickyBroadcast',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1841,7 +1841,7 @@ android.content.ContextWrapper.prototype.sendStickyBroadcast = function() {
 android.content.ContextWrapper.prototype.getResources = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getResources',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1870,7 +1870,7 @@ android.content.ContextWrapper.prototype.getResources = function() {
 android.content.ContextWrapper.prototype.enforcePermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'enforcePermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1899,7 +1899,7 @@ android.content.ContextWrapper.prototype.enforcePermission = function() {
 android.content.ContextWrapper.prototype.getNoBackupFilesDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getNoBackupFilesDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1928,7 +1928,7 @@ android.content.ContextWrapper.prototype.getNoBackupFilesDir = function() {
 android.content.ContextWrapper.prototype.getSharedPreferences = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSharedPreferences',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1957,7 +1957,7 @@ android.content.ContextWrapper.prototype.getSharedPreferences = function() {
 android.content.ContextWrapper.prototype.grantUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'grantUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1987,7 +1987,7 @@ android.content.ContextWrapper.prototype.grantUriPermission = function() {
 android.content.ContextWrapper.prototype.checkUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2016,7 +2016,7 @@ android.content.ContextWrapper.prototype.checkUriPermission = function() {
 android.content.ContextWrapper.prototype.getMainLooper = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMainLooper',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2045,7 +2045,7 @@ android.content.ContextWrapper.prototype.getMainLooper = function() {
 android.content.ContextWrapper.prototype.getAssets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAssets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2074,7 +2074,7 @@ android.content.ContextWrapper.prototype.getAssets = function() {
 android.content.ContextWrapper.prototype.getDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2103,7 +2103,7 @@ android.content.ContextWrapper.prototype.getDir = function() {
 android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumWidth = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getWallpaperDesiredMinimumWidth',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2132,7 +2132,7 @@ android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumWidth = funct
 android.content.ContextWrapper.prototype.startInstrumentation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'startInstrumentation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2161,7 +2161,7 @@ android.content.ContextWrapper.prototype.startInstrumentation = function() {
 android.content.ContextWrapper.prototype.deleteFile = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'deleteFile',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2190,7 +2190,7 @@ android.content.ContextWrapper.prototype.deleteFile = function() {
 android.content.ContextWrapper.prototype.clearWallpaper = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'clearWallpaper',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2219,7 +2219,7 @@ android.content.ContextWrapper.prototype.clearWallpaper = function() {
 android.content.ContextWrapper.prototype.getExternalFilesDir = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getExternalFilesDir',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2248,7 +2248,7 @@ android.content.ContextWrapper.prototype.getExternalFilesDir = function() {
 android.content.ContextWrapper.prototype.sendStickyBroadcastAsUser = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendStickyBroadcastAsUser',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2277,7 +2277,7 @@ android.content.ContextWrapper.prototype.sendStickyBroadcastAsUser = function() 
 android.content.ContextWrapper.prototype.revokeUriPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'revokeUriPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2307,7 +2307,7 @@ android.content.ContextWrapper.prototype.revokeUriPermission = function() {
 android.content.ContextWrapper.prototype.setWallpaper = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setWallpaper',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2336,7 +2336,7 @@ android.content.ContextWrapper.prototype.setWallpaper = function() {
 android.content.ContextWrapper.prototype.getApplicationInfo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getApplicationInfo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2365,7 +2365,7 @@ android.content.ContextWrapper.prototype.getApplicationInfo = function() {
 android.content.ContextWrapper.prototype.sendStickyOrderedBroadcast = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'sendStickyOrderedBroadcast',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2394,7 +2394,7 @@ android.content.ContextWrapper.prototype.sendStickyOrderedBroadcast = function()
 android.content.ContextWrapper.prototype.checkCallingPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkCallingPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2423,7 +2423,7 @@ android.content.ContextWrapper.prototype.checkCallingPermission = function() {
 android.content.ContextWrapper.prototype.unregisterReceiver = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'unregisterReceiver',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2452,7 +2452,7 @@ android.content.ContextWrapper.prototype.unregisterReceiver = function() {
 android.content.ContextWrapper.prototype.stopService = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'stopService',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2481,7 +2481,7 @@ android.content.ContextWrapper.prototype.stopService = function() {
 android.content.ContextWrapper.prototype.createDisplayContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'createDisplayContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

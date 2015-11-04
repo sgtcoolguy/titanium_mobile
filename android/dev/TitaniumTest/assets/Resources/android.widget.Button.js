@@ -32,7 +32,7 @@ android.widget.Button = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -63,7 +63,7 @@ android.widget.Button.prototype.className = "android.widget.Button";
 android.widget.Button.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

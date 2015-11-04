@@ -34,7 +34,7 @@ android.view.ViewGroup.LayoutParams = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -74,7 +74,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'layoutAnim
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'layoutAnimationParameters'
 		});
 		if (!result) {
@@ -94,7 +94,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'layoutAnim
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'layoutAnimationParameters',
 			value: newValue
 		});
@@ -106,7 +106,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'width', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'width'
 		});
 		if (!result) {
@@ -126,7 +126,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'width', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'width',
 			value: newValue
 		});
@@ -138,7 +138,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'height', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'height'
 		});
 		if (!result) {
@@ -158,7 +158,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'height', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'height',
 			value: newValue
 		});
@@ -179,7 +179,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'height', {
 android.view.ViewGroup.LayoutParams.prototype.resolveLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'resolveLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -208,7 +208,7 @@ android.view.ViewGroup.LayoutParams.prototype.resolveLayoutDirection = function(
 android.view.ViewGroup.LayoutParams.prototype.setBaseAttributes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setBaseAttributes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

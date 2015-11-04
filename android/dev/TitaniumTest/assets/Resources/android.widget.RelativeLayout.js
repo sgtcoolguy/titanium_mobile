@@ -32,7 +32,7 @@ android.widget.RelativeLayout = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -203,7 +203,7 @@ android.widget.RelativeLayout.ALIGN_LEFT = 5;
 android.widget.RelativeLayout.prototype.generateLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'generateLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -232,7 +232,7 @@ android.widget.RelativeLayout.prototype.generateLayoutParams = function() {
 android.widget.RelativeLayout.prototype.onLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -261,7 +261,7 @@ android.widget.RelativeLayout.prototype.onLayout = function() {
 android.widget.RelativeLayout.prototype.onMeasure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMeasure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -290,7 +290,7 @@ android.widget.RelativeLayout.prototype.onMeasure = function() {
 android.widget.RelativeLayout.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -319,7 +319,7 @@ android.widget.RelativeLayout.prototype.getAccessibilityClassName = function() {
 android.widget.RelativeLayout.prototype.generateDefaultLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'generateDefaultLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -348,7 +348,7 @@ android.widget.RelativeLayout.prototype.generateDefaultLayoutParams = function()
 android.widget.RelativeLayout.prototype.setIgnoreGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setIgnoreGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -377,7 +377,7 @@ android.widget.RelativeLayout.prototype.setIgnoreGravity = function() {
 android.widget.RelativeLayout.prototype.setHorizontalGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setHorizontalGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -406,7 +406,7 @@ android.widget.RelativeLayout.prototype.setHorizontalGravity = function() {
 android.widget.RelativeLayout.prototype.getBaseline = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getBaseline',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -435,7 +435,7 @@ android.widget.RelativeLayout.prototype.getBaseline = function() {
 android.widget.RelativeLayout.prototype.setVerticalGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setVerticalGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -464,7 +464,7 @@ android.widget.RelativeLayout.prototype.setVerticalGravity = function() {
 android.widget.RelativeLayout.prototype.requestLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'requestLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -493,7 +493,7 @@ android.widget.RelativeLayout.prototype.requestLayout = function() {
 android.widget.RelativeLayout.prototype.checkLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -522,7 +522,7 @@ android.widget.RelativeLayout.prototype.checkLayoutParams = function() {
 android.widget.RelativeLayout.prototype.setGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -551,7 +551,7 @@ android.widget.RelativeLayout.prototype.setGravity = function() {
 android.widget.RelativeLayout.prototype.getGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -580,7 +580,7 @@ android.widget.RelativeLayout.prototype.getGravity = function() {
 android.widget.RelativeLayout.prototype.shouldDelayChildPressedState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'shouldDelayChildPressedState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

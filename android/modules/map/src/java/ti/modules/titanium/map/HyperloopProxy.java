@@ -30,13 +30,15 @@ import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.proxy.ActivityProxy;
 import org.appcelerator.titanium.proxy.TiViewProxy;
+import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import ti.modules.titanium.ui.widget.TiView;
 
 @Kroll.proxy(parentModule = HyperloopModule.class)
-public class HyperloopProxy extends KrollProxy implements InvocationHandler {
+public class HyperloopProxy extends TiViewProxy implements InvocationHandler {
 
     /**
      * 
@@ -749,6 +751,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         m.setAccessible(true); // should offer perf boost since doesn't have to
                                // check security
 
+        // TODO Don't wrap this up any more, just invoke it! We don't need to handle being off UI thread!
         final Method method = m;
         final Object[] arguments = convertedArgs;
         final Object rec = receiver;
@@ -763,11 +766,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
                 }
             }
         };
-        if (KrollRuntime.getInstance().getKrollApplication().runOnMainThread()) {
-            r.run();
-        } else {
-            getActivity().runOnUiThread(r);
-        }
+        r.run();
         try {
             try {
                 return result.getResult();
@@ -915,7 +914,7 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         if (isKnownType(result)) {
             // is it the same object this proxy holds? Return this proxy then
             if (this.nativeObject != null
-                    && result.getClass().getCanonicalName().equals(this.nativeClassName)
+                    && result.getClass().getName().equals(this.nativeClassName)
                     && result.equals(this.nativeObject)) {
                 return this;
             }
@@ -977,8 +976,8 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         // if it's a JS wrapper around proxy, grab the proxy
         if (object instanceof HashMap) {
             HashMap map = (HashMap) object;
-            if (map.containsKey("native")) {
-                object = map.get("native");
+            if (map.containsKey("$native")) {
+                object = map.get("$native");
             }
         }
 
@@ -999,5 +998,13 @@ public class HyperloopProxy extends KrollProxy implements InvocationHandler {
         }
         // TODO Convert other types? Maybe KrollDict?
         return object;
+    }
+
+    @Override
+    public TiUIView createView(Activity activity) {
+        if (this.nativeObject != null && this.nativeObject instanceof View) {
+            return new HyperloopView((View) this.nativeObject, this);
+        }
+        return null;
     }
 }

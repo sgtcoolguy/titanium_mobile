@@ -33,7 +33,7 @@ android.widget.FrameLayout = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ android.widget.FrameLayout.prototype.className = "android.widget.FrameLayout";
 android.widget.FrameLayout.prototype.setForegroundGravity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setForegroundGravity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -95,7 +95,7 @@ android.widget.FrameLayout.prototype.setForegroundGravity = function() {
 android.widget.FrameLayout.prototype.generateLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'generateLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -124,7 +124,7 @@ android.widget.FrameLayout.prototype.generateLayoutParams = function() {
 android.widget.FrameLayout.prototype.onLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -153,7 +153,7 @@ android.widget.FrameLayout.prototype.onLayout = function() {
 android.widget.FrameLayout.prototype.setMeasureAllChildren = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMeasureAllChildren',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -182,7 +182,7 @@ android.widget.FrameLayout.prototype.setMeasureAllChildren = function() {
 android.widget.FrameLayout.prototype.checkLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'checkLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -211,7 +211,7 @@ android.widget.FrameLayout.prototype.checkLayoutParams = function() {
 android.widget.FrameLayout.prototype.getConsiderGoneChildrenWhenMeasuring = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getConsiderGoneChildrenWhenMeasuring',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -240,7 +240,7 @@ android.widget.FrameLayout.prototype.getConsiderGoneChildrenWhenMeasuring = func
 android.widget.FrameLayout.prototype.getMeasureAllChildren = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMeasureAllChildren',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -269,7 +269,7 @@ android.widget.FrameLayout.prototype.getMeasureAllChildren = function() {
 android.widget.FrameLayout.prototype.onMeasure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'onMeasure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -298,7 +298,7 @@ android.widget.FrameLayout.prototype.onMeasure = function() {
 android.widget.FrameLayout.prototype.getAccessibilityClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAccessibilityClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -328,7 +328,7 @@ android.widget.FrameLayout.prototype.getAccessibilityClassName = function() {
 android.widget.FrameLayout.prototype.generateDefaultLayoutParams = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'generateDefaultLayoutParams',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -357,7 +357,7 @@ android.widget.FrameLayout.prototype.generateDefaultLayoutParams = function() {
 android.widget.FrameLayout.prototype.shouldDelayChildPressedState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'shouldDelayChildPressedState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

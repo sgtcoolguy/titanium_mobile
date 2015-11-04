@@ -33,7 +33,7 @@ android.view.InputEvent = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -92,7 +92,7 @@ Object.defineProperty(android.view.InputEvent, 'CREATOR', {
 android.view.InputEvent.prototype.getDeviceId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDeviceId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -121,7 +121,7 @@ android.view.InputEvent.prototype.getDeviceId = function() {
 android.view.InputEvent.prototype.getSource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -150,7 +150,7 @@ android.view.InputEvent.prototype.getSource = function() {
 android.view.InputEvent.prototype.isFromSource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isFromSource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -179,7 +179,7 @@ android.view.InputEvent.prototype.isFromSource = function() {
 android.view.InputEvent.prototype.getEventTime = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getEventTime',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -208,7 +208,7 @@ android.view.InputEvent.prototype.getEventTime = function() {
 android.view.InputEvent.prototype.describeContents = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'describeContents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -237,7 +237,7 @@ android.view.InputEvent.prototype.describeContents = function() {
 android.view.InputEvent.prototype.getDevice = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDevice',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

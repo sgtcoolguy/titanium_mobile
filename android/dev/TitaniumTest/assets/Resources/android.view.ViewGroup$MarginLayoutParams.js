@@ -34,7 +34,7 @@ android.view.ViewGroup.MarginLayoutParams = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'left
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'leftMargin'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'left
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'leftMargin',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'topM
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'topMargin'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'topM
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'topMargin',
 			value: newValue
 		});
@@ -120,7 +120,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'righ
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'rightMargin'
 		});
 		if (!result) {
@@ -140,7 +140,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'righ
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'rightMargin',
 			value: newValue
 		});
@@ -152,7 +152,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'bott
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.native.getNativeField({
+		var result = this.$native.getNativeField({
 			field: 'bottomMargin'
 		});
 		if (!result) {
@@ -172,7 +172,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'bott
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.native.setNativeField({
+		this.$native.setNativeField({
 			field: 'bottomMargin',
 			value: newValue
 		});
@@ -193,7 +193,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'bott
 android.view.ViewGroup.MarginLayoutParams.prototype.isMarginRelative = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isMarginRelative',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -222,7 +222,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.isMarginRelative = function(
 android.view.ViewGroup.MarginLayoutParams.prototype.getLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -251,7 +251,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getLayoutDirection = functio
 android.view.ViewGroup.MarginLayoutParams.prototype.setMargins = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMargins',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -280,7 +280,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setMargins = function() {
 android.view.ViewGroup.MarginLayoutParams.prototype.setMarginEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMarginEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -309,7 +309,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setMarginEnd = function() {
 android.view.ViewGroup.MarginLayoutParams.prototype.getMarginEnd = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMarginEnd',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -338,7 +338,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getMarginEnd = function() {
 android.view.ViewGroup.MarginLayoutParams.prototype.setLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -367,7 +367,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setLayoutDirection = functio
 android.view.ViewGroup.MarginLayoutParams.prototype.resolveLayoutDirection = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'resolveLayoutDirection',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -396,7 +396,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.resolveLayoutDirection = fun
 android.view.ViewGroup.MarginLayoutParams.prototype.getMarginStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMarginStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -425,7 +425,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getMarginStart = function() 
 android.view.ViewGroup.MarginLayoutParams.prototype.setMarginStart = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setMarginStart',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -32,7 +32,7 @@ java.lang.Object = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -81,7 +81,7 @@ java.lang.Object.prototype.className = "java.lang.Object";
 java.lang.Object.prototype.getClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -112,7 +112,7 @@ java.lang.Object.prototype.getClass = function() {
 java.lang.Object.prototype.wait = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'wait',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -141,7 +141,7 @@ java.lang.Object.prototype.wait = function() {
 java.lang.Object.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -170,7 +170,7 @@ java.lang.Object.prototype.hashCode = function() {
 java.lang.Object.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -199,7 +199,7 @@ java.lang.Object.prototype.equals = function() {
 java.lang.Object.prototype.notifyAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'notifyAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -228,7 +228,7 @@ java.lang.Object.prototype.notifyAll = function() {
 java.lang.Object.prototype.clone = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'clone',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -257,7 +257,7 @@ java.lang.Object.prototype.clone = function() {
 java.lang.Object.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -286,7 +286,7 @@ java.lang.Object.prototype.toString = function() {
 java.lang.Object.prototype.finalize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finalize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -315,7 +315,7 @@ java.lang.Object.prototype.finalize = function() {
 java.lang.Object.prototype.notify = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'notify',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

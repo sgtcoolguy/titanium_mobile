@@ -33,7 +33,7 @@ android.view.MotionEvent = function() {
 		}); 
 	}
 	
-	this.native = result;
+	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -771,7 +771,7 @@ android.view.MotionEvent.axisToString = function() {
 android.view.MotionEvent.prototype.findPointerIndex = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'findPointerIndex',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -800,7 +800,7 @@ android.view.MotionEvent.prototype.findPointerIndex = function() {
 android.view.MotionEvent.prototype.getActionIndex = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getActionIndex',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -829,7 +829,7 @@ android.view.MotionEvent.prototype.getActionIndex = function() {
 android.view.MotionEvent.prototype.getButtonState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getButtonState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -859,7 +859,7 @@ android.view.MotionEvent.prototype.getButtonState = function() {
 android.view.MotionEvent.prototype.getOrientation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getOrientation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -888,7 +888,7 @@ android.view.MotionEvent.prototype.getOrientation = function() {
 android.view.MotionEvent.prototype.recycle = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'recycle',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -918,7 +918,7 @@ android.view.MotionEvent.prototype.recycle = function() {
 android.view.MotionEvent.prototype.getHistoricalOrientation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalOrientation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -947,7 +947,7 @@ android.view.MotionEvent.prototype.getHistoricalOrientation = function() {
 android.view.MotionEvent.prototype.getYPrecision = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getYPrecision',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -976,7 +976,7 @@ android.view.MotionEvent.prototype.getYPrecision = function() {
 android.view.MotionEvent.prototype.getPointerCoords = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPointerCoords',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1005,7 +1005,7 @@ android.view.MotionEvent.prototype.getPointerCoords = function() {
 android.view.MotionEvent.prototype.getEventTime = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getEventTime',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1034,7 +1034,7 @@ android.view.MotionEvent.prototype.getEventTime = function() {
 android.view.MotionEvent.prototype.getActionButton = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getActionButton',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1064,7 +1064,7 @@ android.view.MotionEvent.prototype.getActionButton = function() {
 android.view.MotionEvent.prototype.getTouchMinor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTouchMinor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1093,7 +1093,7 @@ android.view.MotionEvent.prototype.getTouchMinor = function() {
 android.view.MotionEvent.prototype.getRawX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRawX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1122,7 +1122,7 @@ android.view.MotionEvent.prototype.getRawX = function() {
 android.view.MotionEvent.prototype.getRawY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getRawY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1151,7 +1151,7 @@ android.view.MotionEvent.prototype.getRawY = function() {
 android.view.MotionEvent.prototype.isButtonPressed = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'isButtonPressed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1181,7 +1181,7 @@ android.view.MotionEvent.prototype.isButtonPressed = function() {
 android.view.MotionEvent.prototype.addBatch = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'addBatch',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1210,7 +1210,7 @@ android.view.MotionEvent.prototype.addBatch = function() {
 android.view.MotionEvent.prototype.getHistorySize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistorySize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1240,7 +1240,7 @@ android.view.MotionEvent.prototype.getHistorySize = function() {
 android.view.MotionEvent.prototype.getHistoricalPressure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalPressure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1269,7 +1269,7 @@ android.view.MotionEvent.prototype.getHistoricalPressure = function() {
 android.view.MotionEvent.prototype.getPointerId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPointerId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1298,7 +1298,7 @@ android.view.MotionEvent.prototype.getPointerId = function() {
 android.view.MotionEvent.prototype.getSource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1327,7 +1327,7 @@ android.view.MotionEvent.prototype.getSource = function() {
 android.view.MotionEvent.prototype.setEdgeFlags = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setEdgeFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1357,7 +1357,7 @@ android.view.MotionEvent.prototype.setEdgeFlags = function() {
 android.view.MotionEvent.prototype.getTouchMajor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getTouchMajor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1386,7 +1386,7 @@ android.view.MotionEvent.prototype.getTouchMajor = function() {
 android.view.MotionEvent.prototype.getFlags = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1415,7 +1415,7 @@ android.view.MotionEvent.prototype.getFlags = function() {
 android.view.MotionEvent.prototype.writeToParcel = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'writeToParcel',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1444,7 +1444,7 @@ android.view.MotionEvent.prototype.writeToParcel = function() {
 android.view.MotionEvent.prototype.setSource = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setSource',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1473,7 +1473,7 @@ android.view.MotionEvent.prototype.setSource = function() {
 android.view.MotionEvent.prototype.setAction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1502,7 +1502,7 @@ android.view.MotionEvent.prototype.setAction = function() {
 android.view.MotionEvent.prototype.getXPrecision = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getXPrecision',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1532,7 +1532,7 @@ android.view.MotionEvent.prototype.getXPrecision = function() {
 android.view.MotionEvent.prototype.getHistoricalAxisValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalAxisValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1561,7 +1561,7 @@ android.view.MotionEvent.prototype.getHistoricalAxisValue = function() {
 android.view.MotionEvent.prototype.getToolType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getToolType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1590,7 +1590,7 @@ android.view.MotionEvent.prototype.getToolType = function() {
 android.view.MotionEvent.prototype.transform = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'transform',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1620,7 +1620,7 @@ android.view.MotionEvent.prototype.transform = function() {
 android.view.MotionEvent.prototype.getHistoricalSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1649,7 +1649,7 @@ android.view.MotionEvent.prototype.getHistoricalSize = function() {
 android.view.MotionEvent.prototype.setLocation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'setLocation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1679,7 +1679,7 @@ android.view.MotionEvent.prototype.setLocation = function() {
 android.view.MotionEvent.prototype.getToolMajor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getToolMajor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1708,7 +1708,7 @@ android.view.MotionEvent.prototype.getToolMajor = function() {
 android.view.MotionEvent.prototype.getHistoricalEventTime = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalEventTime',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1738,7 +1738,7 @@ android.view.MotionEvent.prototype.getHistoricalEventTime = function() {
 android.view.MotionEvent.prototype.getToolMinor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getToolMinor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1767,7 +1767,7 @@ android.view.MotionEvent.prototype.getToolMinor = function() {
 android.view.MotionEvent.prototype.getActionMasked = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getActionMasked',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1796,7 +1796,7 @@ android.view.MotionEvent.prototype.getActionMasked = function() {
 android.view.MotionEvent.prototype.getMetaState = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getMetaState',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1826,7 +1826,7 @@ android.view.MotionEvent.prototype.getMetaState = function() {
 android.view.MotionEvent.prototype.getHistoricalToolMinor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalToolMinor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1855,7 +1855,7 @@ android.view.MotionEvent.prototype.getHistoricalToolMinor = function() {
 android.view.MotionEvent.prototype.getHistoricalPointerCoords = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalPointerCoords',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1885,7 +1885,7 @@ android.view.MotionEvent.prototype.getHistoricalPointerCoords = function() {
 android.view.MotionEvent.prototype.getHistoricalToolMajor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalToolMajor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1914,7 +1914,7 @@ android.view.MotionEvent.prototype.getHistoricalToolMajor = function() {
 android.view.MotionEvent.prototype.offsetLocation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'offsetLocation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1943,7 +1943,7 @@ android.view.MotionEvent.prototype.offsetLocation = function() {
 android.view.MotionEvent.prototype.getPointerProperties = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPointerProperties',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1973,7 +1973,7 @@ android.view.MotionEvent.prototype.getPointerProperties = function() {
 android.view.MotionEvent.prototype.getAxisValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAxisValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2002,7 +2002,7 @@ android.view.MotionEvent.prototype.getAxisValue = function() {
 android.view.MotionEvent.prototype.getAction = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getAction',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2031,7 +2031,7 @@ android.view.MotionEvent.prototype.getAction = function() {
 android.view.MotionEvent.prototype.getPointerCount = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPointerCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2061,7 +2061,7 @@ android.view.MotionEvent.prototype.getPointerCount = function() {
 android.view.MotionEvent.prototype.getHistoricalX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2090,7 +2090,7 @@ android.view.MotionEvent.prototype.getHistoricalX = function() {
 android.view.MotionEvent.prototype.getDownTime = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDownTime',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2120,7 +2120,7 @@ android.view.MotionEvent.prototype.getDownTime = function() {
 android.view.MotionEvent.prototype.getHistoricalY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2149,7 +2149,7 @@ android.view.MotionEvent.prototype.getHistoricalY = function() {
 android.view.MotionEvent.prototype.getDeviceId = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getDeviceId',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2179,7 +2179,7 @@ android.view.MotionEvent.prototype.getDeviceId = function() {
 android.view.MotionEvent.prototype.getHistoricalTouchMajor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalTouchMajor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2209,7 +2209,7 @@ android.view.MotionEvent.prototype.getHistoricalTouchMajor = function() {
 android.view.MotionEvent.prototype.getX = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getX',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2239,7 +2239,7 @@ android.view.MotionEvent.prototype.getX = function() {
 android.view.MotionEvent.prototype.getSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2269,7 +2269,7 @@ android.view.MotionEvent.prototype.getSize = function() {
 android.view.MotionEvent.prototype.getY = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getY',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2299,7 +2299,7 @@ android.view.MotionEvent.prototype.getY = function() {
 android.view.MotionEvent.prototype.getPressure = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getPressure',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2329,7 +2329,7 @@ android.view.MotionEvent.prototype.getPressure = function() {
 android.view.MotionEvent.prototype.getHistoricalTouchMinor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getHistoricalTouchMinor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2358,7 +2358,7 @@ android.view.MotionEvent.prototype.getHistoricalTouchMinor = function() {
 android.view.MotionEvent.prototype.finalize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'finalize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2387,7 +2387,7 @@ android.view.MotionEvent.prototype.finalize = function() {
 android.view.MotionEvent.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2416,7 +2416,7 @@ android.view.MotionEvent.prototype.toString = function() {
 android.view.MotionEvent.prototype.getEdgeFlags = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.native.callNativeFunction({
+	var result = this.$native.callNativeFunction({
 		func: 'getEdgeFlags',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
