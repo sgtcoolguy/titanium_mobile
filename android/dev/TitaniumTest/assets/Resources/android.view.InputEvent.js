@@ -30,9 +30,9 @@ android.view.InputEvent = function() {
 			class: 'android.view.InputEvent',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -52,7 +52,7 @@ android.view.InputEvent.prototype.className = "android.view.InputEvent";
 Object.defineProperty(android.view.InputEvent, 'CREATOR', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -66,7 +66,7 @@ Object.defineProperty(android.view.InputEvent, 'CREATOR', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.InputEvent') {
-				return new this(result);
+				return new android.view.InputEvent(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -103,7 +103,7 @@ android.view.InputEvent.prototype.getDeviceId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -132,7 +132,7 @@ android.view.InputEvent.prototype.getSource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -161,7 +161,7 @@ android.view.InputEvent.prototype.isFromSource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -190,7 +190,7 @@ android.view.InputEvent.prototype.getEventTime = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -219,7 +219,7 @@ android.view.InputEvent.prototype.describeContents = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -248,7 +248,7 @@ android.view.InputEvent.prototype.getDevice = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.InputEvent') {
-			return new this(result);
+			return new android.view.InputEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

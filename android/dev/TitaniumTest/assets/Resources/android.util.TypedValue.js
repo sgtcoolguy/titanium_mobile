@@ -14,7 +14,8 @@ global.android.util = global.android.util || {};
 
 /**
  * @class android.util.TypedValue
- * @extends java.lang.Object  * @constructor
+ * @extends java.lang.Object 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html}
  **/
 android.util.TypedValue = function() {
@@ -29,9 +30,9 @@ android.util.TypedValue = function() {
 			class: 'android.util.TypedValue',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -303,7 +304,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'resourceId', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -335,7 +336,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'data', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -367,7 +368,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'string', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -399,7 +400,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'assetCookie', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -431,7 +432,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'type', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -463,7 +464,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'density', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -495,7 +496,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'changingConfigurations
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.util.TypedValue') {
-				return new this(result);
+				return new android.util.TypedValue(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -523,7 +524,7 @@ Object.defineProperty(android.util.TypedValue.prototype, 'changingConfigurations
  **/
 android.util.TypedValue.complexToFloat = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -541,7 +542,7 @@ android.util.TypedValue.complexToFloat = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -557,7 +558,7 @@ android.util.TypedValue.complexToFloat = function() {
  **/
 android.util.TypedValue.applyDimension = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -575,7 +576,7 @@ android.util.TypedValue.applyDimension = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -591,7 +592,7 @@ android.util.TypedValue.applyDimension = function() {
  **/
 android.util.TypedValue.complexToDimensionPixelSize = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -609,7 +610,7 @@ android.util.TypedValue.complexToDimensionPixelSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -625,7 +626,7 @@ android.util.TypedValue.complexToDimensionPixelSize = function() {
  **/
 android.util.TypedValue.complexToFraction = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -643,7 +644,7 @@ android.util.TypedValue.complexToFraction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -659,7 +660,7 @@ android.util.TypedValue.complexToFraction = function() {
  **/
 android.util.TypedValue.complexToDimensionPixelOffset = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -677,7 +678,7 @@ android.util.TypedValue.complexToDimensionPixelOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -693,7 +694,7 @@ android.util.TypedValue.complexToDimensionPixelOffset = function() {
  **/
 android.util.TypedValue.coerceToString = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -711,7 +712,7 @@ android.util.TypedValue.coerceToString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -727,7 +728,7 @@ android.util.TypedValue.coerceToString = function() {
  **/
 android.util.TypedValue.complexToDimension = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -745,7 +746,7 @@ android.util.TypedValue.complexToDimension = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -776,7 +777,7 @@ android.util.TypedValue.prototype.getFloat = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -805,7 +806,7 @@ android.util.TypedValue.prototype.getDimension = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -834,7 +835,7 @@ android.util.TypedValue.prototype.setTo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -863,7 +864,7 @@ android.util.TypedValue.prototype.getComplexUnit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -892,7 +893,7 @@ android.util.TypedValue.prototype.toString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -921,7 +922,7 @@ android.util.TypedValue.prototype.coerceToString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -950,7 +951,7 @@ android.util.TypedValue.prototype.getFraction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.TypedValue') {
-			return new this(result);
+			return new android.util.TypedValue(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

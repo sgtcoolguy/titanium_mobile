@@ -14,7 +14,8 @@ global.android.widget = global.android.widget || {};
 
 /**
  * @class android.widget.TextView
- * @extends android.view.View  * @constructor
+ * @extends android.view.View 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/widget/TextView.html}
  **/
 android.widget.TextView = function() {
@@ -29,9 +30,9 @@ android.widget.TextView = function() {
 			class: 'android.widget.TextView',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -74,7 +75,7 @@ android.widget.TextView.prototype.getSelectionStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -103,7 +104,7 @@ android.widget.TextView.prototype.setEditableFactory = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -132,7 +133,7 @@ android.widget.TextView.prototype.onCommitCorrection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -161,7 +162,7 @@ android.widget.TextView.prototype.setIncludeFontPadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -190,7 +191,7 @@ android.widget.TextView.prototype.setRawInputType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -219,7 +220,7 @@ android.widget.TextView.prototype.setOnEditorActionListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -248,7 +249,7 @@ android.widget.TextView.prototype.getMarqueeRepeatLimit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -277,7 +278,7 @@ android.widget.TextView.prototype.setCompoundDrawablePadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -306,7 +307,7 @@ android.widget.TextView.prototype.getMovementMethod = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -335,7 +336,7 @@ android.widget.TextView.prototype.setTextScaleX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -364,7 +365,7 @@ android.widget.TextView.prototype.setMaxEms = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -393,7 +394,7 @@ android.widget.TextView.prototype.setCompoundDrawablesRelative = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -422,7 +423,7 @@ android.widget.TextView.prototype.getMinHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -451,7 +452,7 @@ android.widget.TextView.prototype.getLineCount = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -480,7 +481,7 @@ android.widget.TextView.prototype.getShadowRadius = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -509,7 +510,7 @@ android.widget.TextView.prototype.jumpDrawablesToCurrentState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -538,7 +539,7 @@ android.widget.TextView.prototype.setMinHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -567,7 +568,7 @@ android.widget.TextView.prototype.setCursorVisible = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -596,7 +597,7 @@ android.widget.TextView.prototype.setMovementMethod = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -625,7 +626,7 @@ android.widget.TextView.prototype.setSelectAllOnFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -654,7 +655,7 @@ android.widget.TextView.prototype.onCreateDrawableState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -683,7 +684,7 @@ android.widget.TextView.prototype.getText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -712,7 +713,7 @@ android.widget.TextView.prototype.setEllipsize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -741,7 +742,7 @@ android.widget.TextView.prototype.setScroller = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -770,7 +771,7 @@ android.widget.TextView.prototype.getPaintFlags = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -799,7 +800,7 @@ android.widget.TextView.prototype.getLeftPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -828,7 +829,7 @@ android.widget.TextView.prototype.getKeyListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -858,7 +859,7 @@ android.widget.TextView.prototype.setCompoundDrawablesRelativeWithIntrinsicBound
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -887,7 +888,7 @@ android.widget.TextView.prototype.getError = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -916,7 +917,7 @@ android.widget.TextView.prototype.setTextIsSelectable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -946,7 +947,7 @@ android.widget.TextView.prototype.setError = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -975,7 +976,7 @@ android.widget.TextView.prototype.getTotalPaddingBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1004,7 +1005,7 @@ android.widget.TextView.prototype.beginBatchEdit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1034,7 +1035,7 @@ android.widget.TextView.prototype.setHint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1063,7 +1064,7 @@ android.widget.TextView.prototype.getCustomSelectionActionModeCallback = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1092,7 +1093,7 @@ android.widget.TextView.prototype.getTextSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1122,7 +1123,7 @@ android.widget.TextView.prototype.setLinkTextColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1151,7 +1152,7 @@ android.widget.TextView.prototype.getInputType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1180,7 +1181,7 @@ android.widget.TextView.prototype.onPrivateIMECommand = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1209,7 +1210,7 @@ android.widget.TextView.prototype.computeScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1238,7 +1239,7 @@ android.widget.TextView.prototype.setHyphenationFrequency = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1267,7 +1268,7 @@ android.widget.TextView.prototype.setSpannableFactory = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1296,7 +1297,7 @@ android.widget.TextView.prototype.getTotalPaddingLeft = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1325,7 +1326,7 @@ android.widget.TextView.prototype.didTouchFocusSelect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1354,7 +1355,7 @@ android.widget.TextView.prototype.getTopPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1383,7 +1384,7 @@ android.widget.TextView.prototype.onKeyPreIme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1412,7 +1413,7 @@ android.widget.TextView.prototype.getFocusedRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1441,7 +1442,7 @@ android.widget.TextView.prototype.findViewsWithText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1470,7 +1471,7 @@ android.widget.TextView.prototype.onDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1499,7 +1500,7 @@ android.widget.TextView.prototype.setMinEms = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1528,7 +1529,7 @@ android.widget.TextView.prototype.getPaint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1557,7 +1558,7 @@ android.widget.TextView.prototype.setAutoLinkMask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1586,7 +1587,7 @@ android.widget.TextView.prototype.onAttachedToWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1615,7 +1616,7 @@ android.widget.TextView.prototype.setPadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1644,7 +1645,7 @@ android.widget.TextView.prototype.computeHorizontalScrollRange = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1673,7 +1674,7 @@ android.widget.TextView.prototype.onTextContextMenuItem = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1702,7 +1703,7 @@ android.widget.TextView.prototype.getCurrentTextColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1731,7 +1732,7 @@ android.widget.TextView.prototype.getLineBounds = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1760,7 +1761,7 @@ android.widget.TextView.prototype.getBreakStrategy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1789,7 +1790,7 @@ android.widget.TextView.prototype.getTotalPaddingEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1818,7 +1819,7 @@ android.widget.TextView.prototype.getMaxLines = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1847,7 +1848,7 @@ android.widget.TextView.prototype.onVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1876,7 +1877,7 @@ android.widget.TextView.prototype.getDefaultMovementMethod = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1905,7 +1906,7 @@ android.widget.TextView.prototype.setPaintFlags = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1934,7 +1935,7 @@ android.widget.TextView.prototype.getPrivateImeOptions = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1963,7 +1964,7 @@ android.widget.TextView.prototype.onFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1992,7 +1993,7 @@ android.widget.TextView.prototype.getInputExtras = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2021,7 +2022,7 @@ android.widget.TextView.prototype.setGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2050,7 +2051,7 @@ android.widget.TextView.prototype.onKeyMultiple = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2079,7 +2080,7 @@ android.widget.TextView.prototype.getCompoundPaddingEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2108,7 +2109,7 @@ android.widget.TextView.prototype.getTextScaleX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2137,7 +2138,7 @@ android.widget.TextView.prototype.getMinLines = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2166,7 +2167,7 @@ android.widget.TextView.prototype.onKeyShortcut = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2195,7 +2196,7 @@ android.widget.TextView.prototype.setSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2224,7 +2225,7 @@ android.widget.TextView.prototype.onProvideStructure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2253,7 +2254,7 @@ android.widget.TextView.prototype.setElegantTextHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2283,7 +2284,7 @@ android.widget.TextView.prototype.setSingleLine = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2312,7 +2313,7 @@ android.widget.TextView.prototype.onDragEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2341,7 +2342,7 @@ android.widget.TextView.prototype.getAutoLinkMask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2370,7 +2371,7 @@ android.widget.TextView.prototype.invalidateDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2399,7 +2400,7 @@ android.widget.TextView.prototype.getCustomInsertionActionModeCallback = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2428,7 +2429,7 @@ android.widget.TextView.prototype.getCompoundDrawablesRelative = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2457,7 +2458,7 @@ android.widget.TextView.prototype.getCurrentHintTextColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2486,7 +2487,7 @@ android.widget.TextView.prototype.getImeActionId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2515,7 +2516,7 @@ android.widget.TextView.prototype.getGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2544,7 +2545,7 @@ android.widget.TextView.prototype.setInputType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2573,7 +2574,7 @@ android.widget.TextView.prototype.setTransformationMethod = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2602,7 +2603,7 @@ android.widget.TextView.prototype.onCommitCompletion = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2631,7 +2632,7 @@ android.widget.TextView.prototype.getShowSoftInputOnFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2660,7 +2661,7 @@ android.widget.TextView.prototype.getCompoundPaddingBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2689,7 +2690,7 @@ android.widget.TextView.prototype.getLetterSpacing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2718,7 +2719,7 @@ android.widget.TextView.prototype.setLineSpacing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2747,7 +2748,7 @@ android.widget.TextView.prototype.onGenericMotionEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2776,7 +2777,7 @@ android.widget.TextView.prototype.getLeftFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2805,7 +2806,7 @@ android.widget.TextView.prototype.onRestoreInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2834,7 +2835,7 @@ android.widget.TextView.prototype.getBottomPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2863,7 +2864,7 @@ android.widget.TextView.prototype.isInputMethodTarget = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2893,7 +2894,7 @@ android.widget.TextView.prototype.setHintTextColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2922,7 +2923,7 @@ android.widget.TextView.prototype.isTextSelectable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2951,7 +2952,7 @@ android.widget.TextView.prototype.getEditableText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2980,7 +2981,7 @@ android.widget.TextView.prototype.getLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3009,7 +3010,7 @@ android.widget.TextView.prototype.setFrame = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3038,7 +3039,7 @@ android.widget.TextView.prototype.setMaxHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3067,7 +3068,7 @@ android.widget.TextView.prototype.endBatchEdit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3096,7 +3097,7 @@ android.widget.TextView.prototype.getUrls = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3125,7 +3126,7 @@ android.widget.TextView.prototype.setBreakStrategy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3154,7 +3155,7 @@ android.widget.TextView.prototype.getCompoundDrawableTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3183,7 +3184,7 @@ android.widget.TextView.prototype.getExtendedPaddingTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3212,7 +3213,7 @@ android.widget.TextView.prototype.isCursorVisible = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3241,7 +3242,7 @@ android.widget.TextView.prototype.getTotalPaddingTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3270,7 +3271,7 @@ android.widget.TextView.prototype.getLinkTextColors = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3299,7 +3300,7 @@ android.widget.TextView.prototype.bringPointIntoView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3328,7 +3329,7 @@ android.widget.TextView.prototype.length = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3357,7 +3358,7 @@ android.widget.TextView.prototype.hasSelection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3386,7 +3387,7 @@ android.widget.TextView.prototype.setCompoundDrawableTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3415,7 +3416,7 @@ android.widget.TextView.prototype.drawableHotspotChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3444,7 +3445,7 @@ android.widget.TextView.prototype.onFinishTemporaryDetach = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3473,7 +3474,7 @@ android.widget.TextView.prototype.getHyphenationFrequency = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3502,7 +3503,7 @@ android.widget.TextView.prototype.setLines = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3531,7 +3532,7 @@ android.widget.TextView.prototype.getBaseline = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3560,7 +3561,7 @@ android.widget.TextView.prototype.getCompoundPaddingTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3589,7 +3590,7 @@ android.widget.TextView.prototype.getImeActionLabel = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3619,7 +3620,7 @@ android.widget.TextView.prototype.append = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3648,7 +3649,7 @@ android.widget.TextView.prototype.setImeActionLabel = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3681,7 +3682,7 @@ android.widget.TextView.prototype.setText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3710,7 +3711,7 @@ android.widget.TextView.prototype.onSelectionChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3739,7 +3740,7 @@ android.widget.TextView.prototype.hasOverlappingRendering = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3768,7 +3769,7 @@ android.widget.TextView.prototype.moveCursorToVisibleOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3797,7 +3798,7 @@ android.widget.TextView.prototype.setEms = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3826,7 +3827,7 @@ android.widget.TextView.prototype.getAccessibilityClassName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3855,7 +3856,7 @@ android.widget.TextView.prototype.onEditorAction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3884,7 +3885,7 @@ android.widget.TextView.prototype.performLongClick = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3913,7 +3914,7 @@ android.widget.TextView.prototype.getFontFeatureSettings = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3942,7 +3943,7 @@ android.widget.TextView.prototype.getMaxEms = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3971,7 +3972,7 @@ android.widget.TextView.prototype.getFilters = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4000,7 +4001,7 @@ android.widget.TextView.prototype.addTextChangedListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4029,7 +4030,7 @@ android.widget.TextView.prototype.onStartTemporaryDetach = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4059,7 +4060,7 @@ android.widget.TextView.prototype.setCompoundDrawablesWithIntrinsicBounds = func
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4088,7 +4089,7 @@ android.widget.TextView.prototype.getMinEms = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4117,7 +4118,7 @@ android.widget.TextView.prototype.onLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4146,7 +4147,7 @@ android.widget.TextView.prototype.onEndBatchEdit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4175,7 +4176,7 @@ android.widget.TextView.prototype.computeVerticalScrollRange = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4204,7 +4205,7 @@ android.widget.TextView.prototype.setMaxWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4233,7 +4234,7 @@ android.widget.TextView.prototype.onPreDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4262,7 +4263,7 @@ android.widget.TextView.prototype.verifyDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4291,7 +4292,7 @@ android.widget.TextView.prototype.setEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4320,7 +4321,7 @@ android.widget.TextView.prototype.setExtractedText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4349,7 +4350,7 @@ android.widget.TextView.prototype.setFreezesText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4378,7 +4379,7 @@ android.widget.TextView.prototype.getIncludeFontPadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4407,7 +4408,7 @@ android.widget.TextView.prototype.onBeginBatchEdit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4436,7 +4437,7 @@ android.widget.TextView.prototype.isSuggestionsEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4465,7 +4466,7 @@ android.widget.TextView.prototype.setLinksClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4494,7 +4495,7 @@ android.widget.TextView.prototype.getLinksClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4523,7 +4524,7 @@ android.widget.TextView.prototype.getCompoundPaddingRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4552,7 +4553,7 @@ android.widget.TextView.prototype.setKeyListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4581,7 +4582,7 @@ android.widget.TextView.prototype.getCompoundPaddingLeft = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4610,7 +4611,7 @@ android.widget.TextView.prototype.onRtlPropertiesChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4640,7 +4641,7 @@ android.widget.TextView.prototype.setTypeface = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4669,7 +4670,7 @@ android.widget.TextView.prototype.getExtendedPaddingBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4698,7 +4699,7 @@ android.widget.TextView.prototype.setInputExtras = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4727,7 +4728,7 @@ android.widget.TextView.prototype.setShowSoftInputOnFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4756,7 +4757,7 @@ android.widget.TextView.prototype.onKeyUp = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4785,7 +4786,7 @@ android.widget.TextView.prototype.removeTextChangedListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4814,7 +4815,7 @@ android.widget.TextView.prototype.clearComposingText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4843,7 +4844,7 @@ android.widget.TextView.prototype.setWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4872,7 +4873,7 @@ android.widget.TextView.prototype.setPrivateImeOptions = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4901,7 +4902,7 @@ android.widget.TextView.prototype.getLineSpacingMultiplier = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4930,7 +4931,7 @@ android.widget.TextView.prototype.setTextLocale = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4959,7 +4960,7 @@ android.widget.TextView.prototype.getDefaultEditable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4988,7 +4989,7 @@ android.widget.TextView.prototype.onScreenStateChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5017,7 +5018,7 @@ android.widget.TextView.prototype.getLineSpacingExtra = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5046,7 +5047,7 @@ android.widget.TextView.prototype.setFilters = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5075,7 +5076,7 @@ android.widget.TextView.prototype.onSaveInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5104,7 +5105,7 @@ android.widget.TextView.prototype.getHint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5133,7 +5134,7 @@ android.widget.TextView.prototype.setCompoundDrawables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5162,7 +5163,7 @@ android.widget.TextView.prototype.setMinWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5191,7 +5192,7 @@ android.widget.TextView.prototype.getImeOptions = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5220,7 +5221,7 @@ android.widget.TextView.prototype.getShadowDx = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5249,7 +5250,7 @@ android.widget.TextView.prototype.getCompoundPaddingStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5278,7 +5279,7 @@ android.widget.TextView.prototype.getShadowDy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5307,7 +5308,7 @@ android.widget.TextView.prototype.getMaxWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5336,7 +5337,7 @@ android.widget.TextView.prototype.getRightPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5365,7 +5366,7 @@ android.widget.TextView.prototype.cancelLongPress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5394,7 +5395,7 @@ android.widget.TextView.prototype.getMaxHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5423,7 +5424,7 @@ android.widget.TextView.prototype.getTypeface = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5452,7 +5453,7 @@ android.widget.TextView.prototype.getCompoundDrawables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5481,7 +5482,7 @@ android.widget.TextView.prototype.setImeOptions = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5510,7 +5511,7 @@ android.widget.TextView.prototype.onTrackballEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5539,7 +5540,7 @@ android.widget.TextView.prototype.onCreateInputConnection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5568,7 +5569,7 @@ android.widget.TextView.prototype.onTouchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5597,7 +5598,7 @@ android.widget.TextView.prototype.drawableStateChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5627,7 +5628,7 @@ android.widget.TextView.prototype.setTextColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5656,7 +5657,7 @@ android.widget.TextView.prototype.setMaxLines = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5685,7 +5686,7 @@ android.widget.TextView.prototype.setHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5714,7 +5715,7 @@ android.widget.TextView.prototype.getLineHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5743,7 +5744,7 @@ android.widget.TextView.prototype.getCompoundDrawablePadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5772,7 +5773,7 @@ android.widget.TextView.prototype.getOffsetForPosition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5801,7 +5802,7 @@ android.widget.TextView.prototype.setAllCaps = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5830,7 +5831,7 @@ android.widget.TextView.prototype.getTotalPaddingRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5859,7 +5860,7 @@ android.widget.TextView.prototype.setMinLines = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5888,7 +5889,7 @@ android.widget.TextView.prototype.onConfigurationChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5917,7 +5918,7 @@ android.widget.TextView.prototype.setPaddingRelative = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5946,7 +5947,7 @@ android.widget.TextView.prototype.setShadowLayer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5975,7 +5976,7 @@ android.widget.TextView.prototype.getTextLocale = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6004,7 +6005,7 @@ android.widget.TextView.prototype.setFontFeatureSettings = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6033,7 +6034,7 @@ android.widget.TextView.prototype.onKeyDown = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6062,7 +6063,7 @@ android.widget.TextView.prototype.computeVerticalScrollExtent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6091,7 +6092,7 @@ android.widget.TextView.prototype.getEllipsize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6120,7 +6121,7 @@ android.widget.TextView.prototype.setCustomSelectionActionModeCallback = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6149,7 +6150,7 @@ android.widget.TextView.prototype.getMinWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6178,7 +6179,7 @@ android.widget.TextView.prototype.getHighlightColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6208,7 +6209,7 @@ android.widget.TextView.prototype.setTextKeepState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6237,7 +6238,7 @@ android.widget.TextView.prototype.getTransformationMethod = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6266,7 +6267,7 @@ android.widget.TextView.prototype.getCompoundDrawableTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6295,7 +6296,7 @@ android.widget.TextView.prototype.getHintTextColors = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6324,7 +6325,7 @@ android.widget.TextView.prototype.setHighlightColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6353,7 +6354,7 @@ android.widget.TextView.prototype.setHorizontallyScrolling = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6382,7 +6383,7 @@ android.widget.TextView.prototype.getFreezesText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6411,7 +6412,7 @@ android.widget.TextView.prototype.onTextChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6440,7 +6441,7 @@ android.widget.TextView.prototype.onCheckIsTextEditor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6469,7 +6470,7 @@ android.widget.TextView.prototype.debug = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6498,7 +6499,7 @@ android.widget.TextView.prototype.setMarqueeRepeatLimit = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6527,7 +6528,7 @@ android.widget.TextView.prototype.onWindowFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6556,7 +6557,7 @@ android.widget.TextView.prototype.onScrollChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6585,7 +6586,7 @@ android.widget.TextView.prototype.extractText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6614,7 +6615,7 @@ android.widget.TextView.prototype.getTotalPaddingStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6643,7 +6644,7 @@ android.widget.TextView.prototype.onMeasure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6672,7 +6673,7 @@ android.widget.TextView.prototype.getRightFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6702,7 +6703,7 @@ android.widget.TextView.prototype.setTextSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6731,7 +6732,7 @@ android.widget.TextView.prototype.setLetterSpacing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6760,7 +6761,7 @@ android.widget.TextView.prototype.setCustomInsertionActionModeCallback = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6789,7 +6790,7 @@ android.widget.TextView.prototype.getTextColors = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6818,7 +6819,7 @@ android.widget.TextView.prototype.setCompoundDrawableTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6847,7 +6848,7 @@ android.widget.TextView.prototype.getShadowColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6877,7 +6878,7 @@ android.widget.TextView.prototype.setTextAppearance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6906,7 +6907,7 @@ android.widget.TextView.prototype.getSelectionEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6935,7 +6936,7 @@ android.widget.TextView.prototype.isPaddingOffsetRequired = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.TextView') {
-			return new this(result);
+			return new android.widget.TextView(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

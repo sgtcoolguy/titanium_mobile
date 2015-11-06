@@ -14,7 +14,8 @@ global.android.content = global.android.content || {};
 
 /**
  * @class android.content.ContextWrapper
- * @extends android.content.Context  * @constructor
+ * @extends android.content.Context 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/content/ContextWrapper.html}
  **/
 android.content.ContextWrapper = function() {
@@ -29,9 +30,9 @@ android.content.ContextWrapper = function() {
 			class: 'android.content.ContextWrapper',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -75,7 +76,7 @@ android.content.ContextWrapper.prototype.sendOrderedBroadcast = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -104,7 +105,7 @@ android.content.ContextWrapper.prototype.getExternalFilesDirs = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -133,7 +134,7 @@ android.content.ContextWrapper.prototype.enforceCallingPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -162,7 +163,7 @@ android.content.ContextWrapper.prototype.getObbDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -192,7 +193,7 @@ android.content.ContextWrapper.prototype.sendBroadcastAsUser = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -221,7 +222,7 @@ android.content.ContextWrapper.prototype.attachBaseContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -250,7 +251,7 @@ android.content.ContextWrapper.prototype.getExternalCacheDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -279,7 +280,7 @@ android.content.ContextWrapper.prototype.deleteDatabase = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -308,7 +309,7 @@ android.content.ContextWrapper.prototype.checkSelfPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -337,7 +338,7 @@ android.content.ContextWrapper.prototype.enforceCallingOrSelfPermission = functi
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -366,7 +367,7 @@ android.content.ContextWrapper.prototype.openFileInput = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -395,7 +396,7 @@ android.content.ContextWrapper.prototype.removeStickyBroadcastAsUser = function(
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -424,7 +425,7 @@ android.content.ContextWrapper.prototype.checkPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -454,7 +455,7 @@ android.content.ContextWrapper.prototype.enforceUriPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -483,7 +484,7 @@ android.content.ContextWrapper.prototype.getContentResolver = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -512,7 +513,7 @@ android.content.ContextWrapper.prototype.getPackageResourcePath = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -541,7 +542,7 @@ android.content.ContextWrapper.prototype.databaseList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -570,7 +571,7 @@ android.content.ContextWrapper.prototype.getFilesDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -599,7 +600,7 @@ android.content.ContextWrapper.prototype.sendStickyOrderedBroadcastAsUser = func
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -628,7 +629,7 @@ android.content.ContextWrapper.prototype.fileList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -657,7 +658,7 @@ android.content.ContextWrapper.prototype.getExternalMediaDirs = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -686,7 +687,7 @@ android.content.ContextWrapper.prototype.getWallpaper = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -715,7 +716,7 @@ android.content.ContextWrapper.prototype.getDatabasePath = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -744,7 +745,7 @@ android.content.ContextWrapper.prototype.enforceCallingOrSelfUriPermission = fun
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -773,7 +774,7 @@ android.content.ContextWrapper.prototype.getTheme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -802,7 +803,7 @@ android.content.ContextWrapper.prototype.getCacheDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -831,7 +832,7 @@ android.content.ContextWrapper.prototype.getExternalCacheDirs = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -861,7 +862,7 @@ android.content.ContextWrapper.prototype.startIntentSender = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -890,7 +891,7 @@ android.content.ContextWrapper.prototype.checkCallingOrSelfPermission = function
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -919,7 +920,7 @@ android.content.ContextWrapper.prototype.getSystemServiceName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -948,7 +949,7 @@ android.content.ContextWrapper.prototype.getCodeCacheDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -978,7 +979,7 @@ android.content.ContextWrapper.prototype.openOrCreateDatabase = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1007,7 +1008,7 @@ android.content.ContextWrapper.prototype.getFileStreamPath = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1037,7 +1038,7 @@ android.content.ContextWrapper.prototype.startActivities = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1066,7 +1067,7 @@ android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumHeight = func
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1095,7 +1096,7 @@ android.content.ContextWrapper.prototype.startService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1125,7 +1126,7 @@ android.content.ContextWrapper.prototype.registerReceiver = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1154,7 +1155,7 @@ android.content.ContextWrapper.prototype.setTheme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1183,7 +1184,7 @@ android.content.ContextWrapper.prototype.getPackageManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1212,7 +1213,7 @@ android.content.ContextWrapper.prototype.sendOrderedBroadcastAsUser = function()
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1241,7 +1242,7 @@ android.content.ContextWrapper.prototype.getPackageName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1270,7 +1271,7 @@ android.content.ContextWrapper.prototype.bindService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1299,7 +1300,7 @@ android.content.ContextWrapper.prototype.isRestricted = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1328,7 +1329,7 @@ android.content.ContextWrapper.prototype.getObbDirs = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1357,7 +1358,7 @@ android.content.ContextWrapper.prototype.enforceCallingUriPermission = function(
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1386,7 +1387,7 @@ android.content.ContextWrapper.prototype.checkCallingUriPermission = function() 
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1416,7 +1417,7 @@ android.content.ContextWrapper.prototype.sendBroadcast = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1445,7 +1446,7 @@ android.content.ContextWrapper.prototype.getSystemService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1474,7 +1475,7 @@ android.content.ContextWrapper.prototype.unbindService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1503,7 +1504,7 @@ android.content.ContextWrapper.prototype.removeStickyBroadcast = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1532,7 +1533,7 @@ android.content.ContextWrapper.prototype.checkCallingOrSelfUriPermission = funct
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1561,7 +1562,7 @@ android.content.ContextWrapper.prototype.getPackageCodePath = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1590,7 +1591,7 @@ android.content.ContextWrapper.prototype.peekWallpaper = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1619,7 +1620,7 @@ android.content.ContextWrapper.prototype.getClassLoader = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1648,7 +1649,7 @@ android.content.ContextWrapper.prototype.createConfigurationContext = function()
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1677,7 +1678,7 @@ android.content.ContextWrapper.prototype.openFileOutput = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1707,7 +1708,7 @@ android.content.ContextWrapper.prototype.startActivity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1736,7 +1737,7 @@ android.content.ContextWrapper.prototype.createPackageContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1765,7 +1766,7 @@ android.content.ContextWrapper.prototype.getBaseContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1794,7 +1795,7 @@ android.content.ContextWrapper.prototype.getApplicationContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1823,7 +1824,7 @@ android.content.ContextWrapper.prototype.sendStickyBroadcast = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1852,7 +1853,7 @@ android.content.ContextWrapper.prototype.getResources = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1881,7 +1882,7 @@ android.content.ContextWrapper.prototype.enforcePermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1910,7 +1911,7 @@ android.content.ContextWrapper.prototype.getNoBackupFilesDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1939,7 +1940,7 @@ android.content.ContextWrapper.prototype.getSharedPreferences = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1968,7 +1969,7 @@ android.content.ContextWrapper.prototype.grantUriPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1998,7 +1999,7 @@ android.content.ContextWrapper.prototype.checkUriPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2027,7 +2028,7 @@ android.content.ContextWrapper.prototype.getMainLooper = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2056,7 +2057,7 @@ android.content.ContextWrapper.prototype.getAssets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2085,7 +2086,7 @@ android.content.ContextWrapper.prototype.getDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2114,7 +2115,7 @@ android.content.ContextWrapper.prototype.getWallpaperDesiredMinimumWidth = funct
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2143,7 +2144,7 @@ android.content.ContextWrapper.prototype.startInstrumentation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2172,7 +2173,7 @@ android.content.ContextWrapper.prototype.deleteFile = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2201,7 +2202,7 @@ android.content.ContextWrapper.prototype.clearWallpaper = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2230,7 +2231,7 @@ android.content.ContextWrapper.prototype.getExternalFilesDir = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2259,7 +2260,7 @@ android.content.ContextWrapper.prototype.sendStickyBroadcastAsUser = function() 
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2288,7 +2289,7 @@ android.content.ContextWrapper.prototype.revokeUriPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2318,7 +2319,7 @@ android.content.ContextWrapper.prototype.setWallpaper = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2347,7 +2348,7 @@ android.content.ContextWrapper.prototype.getApplicationInfo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2376,7 +2377,7 @@ android.content.ContextWrapper.prototype.sendStickyOrderedBroadcast = function()
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2405,7 +2406,7 @@ android.content.ContextWrapper.prototype.checkCallingPermission = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2434,7 +2435,7 @@ android.content.ContextWrapper.prototype.unregisterReceiver = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2463,7 +2464,7 @@ android.content.ContextWrapper.prototype.stopService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2492,7 +2493,7 @@ android.content.ContextWrapper.prototype.createDisplayContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.content.ContextWrapper') {
-			return new this(result);
+			return new android.content.ContextWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

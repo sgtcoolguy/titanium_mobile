@@ -31,9 +31,9 @@ android.view.ViewGroup.LayoutParams = function() {
 			class: 'android.view.ViewGroup$LayoutParams',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -83,7 +83,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'layoutAnim
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$LayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.LayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -115,7 +115,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'width', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$LayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.LayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -147,7 +147,7 @@ Object.defineProperty(android.view.ViewGroup.LayoutParams.prototype, 'height', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$LayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.LayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -190,7 +190,7 @@ android.view.ViewGroup.LayoutParams.prototype.resolveLayoutDirection = function(
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$LayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.LayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -219,7 +219,7 @@ android.view.ViewGroup.LayoutParams.prototype.setBaseAttributes = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$LayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.LayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

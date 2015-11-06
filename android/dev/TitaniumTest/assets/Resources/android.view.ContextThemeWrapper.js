@@ -14,7 +14,8 @@ global.android.view = global.android.view || {};
 
 /**
  * @class android.view.ContextThemeWrapper
- * @extends android.content.ContextWrapper  * @constructor
+ * @extends android.content.ContextWrapper 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/view/ContextThemeWrapper.html}
  **/
 android.view.ContextThemeWrapper = function() {
@@ -29,9 +30,9 @@ android.view.ContextThemeWrapper = function() {
 			class: 'android.view.ContextThemeWrapper',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -74,7 +75,7 @@ android.view.ContextThemeWrapper.prototype.getTheme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -103,7 +104,7 @@ android.view.ContextThemeWrapper.prototype.getSystemService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -132,7 +133,7 @@ android.view.ContextThemeWrapper.prototype.getResources = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -161,7 +162,7 @@ android.view.ContextThemeWrapper.prototype.setTheme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -190,7 +191,7 @@ android.view.ContextThemeWrapper.prototype.attachBaseContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -219,7 +220,7 @@ android.view.ContextThemeWrapper.prototype.onApplyThemeResource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -248,7 +249,7 @@ android.view.ContextThemeWrapper.prototype.applyOverrideConfiguration = function
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ContextThemeWrapper') {
-			return new this(result);
+			return new android.view.ContextThemeWrapper(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

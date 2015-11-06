@@ -26,7 +26,7 @@ android.view.View.OnTouchListener = function() {
 		var instance = this,
 			copy = Array.prototype.slice.call(arguments)[0],
 			modified = {};
-		
+
 		function _wrapArg(arg) {
 			if (arg.apiName && arg.callNativeFunction) { // Assume hyperloop proxy, wrap in JS wrapper
 				var other = require(arg.apiName);
@@ -34,7 +34,7 @@ android.view.View.OnTouchListener = function() {
 			}
 			return arg;
 		}
-		
+
 		function _wrapArgs() {
 			var newArgs = [];
 			for (var i = 0; i < arguments.length; i++) {
@@ -42,14 +42,14 @@ android.view.View.OnTouchListener = function() {
 			}
 			return newArgs;
 		};
-		// Take original overrides, copy them to hang off JS wrapper later.
-		// Pass along to Java world a function that wraps native arguments before delegating to the JS wrapper
 		Object.keys(copy).forEach(function (each) {
 			// Hang the original override method on the JS wrapper object
 			instance[each] = function() {
 				return copy[each].apply(this, arguments);
 			};
-			
+
+			// Hang a delegate on the "overrides" object we pass into Java.
+			// This one wraps hyperloop proxies from Java in their JS wrapper before forwarding on
 			modified[each] = function() {
 				return instance[each].apply(this, _wrapArgs.apply(this, arguments));
 			}

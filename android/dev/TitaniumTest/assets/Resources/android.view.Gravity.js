@@ -14,7 +14,8 @@ global.android.view = global.android.view || {};
 
 /**
  * @class android.view.Gravity
- * @extends java.lang.Object  * @constructor
+ * @extends java.lang.Object 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html}
  **/
 android.view.Gravity = function() {
@@ -29,9 +30,9 @@ android.view.Gravity = function() {
 			class: 'android.view.Gravity',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -221,7 +222,7 @@ android.view.Gravity.FILL_HORIZONTAL = 7;
  **/
 android.view.Gravity.isVertical = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -239,7 +240,7 @@ android.view.Gravity.isVertical = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.Gravity') {
-			return new this(result);
+			return new android.view.Gravity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -255,7 +256,7 @@ android.view.Gravity.isVertical = function() {
  **/
 android.view.Gravity.getAbsoluteGravity = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -273,7 +274,7 @@ android.view.Gravity.getAbsoluteGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.Gravity') {
-			return new this(result);
+			return new android.view.Gravity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -292,7 +293,7 @@ android.view.Gravity.getAbsoluteGravity = function() {
  **/
 android.view.Gravity.apply = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -310,7 +311,7 @@ android.view.Gravity.apply = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.Gravity') {
-			return new this(result);
+			return new android.view.Gravity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -327,7 +328,7 @@ android.view.Gravity.apply = function() {
  **/
 android.view.Gravity.applyDisplay = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -345,7 +346,7 @@ android.view.Gravity.applyDisplay = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.Gravity') {
-			return new this(result);
+			return new android.view.Gravity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -361,7 +362,7 @@ android.view.Gravity.applyDisplay = function() {
  **/
 android.view.Gravity.isHorizontal = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -379,7 +380,7 @@ android.view.Gravity.isHorizontal = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.Gravity') {
-			return new this(result);
+			return new android.view.Gravity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

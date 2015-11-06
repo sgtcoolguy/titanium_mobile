@@ -31,9 +31,9 @@ android.view.ViewGroup.MarginLayoutParams = function() {
 			class: 'android.view.ViewGroup$MarginLayoutParams',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -65,7 +65,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'left
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.MarginLayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -97,7 +97,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'topM
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.MarginLayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -129,7 +129,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'righ
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.MarginLayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -161,7 +161,7 @@ Object.defineProperty(android.view.ViewGroup.MarginLayoutParams.prototype, 'bott
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-				return new this(result);
+				return new android.view.ViewGroup.MarginLayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -204,7 +204,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.isMarginRelative = function(
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -233,7 +233,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getLayoutDirection = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -262,7 +262,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setMargins = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -291,7 +291,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setMarginEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -320,7 +320,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getMarginEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -349,7 +349,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setLayoutDirection = functio
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -378,7 +378,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.resolveLayoutDirection = fun
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -407,7 +407,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.getMarginStart = function() 
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -436,7 +436,7 @@ android.view.ViewGroup.MarginLayoutParams.prototype.setMarginStart = function() 
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.ViewGroup$MarginLayoutParams') {
-			return new this(result);
+			return new android.view.ViewGroup.MarginLayoutParams(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

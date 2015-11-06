@@ -1,81 +1,57 @@
-/**
- * Hyperloop Module
- * Copyright (c) 2015 by Appcelerator, Inc. and subject to the
- * Appcelerator Platform Subscription agreement.
- */
-var FrameLayout = require('android.widget.FrameLayout'),
-	LayoutParams = require('android.widget.FrameLayout$LayoutParams'),
-	ViewGroupLayoutParams = require('android.view.ViewGroup$LayoutParams'),
-	Gravity = require('android.view.Gravity'),
-	Log = require('android.util.Log'),
-	Color = require('android.graphics.Color'),
-	View = require('android.view.View'),
-	ViewGroup = require('android.view.ViewGroup'),
-	OnTouchListener = require('android.view.View$OnTouchListener'),
-	MotionEvent = require('android.view.MotionEvent'),
-	Activity = require('android.app.Activity'),
+var //RotateAnimation = require('android.view.animation.RotateAnimation'),
+    //ScaleAnimation = require('android.view.animation.ScaleAnimation'),
+    //AnimationSet = require('android.view.animation.AnimationSet'),
+    Color = require('android.graphics.Color'),
+    Gravity = require('android.view.Gravity'),
+    View = require('android.view.View'),
+    Activity = require('android.app.Activity'),
+    LayoutParams = require('android.widget.FrameLayout$LayoutParams'),
 	activity = new Activity(Ti.Android.currentActivity),
-	win = Ti.UI.createWindow({}),
-	view = Ti.UI.createView({
-		layout: 'vertical',
-		top: 20,
-		right: 20,
-		bottom: 20,
-		left: 20,
-		height: Ti.UI.FILL,
-		width: Ti.UI.FILL
-	});
-	//viewGroup = new ViewGroup(view);
+    view,
+    layoutParams,
+    scrollView,
+	button,
+	label,
+	box;
 
-win.add(view);
-
-var drag = new OnTouchListener({
-	onTouch: function(v, event) {
-        // start timer for iteration
-        var params,
-        	action = event.getAction();
-        if (action == MotionEvent.ACTION_MOVE || action == MotionEvent.ACTION_UP) {
-        	params = v.getLayoutParams();
-            params.topMargin = event.getRawY() - v.getHeight();
-            params.leftMargin = event.getRawX() - (v.getWidth() / 2);
-            v.setLayoutParams(params);
-        }
-        return true;
-	}
+win = Ti.UI.createWindow({
+	title: 'Animate View Controller'
 });
-    
-var main = new FrameLayout(activity);
-//main.setBackgroundColor(Color.BLACK);
-// FIXME Tried to access LayoutParams.MATCH_PARENT and it was null, because the constant is actually defined on ViewGroupLayoutParams
-// But that should work, because it does in Java!
-var mainParams = new LayoutParams(ViewGroupLayoutParams.MATCH_PARENT, ViewGroupLayoutParams.MATCH_PARENT, Gravity.TOP);
-main.setLayoutParams(mainParams);
 
-var colors = [
-	Color.BLUE,
-	Color.CYAN,
-	Color.DKGRAY,
-	Color.GRAY,
-	Color.GREEN,
-	Color.LTGRAY,
-	Color.MAGENTA,
-	Color.RED,
-	Color.WHITE,
-	Color.YELLOW
-];
+scrollView = Ti.UI.createScrollView();
+view = Ti.UI.createView();
+button = Ti.UI.createButton({
+	title: 'Animate!',
+	top: 10,
+   width: 100,
+   height: 50
+});
+label = Ti.UI.createLabel();
 
-for (var i = 0; i < colors.length; i++) {
-	var temp = new View(activity);
-	temp.setBackgroundColor(colors[i]);
-	var layoutParams = new LayoutParams(50, 50, Gravity.TOP);
-	layoutParams.setMargins(0, i * 50, 0, 0);
-	temp.setLayoutParams(layoutParams);
-	temp.setOnTouchListener(drag);
-	main.addView(temp);
-}
+scrollView.add(view);
+scrollView.add(button);
+scrollView.add(label);
+win.add(scrollView);
 
-view.add(main);
+// create a view box we're going to animate when you click the button
+box = new View(activity);
+layoutParams = new LayoutParams(50, 50, Gravity.TOP);
+layoutParams.setMargins(10, 10, 0, 0);
+box.setLayoutParams(layoutParams);
+box.setBackgroundColor(Color.RED);
+view.add(box);
 
-//activity.setContentView(main);
+//var flag;
+button.addEventListener('click', function () {
+	//flag = !flag;
+	label.setText('');
+	// animate the UIView
+    box.animate().alpha(0.8).scaleX(1.5).scaleY(1.5).xBy(90).yBy(90).rotation(180).setDuration(1000).start();
+    //var set = new AnimationSet(true);
+    //set.addAnimation(new RotateAnimation(0, 180));
+    //set.addAnimation(new ScaleAnimation(1, 1.5, 1, 1.5));
+    //set.setDuration(1000); // 1 second
+    //box.startAnimation(set);
+});
 
 win.open();

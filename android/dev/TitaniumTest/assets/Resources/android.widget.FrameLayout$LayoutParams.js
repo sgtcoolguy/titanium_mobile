@@ -31,9 +31,9 @@ android.widget.FrameLayout.LayoutParams = function() {
 			class: 'android.widget.FrameLayout$LayoutParams',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -65,7 +65,7 @@ Object.defineProperty(android.widget.FrameLayout.LayoutParams.prototype, 'gravit
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.widget.FrameLayout$LayoutParams') {
-				return new this(result);
+				return new android.widget.FrameLayout.LayoutParams(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);

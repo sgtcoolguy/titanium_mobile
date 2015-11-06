@@ -14,7 +14,8 @@ global.android.widget = global.android.widget || {};
 
 /**
  * @class android.widget.Button
- * @extends android.widget.TextView  * @constructor
+ * @extends android.widget.TextView 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/widget/Button.html}
  **/
 android.widget.Button = function() {
@@ -29,9 +30,9 @@ android.widget.Button = function() {
 			class: 'android.widget.Button',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -74,7 +75,7 @@ android.widget.Button.prototype.getAccessibilityClassName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.Button') {
-			return new this(result);
+			return new android.widget.Button(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

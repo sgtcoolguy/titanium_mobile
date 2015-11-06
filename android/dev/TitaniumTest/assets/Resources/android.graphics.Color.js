@@ -14,7 +14,8 @@ global.android.graphics = global.android.graphics || {};
 
 /**
  * @class android.graphics.Color
- * @extends java.lang.Object  * @constructor
+ * @extends java.lang.Object 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html}
  **/
 android.graphics.Color = function() {
@@ -29,9 +30,9 @@ android.graphics.Color = function() {
 			class: 'android.graphics.Color',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -131,7 +132,7 @@ android.graphics.Color.TRANSPARENT = 0;
  **/
 android.graphics.Color.red = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -149,7 +150,7 @@ android.graphics.Color.red = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -165,7 +166,7 @@ android.graphics.Color.red = function() {
  **/
 android.graphics.Color.argb = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -183,7 +184,7 @@ android.graphics.Color.argb = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -199,7 +200,7 @@ android.graphics.Color.argb = function() {
  **/
 android.graphics.Color.green = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -217,7 +218,7 @@ android.graphics.Color.green = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -233,7 +234,7 @@ android.graphics.Color.green = function() {
  **/
 android.graphics.Color.blue = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -251,7 +252,7 @@ android.graphics.Color.blue = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -267,7 +268,7 @@ android.graphics.Color.blue = function() {
  **/
 android.graphics.Color.alpha = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -285,7 +286,7 @@ android.graphics.Color.alpha = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -302,7 +303,7 @@ android.graphics.Color.alpha = function() {
  **/
 android.graphics.Color.HSVToColor = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -320,7 +321,7 @@ android.graphics.Color.HSVToColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -336,7 +337,7 @@ android.graphics.Color.HSVToColor = function() {
  **/
 android.graphics.Color.rgb = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -354,7 +355,7 @@ android.graphics.Color.rgb = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -370,7 +371,7 @@ android.graphics.Color.rgb = function() {
  **/
 android.graphics.Color.colorToHSV = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -388,7 +389,7 @@ android.graphics.Color.colorToHSV = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -404,7 +405,7 @@ android.graphics.Color.colorToHSV = function() {
  **/
 android.graphics.Color.RGBToHSV = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -422,7 +423,7 @@ android.graphics.Color.RGBToHSV = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -438,7 +439,7 @@ android.graphics.Color.RGBToHSV = function() {
  **/
 android.graphics.Color.parseColor = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -456,7 +457,7 @@ android.graphics.Color.parseColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.graphics.Color') {
-			return new this(result);
+			return new android.graphics.Color(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

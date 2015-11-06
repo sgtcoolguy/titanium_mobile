@@ -30,9 +30,9 @@ android.view.MotionEvent = function() {
 			class: 'android.view.MotionEvent',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -556,7 +556,7 @@ android.view.MotionEvent.ACTION_DOWN = 0;
 Object.defineProperty(android.view.MotionEvent, 'CREATOR', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -570,7 +570,7 @@ Object.defineProperty(android.view.MotionEvent, 'CREATOR', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.MotionEvent') {
-				return new this(result);
+				return new android.view.MotionEvent(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -597,7 +597,7 @@ Object.defineProperty(android.view.MotionEvent, 'CREATOR', {
  **/
 android.view.MotionEvent.obtain = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -615,7 +615,7 @@ android.view.MotionEvent.obtain = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -631,7 +631,7 @@ android.view.MotionEvent.obtain = function() {
  **/
 android.view.MotionEvent.axisFromString = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -649,7 +649,7 @@ android.view.MotionEvent.axisFromString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -665,7 +665,7 @@ android.view.MotionEvent.axisFromString = function() {
  **/
 android.view.MotionEvent.obtainNoHistory = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -683,7 +683,7 @@ android.view.MotionEvent.obtainNoHistory = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -699,7 +699,7 @@ android.view.MotionEvent.obtainNoHistory = function() {
  **/
 android.view.MotionEvent.actionToString = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -717,7 +717,7 @@ android.view.MotionEvent.actionToString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -733,7 +733,7 @@ android.view.MotionEvent.actionToString = function() {
  **/
 android.view.MotionEvent.axisToString = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -751,7 +751,7 @@ android.view.MotionEvent.axisToString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -782,7 +782,7 @@ android.view.MotionEvent.prototype.findPointerIndex = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -811,7 +811,7 @@ android.view.MotionEvent.prototype.getActionIndex = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -840,7 +840,7 @@ android.view.MotionEvent.prototype.getButtonState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -870,7 +870,7 @@ android.view.MotionEvent.prototype.getOrientation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -899,7 +899,7 @@ android.view.MotionEvent.prototype.recycle = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -929,7 +929,7 @@ android.view.MotionEvent.prototype.getHistoricalOrientation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -958,7 +958,7 @@ android.view.MotionEvent.prototype.getYPrecision = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -987,7 +987,7 @@ android.view.MotionEvent.prototype.getPointerCoords = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1016,7 +1016,7 @@ android.view.MotionEvent.prototype.getEventTime = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1045,7 +1045,7 @@ android.view.MotionEvent.prototype.getActionButton = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1075,7 +1075,7 @@ android.view.MotionEvent.prototype.getTouchMinor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1104,7 +1104,7 @@ android.view.MotionEvent.prototype.getRawX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1133,7 +1133,7 @@ android.view.MotionEvent.prototype.getRawY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1162,7 +1162,7 @@ android.view.MotionEvent.prototype.isButtonPressed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1192,7 +1192,7 @@ android.view.MotionEvent.prototype.addBatch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1221,7 +1221,7 @@ android.view.MotionEvent.prototype.getHistorySize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1251,7 +1251,7 @@ android.view.MotionEvent.prototype.getHistoricalPressure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1280,7 +1280,7 @@ android.view.MotionEvent.prototype.getPointerId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1309,7 +1309,7 @@ android.view.MotionEvent.prototype.getSource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1338,7 +1338,7 @@ android.view.MotionEvent.prototype.setEdgeFlags = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1368,7 +1368,7 @@ android.view.MotionEvent.prototype.getTouchMajor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1397,7 +1397,7 @@ android.view.MotionEvent.prototype.getFlags = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1426,7 +1426,7 @@ android.view.MotionEvent.prototype.writeToParcel = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1455,7 +1455,7 @@ android.view.MotionEvent.prototype.setSource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1484,7 +1484,7 @@ android.view.MotionEvent.prototype.setAction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1513,7 +1513,7 @@ android.view.MotionEvent.prototype.getXPrecision = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1543,7 +1543,7 @@ android.view.MotionEvent.prototype.getHistoricalAxisValue = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1572,7 +1572,7 @@ android.view.MotionEvent.prototype.getToolType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1601,7 +1601,7 @@ android.view.MotionEvent.prototype.transform = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1631,7 +1631,7 @@ android.view.MotionEvent.prototype.getHistoricalSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1660,7 +1660,7 @@ android.view.MotionEvent.prototype.setLocation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1690,7 +1690,7 @@ android.view.MotionEvent.prototype.getToolMajor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1719,7 +1719,7 @@ android.view.MotionEvent.prototype.getHistoricalEventTime = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1749,7 +1749,7 @@ android.view.MotionEvent.prototype.getToolMinor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1778,7 +1778,7 @@ android.view.MotionEvent.prototype.getActionMasked = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1807,7 +1807,7 @@ android.view.MotionEvent.prototype.getMetaState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1837,7 +1837,7 @@ android.view.MotionEvent.prototype.getHistoricalToolMinor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1866,7 +1866,7 @@ android.view.MotionEvent.prototype.getHistoricalPointerCoords = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1896,7 +1896,7 @@ android.view.MotionEvent.prototype.getHistoricalToolMajor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1925,7 +1925,7 @@ android.view.MotionEvent.prototype.offsetLocation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1954,7 +1954,7 @@ android.view.MotionEvent.prototype.getPointerProperties = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1984,7 +1984,7 @@ android.view.MotionEvent.prototype.getAxisValue = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2013,7 +2013,7 @@ android.view.MotionEvent.prototype.getAction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2042,7 +2042,7 @@ android.view.MotionEvent.prototype.getPointerCount = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2072,7 +2072,7 @@ android.view.MotionEvent.prototype.getHistoricalX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2101,7 +2101,7 @@ android.view.MotionEvent.prototype.getDownTime = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2131,7 +2131,7 @@ android.view.MotionEvent.prototype.getHistoricalY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2160,7 +2160,7 @@ android.view.MotionEvent.prototype.getDeviceId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2190,7 +2190,7 @@ android.view.MotionEvent.prototype.getHistoricalTouchMajor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2220,7 +2220,7 @@ android.view.MotionEvent.prototype.getX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2250,7 +2250,7 @@ android.view.MotionEvent.prototype.getSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2280,7 +2280,7 @@ android.view.MotionEvent.prototype.getY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2310,7 +2310,7 @@ android.view.MotionEvent.prototype.getPressure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2340,7 +2340,7 @@ android.view.MotionEvent.prototype.getHistoricalTouchMinor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2369,7 +2369,7 @@ android.view.MotionEvent.prototype.finalize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2398,7 +2398,7 @@ android.view.MotionEvent.prototype.toString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2427,7 +2427,7 @@ android.view.MotionEvent.prototype.getEdgeFlags = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.MotionEvent') {
-			return new this(result);
+			return new android.view.MotionEvent(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

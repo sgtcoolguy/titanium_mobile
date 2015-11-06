@@ -14,6 +14,7 @@ global.java.lang = global.java.lang || {};
 
 /**
  * @class java.lang.Object
+
  * @constructor
  * @see {@link http://developer.android.com/reference/java/lang/Object.html}
  **/
@@ -29,9 +30,9 @@ java.lang.Object = function() {
 			class: 'java.lang.Object',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -92,7 +93,7 @@ java.lang.Object.prototype.getClass = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -123,7 +124,7 @@ java.lang.Object.prototype.wait = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -152,7 +153,7 @@ java.lang.Object.prototype.hashCode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -181,7 +182,7 @@ java.lang.Object.prototype.equals = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -210,7 +211,7 @@ java.lang.Object.prototype.notifyAll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -239,7 +240,7 @@ java.lang.Object.prototype.clone = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -268,7 +269,7 @@ java.lang.Object.prototype.toString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -297,7 +298,7 @@ java.lang.Object.prototype.finalize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -326,7 +327,7 @@ java.lang.Object.prototype.notify = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'java.lang.Object') {
-			return new this(result);
+			return new java.lang.Object(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

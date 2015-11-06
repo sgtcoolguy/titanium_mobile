@@ -33,7 +33,7 @@ android.util.Log = function() {
 		}); 
 	}
 	
-	this.$native = result;
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -114,7 +114,7 @@ android.util.Log.isLoggable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -148,7 +148,7 @@ android.util.Log.println = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -183,7 +183,7 @@ android.util.Log.d = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -218,7 +218,7 @@ android.util.Log.e = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -252,7 +252,7 @@ android.util.Log.getStackTraceString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -287,7 +287,7 @@ android.util.Log.v = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -323,7 +323,7 @@ android.util.Log.w = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -359,7 +359,7 @@ android.util.Log.wtf = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -394,7 +394,7 @@ android.util.Log.i = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.util.Log') {
-			return new this(result);
+			return new android.util.Log(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

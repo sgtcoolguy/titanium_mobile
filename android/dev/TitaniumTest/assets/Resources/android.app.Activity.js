@@ -14,7 +14,8 @@ global.android.app = global.android.app || {};
 
 /**
  * @class android.app.Activity
- * @extends android.view.ContextThemeWrapper  * @constructor
+ * @extends android.view.ContextThemeWrapper 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/app/Activity.html}
  **/
 android.app.Activity = function() {
@@ -29,9 +30,9 @@ android.app.Activity = function() {
 			class: 'android.app.Activity',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -99,7 +100,7 @@ android.app.Activity.DEFAULT_KEYS_SEARCH_GLOBAL = 4;
 Object.defineProperty(android.app.Activity, 'FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -113,7 +114,7 @@ Object.defineProperty(android.app.Activity, 'FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.app.Activity') {
-				return new this(result);
+				return new android.app.Activity(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -150,7 +151,7 @@ android.app.Activity.prototype.onChildTitleChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -179,7 +180,7 @@ android.app.Activity.prototype.getChangingConfigurations = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -209,7 +210,7 @@ android.app.Activity.prototype.onSearchRequested = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -238,7 +239,7 @@ android.app.Activity.prototype.navigateUpToFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -267,7 +268,7 @@ android.app.Activity.prototype.removeDialog = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -296,7 +297,7 @@ android.app.Activity.prototype.postponeEnterTransition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -325,7 +326,7 @@ android.app.Activity.prototype.setProgressBarIndeterminate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -355,7 +356,7 @@ android.app.Activity.prototype.startActivityFromFragment = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -384,7 +385,7 @@ android.app.Activity.prototype.dispatchGenericMotionEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -413,7 +414,7 @@ android.app.Activity.prototype.setTaskDescription = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -442,7 +443,7 @@ android.app.Activity.prototype.onBackPressed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -471,7 +472,7 @@ android.app.Activity.prototype.onRestart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -500,7 +501,7 @@ android.app.Activity.prototype.shouldUpRecreateTask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -529,7 +530,7 @@ android.app.Activity.prototype.finishAffinity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -558,7 +559,7 @@ android.app.Activity.prototype.setIntent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -587,7 +588,7 @@ android.app.Activity.prototype.dispatchPopulateAccessibilityEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -616,7 +617,7 @@ android.app.Activity.prototype.getLoaderManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -645,7 +646,7 @@ android.app.Activity.prototype.setActionBar = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -675,7 +676,7 @@ android.app.Activity.prototype.startIntentSender = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -704,7 +705,7 @@ android.app.Activity.prototype.showAssist = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -733,7 +734,7 @@ android.app.Activity.prototype.closeOptionsMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -762,7 +763,7 @@ android.app.Activity.prototype.openOptionsMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -791,7 +792,7 @@ android.app.Activity.prototype.getCallingActivity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -820,7 +821,7 @@ android.app.Activity.prototype.onWindowAttributesChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -849,7 +850,7 @@ android.app.Activity.prototype.invalidateOptionsMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -878,7 +879,7 @@ android.app.Activity.prototype.setProgressBarVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -907,7 +908,7 @@ android.app.Activity.prototype.onCreateNavigateUpTaskStack = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -936,7 +937,7 @@ android.app.Activity.prototype.getCurrentFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -965,7 +966,7 @@ android.app.Activity.prototype.dispatchKeyEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -994,7 +995,7 @@ android.app.Activity.prototype.setProgress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1023,7 +1024,7 @@ android.app.Activity.prototype.setVolumeControlStream = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1052,7 +1053,7 @@ android.app.Activity.prototype.onOptionsMenuClosed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1081,7 +1082,7 @@ android.app.Activity.prototype.setFinishOnTouchOutside = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1110,7 +1111,7 @@ android.app.Activity.prototype.onAttachedToWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1139,7 +1140,7 @@ android.app.Activity.prototype.getApplication = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1168,7 +1169,7 @@ android.app.Activity.prototype.onPrepareOptionsMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1197,7 +1198,7 @@ android.app.Activity.prototype.setProgressBarIndeterminateVisibility = function(
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1226,7 +1227,7 @@ android.app.Activity.prototype.getComponentName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1255,7 +1256,7 @@ android.app.Activity.prototype.getParent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1284,7 +1285,7 @@ android.app.Activity.prototype.stopManagingCursor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1313,7 +1314,7 @@ android.app.Activity.prototype.onTrimMemory = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1342,7 +1343,7 @@ android.app.Activity.prototype.getParentActivityIntent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1371,7 +1372,7 @@ android.app.Activity.prototype.onActionModeFinished = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1400,7 +1401,7 @@ android.app.Activity.prototype.recreate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1430,7 +1431,7 @@ android.app.Activity.prototype.onCreateDialog = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1460,7 +1461,7 @@ android.app.Activity.prototype.startActivityForResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1489,7 +1490,7 @@ android.app.Activity.prototype.onTitleChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1518,7 +1519,7 @@ android.app.Activity.prototype.onActivityReenter = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1547,7 +1548,7 @@ android.app.Activity.prototype.onEnterAnimationComplete = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1576,7 +1577,7 @@ android.app.Activity.prototype.onNewIntent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1605,7 +1606,7 @@ android.app.Activity.prototype.getActionBar = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1634,7 +1635,7 @@ android.app.Activity.prototype.onCreatePanelView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1663,7 +1664,7 @@ android.app.Activity.prototype.onKeyMultiple = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1692,7 +1693,7 @@ android.app.Activity.prototype.getFragmentManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1721,7 +1722,7 @@ android.app.Activity.prototype.onPanelClosed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1750,7 +1751,7 @@ android.app.Activity.prototype.onKeyShortcut = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1779,7 +1780,7 @@ android.app.Activity.prototype.dispatchTrackballEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1808,7 +1809,7 @@ android.app.Activity.prototype.setFeatureDrawableAlpha = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1837,7 +1838,7 @@ android.app.Activity.prototype.onVisibleBehindCanceled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1866,7 +1867,7 @@ android.app.Activity.prototype.addContentView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1895,7 +1896,7 @@ android.app.Activity.prototype.onActivityResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1924,7 +1925,7 @@ android.app.Activity.prototype.getWindowManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1953,7 +1954,7 @@ android.app.Activity.prototype.getRequestedOrientation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1982,7 +1983,7 @@ android.app.Activity.prototype.triggerSearch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2011,7 +2012,7 @@ android.app.Activity.prototype.finish = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2040,7 +2041,7 @@ android.app.Activity.prototype.isChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2069,7 +2070,7 @@ android.app.Activity.prototype.isVoiceInteraction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2098,7 +2099,7 @@ android.app.Activity.prototype.isVoiceInteractionRoot = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2127,7 +2128,7 @@ android.app.Activity.prototype.dispatchKeyShortcutEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2156,7 +2157,7 @@ android.app.Activity.prototype.onProvideReferrer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2185,7 +2186,7 @@ android.app.Activity.prototype.setVisible = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2214,7 +2215,7 @@ android.app.Activity.prototype.isDestroyed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2244,7 +2245,7 @@ android.app.Activity.prototype.setTitle = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2273,7 +2274,7 @@ android.app.Activity.prototype.getVoiceInteractor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2302,7 +2303,7 @@ android.app.Activity.prototype.stopLockTask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2332,7 +2333,7 @@ android.app.Activity.prototype.startActivities = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2361,7 +2362,7 @@ android.app.Activity.prototype.onKeyLongPress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2390,7 +2391,7 @@ android.app.Activity.prototype.startLockTask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2419,7 +2420,7 @@ android.app.Activity.prototype.onGenericMotionEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2448,7 +2449,7 @@ android.app.Activity.prototype.getMenuInflater = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2477,7 +2478,7 @@ android.app.Activity.prototype.isChangingConfigurations = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2506,7 +2507,7 @@ android.app.Activity.prototype.isImmersive = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2535,7 +2536,7 @@ android.app.Activity.prototype.setRequestedOrientation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2564,7 +2565,7 @@ android.app.Activity.prototype.setEnterSharedElementCallback = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2593,7 +2594,7 @@ android.app.Activity.prototype.dismissDialog = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2622,7 +2623,7 @@ android.app.Activity.prototype.getWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2652,7 +2653,7 @@ android.app.Activity.prototype.onRestoreInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2681,7 +2682,7 @@ android.app.Activity.prototype.getLocalClassName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2710,7 +2711,7 @@ android.app.Activity.prototype.onRequestPermissionsResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2739,7 +2740,7 @@ android.app.Activity.prototype.setTitleColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2768,7 +2769,7 @@ android.app.Activity.prototype.closeContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2797,7 +2798,7 @@ android.app.Activity.prototype.moveTaskToBack = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2826,7 +2827,7 @@ android.app.Activity.prototype.dispatchTouchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2855,7 +2856,7 @@ android.app.Activity.prototype.onActionModeStarted = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2885,7 +2886,7 @@ android.app.Activity.prototype.onPostCreate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2915,7 +2916,7 @@ android.app.Activity.prototype.showDialog = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2944,7 +2945,7 @@ android.app.Activity.prototype.getSearchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2973,7 +2974,7 @@ android.app.Activity.prototype.getTaskId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3002,7 +3003,7 @@ android.app.Activity.prototype.navigateUpTo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3031,7 +3032,7 @@ android.app.Activity.prototype.getTitleColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3060,7 +3061,7 @@ android.app.Activity.prototype.setFeatureDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3089,7 +3090,7 @@ android.app.Activity.prototype.requestWindowFeature = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3118,7 +3119,7 @@ android.app.Activity.prototype.finishActivity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3147,7 +3148,7 @@ android.app.Activity.prototype.managedQuery = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3176,7 +3177,7 @@ android.app.Activity.prototype.finishFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3205,7 +3206,7 @@ android.app.Activity.prototype.takeKeyEvents = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3234,7 +3235,7 @@ android.app.Activity.prototype.overridePendingTransition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3263,7 +3264,7 @@ android.app.Activity.prototype.unregisterForContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3292,7 +3293,7 @@ android.app.Activity.prototype.findViewById = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3321,7 +3322,7 @@ android.app.Activity.prototype.onNavigateUp = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3350,7 +3351,7 @@ android.app.Activity.prototype.requestPermissions = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3379,7 +3380,7 @@ android.app.Activity.prototype.onNavigateUpFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3408,7 +3409,7 @@ android.app.Activity.prototype.shouldShowRequestPermissionRationale = function()
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3437,7 +3438,7 @@ android.app.Activity.prototype.isTaskRoot = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3466,7 +3467,7 @@ android.app.Activity.prototype.onProvideAssistData = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3495,7 +3496,7 @@ android.app.Activity.prototype.isFinishing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3524,7 +3525,7 @@ android.app.Activity.prototype.getIntent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3553,7 +3554,7 @@ android.app.Activity.prototype.onStop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3583,7 +3584,7 @@ android.app.Activity.prototype.onWindowStartingActionMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3613,7 +3614,7 @@ android.app.Activity.prototype.startActivityIfNeeded = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3642,7 +3643,7 @@ android.app.Activity.prototype.setExitSharedElementCallback = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3671,7 +3672,7 @@ android.app.Activity.prototype.onPostResume = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3700,7 +3701,7 @@ android.app.Activity.prototype.onCreatePanelMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3729,7 +3730,7 @@ android.app.Activity.prototype.onPreparePanel = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3758,7 +3759,7 @@ android.app.Activity.prototype.setSecondaryProgress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3787,7 +3788,7 @@ android.app.Activity.prototype.getSystemService = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3816,7 +3817,7 @@ android.app.Activity.prototype.startSearch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3845,7 +3846,7 @@ android.app.Activity.prototype.setDefaultKeyMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3874,7 +3875,7 @@ android.app.Activity.prototype.onContextItemSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3903,7 +3904,7 @@ android.app.Activity.prototype.onPause = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3932,7 +3933,7 @@ android.app.Activity.prototype.onApplyThemeResource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3961,7 +3962,7 @@ android.app.Activity.prototype.onProvideAssistContent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3990,7 +3991,7 @@ android.app.Activity.prototype.finishActivityFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4020,7 +4021,7 @@ android.app.Activity.prototype.startActivity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4049,7 +4050,7 @@ android.app.Activity.prototype.setContentTransitionManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4078,7 +4079,7 @@ android.app.Activity.prototype.reportFullyDrawn = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4107,7 +4108,7 @@ android.app.Activity.prototype.getLayoutInflater = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4137,7 +4138,7 @@ android.app.Activity.prototype.startActionMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4166,7 +4167,7 @@ android.app.Activity.prototype.onRetainNonConfigurationInstance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4195,7 +4196,7 @@ android.app.Activity.prototype.getReferrer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4224,7 +4225,7 @@ android.app.Activity.prototype.onDestroy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4253,7 +4254,7 @@ android.app.Activity.prototype.onKeyUp = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4282,7 +4283,7 @@ android.app.Activity.prototype.onMenuOpened = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4311,7 +4312,7 @@ android.app.Activity.prototype.finishAfterTransition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4340,7 +4341,7 @@ android.app.Activity.prototype.startManagingCursor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4370,7 +4371,7 @@ android.app.Activity.prototype.onPrepareDialog = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4399,7 +4400,7 @@ android.app.Activity.prototype.openContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4428,7 +4429,7 @@ android.app.Activity.prototype.getCallingPackage = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4457,7 +4458,7 @@ android.app.Activity.prototype.setMediaController = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4486,7 +4487,7 @@ android.app.Activity.prototype.onAttachFragment = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4516,7 +4517,7 @@ android.app.Activity.prototype.onSaveInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4545,7 +4546,7 @@ android.app.Activity.prototype.hasWindowFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4574,7 +4575,7 @@ android.app.Activity.prototype.onCreateOptionsMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4603,7 +4604,7 @@ android.app.Activity.prototype.getVolumeControlStream = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4633,7 +4634,7 @@ android.app.Activity.prototype.setResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4663,7 +4664,7 @@ android.app.Activity.prototype.startIntentSenderForResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4692,7 +4693,7 @@ android.app.Activity.prototype.onLowMemory = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4721,7 +4722,7 @@ android.app.Activity.prototype.onOptionsItemSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4750,7 +4751,7 @@ android.app.Activity.prototype.onCreateThumbnail = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4779,7 +4780,7 @@ android.app.Activity.prototype.onStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4808,7 +4809,7 @@ android.app.Activity.prototype.getTitle = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4838,7 +4839,7 @@ android.app.Activity.prototype.startNextMatchingActivity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4867,7 +4868,7 @@ android.app.Activity.prototype.releaseInstance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4896,7 +4897,7 @@ android.app.Activity.prototype.onUserInteraction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4925,7 +4926,7 @@ android.app.Activity.prototype.onTrackballEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4954,7 +4955,7 @@ android.app.Activity.prototype.onTouchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4983,7 +4984,7 @@ android.app.Activity.prototype.onUserLeaveHint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5012,7 +5013,7 @@ android.app.Activity.prototype.onResume = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5041,7 +5042,7 @@ android.app.Activity.prototype.getPreferences = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5070,7 +5071,7 @@ android.app.Activity.prototype.getContentTransitionManager = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5099,7 +5100,7 @@ android.app.Activity.prototype.onContextMenuClosed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5129,7 +5130,7 @@ android.app.Activity.prototype.onCreateView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5158,7 +5159,7 @@ android.app.Activity.prototype.getMediaController = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5187,7 +5188,7 @@ android.app.Activity.prototype.onConfigurationChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5216,7 +5217,7 @@ android.app.Activity.prototype.onContentChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5245,7 +5246,7 @@ android.app.Activity.prototype.setFeatureDrawableResource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5274,7 +5275,7 @@ android.app.Activity.prototype.onCreateContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5303,7 +5304,7 @@ android.app.Activity.prototype.onPrepareNavigateUpTaskStack = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5332,7 +5333,7 @@ android.app.Activity.prototype.getLastNonConfigurationInstance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5361,7 +5362,7 @@ android.app.Activity.prototype.onKeyDown = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5390,7 +5391,7 @@ android.app.Activity.prototype.setFeatureDrawableUri = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5419,7 +5420,7 @@ android.app.Activity.prototype.createPendingResult = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5448,7 +5449,7 @@ android.app.Activity.prototype.registerForContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5477,7 +5478,7 @@ android.app.Activity.prototype.dump = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5506,7 +5507,7 @@ android.app.Activity.prototype.showLockTaskEscapeMessage = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5535,7 +5536,7 @@ android.app.Activity.prototype.getContentScene = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5565,7 +5566,7 @@ android.app.Activity.prototype.startIntentSenderFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5595,7 +5596,7 @@ android.app.Activity.prototype.onCreate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5624,7 +5625,7 @@ android.app.Activity.prototype.startPostponedEnterTransition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5653,7 +5654,7 @@ android.app.Activity.prototype.onWindowFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5683,7 +5684,7 @@ android.app.Activity.prototype.startActivityFromChild = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5712,7 +5713,7 @@ android.app.Activity.prototype.onMenuItemSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5741,7 +5742,7 @@ android.app.Activity.prototype.onCreateDescription = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5770,7 +5771,7 @@ android.app.Activity.prototype.requestVisibleBehind = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5799,7 +5800,7 @@ android.app.Activity.prototype.runOnUiThread = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5830,7 +5831,7 @@ android.app.Activity.prototype.setContentView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5859,7 +5860,7 @@ android.app.Activity.prototype.setImmersive = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5888,7 +5889,7 @@ android.app.Activity.prototype.onDetachedFromWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5917,7 +5918,7 @@ android.app.Activity.prototype.finishAndRemoveTask = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5946,7 +5947,7 @@ android.app.Activity.prototype.onStateNotSaved = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.app.Activity') {
-			return new this(result);
+			return new android.app.Activity(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

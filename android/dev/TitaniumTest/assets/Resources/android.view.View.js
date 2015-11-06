@@ -14,7 +14,8 @@ global.android.view = global.android.view || {};
 
 /**
  * @class android.view.View
- * @extends java.lang.Object  * @constructor
+ * @extends java.lang.Object 
+ * @constructor
  * @see {@link http://developer.android.com/reference/android/view/View.html}
  **/
 android.view.View = function() {
@@ -29,9 +30,9 @@ android.view.View = function() {
 			class: 'android.view.View',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -579,7 +580,7 @@ android.view.View.LAYOUT_DIRECTION_LTR = 0;
 Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -593,7 +594,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_S
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -607,7 +608,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_S
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -621,7 +622,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_WINDO
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -635,7 +636,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_WINDO
 Object.defineProperty(android.view.View, 'FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -649,7 +650,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -663,7 +664,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -677,7 +678,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_STATE
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -691,7 +692,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_SELECTED_STATE
 Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -705,7 +706,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -719,7 +720,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'SCALE_X', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -733,7 +734,7 @@ Object.defineProperty(android.view.View, 'SCALE_X', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -747,7 +748,7 @@ Object.defineProperty(android.view.View, 'SCALE_X', {
 Object.defineProperty(android.view.View, 'SCALE_Y', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -761,7 +762,7 @@ Object.defineProperty(android.view.View, 'SCALE_Y', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -775,7 +776,7 @@ Object.defineProperty(android.view.View, 'SCALE_Y', {
 Object.defineProperty(android.view.View, 'FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -789,7 +790,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -803,7 +804,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -817,7 +818,7 @@ Object.defineProperty(android.view.View, 'WINDOW_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -831,7 +832,7 @@ Object.defineProperty(android.view.View, 'WINDOW_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'ROTATION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -845,7 +846,7 @@ Object.defineProperty(android.view.View, 'ROTATION', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -859,7 +860,7 @@ Object.defineProperty(android.view.View, 'ROTATION', {
 Object.defineProperty(android.view.View, 'ENABLED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -873,7 +874,7 @@ Object.defineProperty(android.view.View, 'ENABLED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -887,7 +888,7 @@ Object.defineProperty(android.view.View, 'ENABLED_SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -901,7 +902,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -915,7 +916,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -929,7 +930,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_WINDOW_FOCUSE
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -943,7 +944,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_WINDOW_FOCUSE
 Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -957,7 +958,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_S
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -971,7 +972,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_S
 Object.defineProperty(android.view.View, 'EMPTY_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -985,7 +986,7 @@ Object.defineProperty(android.view.View, 'EMPTY_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -999,7 +1000,7 @@ Object.defineProperty(android.view.View, 'EMPTY_STATE_SET', {
 Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1013,7 +1014,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1027,7 +1028,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'X', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1041,7 +1042,7 @@ Object.defineProperty(android.view.View, 'X', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1055,7 +1056,7 @@ Object.defineProperty(android.view.View, 'X', {
 Object.defineProperty(android.view.View, 'Y', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1069,7 +1070,7 @@ Object.defineProperty(android.view.View, 'Y', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1083,7 +1084,7 @@ Object.defineProperty(android.view.View, 'Y', {
 Object.defineProperty(android.view.View, 'Z', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1097,7 +1098,7 @@ Object.defineProperty(android.view.View, 'Z', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1111,7 +1112,7 @@ Object.defineProperty(android.view.View, 'Z', {
 Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1125,7 +1126,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSE
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1139,7 +1140,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSE
 Object.defineProperty(android.view.View, 'ENABLED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1153,7 +1154,7 @@ Object.defineProperty(android.view.View, 'ENABLED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1167,7 +1168,7 @@ Object.defineProperty(android.view.View, 'ENABLED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1181,7 +1182,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1195,7 +1196,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1209,7 +1210,7 @@ Object.defineProperty(android.view.View, 'PRESSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1223,7 +1224,7 @@ Object.defineProperty(android.view.View, 'PRESSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1237,7 +1238,7 @@ Object.defineProperty(android.view.View, 'SELECTED_WINDOW_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1251,7 +1252,7 @@ Object.defineProperty(android.view.View, 'SELECTED_WINDOW_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'TRANSLATION_Z', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1265,7 +1266,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_Z', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1279,7 +1280,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_Z', {
 Object.defineProperty(android.view.View, 'TRANSLATION_X', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1293,7 +1294,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_X', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1307,7 +1308,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_X', {
 Object.defineProperty(android.view.View, 'TRANSLATION_Y', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1321,7 +1322,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_Y', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1335,7 +1336,7 @@ Object.defineProperty(android.view.View, 'TRANSLATION_Y', {
 Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1349,7 +1350,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSE
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1363,7 +1364,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSE
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1377,7 +1378,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1391,7 +1392,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1405,7 +1406,7 @@ Object.defineProperty(android.view.View, 'PRESSED_WINDOW_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1419,7 +1420,7 @@ Object.defineProperty(android.view.View, 'PRESSED_WINDOW_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'ALPHA', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1433,7 +1434,7 @@ Object.defineProperty(android.view.View, 'ALPHA', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1447,7 +1448,7 @@ Object.defineProperty(android.view.View, 'ALPHA', {
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1461,7 +1462,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_WINDOW_FOCUSED_STATE_S
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1475,7 +1476,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_WINDOW_FOCUSED_STATE_S
 Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1489,7 +1490,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1503,7 +1504,7 @@ Object.defineProperty(android.view.View, 'PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED
 Object.defineProperty(android.view.View, 'SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1517,7 +1518,7 @@ Object.defineProperty(android.view.View, 'SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1531,7 +1532,7 @@ Object.defineProperty(android.view.View, 'SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'ROTATION_Y', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1545,7 +1546,7 @@ Object.defineProperty(android.view.View, 'ROTATION_Y', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1559,7 +1560,7 @@ Object.defineProperty(android.view.View, 'ROTATION_Y', {
 Object.defineProperty(android.view.View, 'ROTATION_X', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1573,7 +1574,7 @@ Object.defineProperty(android.view.View, 'ROTATION_X', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1587,7 +1588,7 @@ Object.defineProperty(android.view.View, 'ROTATION_X', {
 Object.defineProperty(android.view.View, 'PRESSED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1601,7 +1602,7 @@ Object.defineProperty(android.view.View, 'PRESSED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1615,7 +1616,7 @@ Object.defineProperty(android.view.View, 'PRESSED_SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1629,7 +1630,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1643,7 +1644,7 @@ Object.defineProperty(android.view.View, 'ENABLED_FOCUSED_SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1657,7 +1658,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1671,7 +1672,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_
 Object.defineProperty(android.view.View, 'ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1685,7 +1686,7 @@ Object.defineProperty(android.view.View, 'ENABLED_SELECTED_WINDOW_FOCUSED_STATE_
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1699,7 +1700,7 @@ Object.defineProperty(android.view.View, 'ENABLED_SELECTED_WINDOW_FOCUSED_STATE_
 Object.defineProperty(android.view.View, 'ENABLED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1713,7 +1714,7 @@ Object.defineProperty(android.view.View, 'ENABLED_WINDOW_FOCUSED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1727,7 +1728,7 @@ Object.defineProperty(android.view.View, 'ENABLED_WINDOW_FOCUSED_STATE_SET', {
 Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1741,7 +1742,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1755,7 +1756,7 @@ Object.defineProperty(android.view.View, 'FOCUSED_SELECTED_STATE_SET', {
 Object.defineProperty(android.view.View, 'PRESSED_SELECTED_WINDOW_FOCUSED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1769,7 +1770,7 @@ Object.defineProperty(android.view.View, 'PRESSED_SELECTED_WINDOW_FOCUSED_STATE_
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1783,7 +1784,7 @@ Object.defineProperty(android.view.View, 'PRESSED_SELECTED_WINDOW_FOCUSED_STATE_
 Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_STATE_SET', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -1797,7 +1798,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_STATE_SET', {
 		// Wrap result if it's not a primitive type?
 		if (result.apiName) {
 			if (result.apiName === 'android.view.View') {
-				return new this(result);
+				return new android.view.View(result);
 			} else {
 				var ctor = require(result.apiName);
 				return new ctor(result);
@@ -1819,7 +1820,7 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_STATE_SET', {
  **/
 android.view.View.resolveSize = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1837,7 +1838,7 @@ android.view.View.resolveSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1853,7 +1854,7 @@ android.view.View.resolveSize = function() {
  **/
 android.view.View.resolveSizeAndState = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1871,7 +1872,7 @@ android.view.View.resolveSizeAndState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1887,7 +1888,7 @@ android.view.View.resolveSizeAndState = function() {
  **/
 android.view.View.combineMeasuredStates = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1905,7 +1906,7 @@ android.view.View.combineMeasuredStates = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1921,7 +1922,7 @@ android.view.View.combineMeasuredStates = function() {
  **/
 android.view.View.inflate = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1939,7 +1940,7 @@ android.view.View.inflate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1955,7 +1956,7 @@ android.view.View.inflate = function() {
  **/
 android.view.View.generateViewId = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1973,7 +1974,7 @@ android.view.View.generateViewId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -1989,7 +1990,7 @@ android.view.View.generateViewId = function() {
  **/
 android.view.View.getDefaultSize = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -2007,7 +2008,7 @@ android.view.View.getDefaultSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2023,7 +2024,7 @@ android.view.View.getDefaultSize = function() {
  **/
 android.view.View.mergeDrawableStates = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,			
+			class: this.className,
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -2041,7 +2042,7 @@ android.view.View.mergeDrawableStates = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2072,7 +2073,7 @@ android.view.View.prototype.getHorizontalFadingEdgeLength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2101,7 +2102,7 @@ android.view.View.prototype.dispatchDisplayHint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2130,7 +2131,7 @@ android.view.View.prototype.setY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2159,7 +2160,7 @@ android.view.View.prototype.setX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2188,7 +2189,7 @@ android.view.View.prototype.scrollBy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2217,7 +2218,7 @@ android.view.View.prototype.getDrawableState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2246,7 +2247,7 @@ android.view.View.prototype.setOnFocusChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2275,7 +2276,7 @@ android.view.View.prototype.setOnLongClickListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2304,7 +2305,7 @@ android.view.View.prototype.setOnDragListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2333,7 +2334,7 @@ android.view.View.prototype.getHandler = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2362,7 +2363,7 @@ android.view.View.prototype.isNestedScrollingEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2391,7 +2392,7 @@ android.view.View.prototype.setTextAlignment = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2420,7 +2421,7 @@ android.view.View.prototype.setZ = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2449,7 +2450,7 @@ android.view.View.prototype.isVerticalFadingEdgeEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2478,7 +2479,7 @@ android.view.View.prototype.postOnAnimationDelayed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2508,7 +2509,7 @@ android.view.View.prototype.postInvalidate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2537,7 +2538,7 @@ android.view.View.prototype.getScrollIndicators = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2566,7 +2567,7 @@ android.view.View.prototype.setLayoutDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2595,7 +2596,7 @@ android.view.View.prototype.isFocusableInTouchMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2624,7 +2625,7 @@ android.view.View.prototype.dispatchApplyWindowInsets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2653,7 +2654,7 @@ android.view.View.prototype.stopNestedScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2682,7 +2683,7 @@ android.view.View.prototype.onCreateDrawableState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2711,7 +2712,7 @@ android.view.View.prototype.addChildrenForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2740,7 +2741,7 @@ android.view.View.prototype.dispatchPopulateAccessibilityEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2769,7 +2770,7 @@ android.view.View.prototype.refreshDrawableState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2798,7 +2799,7 @@ android.view.View.prototype.isLayoutRequested = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2827,7 +2828,7 @@ android.view.View.prototype.setFilterTouchesWhenObscured = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2856,7 +2857,7 @@ android.view.View.prototype.isDuplicateParentStateEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2885,7 +2886,7 @@ android.view.View.prototype.getKeepScreenOn = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2914,7 +2915,7 @@ android.view.View.prototype.onFilterTouchEventForSecurity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2943,7 +2944,7 @@ android.view.View.prototype.getForegroundTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -2972,7 +2973,7 @@ android.view.View.prototype.requestLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3001,7 +3002,7 @@ android.view.View.prototype.onHoverEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3030,7 +3031,7 @@ android.view.View.prototype.setSaveEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3059,7 +3060,7 @@ android.view.View.prototype.isScrollbarFadingEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3088,7 +3089,7 @@ android.view.View.prototype.isLayoutDirectionResolved = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3117,7 +3118,7 @@ android.view.View.prototype.getApplicationWindowToken = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3146,7 +3147,7 @@ android.view.View.prototype.isInTouchMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3175,7 +3176,7 @@ android.view.View.prototype.getMeasuredHeightAndState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3204,7 +3205,7 @@ android.view.View.prototype.performContextClick = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3233,7 +3234,7 @@ android.view.View.prototype.getFocusables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3262,7 +3263,7 @@ android.view.View.prototype.dispatchKeyEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3291,7 +3292,7 @@ android.view.View.prototype.getWindowVisibleDisplayFrame = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3320,7 +3321,7 @@ android.view.View.prototype.getSuggestedMinimumWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3349,7 +3350,7 @@ android.view.View.prototype.setScrollBarFadeDuration = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3378,7 +3379,7 @@ android.view.View.prototype.performClick = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3407,7 +3408,7 @@ android.view.View.prototype.getHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3436,7 +3437,7 @@ android.view.View.prototype.hasNestedScrollingParent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3465,7 +3466,7 @@ android.view.View.prototype.onKeyPreIme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3494,7 +3495,7 @@ android.view.View.prototype.fitSystemWindows = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3523,7 +3524,7 @@ android.view.View.prototype.findViewsWithText = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3552,7 +3553,7 @@ android.view.View.prototype.setBackgroundTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3581,7 +3582,7 @@ android.view.View.prototype.onDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3610,7 +3611,7 @@ android.view.View.prototype.onAttachedToWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3639,7 +3640,7 @@ android.view.View.prototype.setActivated = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3668,7 +3669,7 @@ android.view.View.prototype.isImportantForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3697,7 +3698,7 @@ android.view.View.prototype.setPadding = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3726,7 +3727,7 @@ android.view.View.prototype.dispatchSaveInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3755,7 +3756,7 @@ android.view.View.prototype.computeHorizontalScrollRange = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3784,7 +3785,7 @@ android.view.View.prototype.clearFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3813,7 +3814,7 @@ android.view.View.prototype.setOnScrollChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3842,7 +3843,7 @@ android.view.View.prototype.callOnClick = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3871,7 +3872,7 @@ android.view.View.prototype.willNotCacheDrawing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3900,7 +3901,7 @@ android.view.View.prototype.onVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3929,7 +3930,7 @@ android.view.View.prototype.invalidateOutline = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3958,7 +3959,7 @@ android.view.View.prototype.setAccessibilityLiveRegion = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -3987,7 +3988,7 @@ android.view.View.prototype.onDrawScrollBars = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4016,7 +4017,7 @@ android.view.View.prototype.dispatchSetActivated = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4045,7 +4046,7 @@ android.view.View.prototype.onFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4074,7 +4075,7 @@ android.view.View.prototype.hasTransientState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4103,7 +4104,7 @@ android.view.View.prototype.toString = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4132,7 +4133,7 @@ android.view.View.prototype.setMeasuredDimension = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4161,7 +4162,7 @@ android.view.View.prototype.setScrollX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4190,7 +4191,7 @@ android.view.View.prototype.getPaddingRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4219,7 +4220,7 @@ android.view.View.prototype.setSystemUiVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4248,7 +4249,7 @@ android.view.View.prototype.setScrollY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4277,7 +4278,7 @@ android.view.View.prototype.dispatchRestoreInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4306,7 +4307,7 @@ android.view.View.prototype.setAccessibilityTraversalAfter = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4335,7 +4336,7 @@ android.view.View.prototype.onKeyShortcut = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4364,7 +4365,7 @@ android.view.View.prototype.onProvideStructure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4393,7 +4394,7 @@ android.view.View.prototype.setSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4422,7 +4423,7 @@ android.view.View.prototype.onApplyWindowInsets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4451,7 +4452,7 @@ android.view.View.prototype.getPaddingBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4480,7 +4481,7 @@ android.view.View.prototype.onDragEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4509,7 +4510,7 @@ android.view.View.prototype.getAccessibilityTraversalBefore = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4538,7 +4539,7 @@ android.view.View.prototype.restoreHierarchyState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4567,7 +4568,7 @@ android.view.View.prototype.dispatchWindowFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4596,7 +4597,7 @@ android.view.View.prototype.getElevation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4625,7 +4626,7 @@ android.view.View.prototype.announceForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4654,7 +4655,7 @@ android.view.View.prototype.getAccessibilityLiveRegion = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4683,7 +4684,7 @@ android.view.View.prototype.invalidateDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4712,7 +4713,7 @@ android.view.View.prototype.setBackgroundResource = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4741,7 +4742,7 @@ android.view.View.prototype.setFocusableInTouchMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4770,7 +4771,7 @@ android.view.View.prototype.post = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4799,7 +4800,7 @@ android.view.View.prototype.setClipBounds = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4829,7 +4830,7 @@ android.view.View.prototype.getClipBounds = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4858,7 +4859,7 @@ android.view.View.prototype.isSaveFromParentEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4887,7 +4888,7 @@ android.view.View.prototype.dispatchVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4917,7 +4918,7 @@ android.view.View.prototype.buildDrawingCache = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4946,7 +4947,7 @@ android.view.View.prototype.onOverScrolled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -4975,7 +4976,7 @@ android.view.View.prototype.getBottomFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5004,7 +5005,7 @@ android.view.View.prototype.getPaddingEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5033,7 +5034,7 @@ android.view.View.prototype.getTextAlignment = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5062,7 +5063,7 @@ android.view.View.prototype.setAccessibilityTraversalBefore = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5091,7 +5092,7 @@ android.view.View.prototype.setTextDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5120,7 +5121,7 @@ android.view.View.prototype.setAlpha = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5149,7 +5150,7 @@ android.view.View.prototype.onKeyLongPress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5178,7 +5179,7 @@ android.view.View.prototype.onGenericMotionEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5207,7 +5208,7 @@ android.view.View.prototype.setCameraDistance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5236,7 +5237,7 @@ android.view.View.prototype.isHorizontalFadingEdgeEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5265,7 +5266,7 @@ android.view.View.prototype.setDuplicateParentStateEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5294,7 +5295,7 @@ android.view.View.prototype.dispatchSetSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5323,7 +5324,7 @@ android.view.View.prototype.getCameraDistance = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5352,7 +5353,7 @@ android.view.View.prototype.onRestoreInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5381,7 +5382,7 @@ android.view.View.prototype.getBottomPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5410,7 +5411,7 @@ android.view.View.prototype.getContentDescription = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5439,7 +5440,7 @@ android.view.View.prototype.setOverScrollMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5468,7 +5469,7 @@ android.view.View.prototype.startAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5497,7 +5498,7 @@ android.view.View.prototype.setOnTouchListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5526,7 +5527,7 @@ android.view.View.prototype.saveHierarchyState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5555,7 +5556,7 @@ android.view.View.prototype.isTextAlignmentResolved = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5584,7 +5585,7 @@ android.view.View.prototype.getBackgroundTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5613,7 +5614,7 @@ android.view.View.prototype.setNextFocusDownId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5642,7 +5643,7 @@ android.view.View.prototype.getMinimumWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5671,7 +5672,7 @@ android.view.View.prototype.setScrollBarStyle = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5700,7 +5701,7 @@ android.view.View.prototype.willNotDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5729,7 +5730,7 @@ android.view.View.prototype.getOverlay = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5758,7 +5759,7 @@ android.view.View.prototype.getScrollBarStyle = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5787,7 +5788,7 @@ android.view.View.prototype.setHorizontalScrollBarEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5816,7 +5817,7 @@ android.view.View.prototype.setHapticFeedbackEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5845,7 +5846,7 @@ android.view.View.prototype.hasFocusable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5874,7 +5875,7 @@ android.view.View.prototype.onDrawForeground = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5903,7 +5904,7 @@ android.view.View.prototype.getPaddingTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5932,7 +5933,7 @@ android.view.View.prototype.isHorizontalScrollBarEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5961,7 +5962,7 @@ android.view.View.prototype.postDelayed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -5990,7 +5991,7 @@ android.view.View.prototype.setAccessibilityDelegate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6019,7 +6020,7 @@ android.view.View.prototype.getContextMenuInfo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6048,7 +6049,7 @@ android.view.View.prototype.setOutlineProvider = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6077,7 +6078,7 @@ android.view.View.prototype.setBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6106,7 +6107,7 @@ android.view.View.prototype.onProvideVirtualStructure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6135,7 +6136,7 @@ android.view.View.prototype.destroyDrawingCache = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6194,7 +6195,7 @@ android.view.View.prototype.setScrollIndicators = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6223,7 +6224,7 @@ android.view.View.prototype.hasOverlappingRendering = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6252,7 +6253,7 @@ android.view.View.prototype.onAnimationEnd = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6281,7 +6282,7 @@ android.view.View.prototype.getMeasuredWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6310,7 +6311,7 @@ android.view.View.prototype.setVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6339,7 +6340,7 @@ android.view.View.prototype.getRotationX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6368,7 +6369,7 @@ android.view.View.prototype.getRootWindowInsets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6397,7 +6398,7 @@ android.view.View.prototype.getRotationY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6426,7 +6427,7 @@ android.view.View.prototype.setSoundEffectsEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6455,7 +6456,7 @@ android.view.View.prototype.onStartTemporaryDetach = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6484,7 +6485,7 @@ android.view.View.prototype.dispatchNestedPreFling = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6513,7 +6514,7 @@ android.view.View.prototype.onAnimationStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6542,7 +6543,7 @@ android.view.View.prototype.getAccessibilityTraversalAfter = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6571,7 +6572,7 @@ android.view.View.prototype.onLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6600,7 +6601,7 @@ android.view.View.prototype.setLongClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6630,7 +6631,7 @@ android.view.View.prototype.postInvalidateDelayed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6659,7 +6660,7 @@ android.view.View.prototype.clearAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6688,7 +6689,7 @@ android.view.View.prototype.getOverScrollMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6717,7 +6718,7 @@ android.view.View.prototype.getParentForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6746,7 +6747,7 @@ android.view.View.prototype.verifyDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6775,7 +6776,7 @@ android.view.View.prototype.setBackgroundDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6804,7 +6805,7 @@ android.view.View.prototype.setOnClickListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6833,7 +6834,7 @@ android.view.View.prototype.setEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6862,7 +6863,7 @@ android.view.View.prototype.dispatchGenericPointerEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6891,7 +6892,7 @@ android.view.View.prototype.requestFocusFromTouch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6920,7 +6921,7 @@ android.view.View.prototype.getForegroundTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6949,7 +6950,7 @@ android.view.View.prototype.onSizeChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -6978,7 +6979,7 @@ android.view.View.prototype.getDrawingCacheQuality = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7007,7 +7008,7 @@ android.view.View.prototype.dispatchGenericFocusedEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7036,7 +7037,7 @@ android.view.View.prototype.dispatchNestedFling = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7065,7 +7066,7 @@ android.view.View.prototype.isHovered = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7095,7 +7096,7 @@ android.view.View.prototype.requestRectangleOnScreen = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7124,7 +7125,7 @@ android.view.View.prototype.getLocationOnScreen = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7153,7 +7154,7 @@ android.view.View.prototype.getWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7182,7 +7183,7 @@ android.view.View.prototype.getLayerType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7211,7 +7212,7 @@ android.view.View.prototype.dispatchDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7240,7 +7241,7 @@ android.view.View.prototype.getTransitionName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7269,7 +7270,7 @@ android.view.View.prototype.getTouchables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7298,7 +7299,7 @@ android.view.View.prototype.setScrollbarFadingEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7328,7 +7329,7 @@ android.view.View.prototype.startActionMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7357,7 +7358,7 @@ android.view.View.prototype.isLaidOut = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7386,7 +7387,7 @@ android.view.View.prototype.hasFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7415,7 +7416,7 @@ android.view.View.prototype.isDrawingCacheEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7444,7 +7445,7 @@ android.view.View.prototype.setKeepScreenOn = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7473,7 +7474,7 @@ android.view.View.prototype.onKeyUp = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7502,7 +7503,7 @@ android.view.View.prototype.setLayerType = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7531,7 +7532,7 @@ android.view.View.prototype.buildLayer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7560,7 +7561,7 @@ android.view.View.prototype.isShown = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7589,7 +7590,7 @@ android.view.View.prototype.dispatchHoverEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7618,7 +7619,7 @@ android.view.View.prototype.getDrawingCacheBackgroundColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7647,7 +7648,7 @@ android.view.View.prototype.getClipToOutline = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7676,7 +7677,7 @@ android.view.View.prototype.draw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7705,7 +7706,7 @@ android.view.View.prototype.isAttachedToWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7734,7 +7735,7 @@ android.view.View.prototype.onScreenStateChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7763,7 +7764,7 @@ android.view.View.prototype.getRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7792,7 +7793,7 @@ android.view.View.prototype.getPivotX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7821,7 +7822,7 @@ android.view.View.prototype.getPivotY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7850,7 +7851,7 @@ android.view.View.prototype.setRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7879,7 +7880,7 @@ android.view.View.prototype.hasWindowFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7908,7 +7909,7 @@ android.view.View.prototype.setScaleX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7937,7 +7938,7 @@ android.view.View.prototype.onSaveInstanceState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7966,7 +7967,7 @@ android.view.View.prototype.setScaleY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -7995,7 +7996,7 @@ android.view.View.prototype.setDrawingCacheEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8024,7 +8025,7 @@ android.view.View.prototype.getTextDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8053,7 +8054,7 @@ android.view.View.prototype.setNextFocusUpId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8082,7 +8083,7 @@ android.view.View.prototype.setForegroundGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8111,7 +8112,7 @@ android.view.View.prototype.bringToFront = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8140,7 +8141,7 @@ android.view.View.prototype.getRotation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8169,7 +8170,7 @@ android.view.View.prototype.dispatchProvideStructure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8198,7 +8199,7 @@ android.view.View.prototype.dispatchDrawableHotspotChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8227,7 +8228,7 @@ android.view.View.prototype.setNestedScrollingEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8256,7 +8257,7 @@ android.view.View.prototype.setTransitionName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8285,7 +8286,7 @@ android.view.View.prototype.dispatchKeyEventPreIme = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8314,7 +8315,7 @@ android.view.View.prototype.onTrackballEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8343,7 +8344,7 @@ android.view.View.prototype.onCreateInputConnection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8372,7 +8373,7 @@ android.view.View.prototype.getDrawingTime = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8401,7 +8402,7 @@ android.view.View.prototype.findViewWithTag = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8430,7 +8431,7 @@ android.view.View.prototype.drawableStateChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8459,7 +8460,7 @@ android.view.View.prototype.setFadingEdgeLength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8488,7 +8489,7 @@ android.view.View.prototype.sendAccessibilityEventUnchecked = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8517,7 +8518,7 @@ android.view.View.prototype.isActivated = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8546,7 +8547,7 @@ android.view.View.prototype.setHorizontalFadingEdgeEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8575,7 +8576,7 @@ android.view.View.prototype.getScaleY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8604,7 +8605,7 @@ android.view.View.prototype.getForeground = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8633,7 +8634,7 @@ android.view.View.prototype.getScaleX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8662,7 +8663,7 @@ android.view.View.prototype.isAccessibilityFocused = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8691,7 +8692,7 @@ android.view.View.prototype.startDrag = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8720,7 +8721,7 @@ android.view.View.prototype.isInLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8749,7 +8750,7 @@ android.view.View.prototype.getLabelFor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8778,7 +8779,7 @@ android.view.View.prototype.setMinimumWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8807,7 +8808,7 @@ android.view.View.prototype.onConfigurationChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8836,7 +8837,7 @@ android.view.View.prototype.performAccessibilityAction = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8865,7 +8866,7 @@ android.view.View.prototype.onDisplayHint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8894,7 +8895,7 @@ android.view.View.prototype.setPaddingRelative = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8923,7 +8924,7 @@ android.view.View.prototype.onCreateContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8952,7 +8953,7 @@ android.view.View.prototype.computeHorizontalScrollExtent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -8981,7 +8982,7 @@ android.view.View.prototype.setLeft = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9010,7 +9011,7 @@ android.view.View.prototype.setDrawingCacheBackgroundColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9039,7 +9040,7 @@ android.view.View.prototype.dispatchDragEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9068,7 +9069,7 @@ android.view.View.prototype.setVerticalFadingEdgeEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9098,7 +9099,7 @@ android.view.View.prototype.getDrawingCache = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9127,7 +9128,7 @@ android.view.View.prototype.computeVerticalScrollExtent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9157,7 +9158,7 @@ android.view.View.prototype.performHapticFeedback = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9186,7 +9187,7 @@ android.view.View.prototype.getTranslationY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9215,7 +9216,7 @@ android.view.View.prototype.getTranslationZ = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9245,7 +9246,7 @@ android.view.View.prototype.setTag = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9274,7 +9275,7 @@ android.view.View.prototype.getTranslationX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9303,7 +9304,7 @@ android.view.View.prototype.setOnContextClickListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9332,7 +9333,7 @@ android.view.View.prototype.sendAccessibilityEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9361,7 +9362,7 @@ android.view.View.prototype.isPressed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9390,7 +9391,7 @@ android.view.View.prototype.setBackgroundColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9419,7 +9420,7 @@ android.view.View.prototype.getForegroundGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9448,7 +9449,7 @@ android.view.View.prototype.getKeyDispatcherState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9477,7 +9478,7 @@ android.view.View.prototype.onScrollChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9506,7 +9507,7 @@ android.view.View.prototype.dispatchWindowVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9535,7 +9536,7 @@ android.view.View.prototype.setForeground = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9564,7 +9565,7 @@ android.view.View.prototype.getScrollBarFadeDuration = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9593,7 +9594,7 @@ android.view.View.prototype.getWindowToken = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9623,7 +9624,7 @@ android.view.View.prototype.getTag = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9652,7 +9653,7 @@ android.view.View.prototype.onMeasure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9681,7 +9682,7 @@ android.view.View.prototype.getRightFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9710,7 +9711,7 @@ android.view.View.prototype.setOnApplyWindowInsetsListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9739,7 +9740,7 @@ android.view.View.prototype.offsetLeftAndRight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9768,7 +9769,7 @@ android.view.View.prototype.getRootView = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9797,7 +9798,7 @@ android.view.View.prototype.isClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9826,7 +9827,7 @@ android.view.View.prototype.onDetachedFromWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9855,7 +9856,7 @@ android.view.View.prototype.getDisplay = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9884,7 +9885,7 @@ android.view.View.prototype.isPaddingOffsetRequired = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9913,7 +9914,7 @@ android.view.View.prototype.playSoundEffect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9942,7 +9943,7 @@ android.view.View.prototype.getTouchDelegate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -9971,7 +9972,7 @@ android.view.View.prototype.getMinimumHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10000,7 +10001,7 @@ android.view.View.prototype.removeOnAttachStateChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10029,7 +10030,7 @@ android.view.View.prototype.isOpaque = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10058,7 +10059,7 @@ android.view.View.prototype.setClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10087,7 +10088,7 @@ android.view.View.prototype.getMeasuredState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10116,7 +10117,7 @@ android.view.View.prototype.isLongClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10145,7 +10146,7 @@ android.view.View.prototype.animate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10174,7 +10175,7 @@ android.view.View.prototype.setStateListAnimator = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10203,7 +10204,7 @@ android.view.View.prototype.getMatrix = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10232,7 +10233,7 @@ android.view.View.prototype.isHapticFeedbackEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10261,7 +10262,7 @@ android.view.View.prototype.jumpDrawablesToCurrentState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10290,7 +10291,7 @@ android.view.View.prototype.dispatchGenericMotionEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10319,7 +10320,7 @@ android.view.View.prototype.getTopFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10348,7 +10349,7 @@ android.view.View.prototype.getLeftPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10377,7 +10378,7 @@ android.view.View.prototype.setRotation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10406,7 +10407,7 @@ android.view.View.prototype.scrollTo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10435,7 +10436,7 @@ android.view.View.prototype.setPivotX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10464,7 +10465,7 @@ android.view.View.prototype.dispatchSetPressed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10493,7 +10494,7 @@ android.view.View.prototype.setPivotY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10522,7 +10523,7 @@ android.view.View.prototype.overScrollBy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10551,7 +10552,7 @@ android.view.View.prototype.startNestedScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10580,7 +10581,7 @@ android.view.View.prototype.setWillNotCacheDrawing = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10609,7 +10610,7 @@ android.view.View.prototype.setScrollBarSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10638,7 +10639,7 @@ android.view.View.prototype.onInitializeAccessibilityEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10667,7 +10668,7 @@ android.view.View.prototype.computeScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10696,7 +10697,7 @@ android.view.View.prototype.isScrollContainer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10725,7 +10726,7 @@ android.view.View.prototype.getScrollX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10754,7 +10755,7 @@ android.view.View.prototype.getTopPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10783,7 +10784,7 @@ android.view.View.prototype.getScrollY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10812,7 +10813,7 @@ android.view.View.prototype.isDirty = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10841,7 +10842,7 @@ android.view.View.prototype.setForegroundTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10870,7 +10871,7 @@ android.view.View.prototype.isSaveEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10899,7 +10900,7 @@ android.view.View.prototype.getResources = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10928,7 +10929,7 @@ android.view.View.prototype.setOnKeyListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10957,7 +10958,7 @@ android.view.View.prototype.offsetTopAndBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -10986,7 +10987,7 @@ android.view.View.prototype.setWillNotDraw = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11015,7 +11016,7 @@ android.view.View.prototype.isSelected = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11044,7 +11045,7 @@ android.view.View.prototype.getFocusedRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11073,7 +11074,7 @@ android.view.View.prototype.dispatchWindowSystemUiVisiblityChanged = function() 
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11102,7 +11103,7 @@ android.view.View.prototype.getWindowAttachCount = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11131,7 +11132,7 @@ android.view.View.prototype.cancelPendingInputEvents = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11160,7 +11161,7 @@ android.view.View.prototype.setMinimumHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11189,7 +11190,7 @@ android.view.View.prototype.getParent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11218,7 +11219,7 @@ android.view.View.prototype.getWindowVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11247,7 +11248,7 @@ android.view.View.prototype.forceLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11276,7 +11277,7 @@ android.view.View.prototype.dispatchSystemUiVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11305,7 +11306,7 @@ android.view.View.prototype.onKeyMultiple = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11334,7 +11335,7 @@ android.view.View.prototype.onWindowSystemUiVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11363,7 +11364,7 @@ android.view.View.prototype.onInitializeAccessibilityNodeInfo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11392,7 +11393,7 @@ android.view.View.prototype.setLabelFor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11421,7 +11422,7 @@ android.view.View.prototype.setVerticalScrollbarPosition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11450,7 +11451,7 @@ android.view.View.prototype.focusSearch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11479,7 +11480,7 @@ android.view.View.prototype.dispatchTrackballEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11508,7 +11509,7 @@ android.view.View.prototype.getOutlineProvider = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11537,7 +11538,7 @@ android.view.View.prototype.getNextFocusForwardId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11566,7 +11567,7 @@ android.view.View.prototype.getLocalVisibleRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11595,7 +11596,7 @@ android.view.View.prototype.canResolveTextDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11624,7 +11625,7 @@ android.view.View.prototype.getImportantForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11653,7 +11654,7 @@ android.view.View.prototype.getDrawingRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11682,7 +11683,7 @@ android.view.View.prototype.dispatchKeyShortcutEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11711,7 +11712,7 @@ android.view.View.prototype.getVerticalFadingEdgeLength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11740,7 +11741,7 @@ android.view.View.prototype.getOnFocusChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11769,7 +11770,7 @@ android.view.View.prototype.isFocused = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11798,7 +11799,7 @@ android.view.View.prototype.isTextDirectionResolved = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11827,7 +11828,7 @@ android.view.View.prototype.getNextFocusDownId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11856,7 +11857,7 @@ android.view.View.prototype.measure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11885,7 +11886,7 @@ android.view.View.prototype.setClipToOutline = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11914,7 +11915,7 @@ android.view.View.prototype.isVerticalScrollBarEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11943,7 +11944,7 @@ android.view.View.prototype.setNextFocusRightId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -11972,7 +11973,7 @@ android.view.View.prototype.getLeftFadingEdgeStrength = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12002,7 +12003,7 @@ android.view.View.prototype.unscheduleDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12031,7 +12032,7 @@ android.view.View.prototype.onFinishInflate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12060,7 +12061,7 @@ android.view.View.prototype.requestApplyInsets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12091,7 +12092,7 @@ android.view.View.prototype.awakenScrollBars = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12120,7 +12121,7 @@ android.view.View.prototype.setHovered = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12149,7 +12150,7 @@ android.view.View.prototype.getId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12178,7 +12179,7 @@ android.view.View.prototype.setSaveFromParentEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12207,7 +12208,7 @@ android.view.View.prototype.getStateListAnimator = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12236,7 +12237,7 @@ android.view.View.prototype.getScrollBarDefaultDelayBeforeFade = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12265,7 +12266,7 @@ android.view.View.prototype.dispatchTouchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12294,7 +12295,7 @@ android.view.View.prototype.onSetAlpha = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12323,7 +12324,7 @@ android.view.View.prototype.getPaddingStart = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12352,7 +12353,7 @@ android.view.View.prototype.getAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12381,7 +12382,7 @@ android.view.View.prototype.getMeasuredWidthAndState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12410,7 +12411,7 @@ android.view.View.prototype.setImportantForAccessibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12439,7 +12440,7 @@ android.view.View.prototype.getPaddingLeft = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12468,7 +12469,7 @@ android.view.View.prototype.addOnLayoutChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12497,7 +12498,7 @@ android.view.View.prototype.findFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12526,7 +12527,7 @@ android.view.View.prototype.canScrollHorizontally = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12555,7 +12556,7 @@ android.view.View.prototype.onWindowVisibilityChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12584,7 +12585,7 @@ android.view.View.prototype.onPopulateAccessibilityEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12613,7 +12614,7 @@ android.view.View.prototype.getHitRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12642,7 +12643,7 @@ android.view.View.prototype.removeOnLayoutChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12671,7 +12672,7 @@ android.view.View.prototype.onFinishTemporaryDetach = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12700,7 +12701,7 @@ android.view.View.prototype.drawableHotspotChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12729,7 +12730,7 @@ android.view.View.prototype.getLayoutDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12758,7 +12759,7 @@ android.view.View.prototype.layout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12787,7 +12788,7 @@ android.view.View.prototype.getBaseline = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12817,7 +12818,7 @@ android.view.View.prototype.getGlobalVisibleRect = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12846,7 +12847,7 @@ android.view.View.prototype.setDrawingCacheQuality = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12875,7 +12876,7 @@ android.view.View.prototype.isHardwareAccelerated = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12904,7 +12905,7 @@ android.view.View.prototype.requestUnbufferedDispatch = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12933,7 +12934,7 @@ android.view.View.prototype.setHasTransientState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12963,7 +12964,7 @@ android.view.View.prototype.postInvalidateOnAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -12992,7 +12993,7 @@ android.view.View.prototype.scheduleDrawable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13021,7 +13022,7 @@ android.view.View.prototype.addOnAttachStateChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13050,7 +13051,7 @@ android.view.View.prototype.getVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13079,7 +13080,7 @@ android.view.View.prototype.getHorizontalScrollbarHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13108,7 +13109,7 @@ android.view.View.prototype.computeHorizontalScrollOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13137,7 +13138,7 @@ android.view.View.prototype.findViewById = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13166,7 +13167,7 @@ android.view.View.prototype.getAccessibilityClassName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13195,7 +13196,7 @@ android.view.View.prototype.setOnSystemUiVisibilityChangeListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13224,7 +13225,7 @@ android.view.View.prototype.removeCallbacks = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13253,7 +13254,7 @@ android.view.View.prototype.performLongClick = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13282,7 +13283,7 @@ android.view.View.prototype.setRotationX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13311,7 +13312,7 @@ android.view.View.prototype.setRotationY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13340,7 +13341,7 @@ android.view.View.prototype.requestFitSystemWindows = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13369,7 +13370,7 @@ android.view.View.prototype.setLayerPaint = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13398,7 +13399,7 @@ android.view.View.prototype.showContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13427,7 +13428,7 @@ android.view.View.prototype.setPressed = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13456,7 +13457,7 @@ android.view.View.prototype.onCancelPendingInputEvents = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13485,7 +13486,7 @@ android.view.View.prototype.hasOnClickListeners = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13514,7 +13515,7 @@ android.view.View.prototype.setFocusable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13543,7 +13544,7 @@ android.view.View.prototype.computeVerticalScrollRange = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13572,7 +13573,7 @@ android.view.View.prototype.setScrollContainer = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13601,7 +13602,7 @@ android.view.View.prototype.getBackgroundTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13630,7 +13631,7 @@ android.view.View.prototype.setAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13659,7 +13660,7 @@ android.view.View.prototype.dispatchNestedScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13689,7 +13690,7 @@ android.view.View.prototype.addFocusables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13718,7 +13719,7 @@ android.view.View.prototype.isContextClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13747,7 +13748,7 @@ android.view.View.prototype.getSystemUiVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13776,7 +13777,7 @@ android.view.View.prototype.isEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13805,7 +13806,7 @@ android.view.View.prototype.computeVerticalScrollOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13834,7 +13835,7 @@ android.view.View.prototype.setOnGenericMotionListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13863,7 +13864,7 @@ android.view.View.prototype.setNextFocusLeftId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13892,7 +13893,7 @@ android.view.View.prototype.onRtlPropertiesChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13921,7 +13922,7 @@ android.view.View.prototype.setLayoutParams = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13950,7 +13951,7 @@ android.view.View.prototype.computeSystemWindowInsets = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -13979,7 +13980,7 @@ android.view.View.prototype.getVerticalScrollbarWidth = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14008,7 +14009,7 @@ android.view.View.prototype.setContentDescription = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14037,7 +14038,7 @@ android.view.View.prototype.setOnCreateContextMenuListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14066,7 +14067,7 @@ android.view.View.prototype.setBackgroundTintList = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14095,7 +14096,7 @@ android.view.View.prototype.isPaddingRelative = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14124,7 +14125,7 @@ android.view.View.prototype.setTranslationZ = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14153,7 +14154,7 @@ android.view.View.prototype.setElevation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14182,7 +14183,7 @@ android.view.View.prototype.setTranslationY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14211,7 +14212,7 @@ android.view.View.prototype.canResolveLayoutDirection = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14240,7 +14241,7 @@ android.view.View.prototype.getNextFocusUpId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14269,7 +14270,7 @@ android.view.View.prototype.setTranslationX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14298,7 +14299,7 @@ android.view.View.prototype.postOnAnimation = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14327,7 +14328,7 @@ android.view.View.prototype.dispatchUnhandledMove = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14356,7 +14357,7 @@ android.view.View.prototype.setForegroundTintMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14385,7 +14386,7 @@ android.view.View.prototype.getViewTreeObserver = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14414,7 +14415,7 @@ android.view.View.prototype.isFocusable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14443,7 +14444,7 @@ android.view.View.prototype.canScrollVertically = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14472,7 +14473,7 @@ android.view.View.prototype.setContextClickable = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14501,7 +14502,7 @@ android.view.View.prototype.getFilterTouchesWhenObscured = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14530,7 +14531,7 @@ android.view.View.prototype.getBottom = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14559,7 +14560,7 @@ android.view.View.prototype.isSoundEffectsEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14588,7 +14589,7 @@ android.view.View.prototype.getSolidColor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14617,7 +14618,7 @@ android.view.View.prototype.getAlpha = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14646,7 +14647,7 @@ android.view.View.prototype.getSuggestedMinimumHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14675,7 +14676,7 @@ android.view.View.prototype.setTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14704,7 +14705,7 @@ android.view.View.prototype.getRightPaddingOffset = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14733,7 +14734,7 @@ android.view.View.prototype.cancelLongPress = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14762,7 +14763,7 @@ android.view.View.prototype.getTop = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14791,7 +14792,7 @@ android.view.View.prototype.setId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14820,7 +14821,7 @@ android.view.View.prototype.isInEditMode = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14849,7 +14850,7 @@ android.view.View.prototype.onTouchEvent = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14878,7 +14879,7 @@ android.view.View.prototype.setTouchDelegate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14907,7 +14908,7 @@ android.view.View.prototype.onHoverChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14936,7 +14937,7 @@ android.view.View.prototype.getNextFocusRightId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14965,7 +14966,7 @@ android.view.View.prototype.setNextFocusForwardId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -14994,7 +14995,7 @@ android.view.View.prototype.getMeasuredHeight = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15023,7 +15024,7 @@ android.view.View.prototype.dispatchNestedPrePerformAccessibilityAction = functi
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15052,7 +15053,7 @@ android.view.View.prototype.setVerticalScrollBarEnabled = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15081,7 +15082,7 @@ android.view.View.prototype.dispatchConfigurationChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15110,7 +15111,7 @@ android.view.View.prototype.getScrollBarSize = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15139,7 +15140,7 @@ android.view.View.prototype.getVerticalScrollbarPosition = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15168,7 +15169,7 @@ android.view.View.prototype.onKeyDown = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15199,7 +15200,7 @@ android.view.View.prototype.requestFocus = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15228,7 +15229,7 @@ android.view.View.prototype.getWindowSystemUiVisibility = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15257,7 +15258,7 @@ android.view.View.prototype.setBackground = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15286,7 +15287,7 @@ android.view.View.prototype.getLocationInWindow = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15315,7 +15316,7 @@ android.view.View.prototype.setOnHoverListener = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15344,7 +15345,7 @@ android.view.View.prototype.getAccessibilityNodeProvider = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15373,7 +15374,7 @@ android.view.View.prototype.setScrollBarDefaultDelayBeforeFade = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15402,7 +15403,7 @@ android.view.View.prototype.createAccessibilityNodeInfo = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15431,7 +15432,7 @@ android.view.View.prototype.getNextFocusLeftId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15460,7 +15461,7 @@ android.view.View.prototype.checkInputConnectionProxy = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15489,7 +15490,7 @@ android.view.View.prototype.onCheckIsTextEditor = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15518,7 +15519,7 @@ android.view.View.prototype.onWindowFocusChanged = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15547,7 +15548,7 @@ android.view.View.prototype.setFitsSystemWindows = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15576,7 +15577,7 @@ android.view.View.prototype.createContextMenu = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15607,7 +15608,7 @@ android.view.View.prototype.invalidate = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15636,7 +15637,7 @@ android.view.View.prototype.addTouchables = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15665,7 +15666,7 @@ android.view.View.prototype.getX = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15694,7 +15695,7 @@ android.view.View.prototype.getY = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15723,7 +15724,7 @@ android.view.View.prototype.getZ = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15752,7 +15753,7 @@ android.view.View.prototype.canResolveTextAlignment = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15781,7 +15782,7 @@ android.view.View.prototype.dispatchNestedPreScroll = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15810,7 +15811,7 @@ android.view.View.prototype.getContext = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15839,7 +15840,7 @@ android.view.View.prototype.getBackground = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15868,7 +15869,7 @@ android.view.View.prototype.getFitsSystemWindows = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15897,7 +15898,7 @@ android.view.View.prototype.getLeft = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -15926,7 +15927,7 @@ android.view.View.prototype.getWindowId = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.view.View') {
-			return new this(result);
+			return new android.view.View(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);

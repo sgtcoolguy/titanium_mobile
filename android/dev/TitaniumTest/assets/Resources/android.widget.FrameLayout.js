@@ -30,9 +30,9 @@ android.widget.FrameLayout = function() {
 			class: 'android.widget.FrameLayout',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		}); 
+		});
 	}
-	
+
 	this.$native = result;
 	this._hasPointer = result != null;
 	this._private = {};
@@ -75,7 +75,7 @@ android.widget.FrameLayout.prototype.setForegroundGravity = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -106,7 +106,7 @@ android.widget.FrameLayout.prototype.generateLayoutParams = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -135,7 +135,7 @@ android.widget.FrameLayout.prototype.onLayout = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -164,7 +164,7 @@ android.widget.FrameLayout.prototype.setMeasureAllChildren = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -193,7 +193,7 @@ android.widget.FrameLayout.prototype.checkLayoutParams = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -222,7 +222,7 @@ android.widget.FrameLayout.prototype.getConsiderGoneChildrenWhenMeasuring = func
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -251,7 +251,7 @@ android.widget.FrameLayout.prototype.getMeasureAllChildren = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -280,7 +280,7 @@ android.widget.FrameLayout.prototype.onMeasure = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -309,7 +309,7 @@ android.widget.FrameLayout.prototype.getAccessibilityClassName = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -339,7 +339,7 @@ android.widget.FrameLayout.prototype.generateDefaultLayoutParams = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
@@ -368,7 +368,7 @@ android.widget.FrameLayout.prototype.shouldDelayChildPressedState = function() {
 	// Wrap result if it's not a primitive type?
 	if (result.apiName) {
 		if (result.apiName === 'android.widget.FrameLayout') {
-			return new this(result);
+			return new android.widget.FrameLayout(result);
 		} else {
 			var ctor = require(result.apiName);
 			return new ctor(result);
