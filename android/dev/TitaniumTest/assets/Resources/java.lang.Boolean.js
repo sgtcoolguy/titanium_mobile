@@ -22,7 +22,9 @@ java.lang.Boolean = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Boolean') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Boolean') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Boolean.prototype.constructor = java.lang.Boolean;
 
 java.lang.Boolean.className = "java.lang.Boolean";
 java.lang.Boolean.prototype.className = "java.lang.Boolean";
+
+// class property
+Object.defineProperty(java.lang.Boolean, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Boolean',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -143,15 +159,9 @@ Object.defineProperty(java.lang.Boolean, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#compare(boolean, boolean)}
  **/
 java.lang.Boolean.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -178,15 +188,9 @@ java.lang.Boolean.compare = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#valueOf(java.lang.String)}
  **/
 java.lang.Boolean.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -212,15 +216,9 @@ java.lang.Boolean.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#parseBoolean(java.lang.String)}
  **/
 java.lang.Boolean.parseBoolean = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseBoolean',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -246,15 +244,9 @@ java.lang.Boolean.parseBoolean = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#logicalAnd(boolean, boolean)}
  **/
 java.lang.Boolean.logicalAnd = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'logicalAnd',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -280,15 +272,9 @@ java.lang.Boolean.logicalAnd = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#hashCode(boolean)}
  **/
 java.lang.Boolean.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -314,15 +300,9 @@ java.lang.Boolean.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#toString(boolean)}
  **/
 java.lang.Boolean.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -348,15 +328,9 @@ java.lang.Boolean.toString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#getBoolean(java.lang.String)}
  **/
 java.lang.Boolean.getBoolean = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getBoolean',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -382,15 +356,9 @@ java.lang.Boolean.getBoolean = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#logicalXor(boolean, boolean)}
  **/
 java.lang.Boolean.logicalXor = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'logicalXor',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -416,15 +384,9 @@ java.lang.Boolean.logicalXor = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Boolean.html#logicalOr(boolean, boolean)}
  **/
 java.lang.Boolean.logicalOr = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'logicalOr',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

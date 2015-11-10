@@ -22,7 +22,9 @@ android.graphics.Rect = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Rect') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Rect') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.graphics.Rect.prototype.constructor = android.graphics.Rect;
 
 android.graphics.Rect.className = "android.graphics.Rect";
 android.graphics.Rect.prototype.className = "android.graphics.Rect";
+
+// class property
+Object.defineProperty(android.graphics.Rect, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Rect',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -215,15 +231,9 @@ Object.defineProperty(android.graphics.Rect.prototype, 'right', {
  * @see {@link http://developer.android.com/reference/android/graphics/Rect.html#intersects(android.graphics.Rect, android.graphics.Rect)}
  **/
 android.graphics.Rect.intersects = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'intersects',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -249,15 +259,9 @@ android.graphics.Rect.intersects = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Rect.html#unflattenFromString(java.lang.String)}
  **/
 android.graphics.Rect.unflattenFromString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'unflattenFromString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

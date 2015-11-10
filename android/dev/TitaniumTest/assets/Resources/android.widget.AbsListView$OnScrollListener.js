@@ -19,7 +19,7 @@ android.widget.AbsListView.OnScrollListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.AbsListView$OnScrollListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.AbsListView$OnScrollListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.widget.AbsListView.OnScrollListener.isInstanceOf = function (self, cls) 
 
 android.widget.AbsListView.OnScrollListener.className = "android.widget.AbsListView$OnScrollListener";
 android.widget.AbsListView.OnScrollListener.prototype.className = "android.widget.AbsListView$OnScrollListener";
+
+// class property
+Object.defineProperty(android.widget.AbsListView.OnScrollListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.AbsListView$OnScrollListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/widget/AbsListView.OnScrollListener.html#SCROLL_STATE_IDLE

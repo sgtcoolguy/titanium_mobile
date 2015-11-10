@@ -23,7 +23,9 @@ java.nio.charset.CodingErrorAction = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.charset.CodingErrorAction') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.charset.CodingErrorAction') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ java.nio.charset.CodingErrorAction.prototype.constructor = java.nio.charset.Codi
 
 java.nio.charset.CodingErrorAction.className = "java.nio.charset.CodingErrorAction";
 java.nio.charset.CodingErrorAction.prototype.className = "java.nio.charset.CodingErrorAction";
+
+// class property
+Object.defineProperty(java.nio.charset.CodingErrorAction, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.charset.CodingErrorAction',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.charset.CodingErrorAction.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.charset.CodingErrorAction',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.charset.CodingErrorAction.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

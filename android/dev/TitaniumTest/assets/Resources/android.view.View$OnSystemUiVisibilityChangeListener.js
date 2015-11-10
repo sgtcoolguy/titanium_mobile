@@ -19,7 +19,7 @@ android.view.View.OnSystemUiVisibilityChangeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnSystemUiVisibilityChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnSystemUiVisibilityChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnSystemUiVisibilityChangeListener.isInstanceOf = function (se
 
 android.view.View.OnSystemUiVisibilityChangeListener.className = "android.view.View$OnSystemUiVisibilityChangeListener";
 android.view.View.OnSystemUiVisibilityChangeListener.prototype.className = "android.view.View$OnSystemUiVisibilityChangeListener";
+
+// class property
+Object.defineProperty(android.view.View.OnSystemUiVisibilityChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnSystemUiVisibilityChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

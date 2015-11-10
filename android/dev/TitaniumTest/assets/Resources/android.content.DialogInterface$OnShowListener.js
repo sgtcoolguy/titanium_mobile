@@ -19,7 +19,7 @@ android.content.DialogInterface.OnShowListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface$OnShowListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface$OnShowListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.content.DialogInterface.OnShowListener.isInstanceOf = function (self, cl
 
 android.content.DialogInterface.OnShowListener.className = "android.content.DialogInterface$OnShowListener";
 android.content.DialogInterface.OnShowListener.prototype.className = "android.content.DialogInterface$OnShowListener";
+
+// class property
+Object.defineProperty(android.content.DialogInterface.OnShowListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.DialogInterface$OnShowListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

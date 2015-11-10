@@ -22,7 +22,9 @@ java.net.NetworkInterface = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.NetworkInterface') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.NetworkInterface') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ java.net.NetworkInterface.prototype.constructor = java.net.NetworkInterface;
 java.net.NetworkInterface.className = "java.net.NetworkInterface";
 java.net.NetworkInterface.prototype.className = "java.net.NetworkInterface";
 
+// class property
+Object.defineProperty(java.net.NetworkInterface, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.NetworkInterface',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
@@ -54,157 +70,15 @@ java.net.NetworkInterface.prototype.className = "java.net.NetworkInterface";
 // Static methods
 /**
  * TODO Fill out docs more...
- * @function getByName
- * @static
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getByName(java.lang.String)}
- **/
-java.net.NetworkInterface.getByName = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getByName',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#access$100(java.net.NetworkInterface)}
- **/
-java.net.NetworkInterface.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getByIndex
  * @static
  * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getByIndex(int)}
  **/
 java.net.NetworkInterface.getByIndex = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getByIndex',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#access$000(java.net.NetworkInterface)}
- **/
-java.net.NetworkInterface.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getDefault
- * @static
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getDefault()}
- **/
-java.net.NetworkInterface.getDefault = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getDefault',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -229,16 +103,38 @@ java.net.NetworkInterface.getDefault = function() {
  * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getByInetAddress(java.net.InetAddress)}
  **/
 java.net.NetworkInterface.getByInetAddress = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getByInetAddress',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.NetworkInterface') {
+			return new java.net.NetworkInterface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getByName
+ * @static
+ * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getByName(java.lang.String)}
+ **/
+java.net.NetworkInterface.getByName = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'getByName',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -263,15 +159,9 @@ java.net.NetworkInterface.getByInetAddress = function() {
  * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getNetworkInterfaces()}
  **/
 java.net.NetworkInterface.getNetworkInterfaces = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getNetworkInterfaces',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -304,6 +194,35 @@ java.net.NetworkInterface.prototype.getInterfaceAddresses = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getInterfaceAddresses',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.NetworkInterface') {
+			return new java.net.NetworkInterface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getParent
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getParent()}
+ **/
+java.net.NetworkInterface.prototype.getParent = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getParent',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -468,122 +387,6 @@ java.net.NetworkInterface.prototype.isPointToPoint = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isUp
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#isUp()}
- **/
-java.net.NetworkInterface.prototype.isUp = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isUp',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hashCode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#hashCode()}
- **/
-java.net.NetworkInterface.prototype.hashCode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'hashCode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isLoopback
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#isLoopback()}
- **/
-java.net.NetworkInterface.prototype.isLoopback = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isLoopback',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getParent
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#getParent()}
- **/
-java.net.NetworkInterface.prototype.getParent = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getParent',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.NetworkInterface') {
-			return new java.net.NetworkInterface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getMTU
  * @memberof
  * @instance
@@ -594,6 +397,35 @@ java.net.NetworkInterface.prototype.getMTU = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getMTU',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.NetworkInterface') {
+			return new java.net.NetworkInterface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isUp
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#isUp()}
+ **/
+java.net.NetworkInterface.prototype.isUp = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'isUp',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -642,6 +474,35 @@ java.net.NetworkInterface.prototype.getDisplayName = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function hashCode
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#hashCode()}
+ **/
+java.net.NetworkInterface.prototype.hashCode = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'hashCode',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.NetworkInterface') {
+			return new java.net.NetworkInterface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function equals
  * @memberof
  * @instance
@@ -652,6 +513,35 @@ java.net.NetworkInterface.prototype.equals = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'equals',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.NetworkInterface') {
+			return new java.net.NetworkInterface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isLoopback
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/NetworkInterface.html#isLoopback()}
+ **/
+java.net.NetworkInterface.prototype.isLoopback = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'isLoopback',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

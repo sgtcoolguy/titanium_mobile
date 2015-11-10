@@ -22,7 +22,9 @@ java.lang.Thread = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Thread') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Thread') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ java.lang.Thread.prototype.constructor = java.lang.Thread;
 
 java.lang.Thread.className = "java.lang.Thread";
 java.lang.Thread.prototype.className = "java.lang.Thread";
+
+// class property
+Object.defineProperty(java.lang.Thread, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Thread',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.lang.Thread.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.lang.Thread',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.lang.Thread.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -68,198 +105,6 @@ java.lang.Thread.NORM_PRIORITY = 5;
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/lang/Thread.html#threadLocalRandomSecondarySeed
-Object.defineProperty(java.lang.Thread.prototype, 'threadLocalRandomSecondarySeed', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threadLocalRandomSecondarySeed'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threadLocalRandomSecondarySeed',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Thread.html#threadLocals
-Object.defineProperty(java.lang.Thread.prototype, 'threadLocals', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threadLocals'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threadLocals',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Thread.html#inheritableThreadLocals
-Object.defineProperty(java.lang.Thread.prototype, 'inheritableThreadLocals', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'inheritableThreadLocals'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'inheritableThreadLocals',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Thread.html#parkBlocker
-Object.defineProperty(java.lang.Thread.prototype, 'parkBlocker', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'parkBlocker'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'parkBlocker',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Thread.html#threadLocalRandomSeed
-Object.defineProperty(java.lang.Thread.prototype, 'threadLocalRandomSeed', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threadLocalRandomSeed'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threadLocalRandomSeed',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Thread.html#threadLocalRandomProbe
-Object.defineProperty(java.lang.Thread.prototype, 'threadLocalRandomProbe', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threadLocalRandomProbe'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Thread') {
-				return new java.lang.Thread(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threadLocalRandomProbe',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -269,15 +114,9 @@ Object.defineProperty(java.lang.Thread.prototype, 'threadLocalRandomProbe', {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#getAllStackTraces()}
  **/
 java.lang.Thread.getAllStackTraces = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getAllStackTraces',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -304,15 +143,9 @@ java.lang.Thread.getAllStackTraces = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#sleep(long, int)}
  **/
 java.lang.Thread.sleep = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'sleep',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -338,15 +171,9 @@ java.lang.Thread.sleep = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#yield()}
  **/
 java.lang.Thread.yield = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'yield',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -372,15 +199,9 @@ java.lang.Thread.yield = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#enumerate(java.lang.Thread[])}
  **/
 java.lang.Thread.enumerate = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'enumerate',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -406,15 +227,9 @@ java.lang.Thread.enumerate = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#activeCount()}
  **/
 java.lang.Thread.activeCount = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'activeCount',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -440,15 +255,9 @@ java.lang.Thread.activeCount = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#currentThread()}
  **/
 java.lang.Thread.currentThread = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'currentThread',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -474,15 +283,9 @@ java.lang.Thread.currentThread = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#dumpStack()}
  **/
 java.lang.Thread.dumpStack = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'dumpStack',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -508,50 +311,10 @@ java.lang.Thread.dumpStack = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#setDefaultUncaughtExceptionHandler(java.lang.Thread$UncaughtExceptionHandler)}
  **/
 java.lang.Thread.setDefaultUncaughtExceptionHandler = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setDefaultUncaughtExceptionHandler',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Thread') {
-			return new java.lang.Thread(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function processQueue
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Thread.html#processQueue(java.lang.ref.ReferenceQueue, java.util.concurrent.ConcurrentMap)}
- **/
-java.lang.Thread.processQueue = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'processQueue',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -576,15 +339,9 @@ java.lang.Thread.processQueue = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#interrupted()}
  **/
 java.lang.Thread.interrupted = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'interrupted',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -610,15 +367,9 @@ java.lang.Thread.interrupted = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#getDefaultUncaughtExceptionHandler()}
  **/
 java.lang.Thread.getDefaultUncaughtExceptionHandler = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefaultUncaughtExceptionHandler',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -644,15 +395,9 @@ java.lang.Thread.getDefaultUncaughtExceptionHandler = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Thread.html#holdsLock(java.lang.Object)}
  **/
 java.lang.Thread.holdsLock = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'holdsLock',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1006,35 +751,6 @@ java.lang.Thread.prototype.resume = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'resume',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Thread') {
-			return new java.lang.Thread(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function blockedOn
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Thread.html#blockedOn(sun.nio.ch.Interruptible)}
- **/
-java.lang.Thread.prototype.blockedOn = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'blockedOn',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

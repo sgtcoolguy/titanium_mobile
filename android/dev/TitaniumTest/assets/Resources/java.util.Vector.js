@@ -30,10 +30,10 @@ java.util.Vector = function() {
 			class: 'java.util.Vector',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -55,7 +55,7 @@ Object.defineProperty(java.util.Vector.prototype, 'capacityIncrement', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'capacityIncrement'
 		});
 		if (!result) {
@@ -75,7 +75,7 @@ Object.defineProperty(java.util.Vector.prototype, 'capacityIncrement', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'capacityIncrement',
 			value: newValue
 		});
@@ -87,7 +87,7 @@ Object.defineProperty(java.util.Vector.prototype, 'elementData', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'elementData'
 		});
 		if (!result) {
@@ -107,7 +107,7 @@ Object.defineProperty(java.util.Vector.prototype, 'elementData', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'elementData',
 			value: newValue
 		});
@@ -119,7 +119,7 @@ Object.defineProperty(java.util.Vector.prototype, 'elementCount', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'elementCount'
 		});
 		if (!result) {
@@ -139,7 +139,7 @@ Object.defineProperty(java.util.Vector.prototype, 'elementCount', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'elementCount',
 			value: newValue
 		});
@@ -160,7 +160,7 @@ Object.defineProperty(java.util.Vector.prototype, 'elementCount', {
 java.util.Vector.prototype.firstElement = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'firstElement',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -189,7 +189,7 @@ java.util.Vector.prototype.firstElement = function() {
 java.util.Vector.prototype.replaceAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'replaceAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -219,7 +219,7 @@ java.util.Vector.prototype.replaceAll = function() {
 java.util.Vector.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -248,7 +248,7 @@ java.util.Vector.prototype.remove = function() {
 java.util.Vector.prototype.capacity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'capacity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -277,7 +277,7 @@ java.util.Vector.prototype.capacity = function() {
 java.util.Vector.prototype.removeAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -306,7 +306,7 @@ java.util.Vector.prototype.removeAll = function() {
 java.util.Vector.prototype.iterator = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'iterator',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -335,7 +335,7 @@ java.util.Vector.prototype.iterator = function() {
 java.util.Vector.prototype.setSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -364,7 +364,7 @@ java.util.Vector.prototype.setSize = function() {
 java.util.Vector.prototype.setElementAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setElementAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -393,7 +393,7 @@ java.util.Vector.prototype.setElementAt = function() {
 java.util.Vector.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -422,7 +422,7 @@ java.util.Vector.prototype.hashCode = function() {
 java.util.Vector.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -451,7 +451,7 @@ java.util.Vector.prototype.get = function() {
 java.util.Vector.prototype.elementAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'elementAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -480,7 +480,7 @@ java.util.Vector.prototype.elementAt = function() {
 java.util.Vector.prototype.removeElementAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeElementAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -510,7 +510,7 @@ java.util.Vector.prototype.removeElementAt = function() {
 java.util.Vector.prototype.toArray = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toArray',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -539,7 +539,7 @@ java.util.Vector.prototype.toArray = function() {
 java.util.Vector.prototype.removeRange = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeRange',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -569,7 +569,7 @@ java.util.Vector.prototype.removeRange = function() {
 java.util.Vector.prototype.indexOf = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'indexOf',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -598,7 +598,7 @@ java.util.Vector.prototype.indexOf = function() {
 java.util.Vector.prototype.removeAllElements = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeAllElements',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -628,7 +628,7 @@ java.util.Vector.prototype.removeAllElements = function() {
 java.util.Vector.prototype.add = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'add',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -657,7 +657,7 @@ java.util.Vector.prototype.add = function() {
 java.util.Vector.prototype.subList = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'subList',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -686,7 +686,7 @@ java.util.Vector.prototype.subList = function() {
 java.util.Vector.prototype.trimToSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'trimToSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -715,7 +715,7 @@ java.util.Vector.prototype.trimToSize = function() {
 java.util.Vector.prototype.set = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'set',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -744,7 +744,7 @@ java.util.Vector.prototype.set = function() {
 java.util.Vector.prototype.elementData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'elementData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -773,7 +773,7 @@ java.util.Vector.prototype.elementData = function() {
 java.util.Vector.prototype.spliterator = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'spliterator',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -802,7 +802,7 @@ java.util.Vector.prototype.spliterator = function() {
 java.util.Vector.prototype.forEach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'forEach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -831,7 +831,7 @@ java.util.Vector.prototype.forEach = function() {
 java.util.Vector.prototype.copyInto = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'copyInto',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -860,7 +860,7 @@ java.util.Vector.prototype.copyInto = function() {
 java.util.Vector.prototype.containsAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'containsAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -889,7 +889,7 @@ java.util.Vector.prototype.containsAll = function() {
 java.util.Vector.prototype.isEmpty = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isEmpty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -918,7 +918,7 @@ java.util.Vector.prototype.isEmpty = function() {
 java.util.Vector.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -947,7 +947,7 @@ java.util.Vector.prototype.clear = function() {
 java.util.Vector.prototype.sort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'sort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -976,7 +976,7 @@ java.util.Vector.prototype.sort = function() {
 java.util.Vector.prototype.removeIf = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeIf',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1006,7 +1006,7 @@ java.util.Vector.prototype.removeIf = function() {
 java.util.Vector.prototype.lastIndexOf = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'lastIndexOf',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1035,7 +1035,7 @@ java.util.Vector.prototype.lastIndexOf = function() {
 java.util.Vector.prototype.contains = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'contains',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1064,7 +1064,7 @@ java.util.Vector.prototype.contains = function() {
 java.util.Vector.prototype.insertElementAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'insertElementAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1093,7 +1093,7 @@ java.util.Vector.prototype.insertElementAt = function() {
 java.util.Vector.prototype.size = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'size',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1123,7 +1123,7 @@ java.util.Vector.prototype.size = function() {
 java.util.Vector.prototype.addAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'addAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1152,7 +1152,7 @@ java.util.Vector.prototype.addAll = function() {
 java.util.Vector.prototype.elements = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'elements',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1181,7 +1181,7 @@ java.util.Vector.prototype.elements = function() {
 java.util.Vector.prototype.lastElement = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'lastElement',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1210,7 +1210,7 @@ java.util.Vector.prototype.lastElement = function() {
 java.util.Vector.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1239,7 +1239,7 @@ java.util.Vector.prototype.equals = function() {
 java.util.Vector.prototype.clone = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clone',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1269,7 +1269,7 @@ java.util.Vector.prototype.clone = function() {
 java.util.Vector.prototype.listIterator = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'listIterator',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1298,7 +1298,7 @@ java.util.Vector.prototype.listIterator = function() {
 java.util.Vector.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1327,7 +1327,7 @@ java.util.Vector.prototype.toString = function() {
 java.util.Vector.prototype.ensureCapacity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'ensureCapacity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1356,7 +1356,7 @@ java.util.Vector.prototype.ensureCapacity = function() {
 java.util.Vector.prototype.addElement = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'addElement',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1385,7 +1385,7 @@ java.util.Vector.prototype.addElement = function() {
 java.util.Vector.prototype.removeElement = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeElement',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1414,7 +1414,7 @@ java.util.Vector.prototype.removeElement = function() {
 java.util.Vector.prototype.retainAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'retainAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

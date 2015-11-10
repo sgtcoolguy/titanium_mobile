@@ -23,7 +23,9 @@ java.util.Locale.Category = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.Locale$Category') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.util.Locale$Category') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ java.util.Locale.Category.prototype.constructor = java.util.Locale.Category;
 
 java.util.Locale.Category.className = "java.util.Locale$Category";
 java.util.Locale.Category.prototype.className = "java.util.Locale$Category";
+
+// class property
+Object.defineProperty(java.util.Locale.Category, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.Locale$Category',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -107,102 +123,6 @@ Object.defineProperty(java.util.Locale.Category, 'FORMAT', {
 });
 
 // Instance Fields
-// http://developer.android.com/reference/java/util/Locale.Category.html#scriptKey
-Object.defineProperty(java.util.Locale.Category.prototype, 'scriptKey', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'scriptKey'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale$Category') {
-				return new java.util.Locale.Category(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.Category.html#countryKey
-Object.defineProperty(java.util.Locale.Category.prototype, 'countryKey', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'countryKey'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale$Category') {
-				return new java.util.Locale.Category(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.Category.html#variantKey
-Object.defineProperty(java.util.Locale.Category.prototype, 'variantKey', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'variantKey'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale$Category') {
-				return new java.util.Locale.Category(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.Category.html#languageKey
-Object.defineProperty(java.util.Locale.Category.prototype, 'languageKey', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'languageKey'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale$Category') {
-				return new java.util.Locale.Category(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -212,15 +132,9 @@ Object.defineProperty(java.util.Locale.Category.prototype, 'languageKey', {
  * @see {@link http://developer.android.com/reference/java/util/Locale.Category.html#valueOf(java.lang.String)}
  **/
 java.util.Locale.Category.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -246,15 +160,9 @@ java.util.Locale.Category.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.Category.html#values()}
  **/
 java.util.Locale.Category.values = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'values',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

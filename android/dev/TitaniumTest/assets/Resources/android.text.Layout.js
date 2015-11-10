@@ -22,15 +22,13 @@ android.text.Layout = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.text.Layout') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.text.Layout') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.text.Layout',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.text.Layout. Create a subclass using android.text.Layout.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.text.Layout.prototype.constructor = android.text.Layout;
 
 android.text.Layout.className = "android.text.Layout";
 android.text.Layout.prototype.className = "android.text.Layout";
+
+// class property
+Object.defineProperty(android.text.Layout, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.text.Layout',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.text.Layout.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.text.Layout',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.text.Layout.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -108,15 +141,9 @@ android.text.Layout.BREAK_STRATEGY_SIMPLE = 0;
  * @see {@link http://developer.android.com/reference/android/text/Layout.html#getDesiredWidth(java.lang.CharSequence, int, int, android.text.TextPaint)}
  **/
 android.text.Layout.getDesiredWidth = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDesiredWidth',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

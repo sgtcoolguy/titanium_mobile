@@ -22,7 +22,9 @@ android.graphics.Movie = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Movie') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Movie') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ android.graphics.Movie.prototype.constructor = android.graphics.Movie;
 android.graphics.Movie.className = "android.graphics.Movie";
 android.graphics.Movie.prototype.className = "android.graphics.Movie";
 
+// class property
+Object.defineProperty(android.graphics.Movie, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Movie',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.Movie.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.Movie',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.Movie.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -59,15 +96,9 @@ android.graphics.Movie.prototype.className = "android.graphics.Movie";
  * @see {@link http://developer.android.com/reference/android/graphics/Movie.html#decodeByteArray(byte[], int, int)}
  **/
 android.graphics.Movie.decodeByteArray = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decodeByteArray',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -93,15 +124,9 @@ android.graphics.Movie.decodeByteArray = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Movie.html#decodeFile(java.lang.String)}
  **/
 android.graphics.Movie.decodeFile = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decodeFile',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -127,15 +152,9 @@ android.graphics.Movie.decodeFile = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Movie.html#decodeStream(java.io.InputStream)}
  **/
 android.graphics.Movie.decodeStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decodeStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

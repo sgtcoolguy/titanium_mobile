@@ -30,10 +30,10 @@ java.lang.AbstractStringBuilder = function() {
 			class: 'java.lang.AbstractStringBuilder',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -55,7 +55,7 @@ Object.defineProperty(java.lang.AbstractStringBuilder.prototype, 'count', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'count'
 		});
 		if (!result) {
@@ -75,7 +75,7 @@ Object.defineProperty(java.lang.AbstractStringBuilder.prototype, 'count', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'count',
 			value: newValue
 		});
@@ -87,7 +87,7 @@ Object.defineProperty(java.lang.AbstractStringBuilder.prototype, 'value', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'value'
 		});
 		if (!result) {
@@ -107,7 +107,7 @@ Object.defineProperty(java.lang.AbstractStringBuilder.prototype, 'value', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'value',
 			value: newValue
 		});
@@ -128,7 +128,7 @@ Object.defineProperty(java.lang.AbstractStringBuilder.prototype, 'value', {
 java.lang.AbstractStringBuilder.prototype.deleteCharAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'deleteCharAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -157,7 +157,7 @@ java.lang.AbstractStringBuilder.prototype.deleteCharAt = function() {
 java.lang.AbstractStringBuilder.prototype.codePointAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'codePointAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -186,7 +186,7 @@ java.lang.AbstractStringBuilder.prototype.codePointAt = function() {
 java.lang.AbstractStringBuilder.prototype.setCharAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setCharAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -215,7 +215,7 @@ java.lang.AbstractStringBuilder.prototype.setCharAt = function() {
 java.lang.AbstractStringBuilder.prototype.replace = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'replace',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -255,7 +255,7 @@ java.lang.AbstractStringBuilder.prototype.replace = function() {
 java.lang.AbstractStringBuilder.prototype.insert = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'insert',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -284,7 +284,7 @@ java.lang.AbstractStringBuilder.prototype.insert = function() {
 java.lang.AbstractStringBuilder.prototype.delete = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'delete',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -314,7 +314,7 @@ java.lang.AbstractStringBuilder.prototype.delete = function() {
 java.lang.AbstractStringBuilder.prototype.substring = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'substring',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -343,7 +343,7 @@ java.lang.AbstractStringBuilder.prototype.substring = function() {
 java.lang.AbstractStringBuilder.prototype.capacity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'capacity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -372,7 +372,7 @@ java.lang.AbstractStringBuilder.prototype.capacity = function() {
 java.lang.AbstractStringBuilder.prototype.appendCodePoint = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'appendCodePoint',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -401,7 +401,7 @@ java.lang.AbstractStringBuilder.prototype.appendCodePoint = function() {
 java.lang.AbstractStringBuilder.prototype.expandCapacity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'expandCapacity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -430,7 +430,7 @@ java.lang.AbstractStringBuilder.prototype.expandCapacity = function() {
 java.lang.AbstractStringBuilder.prototype.codePointBefore = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'codePointBefore',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -460,7 +460,7 @@ java.lang.AbstractStringBuilder.prototype.codePointBefore = function() {
 java.lang.AbstractStringBuilder.prototype.indexOf = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'indexOf',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -489,7 +489,7 @@ java.lang.AbstractStringBuilder.prototype.indexOf = function() {
 java.lang.AbstractStringBuilder.prototype.codePointCount = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'codePointCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -518,7 +518,7 @@ java.lang.AbstractStringBuilder.prototype.codePointCount = function() {
 java.lang.AbstractStringBuilder.prototype.trimToSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'trimToSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -547,7 +547,7 @@ java.lang.AbstractStringBuilder.prototype.trimToSize = function() {
 java.lang.AbstractStringBuilder.prototype.getChars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getChars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -576,7 +576,7 @@ java.lang.AbstractStringBuilder.prototype.getChars = function() {
 java.lang.AbstractStringBuilder.prototype.length = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'length',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -605,7 +605,7 @@ java.lang.AbstractStringBuilder.prototype.length = function() {
 java.lang.AbstractStringBuilder.prototype.subSequence = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'subSequence',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -634,7 +634,7 @@ java.lang.AbstractStringBuilder.prototype.subSequence = function() {
 java.lang.AbstractStringBuilder.prototype.reverse = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'reverse',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -664,7 +664,7 @@ java.lang.AbstractStringBuilder.prototype.reverse = function() {
 java.lang.AbstractStringBuilder.prototype.lastIndexOf = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'lastIndexOf',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -693,7 +693,7 @@ java.lang.AbstractStringBuilder.prototype.lastIndexOf = function() {
 java.lang.AbstractStringBuilder.prototype.getValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -722,7 +722,7 @@ java.lang.AbstractStringBuilder.prototype.getValue = function() {
 java.lang.AbstractStringBuilder.prototype.setLength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -751,7 +751,7 @@ java.lang.AbstractStringBuilder.prototype.setLength = function() {
 java.lang.AbstractStringBuilder.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -780,7 +780,7 @@ java.lang.AbstractStringBuilder.prototype.toString = function() {
 java.lang.AbstractStringBuilder.prototype.ensureCapacity = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'ensureCapacity',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -809,7 +809,7 @@ java.lang.AbstractStringBuilder.prototype.ensureCapacity = function() {
 java.lang.AbstractStringBuilder.prototype.charAt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'charAt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -838,7 +838,7 @@ java.lang.AbstractStringBuilder.prototype.charAt = function() {
 java.lang.AbstractStringBuilder.prototype.offsetByCodePoints = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'offsetByCodePoints',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -883,7 +883,7 @@ java.lang.AbstractStringBuilder.prototype.offsetByCodePoints = function() {
 java.lang.AbstractStringBuilder.prototype.append = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'append',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

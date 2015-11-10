@@ -23,7 +23,9 @@ java.lang.reflect.Constructor = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.reflect.Constructor') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.reflect.Constructor') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ java.lang.reflect.Constructor.prototype.constructor = java.lang.reflect.Construc
 
 java.lang.reflect.Constructor.className = "java.lang.reflect.Constructor";
 java.lang.reflect.Constructor.prototype.className = "java.lang.reflect.Constructor";
+
+// class property
+Object.defineProperty(java.lang.reflect.Constructor, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.reflect.Constructor',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -86,16 +102,16 @@ java.lang.reflect.Constructor.prototype.getName = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function handleParameterNumberMismatch
+ * @function getParameterCount
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#handleParameterNumberMismatch(int, int)}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getParameterCount()}
  **/
-java.lang.reflect.Constructor.prototype.handleParameterNumberMismatch = function() {
+java.lang.reflect.Constructor.prototype.getParameterCount = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'handleParameterNumberMismatch',
+		func: 'getParameterCount',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -115,16 +131,16 @@ java.lang.reflect.Constructor.prototype.handleParameterNumberMismatch = function
 };
 /**
  * TODO Fill out docs more...
- * @function getParameterCount
+ * @function isVarArgs
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getParameterCount()}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#isVarArgs()}
  **/
-java.lang.reflect.Constructor.prototype.getParameterCount = function() {
+java.lang.reflect.Constructor.prototype.isVarArgs = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getParameterCount',
+		func: 'isVarArgs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -202,16 +218,16 @@ java.lang.reflect.Constructor.prototype.getParameterTypes = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getGenericExceptionTypes
+ * @function newInstance
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getGenericExceptionTypes()}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#newInstance(java.lang.Object[])}
  **/
-java.lang.reflect.Constructor.prototype.getGenericExceptionTypes = function() {
+java.lang.reflect.Constructor.prototype.newInstance = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getGenericExceptionTypes',
+		func: 'newInstance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -231,16 +247,16 @@ java.lang.reflect.Constructor.prototype.getGenericExceptionTypes = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function specificToGenericStringHeader
+ * @function getGenericExceptionTypes
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#specificToGenericStringHeader(java.lang.StringBuilder)}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getGenericExceptionTypes()}
  **/
-java.lang.reflect.Constructor.prototype.specificToGenericStringHeader = function() {
+java.lang.reflect.Constructor.prototype.getGenericExceptionTypes = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'specificToGenericStringHeader',
+		func: 'getGenericExceptionTypes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -347,16 +363,74 @@ java.lang.reflect.Constructor.prototype.getDeclaringClass = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getConstructorAccessor
+ * @function getExceptionTypes
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getConstructorAccessor()}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getExceptionTypes()}
  **/
-java.lang.reflect.Constructor.prototype.getConstructorAccessor = function() {
+java.lang.reflect.Constructor.prototype.getExceptionTypes = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getConstructorAccessor',
+		func: 'getExceptionTypes',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.reflect.Constructor') {
+			return new java.lang.reflect.Constructor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getGenericParameterTypes
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getGenericParameterTypes()}
+ **/
+java.lang.reflect.Constructor.prototype.getGenericParameterTypes = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getGenericParameterTypes',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.reflect.Constructor') {
+			return new java.lang.reflect.Constructor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getAnnotation
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getAnnotation(java.lang.Class)}
+ **/
+java.lang.reflect.Constructor.prototype.getAnnotation = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getAnnotation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -405,6 +479,35 @@ java.lang.reflect.Constructor.prototype.hashCode = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function equals
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#equals(java.lang.Object)}
+ **/
+java.lang.reflect.Constructor.prototype.equals = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'equals',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.reflect.Constructor') {
+			return new java.lang.reflect.Constructor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function toGenericString
  * @memberof
  * @instance
@@ -434,16 +537,16 @@ java.lang.reflect.Constructor.prototype.toGenericString = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function copy
+ * @function toString
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#copy()}
+ * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#toString()}
  **/
-java.lang.reflect.Constructor.prototype.copy = function() {
+java.lang.reflect.Constructor.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'copy',
+		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -521,470 +624,6 @@ java.lang.reflect.Constructor.prototype.getTypeParameters = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getRoot
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getRoot()}
- **/
-java.lang.reflect.Constructor.prototype.getRoot = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getRoot',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getAnnotationBytes
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getAnnotationBytes()}
- **/
-java.lang.reflect.Constructor.prototype.getAnnotationBytes = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getAnnotationBytes',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setConstructorAccessor
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#setConstructorAccessor(sun.reflect.ConstructorAccessor)}
- **/
-java.lang.reflect.Constructor.prototype.setConstructorAccessor = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setConstructorAccessor',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hasGenericInformation
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#hasGenericInformation()}
- **/
-java.lang.reflect.Constructor.prototype.hasGenericInformation = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'hasGenericInformation',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isVarArgs
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#isVarArgs()}
- **/
-java.lang.reflect.Constructor.prototype.isVarArgs = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isVarArgs',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getSignature
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getSignature()}
- **/
-java.lang.reflect.Constructor.prototype.getSignature = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getSignature',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function newInstance
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#newInstance(java.lang.Object[])}
- **/
-java.lang.reflect.Constructor.prototype.newInstance = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'newInstance',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function specificToStringHeader
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#specificToStringHeader(java.lang.StringBuilder)}
- **/
-java.lang.reflect.Constructor.prototype.specificToStringHeader = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'specificToStringHeader',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getRawParameterAnnotations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getRawParameterAnnotations()}
- **/
-java.lang.reflect.Constructor.prototype.getRawParameterAnnotations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getRawParameterAnnotations',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getExceptionTypes
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getExceptionTypes()}
- **/
-java.lang.reflect.Constructor.prototype.getExceptionTypes = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getExceptionTypes',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getSlot
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getSlot()}
- **/
-java.lang.reflect.Constructor.prototype.getSlot = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getSlot',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getGenericParameterTypes
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getGenericParameterTypes()}
- **/
-java.lang.reflect.Constructor.prototype.getGenericParameterTypes = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getGenericParameterTypes',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getGenericInfo
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getGenericInfo()}
- **/
-java.lang.reflect.Constructor.prototype.getGenericInfo = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getGenericInfo',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getAnnotation
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getAnnotation(java.lang.Class)}
- **/
-java.lang.reflect.Constructor.prototype.getAnnotation = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getAnnotation',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function equals
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#equals(java.lang.Object)}
- **/
-java.lang.reflect.Constructor.prototype.equals = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'equals',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function toString
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#toString()}
- **/
-java.lang.reflect.Constructor.prototype.toString = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'toString',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getParameterAnnotations
  * @memberof
  * @instance
@@ -1024,35 +663,6 @@ java.lang.reflect.Constructor.prototype.getAnnotatedReturnType = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getAnnotatedReturnType',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Constructor') {
-			return new java.lang.reflect.Constructor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getRawAnnotations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Constructor.html#getRawAnnotations()}
- **/
-java.lang.reflect.Constructor.prototype.getRawAnnotations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getRawAnnotations',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

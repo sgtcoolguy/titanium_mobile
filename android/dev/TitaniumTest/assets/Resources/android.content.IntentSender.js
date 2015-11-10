@@ -22,7 +22,9 @@ android.content.IntentSender = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.IntentSender') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.IntentSender') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.IntentSender.prototype.constructor = android.content.IntentSende
 
 android.content.IntentSender.className = "android.content.IntentSender";
 android.content.IntentSender.prototype.className = "android.content.IntentSender";
+
+// class property
+Object.defineProperty(android.content.IntentSender, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.IntentSender',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.IntentSender.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.IntentSender',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.IntentSender.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -87,15 +124,9 @@ Object.defineProperty(android.content.IntentSender, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#readIntentSenderOrNullFromParcel(android.os.Parcel)}
  **/
 android.content.IntentSender.readIntentSenderOrNullFromParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'readIntentSenderOrNullFromParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -121,15 +152,9 @@ android.content.IntentSender.readIntentSenderOrNullFromParcel = function() {
  * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#writeIntentSenderOrNullToParcel(android.content.IntentSender, android.os.Parcel)}
  **/
 android.content.IntentSender.writeIntentSenderOrNullToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writeIntentSenderOrNullToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -182,93 +207,6 @@ android.content.IntentSender.prototype.sendIntent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getTargetPackage
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#getTargetPackage()}
- **/
-android.content.IntentSender.prototype.getTargetPackage = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getTargetPackage',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.IntentSender') {
-			return new android.content.IntentSender(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getCreatorUid
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#getCreatorUid()}
- **/
-android.content.IntentSender.prototype.getCreatorUid = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getCreatorUid',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.IntentSender') {
-			return new android.content.IntentSender(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function describeContents
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#describeContents()}
- **/
-android.content.IntentSender.prototype.describeContents = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'describeContents',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.IntentSender') {
-			return new android.content.IntentSender(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function hashCode
  * @memberof
  * @instance
@@ -279,6 +217,35 @@ android.content.IntentSender.prototype.hashCode = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'hashCode',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.IntentSender') {
+			return new android.content.IntentSender(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getTargetPackage
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#getTargetPackage()}
+ **/
+android.content.IntentSender.prototype.getTargetPackage = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getTargetPackage',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -366,6 +333,64 @@ android.content.IntentSender.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.IntentSender') {
+			return new android.content.IntentSender(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCreatorUid
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#getCreatorUid()}
+ **/
+android.content.IntentSender.prototype.getCreatorUid = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getCreatorUid',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.IntentSender') {
+			return new android.content.IntentSender(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function describeContents
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/IntentSender.html#describeContents()}
+ **/
+android.content.IntentSender.prototype.describeContents = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'describeContents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

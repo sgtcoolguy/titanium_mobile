@@ -22,7 +22,9 @@ android.content.ComponentName = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.ComponentName') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.ComponentName') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.content.ComponentName.prototype.constructor = android.content.ComponentN
 
 android.content.ComponentName.className = "android.content.ComponentName";
 android.content.ComponentName.prototype.className = "android.content.ComponentName";
+
+// class property
+Object.defineProperty(android.content.ComponentName, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.ComponentName',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -87,15 +103,9 @@ Object.defineProperty(android.content.ComponentName, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/content/ComponentName.html#readFromParcel(android.os.Parcel)}
  **/
 android.content.ComponentName.readFromParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'readFromParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -121,15 +131,9 @@ android.content.ComponentName.readFromParcel = function() {
  * @see {@link http://developer.android.com/reference/android/content/ComponentName.html#unflattenFromString(java.lang.String)}
  **/
 android.content.ComponentName.unflattenFromString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'unflattenFromString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -156,15 +160,9 @@ android.content.ComponentName.unflattenFromString = function() {
  * @see {@link http://developer.android.com/reference/android/content/ComponentName.html#createRelative(android.content.Context, java.lang.String)}
  **/
 android.content.ComponentName.createRelative = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createRelative',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -190,15 +188,9 @@ android.content.ComponentName.createRelative = function() {
  * @see {@link http://developer.android.com/reference/android/content/ComponentName.html#writeToParcel(android.content.ComponentName, android.os.Parcel)}
  **/
 android.content.ComponentName.writeToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writeToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

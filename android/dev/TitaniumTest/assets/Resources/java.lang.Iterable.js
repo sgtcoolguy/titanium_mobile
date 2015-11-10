@@ -18,7 +18,7 @@ java.lang.Iterable = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Iterable') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.lang.Iterable') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ java.lang.Iterable.isInstanceOf = function (self, cls) {
 
 java.lang.Iterable.className = "java.lang.Iterable";
 java.lang.Iterable.prototype.className = "java.lang.Iterable";
+
+// class property
+Object.defineProperty(java.lang.Iterable, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Iterable',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

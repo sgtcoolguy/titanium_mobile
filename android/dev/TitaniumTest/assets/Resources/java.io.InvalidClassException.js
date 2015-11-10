@@ -30,10 +30,10 @@ java.io.InvalidClassException = function() {
 			class: 'java.io.InvalidClassException',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -55,7 +55,7 @@ Object.defineProperty(java.io.InvalidClassException.prototype, 'classname', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'classname'
 		});
 		if (!result) {
@@ -75,7 +75,7 @@ Object.defineProperty(java.io.InvalidClassException.prototype, 'classname', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'classname',
 			value: newValue
 		});
@@ -96,7 +96,7 @@ Object.defineProperty(java.io.InvalidClassException.prototype, 'classname', {
 java.io.InvalidClassException.prototype.getMessage = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getMessage',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

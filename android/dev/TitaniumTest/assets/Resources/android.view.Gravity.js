@@ -22,7 +22,9 @@ android.view.Gravity = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.Gravity') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.Gravity') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.view.Gravity.prototype.constructor = android.view.Gravity;
 
 android.view.Gravity.className = "android.view.Gravity";
 android.view.Gravity.prototype.className = "android.view.Gravity";
+
+// class property
+Object.defineProperty(android.view.Gravity, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.Gravity',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.Gravity.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.Gravity',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.Gravity.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -221,15 +258,9 @@ android.view.Gravity.FILL_HORIZONTAL = 7;
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html#isVertical(int)}
  **/
 android.view.Gravity.isVertical = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isVertical',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -255,15 +286,9 @@ android.view.Gravity.isVertical = function() {
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html#getAbsoluteGravity(int, int)}
  **/
 android.view.Gravity.getAbsoluteGravity = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getAbsoluteGravity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -292,15 +317,9 @@ android.view.Gravity.getAbsoluteGravity = function() {
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html#apply(int, int, int, android.graphics.Rect, int, int, android.graphics.Rect, int)}
  **/
 android.view.Gravity.apply = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'apply',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -327,15 +346,9 @@ android.view.Gravity.apply = function() {
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html#applyDisplay(int, android.graphics.Rect, android.graphics.Rect, int)}
  **/
 android.view.Gravity.applyDisplay = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'applyDisplay',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -361,15 +374,9 @@ android.view.Gravity.applyDisplay = function() {
  * @see {@link http://developer.android.com/reference/android/view/Gravity.html#isHorizontal(int)}
  **/
 android.view.Gravity.isHorizontal = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isHorizontal',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

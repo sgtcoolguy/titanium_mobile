@@ -19,7 +19,7 @@ android.content.SharedPreferences.OnSharedPreferenceChangeListener = function() 
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.SharedPreferences$OnSharedPreferenceChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.content.SharedPreferences$OnSharedPreferenceChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.content.SharedPreferences.OnSharedPreferenceChangeListener.isInstanceOf 
 
 android.content.SharedPreferences.OnSharedPreferenceChangeListener.className = "android.content.SharedPreferences$OnSharedPreferenceChangeListener";
 android.content.SharedPreferences.OnSharedPreferenceChangeListener.prototype.className = "android.content.SharedPreferences$OnSharedPreferenceChangeListener";
+
+// class property
+Object.defineProperty(android.content.SharedPreferences.OnSharedPreferenceChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.SharedPreferences$OnSharedPreferenceChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

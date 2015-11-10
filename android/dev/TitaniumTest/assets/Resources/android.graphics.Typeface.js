@@ -22,7 +22,9 @@ android.graphics.Typeface = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Typeface') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Typeface') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.graphics.Typeface.prototype.constructor = android.graphics.Typeface;
 
 android.graphics.Typeface.className = "android.graphics.Typeface";
 android.graphics.Typeface.prototype.className = "android.graphics.Typeface";
+
+// class property
+Object.defineProperty(android.graphics.Typeface, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Typeface',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.Typeface.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.Typeface',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.Typeface.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -75,13 +112,9 @@ android.graphics.Typeface.NORMAL = 0;
 // http://developer.android.com/reference/android/graphics/Typeface.html#DEFAULT_BOLD
 Object.defineProperty(android.graphics.Typeface, 'DEFAULT_BOLD', {
 	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
+		if (!this.class) return null;
 
-		var result = classProxy.getNativeField({
+		var result = this.class.getNativeField({
 			field: 'DEFAULT_BOLD'
 		});
 		if (!result) {
@@ -103,13 +136,9 @@ Object.defineProperty(android.graphics.Typeface, 'DEFAULT_BOLD', {
 // http://developer.android.com/reference/android/graphics/Typeface.html#MONOSPACE
 Object.defineProperty(android.graphics.Typeface, 'MONOSPACE', {
 	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
+		if (!this.class) return null;
 
-		var result = classProxy.getNativeField({
+		var result = this.class.getNativeField({
 			field: 'MONOSPACE'
 		});
 		if (!result) {
@@ -131,13 +160,9 @@ Object.defineProperty(android.graphics.Typeface, 'MONOSPACE', {
 // http://developer.android.com/reference/android/graphics/Typeface.html#DEFAULT
 Object.defineProperty(android.graphics.Typeface, 'DEFAULT', {
 	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
+		if (!this.class) return null;
 
-		var result = classProxy.getNativeField({
+		var result = this.class.getNativeField({
 			field: 'DEFAULT'
 		});
 		if (!result) {
@@ -159,13 +184,9 @@ Object.defineProperty(android.graphics.Typeface, 'DEFAULT', {
 // http://developer.android.com/reference/android/graphics/Typeface.html#SANS_SERIF
 Object.defineProperty(android.graphics.Typeface, 'SANS_SERIF', {
 	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
+		if (!this.class) return null;
 
-		var result = classProxy.getNativeField({
+		var result = this.class.getNativeField({
 			field: 'SANS_SERIF'
 		});
 		if (!result) {
@@ -187,13 +208,9 @@ Object.defineProperty(android.graphics.Typeface, 'SANS_SERIF', {
 // http://developer.android.com/reference/android/graphics/Typeface.html#SERIF
 Object.defineProperty(android.graphics.Typeface, 'SERIF', {
 	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
+		if (!this.class) return null;
 
-		var result = classProxy.getNativeField({
+		var result = this.class.getNativeField({
 			field: 'SERIF'
 		});
 		if (!result) {
@@ -224,15 +241,9 @@ Object.defineProperty(android.graphics.Typeface, 'SERIF', {
  * @see {@link http://developer.android.com/reference/android/graphics/Typeface.html#createFromFile(java.lang.String)}
  **/
 android.graphics.Typeface.createFromFile = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromFile',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -259,15 +270,9 @@ android.graphics.Typeface.createFromFile = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Typeface.html#create(android.graphics.Typeface, int)}
  **/
 android.graphics.Typeface.create = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'create',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -293,15 +298,9 @@ android.graphics.Typeface.create = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Typeface.html#createFromAsset(android.content.res.AssetManager, java.lang.String)}
  **/
 android.graphics.Typeface.createFromAsset = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromAsset',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -327,15 +326,9 @@ android.graphics.Typeface.createFromAsset = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Typeface.html#defaultFromStyle(int)}
  **/
 android.graphics.Typeface.defaultFromStyle = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'defaultFromStyle',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

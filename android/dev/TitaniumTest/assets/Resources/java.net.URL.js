@@ -22,7 +22,9 @@ java.net.URL = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.URL') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.URL') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,161 +47,25 @@ java.net.URL.prototype.constructor = java.net.URL;
 java.net.URL.className = "java.net.URL";
 java.net.URL.prototype.className = "java.net.URL";
 
+// class property
+Object.defineProperty(java.net.URL, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.URL',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/net/URL.html#serialVersionUID}
- */
-java.net.URL.serialVersionUID = -7627629688361524110;
 
 // Static fields
-// http://developer.android.com/reference/java/net/URL.html#factory
-Object.defineProperty(java.net.URL, 'factory', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'factory'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.URL') {
-				return new java.net.URL(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return;
-
-		classProxy.setNativeField({
-			field: 'factory',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/URL.html#handlers
-Object.defineProperty(java.net.URL, 'handlers', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'handlers'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.URL') {
-				return new java.net.URL(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return;
-
-		classProxy.setNativeField({
-			field: 'handlers',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Instance Fields
-// http://developer.android.com/reference/java/net/URL.html#handler
-Object.defineProperty(java.net.URL.prototype, 'handler', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'handler'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.URL') {
-				return new java.net.URL(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'handler',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/URL.html#hostAddress
-Object.defineProperty(java.net.URL.prototype, 'hostAddress', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'hostAddress'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.URL') {
-				return new java.net.URL(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'hostAddress',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -209,50 +75,10 @@ Object.defineProperty(java.net.URL.prototype, 'hostAddress', {
  * @see {@link http://developer.android.com/reference/java/net/URL.html#setURLStreamHandlerFactory(java.net.URLStreamHandlerFactory)}
  **/
 java.net.URL.setURLStreamHandlerFactory = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setURLStreamHandlerFactory',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.URL') {
-			return new java.net.URL(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getURLStreamHandler
- * @static
- * @see {@link http://developer.android.com/reference/java/net/URL.html#getURLStreamHandler(java.lang.String)}
- **/
-java.net.URL.getURLStreamHandler = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getURLStreamHandler',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -272,36 +98,6 @@ java.net.URL.getURLStreamHandler = function() {
 };
 
 // Instance methods
-/**
- * TODO Fill out docs more...
- * @function set
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/URL.html#set(java.lang.String, java.lang.String, int, java.lang.String, java.lang.String)}
- * @see {@link http://developer.android.com/reference/java/net/URL.html#set(java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
- **/
-java.net.URL.prototype.set = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'set',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.URL') {
-			return new java.net.URL(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function getDefaultPort

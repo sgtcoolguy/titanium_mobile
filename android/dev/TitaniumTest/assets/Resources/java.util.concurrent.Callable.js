@@ -19,7 +19,7 @@ java.util.concurrent.Callable = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.concurrent.Callable') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.concurrent.Callable') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.util.concurrent.Callable.isInstanceOf = function (self, cls) {
 
 java.util.concurrent.Callable.className = "java.util.concurrent.Callable";
 java.util.concurrent.Callable.prototype.className = "java.util.concurrent.Callable";
+
+// class property
+Object.defineProperty(java.util.concurrent.Callable, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.concurrent.Callable',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

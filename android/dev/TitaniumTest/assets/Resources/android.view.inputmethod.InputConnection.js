@@ -19,7 +19,7 @@ android.view.inputmethod.InputConnection = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.inputmethod.InputConnection') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.inputmethod.InputConnection') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.inputmethod.InputConnection.isInstanceOf = function (self, cls) {
 
 android.view.inputmethod.InputConnection.className = "android.view.inputmethod.InputConnection";
 android.view.inputmethod.InputConnection.prototype.className = "android.view.inputmethod.InputConnection";
+
+// class property
+Object.defineProperty(android.view.inputmethod.InputConnection, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.inputmethod.InputConnection',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/view/inputmethod/InputConnection.html#GET_EXTRACTED_TEXT_MONITOR

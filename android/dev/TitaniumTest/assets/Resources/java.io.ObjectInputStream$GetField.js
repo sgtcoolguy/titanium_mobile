@@ -31,10 +31,10 @@ java.io.ObjectInputStream.GetField = function() {
 			class: 'java.io.ObjectInputStream$GetField',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.io.ObjectInputStream.GetField.prototype.className = "java.io.ObjectInputStr
 java.io.ObjectInputStream.GetField.prototype.getObjectStreamClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getObjectStreamClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -94,7 +94,7 @@ java.io.ObjectInputStream.GetField.prototype.getObjectStreamClass = function() {
 java.io.ObjectInputStream.GetField.prototype.defaulted = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'defaulted',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -131,7 +131,7 @@ java.io.ObjectInputStream.GetField.prototype.defaulted = function() {
 java.io.ObjectInputStream.GetField.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

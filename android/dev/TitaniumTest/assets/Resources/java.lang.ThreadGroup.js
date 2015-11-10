@@ -22,7 +22,9 @@ java.lang.ThreadGroup = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.ThreadGroup') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.ThreadGroup') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,331 +47,46 @@ java.lang.ThreadGroup.prototype.constructor = java.lang.ThreadGroup;
 java.lang.ThreadGroup.className = "java.lang.ThreadGroup";
 java.lang.ThreadGroup.prototype.className = "java.lang.ThreadGroup";
 
+// class property
+Object.defineProperty(java.lang.ThreadGroup, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.ThreadGroup',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.lang.ThreadGroup.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.lang.ThreadGroup',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.lang.ThreadGroup.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#maxPriority
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'maxPriority', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'maxPriority'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'maxPriority',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#destroyed
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'destroyed', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'destroyed'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'destroyed',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#name
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'name', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'name'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'name',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#threads
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'threads', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threads'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threads',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#ngroups
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'ngroups', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'ngroups'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'ngroups',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#groups
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'groups', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'groups'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'groups',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#nthreads
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'nthreads', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'nthreads'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'nthreads',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#nUnstartedThreads
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'nUnstartedThreads', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'nUnstartedThreads'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'nUnstartedThreads',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#daemon
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'daemon', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'daemon'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'daemon',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ThreadGroup.html#vmAllowSuspension
-Object.defineProperty(java.lang.ThreadGroup.prototype, 'vmAllowSuspension', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'vmAllowSuspension'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ThreadGroup') {
-				return new java.lang.ThreadGroup(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'vmAllowSuspension',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
 
@@ -386,183 +103,6 @@ java.lang.ThreadGroup.prototype.setMaxPriority = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'setMaxPriority',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getName
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#getName()}
- **/
-java.lang.ThreadGroup.prototype.getName = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getName',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isDaemon
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#isDaemon()}
- **/
-java.lang.ThreadGroup.prototype.isDaemon = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isDaemon',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function interrupt
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#interrupt()}
- **/
-java.lang.ThreadGroup.prototype.interrupt = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'interrupt',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function activeGroupCount
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#activeGroupCount()}
- **/
-java.lang.ThreadGroup.prototype.activeGroupCount = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'activeGroupCount',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function enumerate
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.Thread[])}
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.Thread[], boolean)}
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.ThreadGroup[])}
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.ThreadGroup[], boolean)}
- **/
-java.lang.ThreadGroup.prototype.enumerate = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'enumerate',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function addUnstarted
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#addUnstarted()}
- **/
-java.lang.ThreadGroup.prototype.addUnstarted = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'addUnstarted',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -669,35 +209,6 @@ java.lang.ThreadGroup.prototype.resume = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function add
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#add(java.lang.Thread)}
- **/
-java.lang.ThreadGroup.prototype.add = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'add',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getParent
  * @memberof
  * @instance
@@ -727,16 +238,16 @@ java.lang.ThreadGroup.prototype.getParent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isDestroyed
+ * @function getName
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#isDestroyed()}
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#getName()}
  **/
-java.lang.ThreadGroup.prototype.isDestroyed = function() {
+java.lang.ThreadGroup.prototype.getName = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'isDestroyed',
+		func: 'getName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -756,16 +267,16 @@ java.lang.ThreadGroup.prototype.isDestroyed = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function threadTerminated
+ * @function isDestroyed
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#threadTerminated(java.lang.Thread)}
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#isDestroyed()}
  **/
-java.lang.ThreadGroup.prototype.threadTerminated = function() {
+java.lang.ThreadGroup.prototype.isDestroyed = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'threadTerminated',
+		func: 'isDestroyed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -847,7 +358,6 @@ java.lang.ThreadGroup.prototype.parentOf = function() {
  * @memberof
  * @instance
  * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#list()}
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#list(java.io.PrintStream, int)}
  **/
 java.lang.ThreadGroup.prototype.list = function() {
 	if (!this._hasPointer) return null;
@@ -1018,6 +528,125 @@ java.lang.ThreadGroup.prototype.stop = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function isDaemon
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#isDaemon()}
+ **/
+java.lang.ThreadGroup.prototype.isDaemon = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'isDaemon',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.ThreadGroup') {
+			return new java.lang.ThreadGroup(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function interrupt
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#interrupt()}
+ **/
+java.lang.ThreadGroup.prototype.interrupt = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'interrupt',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.ThreadGroup') {
+			return new java.lang.ThreadGroup(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function activeGroupCount
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#activeGroupCount()}
+ **/
+java.lang.ThreadGroup.prototype.activeGroupCount = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'activeGroupCount',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.ThreadGroup') {
+			return new java.lang.ThreadGroup(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function enumerate
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.Thread[])}
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.Thread[], boolean)}
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.ThreadGroup[])}
+ * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#enumerate(java.lang.ThreadGroup[], boolean)}
+ **/
+java.lang.ThreadGroup.prototype.enumerate = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'enumerate',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.ThreadGroup') {
+			return new java.lang.ThreadGroup(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function uncaughtException
  * @memberof
  * @instance
@@ -1057,35 +686,6 @@ java.lang.ThreadGroup.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ThreadGroup') {
-			return new java.lang.ThreadGroup(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function threadStartFailed
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ThreadGroup.html#threadStartFailed(java.lang.Thread)}
- **/
-java.lang.ThreadGroup.prototype.threadStartFailed = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'threadStartFailed',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

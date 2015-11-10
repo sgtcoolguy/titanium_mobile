@@ -19,7 +19,7 @@ android.animation.ValueAnimator.AnimatorUpdateListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.animation.ValueAnimator$AnimatorUpdateListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.animation.ValueAnimator$AnimatorUpdateListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.animation.ValueAnimator.AnimatorUpdateListener.isInstanceOf = function (
 
 android.animation.ValueAnimator.AnimatorUpdateListener.className = "android.animation.ValueAnimator$AnimatorUpdateListener";
 android.animation.ValueAnimator.AnimatorUpdateListener.prototype.className = "android.animation.ValueAnimator$AnimatorUpdateListener";
+
+// class property
+Object.defineProperty(android.animation.ValueAnimator.AnimatorUpdateListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.animation.ValueAnimator$AnimatorUpdateListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

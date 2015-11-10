@@ -31,10 +31,10 @@ java.lang.ClassValue.ClassValueMap = function() {
 			class: 'java.lang.ClassValue$ClassValueMap',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -53,7 +53,7 @@ java.lang.ClassValue.ClassValueMap.prototype.className = "java.lang.ClassValue$C
 Object.defineProperty(java.lang.ClassValue.ClassValueMap, '$assertionsDisabled', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -89,7 +89,7 @@ Object.defineProperty(java.lang.ClassValue.ClassValueMap, '$assertionsDisabled',
  **/
 java.lang.ClassValue.ClassValueMap.loadFromCache = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -123,7 +123,7 @@ java.lang.ClassValue.ClassValueMap.loadFromCache = function() {
  **/
 java.lang.ClassValue.ClassValueMap.probeHomeLocation = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -157,7 +157,7 @@ java.lang.ClassValue.ClassValueMap.probeHomeLocation = function() {
  **/
 java.lang.ClassValue.ClassValueMap.probeBackupLocations = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -195,7 +195,7 @@ java.lang.ClassValue.ClassValueMap.probeBackupLocations = function() {
 java.lang.ClassValue.ClassValueMap.prototype.removeEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -224,7 +224,7 @@ java.lang.ClassValue.ClassValueMap.prototype.removeEntry = function() {
 java.lang.ClassValue.ClassValueMap.prototype.getCache = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getCache',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -253,7 +253,7 @@ java.lang.ClassValue.ClassValueMap.prototype.getCache = function() {
 java.lang.ClassValue.ClassValueMap.prototype.changeEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'changeEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -282,7 +282,7 @@ java.lang.ClassValue.ClassValueMap.prototype.changeEntry = function() {
 java.lang.ClassValue.ClassValueMap.prototype.finishEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'finishEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -311,7 +311,7 @@ java.lang.ClassValue.ClassValueMap.prototype.finishEntry = function() {
 java.lang.ClassValue.ClassValueMap.prototype.startEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'startEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

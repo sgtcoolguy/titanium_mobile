@@ -22,15 +22,13 @@ java.net.SocketImpl = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.SocketImpl') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.SocketImpl') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.net.SocketImpl',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.net.SocketImpl. Create a subclass using java.net.SocketImpl.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ java.net.SocketImpl.prototype.constructor = java.net.SocketImpl;
 
 java.net.SocketImpl.className = "java.net.SocketImpl";
 java.net.SocketImpl.prototype.className = "java.net.SocketImpl";
+
+// class property
+Object.defineProperty(java.net.SocketImpl, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.SocketImpl',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.net.SocketImpl.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.net.SocketImpl',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.net.SocketImpl.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -114,38 +147,6 @@ Object.defineProperty(java.net.SocketImpl.prototype, 'port', {
 	},
 	enumerable: true
 });
-// http://developer.android.com/reference/java/net/SocketImpl.html#serverSocket
-Object.defineProperty(java.net.SocketImpl.prototype, 'serverSocket', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'serverSocket'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.SocketImpl') {
-				return new java.net.SocketImpl(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'serverSocket',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 // http://developer.android.com/reference/java/net/SocketImpl.html#localport
 Object.defineProperty(java.net.SocketImpl.prototype, 'localport', {
 	get: function() {
@@ -173,38 +174,6 @@ Object.defineProperty(java.net.SocketImpl.prototype, 'localport', {
 
 		this.$native.setNativeField({
 			field: 'localport',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/SocketImpl.html#socket
-Object.defineProperty(java.net.SocketImpl.prototype, 'socket', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'socket'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.SocketImpl') {
-				return new java.net.SocketImpl(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'socket',
 			value: newValue
 		});
 	},
@@ -335,45 +304,16 @@ java.net.SocketImpl.prototype.available = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getServerSocket
+ * @function getInputStream
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getServerSocket()}
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getInputStream()}
  **/
-java.net.SocketImpl.prototype.getServerSocket = function() {
+java.net.SocketImpl.prototype.getInputStream = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getServerSocket',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getOption
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getOption(java.net.SocketOption)}
- **/
-java.net.SocketImpl.prototype.getOption = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getOption',
+		func: 'getInputStream',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -403,298 +343,6 @@ java.net.SocketImpl.prototype.listen = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'listen',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function bind
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#bind(java.net.InetAddress, int)}
- **/
-java.net.SocketImpl.prototype.bind = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'bind',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function supportsUrgentData
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#supportsUrgentData()}
- **/
-java.net.SocketImpl.prototype.supportsUrgentData = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'supportsUrgentData',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setServerSocket
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#setServerSocket(java.net.ServerSocket)}
- **/
-java.net.SocketImpl.prototype.setServerSocket = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setServerSocket',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getFileDescriptor
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getFileDescriptor()}
- **/
-java.net.SocketImpl.prototype.getFileDescriptor = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getFileDescriptor',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function create
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#create(boolean)}
- **/
-java.net.SocketImpl.prototype.create = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'create',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function close
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#close()}
- **/
-java.net.SocketImpl.prototype.close = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'close',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function connect
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.lang.String, int)}
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.net.InetAddress, int)}
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.net.SocketAddress, int)}
- **/
-java.net.SocketImpl.prototype.connect = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'connect',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setSocket
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#setSocket(java.net.Socket)}
- **/
-java.net.SocketImpl.prototype.setSocket = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setSocket',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setOption
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#setOption(java.net.SocketOption, java.lang.Object)}
- **/
-java.net.SocketImpl.prototype.setOption = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setOption',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.SocketImpl') {
-			return new java.net.SocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getInputStream
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getInputStream()}
- **/
-java.net.SocketImpl.prototype.getInputStream = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getInputStream',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -830,6 +478,35 @@ java.net.SocketImpl.prototype.setPerformancePreferences = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function bind
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#bind(java.net.InetAddress, int)}
+ **/
+java.net.SocketImpl.prototype.bind = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'bind',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.SocketImpl') {
+			return new java.net.SocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getPort
  * @memberof
  * @instance
@@ -888,16 +565,16 @@ java.net.SocketImpl.prototype.sendUrgentData = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getSocket
+ * @function supportsUrgentData
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getSocket()}
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#supportsUrgentData()}
  **/
-java.net.SocketImpl.prototype.getSocket = function() {
+java.net.SocketImpl.prototype.supportsUrgentData = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getSocket',
+		func: 'supportsUrgentData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -917,16 +594,45 @@ java.net.SocketImpl.prototype.getSocket = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function reset
+ * @function getFileDescriptor
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#reset()}
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#getFileDescriptor()}
  **/
-java.net.SocketImpl.prototype.reset = function() {
+java.net.SocketImpl.prototype.getFileDescriptor = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'reset',
+		func: 'getFileDescriptor',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.SocketImpl') {
+			return new java.net.SocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function create
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#create(boolean)}
+ **/
+java.net.SocketImpl.prototype.create = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'create',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -985,6 +691,66 @@ java.net.SocketImpl.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.SocketImpl') {
+			return new java.net.SocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function close
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#close()}
+ **/
+java.net.SocketImpl.prototype.close = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'close',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.SocketImpl') {
+			return new java.net.SocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function connect
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.lang.String, int)}
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.net.InetAddress, int)}
+ * @see {@link http://developer.android.com/reference/java/net/SocketImpl.html#connect(java.net.SocketAddress, int)}
+ **/
+java.net.SocketImpl.prototype.connect = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'connect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

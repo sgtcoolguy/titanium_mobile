@@ -22,7 +22,9 @@ java.lang.StringBuffer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.StringBuffer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.StringBuffer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,13 +47,21 @@ java.lang.StringBuffer.prototype.constructor = java.lang.StringBuffer;
 java.lang.StringBuffer.className = "java.lang.StringBuffer";
 java.lang.StringBuffer.prototype.className = "java.lang.StringBuffer";
 
+// class property
+Object.defineProperty(java.lang.StringBuffer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.StringBuffer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#serialVersionUID}
- */
-java.lang.StringBuffer.serialVersionUID = 3388685877147921107;
 
 // Static fields
 
@@ -766,7 +776,6 @@ java.lang.StringBuffer.prototype.offsetByCodePoints = function() {
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.Object)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.String)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.StringBuffer)}
- * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.AbstractStringBuilder)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.CharSequence)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.CharSequence, int, int)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(char[])}
@@ -787,7 +796,6 @@ java.lang.StringBuffer.prototype.offsetByCodePoints = function() {
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(char[])}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.CharSequence, int, int)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.CharSequence)}
- * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.AbstractStringBuilder)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.StringBuffer)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.String)}
  * @see {@link http://developer.android.com/reference/java/lang/StringBuffer.html#append(java.lang.Object)}

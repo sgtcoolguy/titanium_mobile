@@ -30,10 +30,10 @@ java.util.WeakHashMap = function() {
 			class: 'java.util.WeakHashMap',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -55,7 +55,7 @@ Object.defineProperty(java.util.WeakHashMap.prototype, 'modCount', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'modCount'
 		});
 		if (!result) {
@@ -75,7 +75,7 @@ Object.defineProperty(java.util.WeakHashMap.prototype, 'modCount', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'modCount',
 			value: newValue
 		});
@@ -87,7 +87,7 @@ Object.defineProperty(java.util.WeakHashMap.prototype, 'table', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'table'
 		});
 		if (!result) {
@@ -107,7 +107,7 @@ Object.defineProperty(java.util.WeakHashMap.prototype, 'table', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'table',
 			value: newValue
 		});
@@ -124,7 +124,7 @@ Object.defineProperty(java.util.WeakHashMap.prototype, 'table', {
  **/
 java.util.WeakHashMap.unmaskNull = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -162,7 +162,7 @@ java.util.WeakHashMap.unmaskNull = function() {
 java.util.WeakHashMap.prototype.entrySet = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'entrySet',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -191,7 +191,7 @@ java.util.WeakHashMap.prototype.entrySet = function() {
 java.util.WeakHashMap.prototype.containsKey = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'containsKey',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -220,7 +220,7 @@ java.util.WeakHashMap.prototype.containsKey = function() {
 java.util.WeakHashMap.prototype.forEach = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'forEach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -249,7 +249,7 @@ java.util.WeakHashMap.prototype.forEach = function() {
 java.util.WeakHashMap.prototype.removeMapping = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeMapping',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -278,7 +278,7 @@ java.util.WeakHashMap.prototype.removeMapping = function() {
 java.util.WeakHashMap.prototype.values = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'values',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -307,7 +307,7 @@ java.util.WeakHashMap.prototype.values = function() {
 java.util.WeakHashMap.prototype.isEmpty = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isEmpty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -336,7 +336,7 @@ java.util.WeakHashMap.prototype.isEmpty = function() {
 java.util.WeakHashMap.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -365,7 +365,7 @@ java.util.WeakHashMap.prototype.clear = function() {
 java.util.WeakHashMap.prototype.replaceAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'replaceAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -394,7 +394,7 @@ java.util.WeakHashMap.prototype.replaceAll = function() {
 java.util.WeakHashMap.prototype.put = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'put',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -423,7 +423,7 @@ java.util.WeakHashMap.prototype.put = function() {
 java.util.WeakHashMap.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -452,7 +452,7 @@ java.util.WeakHashMap.prototype.remove = function() {
 java.util.WeakHashMap.prototype.containsValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'containsValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -481,7 +481,7 @@ java.util.WeakHashMap.prototype.containsValue = function() {
 java.util.WeakHashMap.prototype.size = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'size',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -510,7 +510,7 @@ java.util.WeakHashMap.prototype.size = function() {
 java.util.WeakHashMap.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -539,7 +539,7 @@ java.util.WeakHashMap.prototype.get = function() {
 java.util.WeakHashMap.prototype.putAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'putAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -568,7 +568,7 @@ java.util.WeakHashMap.prototype.putAll = function() {
 java.util.WeakHashMap.prototype.resize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'resize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -597,7 +597,7 @@ java.util.WeakHashMap.prototype.resize = function() {
 java.util.WeakHashMap.prototype.getEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -626,7 +626,7 @@ java.util.WeakHashMap.prototype.getEntry = function() {
 java.util.WeakHashMap.prototype.keySet = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'keySet',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -655,7 +655,7 @@ java.util.WeakHashMap.prototype.keySet = function() {
 java.util.WeakHashMap.prototype.hash = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hash',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

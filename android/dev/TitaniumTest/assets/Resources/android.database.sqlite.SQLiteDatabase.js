@@ -23,7 +23,9 @@ android.database.sqlite.SQLiteDatabase = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.database.sqlite.SQLiteDatabase') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.database.sqlite.SQLiteDatabase') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.database.sqlite.SQLiteDatabase.prototype.constructor = android.database.
 
 android.database.sqlite.SQLiteDatabase.className = "android.database.sqlite.SQLiteDatabase";
 android.database.sqlite.SQLiteDatabase.prototype.className = "android.database.sqlite.SQLiteDatabase";
+
+// class property
+Object.defineProperty(android.database.sqlite.SQLiteDatabase, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.database.sqlite.SQLiteDatabase',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -138,15 +154,9 @@ android.database.sqlite.SQLiteDatabase.MAX_SQL_CACHE_SIZE = 100;
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#deleteDatabase(java.io.File)}
  **/
 android.database.sqlite.SQLiteDatabase.deleteDatabase = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'deleteDatabase',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -172,15 +182,9 @@ android.database.sqlite.SQLiteDatabase.deleteDatabase = function() {
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#create(android.database.sqlite.SQLiteDatabase$CursorFactory)}
  **/
 android.database.sqlite.SQLiteDatabase.create = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'create',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -207,15 +211,9 @@ android.database.sqlite.SQLiteDatabase.create = function() {
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int, android.database.DatabaseErrorHandler)}
  **/
 android.database.sqlite.SQLiteDatabase.openDatabase = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'openDatabase',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -241,15 +239,9 @@ android.database.sqlite.SQLiteDatabase.openDatabase = function() {
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#releaseMemory()}
  **/
 android.database.sqlite.SQLiteDatabase.releaseMemory = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'releaseMemory',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -277,15 +269,9 @@ android.database.sqlite.SQLiteDatabase.releaseMemory = function() {
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#openOrCreateDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, android.database.DatabaseErrorHandler)}
  **/
 android.database.sqlite.SQLiteDatabase.openOrCreateDatabase = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'openOrCreateDatabase',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -311,15 +297,9 @@ android.database.sqlite.SQLiteDatabase.openOrCreateDatabase = function() {
  * @see {@link http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#findEditTable(java.lang.String)}
  **/
 android.database.sqlite.SQLiteDatabase.findEditTable = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'findEditTable',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

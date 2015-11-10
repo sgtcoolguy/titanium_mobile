@@ -22,7 +22,9 @@ java.io.File = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.io.File') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.io.File') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ java.io.File.prototype.constructor = java.io.File;
 
 java.io.File.className = "java.io.File";
 java.io.File.prototype.className = "java.io.File";
+
+// class property
+Object.defineProperty(java.io.File, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.io.File',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.io.File.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.io.File',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.io.File.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -132,34 +169,6 @@ Object.defineProperty(java.io.File, 'separatorChar', {
 	},
 	enumerable: true
 });
-// http://developer.android.com/reference/java/io/File.html#$assertionsDisabled
-Object.defineProperty(java.io.File, '$assertionsDisabled', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: '$assertionsDisabled'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.io.File') {
-				return new java.io.File(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 // http://developer.android.com/reference/java/io/File.html#separator
 Object.defineProperty(java.io.File, 'separator', {
 	get: function() {
@@ -199,15 +208,9 @@ Object.defineProperty(java.io.File, 'separator', {
  * @see {@link http://developer.android.com/reference/java/io/File.html#listRoots()}
  **/
 java.io.File.listRoots = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'listRoots',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -234,15 +237,9 @@ java.io.File.listRoots = function() {
  * @see {@link http://developer.android.com/reference/java/io/File.html#createTempFile(java.lang.String, java.lang.String)}
  **/
 java.io.File.createTempFile = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createTempFile',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1083,35 +1080,6 @@ java.io.File.prototype.canWrite = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isInvalid
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/io/File.html#isInvalid()}
- **/
-java.io.File.prototype.isInvalid = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isInvalid',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.File') {
-			return new java.io.File(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function list
  * @memberof
  * @instance
@@ -1152,35 +1120,6 @@ java.io.File.prototype.isHidden = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'isHidden',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.File') {
-			return new java.io.File(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getPrefixLength
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/io/File.html#getPrefixLength()}
- **/
-java.io.File.prototype.getPrefixLength = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getPrefixLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

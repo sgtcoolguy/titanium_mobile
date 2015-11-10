@@ -19,7 +19,7 @@ java.nio.channels.WritableByteChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.WritableByteChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.WritableByteChannel') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.nio.channels.WritableByteChannel.isInstanceOf = function (self, cls) {
 
 java.nio.channels.WritableByteChannel.className = "java.nio.channels.WritableByteChannel";
 java.nio.channels.WritableByteChannel.prototype.className = "java.nio.channels.WritableByteChannel";
+
+// class property
+Object.defineProperty(java.nio.channels.WritableByteChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.WritableByteChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

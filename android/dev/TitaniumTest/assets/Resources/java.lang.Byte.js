@@ -22,7 +22,9 @@ java.lang.Byte = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Byte') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Byte') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Byte.prototype.constructor = java.lang.Byte;
 
 java.lang.Byte.className = "java.lang.Byte";
 java.lang.Byte.prototype.className = "java.lang.Byte";
+
+// class property
+Object.defineProperty(java.lang.Byte, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Byte',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -111,15 +127,9 @@ Object.defineProperty(java.lang.Byte, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#compare(byte, byte)}
  **/
 java.lang.Byte.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -147,15 +157,9 @@ java.lang.Byte.compare = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#valueOf(java.lang.String)}
  **/
 java.lang.Byte.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -181,15 +185,9 @@ java.lang.Byte.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#toUnsignedLong(byte)}
  **/
 java.lang.Byte.toUnsignedLong = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedLong',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -215,15 +213,9 @@ java.lang.Byte.toUnsignedLong = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#decode(java.lang.String)}
  **/
 java.lang.Byte.decode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -250,15 +242,9 @@ java.lang.Byte.decode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#parseByte(java.lang.String)}
  **/
 java.lang.Byte.parseByte = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseByte',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -284,15 +270,9 @@ java.lang.Byte.parseByte = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#toUnsignedInt(byte)}
  **/
 java.lang.Byte.toUnsignedInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -318,15 +298,9 @@ java.lang.Byte.toUnsignedInt = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#hashCode(byte)}
  **/
 java.lang.Byte.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -352,15 +326,9 @@ java.lang.Byte.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Byte.html#toString(byte)}
  **/
 java.lang.Byte.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

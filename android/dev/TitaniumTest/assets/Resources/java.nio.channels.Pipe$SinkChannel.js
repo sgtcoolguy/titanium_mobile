@@ -24,15 +24,13 @@ java.nio.channels.Pipe.SinkChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.Pipe$SinkChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.Pipe$SinkChannel') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.Pipe$SinkChannel',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.Pipe$SinkChannel. Create a subclass using java.nio.channels.Pipe.SinkChannel.extend();' );
 	}
 
 	this.$native = result;
@@ -46,6 +44,41 @@ java.nio.channels.Pipe.SinkChannel.prototype.constructor = java.nio.channels.Pip
 
 java.nio.channels.Pipe.SinkChannel.className = "java.nio.channels.Pipe$SinkChannel";
 java.nio.channels.Pipe.SinkChannel.prototype.className = "java.nio.channels.Pipe$SinkChannel";
+
+// class property
+Object.defineProperty(java.nio.channels.Pipe.SinkChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.Pipe$SinkChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.Pipe.SinkChannel.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.Pipe$SinkChannel',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.Pipe.SinkChannel.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

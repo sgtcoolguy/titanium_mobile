@@ -22,7 +22,9 @@ android.graphics.Color = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Color') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Color') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.graphics.Color.prototype.constructor = android.graphics.Color;
 
 android.graphics.Color.className = "android.graphics.Color";
 android.graphics.Color.prototype.className = "android.graphics.Color";
+
+// class property
+Object.defineProperty(android.graphics.Color, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Color',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.Color.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.Color',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.Color.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -131,15 +168,9 @@ android.graphics.Color.TRANSPARENT = 0;
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#red(int)}
  **/
 android.graphics.Color.red = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'red',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -165,15 +196,9 @@ android.graphics.Color.red = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#argb(int, int, int, int)}
  **/
 android.graphics.Color.argb = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'argb',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -199,15 +224,9 @@ android.graphics.Color.argb = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#green(int)}
  **/
 android.graphics.Color.green = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'green',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -233,15 +252,9 @@ android.graphics.Color.green = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#blue(int)}
  **/
 android.graphics.Color.blue = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'blue',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -267,15 +280,9 @@ android.graphics.Color.blue = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#alpha(int)}
  **/
 android.graphics.Color.alpha = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'alpha',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -302,15 +309,9 @@ android.graphics.Color.alpha = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#HSVToColor(int, float[])}
  **/
 android.graphics.Color.HSVToColor = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'HSVToColor',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -336,15 +337,9 @@ android.graphics.Color.HSVToColor = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#rgb(int, int, int)}
  **/
 android.graphics.Color.rgb = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'rgb',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -370,15 +365,9 @@ android.graphics.Color.rgb = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#colorToHSV(int, float[])}
  **/
 android.graphics.Color.colorToHSV = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'colorToHSV',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -404,15 +393,9 @@ android.graphics.Color.colorToHSV = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#RGBToHSV(int, int, int, float[])}
  **/
 android.graphics.Color.RGBToHSV = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'RGBToHSV',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -438,15 +421,9 @@ android.graphics.Color.RGBToHSV = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String)}
  **/
 android.graphics.Color.parseColor = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseColor',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

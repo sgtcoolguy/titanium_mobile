@@ -31,10 +31,10 @@ java.lang.ClassValue.Identity = function() {
 			class: 'java.lang.ClassValue$Identity',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };

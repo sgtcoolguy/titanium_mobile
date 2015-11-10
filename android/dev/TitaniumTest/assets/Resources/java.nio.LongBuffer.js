@@ -22,15 +22,13 @@ java.nio.LongBuffer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.LongBuffer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.LongBuffer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.LongBuffer',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.LongBuffer. Create a subclass using java.nio.LongBuffer.extend();' );
 	}
 
 	this.$native = result;
@@ -45,91 +43,46 @@ java.nio.LongBuffer.prototype.constructor = java.nio.LongBuffer;
 java.nio.LongBuffer.className = "java.nio.LongBuffer";
 java.nio.LongBuffer.prototype.className = "java.nio.LongBuffer";
 
+// class property
+Object.defineProperty(java.nio.LongBuffer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.LongBuffer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.LongBuffer.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.LongBuffer',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.LongBuffer.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/nio/LongBuffer.html#isReadOnly
-Object.defineProperty(java.nio.LongBuffer.prototype, 'isReadOnly', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'isReadOnly'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.LongBuffer') {
-				return new java.nio.LongBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'isReadOnly',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/LongBuffer.html#offset
-Object.defineProperty(java.nio.LongBuffer.prototype, 'offset', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'offset'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.LongBuffer') {
-				return new java.nio.LongBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/LongBuffer.html#hb
-Object.defineProperty(java.nio.LongBuffer.prototype, 'hb', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'hb'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.LongBuffer') {
-				return new java.nio.LongBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -139,15 +92,9 @@ Object.defineProperty(java.nio.LongBuffer.prototype, 'hb', {
  * @see {@link http://developer.android.com/reference/java/nio/LongBuffer.html#allocate(int)}
  **/
 java.nio.LongBuffer.allocate = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'allocate',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -174,15 +121,9 @@ java.nio.LongBuffer.allocate = function() {
  * @see {@link http://developer.android.com/reference/java/nio/LongBuffer.html#wrap(long[])}
  **/
 java.nio.LongBuffer.wrap = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'wrap',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

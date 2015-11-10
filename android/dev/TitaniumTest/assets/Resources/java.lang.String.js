@@ -22,7 +22,9 @@ java.lang.String = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.String') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.String') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.String.prototype.constructor = java.lang.String;
 
 java.lang.String.className = "java.lang.String";
 java.lang.String.prototype.className = "java.lang.String";
+
+// class property
+Object.defineProperty(java.lang.String, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.String',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -88,51 +104,10 @@ Object.defineProperty(java.lang.String, 'CASE_INSENSITIVE_ORDER', {
  * @see {@link http://developer.android.com/reference/java/lang/String.html#join(java.lang.CharSequence, java.lang.Iterable)}
  **/
 java.lang.String.join = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'join',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.String') {
-			return new java.lang.String(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function indexOf
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/String.html#indexOf(char[], int, int, java.lang.String, int)}
- * @see {@link http://developer.android.com/reference/java/lang/String.html#indexOf(char[], int, int, char[], int, int, int)}
- **/
-java.lang.String.indexOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'indexOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -158,15 +133,9 @@ java.lang.String.indexOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/String.html#copyValueOf(char[])}
  **/
 java.lang.String.copyValueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'copyValueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -200,15 +169,9 @@ java.lang.String.copyValueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/String.html#valueOf(double)}
  **/
 java.lang.String.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -235,51 +198,10 @@ java.lang.String.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/String.html#format(java.util.Locale, java.lang.String, java.lang.Object[])}
  **/
 java.lang.String.format = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'format',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.String') {
-			return new java.lang.String(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function lastIndexOf
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/String.html#lastIndexOf(char[], int, int, java.lang.String, int)}
- * @see {@link http://developer.android.com/reference/java/lang/String.html#lastIndexOf(char[], int, int, char[], int, int, int)}
- **/
-java.lang.String.lastIndexOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'lastIndexOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -867,7 +789,6 @@ java.lang.String.prototype.intern = function() {
  * @function getChars
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/lang/String.html#getChars(char[], int)}
  * @see {@link http://developer.android.com/reference/java/lang/String.html#getChars(int, int, char[], int)}
  **/
 java.lang.String.prototype.getChars = function() {

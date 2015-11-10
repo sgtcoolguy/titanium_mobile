@@ -22,15 +22,13 @@ android.app.LoaderManager = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.LoaderManager') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.app.LoaderManager') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.app.LoaderManager',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.app.LoaderManager. Create a subclass using android.app.LoaderManager.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.app.LoaderManager.prototype.constructor = android.app.LoaderManager;
 
 android.app.LoaderManager.className = "android.app.LoaderManager";
 android.app.LoaderManager.prototype.className = "android.app.LoaderManager";
+
+// class property
+Object.defineProperty(android.app.LoaderManager, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.LoaderManager',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.app.LoaderManager.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.app.LoaderManager',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.app.LoaderManager.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -59,15 +92,9 @@ android.app.LoaderManager.prototype.className = "android.app.LoaderManager";
  * @see {@link http://developer.android.com/reference/android/app/LoaderManager.html#enableDebugLogging(boolean)}
  **/
 android.app.LoaderManager.enableDebugLogging = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'enableDebugLogging',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

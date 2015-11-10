@@ -22,15 +22,13 @@ java.nio.ByteBuffer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.ByteBuffer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.ByteBuffer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.ByteBuffer',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.ByteBuffer. Create a subclass using java.nio.ByteBuffer.extend();' );
 	}
 
 	this.$native = result;
@@ -45,155 +43,46 @@ java.nio.ByteBuffer.prototype.constructor = java.nio.ByteBuffer;
 java.nio.ByteBuffer.className = "java.nio.ByteBuffer";
 java.nio.ByteBuffer.prototype.className = "java.nio.ByteBuffer";
 
+// class property
+Object.defineProperty(java.nio.ByteBuffer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.ByteBuffer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.ByteBuffer.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.ByteBuffer',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.ByteBuffer.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/nio/ByteBuffer.html#bigEndian
-Object.defineProperty(java.nio.ByteBuffer.prototype, 'bigEndian', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'bigEndian'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.ByteBuffer') {
-				return new java.nio.ByteBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'bigEndian',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/ByteBuffer.html#nativeByteOrder
-Object.defineProperty(java.nio.ByteBuffer.prototype, 'nativeByteOrder', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'nativeByteOrder'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.ByteBuffer') {
-				return new java.nio.ByteBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'nativeByteOrder',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/ByteBuffer.html#isReadOnly
-Object.defineProperty(java.nio.ByteBuffer.prototype, 'isReadOnly', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'isReadOnly'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.ByteBuffer') {
-				return new java.nio.ByteBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'isReadOnly',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/ByteBuffer.html#offset
-Object.defineProperty(java.nio.ByteBuffer.prototype, 'offset', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'offset'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.ByteBuffer') {
-				return new java.nio.ByteBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/ByteBuffer.html#hb
-Object.defineProperty(java.nio.ByteBuffer.prototype, 'hb', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'hb'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.ByteBuffer') {
-				return new java.nio.ByteBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -203,15 +92,9 @@ Object.defineProperty(java.nio.ByteBuffer.prototype, 'hb', {
  * @see {@link http://developer.android.com/reference/java/nio/ByteBuffer.html#allocateDirect(int)}
  **/
 java.nio.ByteBuffer.allocateDirect = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'allocateDirect',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -237,15 +120,9 @@ java.nio.ByteBuffer.allocateDirect = function() {
  * @see {@link http://developer.android.com/reference/java/nio/ByteBuffer.html#allocate(int)}
  **/
 java.nio.ByteBuffer.allocate = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'allocate',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -272,15 +149,9 @@ java.nio.ByteBuffer.allocate = function() {
  * @see {@link http://developer.android.com/reference/java/nio/ByteBuffer.html#wrap(byte[])}
  **/
 java.nio.ByteBuffer.wrap = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'wrap',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1205,64 +1076,6 @@ java.nio.ByteBuffer.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.ByteBuffer') {
-			return new java.nio.ByteBuffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function _get
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/ByteBuffer.html#_get(int)}
- **/
-java.nio.ByteBuffer.prototype._get = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: '_get',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.ByteBuffer') {
-			return new java.nio.ByteBuffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function _put
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/ByteBuffer.html#_put(int, byte)}
- **/
-java.nio.ByteBuffer.prototype._put = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: '_put',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

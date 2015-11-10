@@ -20,7 +20,7 @@ android.database.sqlite.SQLiteDatabase.CursorFactory = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.database.sqlite.SQLiteDatabase$CursorFactory') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.database.sqlite.SQLiteDatabase$CursorFactory') {
 		result = arguments[0];
 	}
 	else {
@@ -93,6 +93,19 @@ android.database.sqlite.SQLiteDatabase.CursorFactory.isInstanceOf = function (se
 
 android.database.sqlite.SQLiteDatabase.CursorFactory.className = "android.database.sqlite.SQLiteDatabase$CursorFactory";
 android.database.sqlite.SQLiteDatabase.CursorFactory.prototype.className = "android.database.sqlite.SQLiteDatabase$CursorFactory";
+
+// class property
+Object.defineProperty(android.database.sqlite.SQLiteDatabase.CursorFactory, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.database.sqlite.SQLiteDatabase$CursorFactory',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

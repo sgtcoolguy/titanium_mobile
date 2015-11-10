@@ -19,7 +19,7 @@ android.view.View.OnLayoutChangeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnLayoutChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnLayoutChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnLayoutChangeListener.isInstanceOf = function (self, cls) {
 
 android.view.View.OnLayoutChangeListener.className = "android.view.View$OnLayoutChangeListener";
 android.view.View.OnLayoutChangeListener.prototype.className = "android.view.View$OnLayoutChangeListener";
+
+// class property
+Object.defineProperty(android.view.View.OnLayoutChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnLayoutChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

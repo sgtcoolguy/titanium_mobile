@@ -23,15 +23,13 @@ android.content.pm.PackageManager = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.pm.PackageManager') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.pm.PackageManager') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.content.pm.PackageManager',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.content.pm.PackageManager. Create a subclass using android.content.pm.PackageManager.extend();' );
 	}
 
 	this.$native = result;
@@ -45,6 +43,41 @@ android.content.pm.PackageManager.prototype.constructor = android.content.pm.Pac
 
 android.content.pm.PackageManager.className = "android.content.pm.PackageManager";
 android.content.pm.PackageManager.prototype.className = "android.content.pm.PackageManager";
+
+// class property
+Object.defineProperty(android.content.pm.PackageManager, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.pm.PackageManager',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.pm.PackageManager.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.pm.PackageManager',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.pm.PackageManager.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**

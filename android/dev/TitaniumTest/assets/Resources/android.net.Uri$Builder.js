@@ -23,7 +23,9 @@ android.net.Uri.Builder = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.net.Uri$Builder') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.net.Uri$Builder') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.net.Uri.Builder.prototype.constructor = android.net.Uri.Builder;
 
 android.net.Uri.Builder.className = "android.net.Uri$Builder";
 android.net.Uri.Builder.prototype.className = "android.net.Uri$Builder";
+
+// class property
+Object.defineProperty(android.net.Uri.Builder, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.net.Uri$Builder',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 

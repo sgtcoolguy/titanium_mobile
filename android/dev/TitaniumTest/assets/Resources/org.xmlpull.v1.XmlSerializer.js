@@ -19,7 +19,7 @@ org.xmlpull.v1.XmlSerializer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'org.xmlpull.v1.XmlSerializer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'org.xmlpull.v1.XmlSerializer') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ org.xmlpull.v1.XmlSerializer.isInstanceOf = function (self, cls) {
 
 org.xmlpull.v1.XmlSerializer.className = "org.xmlpull.v1.XmlSerializer";
 org.xmlpull.v1.XmlSerializer.prototype.className = "org.xmlpull.v1.XmlSerializer";
+
+// class property
+Object.defineProperty(org.xmlpull.v1.XmlSerializer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'org.xmlpull.v1.XmlSerializer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

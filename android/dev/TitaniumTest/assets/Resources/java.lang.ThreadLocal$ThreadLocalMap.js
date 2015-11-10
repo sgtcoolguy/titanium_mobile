@@ -31,10 +31,10 @@ java.lang.ThreadLocal.ThreadLocalMap = function() {
 			class: 'java.lang.ThreadLocal$ThreadLocalMap',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -61,7 +61,7 @@ java.lang.ThreadLocal.ThreadLocalMap.prototype.className = "java.lang.ThreadLoca
  **/
 java.lang.ThreadLocal.ThreadLocalMap.access$200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -95,7 +95,7 @@ java.lang.ThreadLocal.ThreadLocalMap.access$200 = function() {
  **/
 java.lang.ThreadLocal.ThreadLocalMap.access$100 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -129,7 +129,7 @@ java.lang.ThreadLocal.ThreadLocalMap.access$100 = function() {
  **/
 java.lang.ThreadLocal.ThreadLocalMap.access$000 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;

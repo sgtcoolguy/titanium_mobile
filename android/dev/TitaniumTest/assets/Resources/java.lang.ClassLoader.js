@@ -22,15 +22,13 @@ java.lang.ClassLoader = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.ClassLoader') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.ClassLoader') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.lang.ClassLoader',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.lang.ClassLoader. Create a subclass using java.lang.ClassLoader.extend();' );
 	}
 
 	this.$native = result;
@@ -45,103 +43,48 @@ java.lang.ClassLoader.prototype.constructor = java.lang.ClassLoader;
 java.lang.ClassLoader.className = "java.lang.ClassLoader";
 java.lang.ClassLoader.prototype.className = "java.lang.ClassLoader";
 
+// class property
+Object.defineProperty(java.lang.ClassLoader, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.ClassLoader',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.lang.ClassLoader.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.lang.ClassLoader',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.lang.ClassLoader.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/lang/ClassLoader.html#classAssertionStatus
-Object.defineProperty(java.lang.ClassLoader.prototype, 'classAssertionStatus', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'classAssertionStatus'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ClassLoader') {
-				return new java.lang.ClassLoader(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'classAssertionStatus',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/ClassLoader.html#assertionLock
-Object.defineProperty(java.lang.ClassLoader.prototype, 'assertionLock', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'assertionLock'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.ClassLoader') {
-				return new java.lang.ClassLoader(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function getClassLoader
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getClassLoader(java.lang.Class)}
- **/
-java.lang.ClassLoader.getClassLoader = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getClassLoader',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function registerAsParallelCapable
@@ -149,50 +92,10 @@ java.lang.ClassLoader.getClassLoader = function() {
  * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#registerAsParallelCapable()}
  **/
 java.lang.ClassLoader.registerAsParallelCapable = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'registerAsParallelCapable',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function findNative
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#findNative(java.lang.ClassLoader, java.lang.String)}
- **/
-java.lang.ClassLoader.findNative = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'findNative',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -217,118 +120,10 @@ java.lang.ClassLoader.findNative = function() {
  * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getSystemResources(java.lang.String)}
  **/
 java.lang.ClassLoader.getSystemResources = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSystemResources',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function loadLibrary
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#loadLibrary(java.lang.Class, java.lang.String, boolean)}
- **/
-java.lang.ClassLoader.loadLibrary = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'loadLibrary',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#access$100()}
- **/
-java.lang.ClassLoader.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#access$000()}
- **/
-java.lang.ClassLoader.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -353,15 +148,9 @@ java.lang.ClassLoader.access$000 = function() {
  * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getSystemClassLoader()}
  **/
 java.lang.ClassLoader.getSystemClassLoader = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSystemClassLoader',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -387,84 +176,10 @@ java.lang.ClassLoader.getSystemClassLoader = function() {
  * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getSystemResource(java.lang.String)}
  **/
 java.lang.ClassLoader.getSystemResource = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSystemResource',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getBootstrapClassPath
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getBootstrapClassPath()}
- **/
-java.lang.ClassLoader.getBootstrapClassPath = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getBootstrapClassPath',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function checkClassLoaderPermission
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#checkClassLoaderPermission(java.lang.ClassLoader, java.lang.Class)}
- **/
-java.lang.ClassLoader.checkClassLoaderPermission = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'checkClassLoaderPermission',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -489,15 +204,9 @@ java.lang.ClassLoader.checkClassLoaderPermission = function() {
  * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#getSystemResourceAsStream(java.lang.String)}
  **/
 java.lang.ClassLoader.getSystemResourceAsStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSystemResourceAsStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -559,35 +268,6 @@ java.lang.ClassLoader.prototype.findResource = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'findResource',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function desiredAssertionStatus
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#desiredAssertionStatus(java.lang.String)}
- **/
-java.lang.ClassLoader.prototype.desiredAssertionStatus = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'desiredAssertionStatus',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -762,35 +442,6 @@ java.lang.ClassLoader.prototype.getResources = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getResources',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function addClass
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#addClass(java.lang.Class)}
- **/
-java.lang.ClassLoader.prototype.addClass = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'addClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1055,35 +706,6 @@ java.lang.ClassLoader.prototype.setSigners = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'setSigners',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.ClassLoader') {
-			return new java.lang.ClassLoader(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isAncestor
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/ClassLoader.html#isAncestor(java.lang.ClassLoader)}
- **/
-java.lang.ClassLoader.prototype.isAncestor = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isAncestor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

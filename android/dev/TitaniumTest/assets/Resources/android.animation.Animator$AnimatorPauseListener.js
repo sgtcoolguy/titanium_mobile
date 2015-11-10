@@ -19,7 +19,7 @@ android.animation.Animator.AnimatorPauseListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.animation.Animator$AnimatorPauseListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.animation.Animator$AnimatorPauseListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.animation.Animator.AnimatorPauseListener.isInstanceOf = function (self, 
 
 android.animation.Animator.AnimatorPauseListener.className = "android.animation.Animator$AnimatorPauseListener";
 android.animation.Animator.AnimatorPauseListener.prototype.className = "android.animation.Animator$AnimatorPauseListener";
+
+// class property
+Object.defineProperty(android.animation.Animator.AnimatorPauseListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.animation.Animator$AnimatorPauseListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

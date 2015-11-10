@@ -22,7 +22,9 @@ android.graphics.Canvas = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Canvas') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Canvas') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.graphics.Canvas.prototype.constructor = android.graphics.Canvas;
 
 android.graphics.Canvas.className = "android.graphics.Canvas";
 android.graphics.Canvas.prototype.className = "android.graphics.Canvas";
+
+// class property
+Object.defineProperty(android.graphics.Canvas, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Canvas',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.Canvas.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.Canvas',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.Canvas.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**

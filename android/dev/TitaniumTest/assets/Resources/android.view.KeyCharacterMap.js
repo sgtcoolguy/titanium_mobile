@@ -22,7 +22,9 @@ android.view.KeyCharacterMap = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.KeyCharacterMap') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.KeyCharacterMap') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.view.KeyCharacterMap.prototype.constructor = android.view.KeyCharacterMa
 
 android.view.KeyCharacterMap.className = "android.view.KeyCharacterMap";
 android.view.KeyCharacterMap.prototype.className = "android.view.KeyCharacterMap";
+
+// class property
+Object.defineProperty(android.view.KeyCharacterMap, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.KeyCharacterMap',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.KeyCharacterMap.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.KeyCharacterMap',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.KeyCharacterMap.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -165,15 +202,9 @@ Object.defineProperty(android.view.KeyCharacterMap, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/view/KeyCharacterMap.html#deviceHasKeys(int[])}
  **/
 android.view.KeyCharacterMap.deviceHasKeys = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'deviceHasKeys',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -199,15 +230,9 @@ android.view.KeyCharacterMap.deviceHasKeys = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyCharacterMap.html#deviceHasKey(int)}
  **/
 android.view.KeyCharacterMap.deviceHasKey = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'deviceHasKey',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -233,15 +258,9 @@ android.view.KeyCharacterMap.deviceHasKey = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyCharacterMap.html#load(int)}
  **/
 android.view.KeyCharacterMap.load = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'load',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -267,15 +286,9 @@ android.view.KeyCharacterMap.load = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyCharacterMap.html#getDeadChar(int, int)}
  **/
 android.view.KeyCharacterMap.getDeadChar = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDeadChar',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

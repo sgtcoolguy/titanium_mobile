@@ -23,7 +23,9 @@ android.view.accessibility.AccessibilityEvent = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.accessibility.AccessibilityEvent') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.accessibility.AccessibilityEvent') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.view.accessibility.AccessibilityEvent.prototype.constructor = android.vi
 
 android.view.accessibility.AccessibilityEvent.className = "android.view.accessibility.AccessibilityEvent";
 android.view.accessibility.AccessibilityEvent.prototype.className = "android.view.accessibility.AccessibilityEvent";
+
+// class property
+Object.defineProperty(android.view.accessibility.AccessibilityEvent, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.accessibility.AccessibilityEvent',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -282,15 +298,9 @@ Object.defineProperty(android.view.accessibility.AccessibilityEvent, 'CREATOR', 
  * @see {@link http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html#obtain()}
  **/
 android.view.accessibility.AccessibilityEvent.obtain = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'obtain',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -316,15 +326,9 @@ android.view.accessibility.AccessibilityEvent.obtain = function() {
  * @see {@link http://developer.android.com/reference/android/view/accessibility/AccessibilityEvent.html#eventTypeToString(int)}
  **/
 android.view.accessibility.AccessibilityEvent.eventTypeToString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'eventTypeToString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

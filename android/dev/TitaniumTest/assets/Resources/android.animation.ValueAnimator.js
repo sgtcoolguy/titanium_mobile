@@ -22,7 +22,9 @@ android.animation.ValueAnimator = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.animation.ValueAnimator') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.animation.ValueAnimator') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.animation.ValueAnimator.prototype.constructor = android.animation.ValueA
 
 android.animation.ValueAnimator.className = "android.animation.ValueAnimator";
 android.animation.ValueAnimator.prototype.className = "android.animation.ValueAnimator";
+
+// class property
+Object.defineProperty(android.animation.ValueAnimator, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.animation.ValueAnimator',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.animation.ValueAnimator.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.animation.ValueAnimator',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.animation.ValueAnimator.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -77,15 +114,9 @@ android.animation.ValueAnimator.INFINITE = -1;
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#getFrameDelay()}
  **/
 android.animation.ValueAnimator.getFrameDelay = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getFrameDelay',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -111,15 +142,9 @@ android.animation.ValueAnimator.getFrameDelay = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#ofInt(int[])}
  **/
 android.animation.ValueAnimator.ofInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'ofInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -145,15 +170,9 @@ android.animation.ValueAnimator.ofInt = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#setFrameDelay(long)}
  **/
 android.animation.ValueAnimator.setFrameDelay = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setFrameDelay',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -179,15 +198,9 @@ android.animation.ValueAnimator.setFrameDelay = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#ofArgb(int[])}
  **/
 android.animation.ValueAnimator.ofArgb = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'ofArgb',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -213,15 +226,9 @@ android.animation.ValueAnimator.ofArgb = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#ofFloat(float[])}
  **/
 android.animation.ValueAnimator.ofFloat = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'ofFloat',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -247,15 +254,9 @@ android.animation.ValueAnimator.ofFloat = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#ofPropertyValuesHolder(android.animation.PropertyValuesHolder[])}
  **/
 android.animation.ValueAnimator.ofPropertyValuesHolder = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'ofPropertyValuesHolder',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -281,15 +282,9 @@ android.animation.ValueAnimator.ofPropertyValuesHolder = function() {
  * @see {@link http://developer.android.com/reference/android/animation/ValueAnimator.html#ofObject(android.animation.TypeEvaluator, java.lang.Object[])}
  **/
 android.animation.ValueAnimator.ofObject = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'ofObject',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

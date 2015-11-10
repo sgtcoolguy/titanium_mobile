@@ -22,7 +22,9 @@ java.lang.Package = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Package') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Package') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ java.lang.Package.prototype.constructor = java.lang.Package;
 java.lang.Package.className = "java.lang.Package";
 java.lang.Package.prototype.className = "java.lang.Package";
 
+// class property
+Object.defineProperty(java.lang.Package, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Package',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.lang.Package.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.lang.Package',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.lang.Package.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -54,192 +91,15 @@ java.lang.Package.prototype.className = "java.lang.Package";
 // Static methods
 /**
  * TODO Fill out docs more...
- * @function getSystemPackage
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getSystemPackage(java.lang.String)}
- **/
-java.lang.Package.getSystemPackage = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getSystemPackage',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getPackage
  * @static
  * @see {@link http://developer.android.com/reference/java/lang/Package.html#getPackage(java.lang.String)}
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getPackage(java.lang.Class)}
  **/
 java.lang.Package.getPackage = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getPackage',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$400
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#access$400()}
- **/
-java.lang.Package.access$400 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$400',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$200
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#access$200()}
- **/
-java.lang.Package.access$200 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$200',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#access$100(java.lang.String)}
- **/
-java.lang.Package.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#access$000()}
- **/
-java.lang.Package.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -264,50 +124,10 @@ java.lang.Package.access$000 = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Package.html#getPackages()}
  **/
 java.lang.Package.getPackages = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getPackages',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getSystemPackages
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getSystemPackages()}
- **/
-java.lang.Package.getSystemPackages = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getSystemPackages',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -417,180 +237,6 @@ java.lang.Package.prototype.isAnnotationPresent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function isCompatibleWith
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#isCompatibleWith(java.lang.String)}
- **/
-java.lang.Package.prototype.isCompatibleWith = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isCompatibleWith',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getDeclaredAnnotations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getDeclaredAnnotations()}
- **/
-java.lang.Package.prototype.getDeclaredAnnotations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDeclaredAnnotations',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getAnnotationsByType
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getAnnotationsByType(java.lang.Class)}
- **/
-java.lang.Package.prototype.getAnnotationsByType = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getAnnotationsByType',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hashCode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#hashCode()}
- **/
-java.lang.Package.prototype.hashCode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'hashCode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getSpecificationVersion
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getSpecificationVersion()}
- **/
-java.lang.Package.prototype.getSpecificationVersion = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getSpecificationVersion',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getImplementationVendor
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Package.html#getImplementationVendor()}
- **/
-java.lang.Package.prototype.getImplementationVendor = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getImplementationVendor',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Package') {
-			return new java.lang.Package(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getSpecificationTitle
  * @memberof
  * @instance
@@ -630,6 +276,35 @@ java.lang.Package.prototype.getImplementationTitle = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getImplementationTitle',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isCompatibleWith
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#isCompatibleWith(java.lang.String)}
+ **/
+java.lang.Package.prototype.isCompatibleWith = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'isCompatibleWith',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -707,6 +382,64 @@ java.lang.Package.prototype.getSpecificationVendor = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getDeclaredAnnotations
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#getDeclaredAnnotations()}
+ **/
+java.lang.Package.prototype.getDeclaredAnnotations = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getDeclaredAnnotations',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getAnnotationsByType
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#getAnnotationsByType(java.lang.Class)}
+ **/
+java.lang.Package.prototype.getAnnotationsByType = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getAnnotationsByType',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getAnnotation
  * @memberof
  * @instance
@@ -765,6 +498,35 @@ java.lang.Package.prototype.getDeclaredAnnotationsByType = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function hashCode
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#hashCode()}
+ **/
+java.lang.Package.prototype.hashCode = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'hashCode',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getDeclaredAnnotation
  * @memberof
  * @instance
@@ -804,6 +566,64 @@ java.lang.Package.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getSpecificationVersion
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#getSpecificationVersion()}
+ **/
+java.lang.Package.prototype.getSpecificationVersion = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getSpecificationVersion',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Package') {
+			return new java.lang.Package(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getImplementationVendor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Package.html#getImplementationVendor()}
+ **/
+java.lang.Package.prototype.getImplementationVendor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getImplementationVendor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

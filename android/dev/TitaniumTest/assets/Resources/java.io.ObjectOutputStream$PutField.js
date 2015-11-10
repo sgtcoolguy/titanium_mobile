@@ -31,10 +31,10 @@ java.io.ObjectOutputStream.PutField = function() {
 			class: 'java.io.ObjectOutputStream$PutField',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.io.ObjectOutputStream.PutField.prototype.className = "java.io.ObjectOutputS
 java.io.ObjectOutputStream.PutField.prototype.write = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'write',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -102,7 +102,7 @@ java.io.ObjectOutputStream.PutField.prototype.write = function() {
 java.io.ObjectOutputStream.PutField.prototype.put = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'put',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

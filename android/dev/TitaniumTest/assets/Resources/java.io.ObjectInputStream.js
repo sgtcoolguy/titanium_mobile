@@ -30,10 +30,10 @@ java.io.ObjectInputStream = function() {
 			class: 'java.io.ObjectInputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -60,7 +60,7 @@ java.io.ObjectInputStream.prototype.className = "java.io.ObjectInputStream";
  **/
 java.io.ObjectInputStream.access$700 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -94,7 +94,7 @@ java.io.ObjectInputStream.access$700 = function() {
  **/
 java.io.ObjectInputStream.access$600 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -128,7 +128,7 @@ java.io.ObjectInputStream.access$600 = function() {
  **/
 java.io.ObjectInputStream.access$500 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -162,7 +162,7 @@ java.io.ObjectInputStream.access$500 = function() {
  **/
 java.io.ObjectInputStream.access$300 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -196,7 +196,7 @@ java.io.ObjectInputStream.access$300 = function() {
  **/
 java.io.ObjectInputStream.access$200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -230,7 +230,7 @@ java.io.ObjectInputStream.access$200 = function() {
  **/
 java.io.ObjectInputStream.access$002 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -264,7 +264,7 @@ java.io.ObjectInputStream.access$002 = function() {
  **/
 java.io.ObjectInputStream.access$100 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -298,7 +298,7 @@ java.io.ObjectInputStream.access$100 = function() {
  **/
 java.io.ObjectInputStream.access$000 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -332,7 +332,7 @@ java.io.ObjectInputStream.access$000 = function() {
  **/
 java.io.ObjectInputStream.access$800 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -370,7 +370,7 @@ java.io.ObjectInputStream.access$800 = function() {
 java.io.ObjectInputStream.prototype.available = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'available',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -399,7 +399,7 @@ java.io.ObjectInputStream.prototype.available = function() {
 java.io.ObjectInputStream.prototype.readChar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readChar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -428,7 +428,7 @@ java.io.ObjectInputStream.prototype.readChar = function() {
 java.io.ObjectInputStream.prototype.readUnshared = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUnshared',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -457,7 +457,7 @@ java.io.ObjectInputStream.prototype.readUnshared = function() {
 java.io.ObjectInputStream.prototype.readObjectOverride = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readObjectOverride',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -486,7 +486,7 @@ java.io.ObjectInputStream.prototype.readObjectOverride = function() {
 java.io.ObjectInputStream.prototype.readUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -515,7 +515,7 @@ java.io.ObjectInputStream.prototype.readUTF = function() {
 java.io.ObjectInputStream.prototype.readDouble = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readDouble',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -545,7 +545,7 @@ java.io.ObjectInputStream.prototype.readDouble = function() {
 java.io.ObjectInputStream.prototype.readFully = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFully',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -574,7 +574,7 @@ java.io.ObjectInputStream.prototype.readFully = function() {
 java.io.ObjectInputStream.prototype.readFloat = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFloat',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -603,7 +603,7 @@ java.io.ObjectInputStream.prototype.readFloat = function() {
 java.io.ObjectInputStream.prototype.readInt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readInt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -632,7 +632,7 @@ java.io.ObjectInputStream.prototype.readInt = function() {
 java.io.ObjectInputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -661,7 +661,7 @@ java.io.ObjectInputStream.prototype.close = function() {
 java.io.ObjectInputStream.prototype.readUnsignedByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUnsignedByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -690,7 +690,7 @@ java.io.ObjectInputStream.prototype.readUnsignedByte = function() {
 java.io.ObjectInputStream.prototype.resolveProxyClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'resolveProxyClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -720,7 +720,7 @@ java.io.ObjectInputStream.prototype.resolveProxyClass = function() {
 java.io.ObjectInputStream.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -749,7 +749,7 @@ java.io.ObjectInputStream.prototype.read = function() {
 java.io.ObjectInputStream.prototype.defaultReadObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'defaultReadObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -778,7 +778,7 @@ java.io.ObjectInputStream.prototype.defaultReadObject = function() {
 java.io.ObjectInputStream.prototype.resolveObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'resolveObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -807,7 +807,7 @@ java.io.ObjectInputStream.prototype.resolveObject = function() {
 java.io.ObjectInputStream.prototype.readLine = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLine',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -836,7 +836,7 @@ java.io.ObjectInputStream.prototype.readLine = function() {
 java.io.ObjectInputStream.prototype.registerValidation = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'registerValidation',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -865,7 +865,7 @@ java.io.ObjectInputStream.prototype.registerValidation = function() {
 java.io.ObjectInputStream.prototype.readObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -894,7 +894,7 @@ java.io.ObjectInputStream.prototype.readObject = function() {
 java.io.ObjectInputStream.prototype.skipBytes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skipBytes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -923,7 +923,7 @@ java.io.ObjectInputStream.prototype.skipBytes = function() {
 java.io.ObjectInputStream.prototype.readFields = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFields',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -952,7 +952,7 @@ java.io.ObjectInputStream.prototype.readFields = function() {
 java.io.ObjectInputStream.prototype.readLong = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLong',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -981,7 +981,7 @@ java.io.ObjectInputStream.prototype.readLong = function() {
 java.io.ObjectInputStream.prototype.readShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1010,7 +1010,7 @@ java.io.ObjectInputStream.prototype.readShort = function() {
 java.io.ObjectInputStream.prototype.resolveClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'resolveClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1039,7 +1039,7 @@ java.io.ObjectInputStream.prototype.resolveClass = function() {
 java.io.ObjectInputStream.prototype.readClassDescriptor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readClassDescriptor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1068,7 +1068,7 @@ java.io.ObjectInputStream.prototype.readClassDescriptor = function() {
 java.io.ObjectInputStream.prototype.readBoolean = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readBoolean',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1097,7 +1097,7 @@ java.io.ObjectInputStream.prototype.readBoolean = function() {
 java.io.ObjectInputStream.prototype.enableResolveObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'enableResolveObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1126,7 +1126,7 @@ java.io.ObjectInputStream.prototype.enableResolveObject = function() {
 java.io.ObjectInputStream.prototype.readByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1155,7 +1155,7 @@ java.io.ObjectInputStream.prototype.readByte = function() {
 java.io.ObjectInputStream.prototype.readStreamHeader = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readStreamHeader',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1184,7 +1184,7 @@ java.io.ObjectInputStream.prototype.readStreamHeader = function() {
 java.io.ObjectInputStream.prototype.readUnsignedShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUnsignedShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1213,7 +1213,7 @@ java.io.ObjectInputStream.prototype.readUnsignedShort = function() {
 java.io.ObjectInputStream.prototype.readTypeString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readTypeString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

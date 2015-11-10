@@ -22,15 +22,13 @@ java.nio.FloatBuffer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.FloatBuffer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.FloatBuffer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.FloatBuffer',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.FloatBuffer. Create a subclass using java.nio.FloatBuffer.extend();' );
 	}
 
 	this.$native = result;
@@ -45,91 +43,46 @@ java.nio.FloatBuffer.prototype.constructor = java.nio.FloatBuffer;
 java.nio.FloatBuffer.className = "java.nio.FloatBuffer";
 java.nio.FloatBuffer.prototype.className = "java.nio.FloatBuffer";
 
+// class property
+Object.defineProperty(java.nio.FloatBuffer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.FloatBuffer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.FloatBuffer.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.FloatBuffer',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.FloatBuffer.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/nio/FloatBuffer.html#isReadOnly
-Object.defineProperty(java.nio.FloatBuffer.prototype, 'isReadOnly', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'isReadOnly'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.FloatBuffer') {
-				return new java.nio.FloatBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'isReadOnly',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/FloatBuffer.html#offset
-Object.defineProperty(java.nio.FloatBuffer.prototype, 'offset', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'offset'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.FloatBuffer') {
-				return new java.nio.FloatBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/nio/FloatBuffer.html#hb
-Object.defineProperty(java.nio.FloatBuffer.prototype, 'hb', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'hb'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.FloatBuffer') {
-				return new java.nio.FloatBuffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -139,15 +92,9 @@ Object.defineProperty(java.nio.FloatBuffer.prototype, 'hb', {
  * @see {@link http://developer.android.com/reference/java/nio/FloatBuffer.html#allocate(int)}
  **/
 java.nio.FloatBuffer.allocate = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'allocate',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -174,15 +121,9 @@ java.nio.FloatBuffer.allocate = function() {
  * @see {@link http://developer.android.com/reference/java/nio/FloatBuffer.html#wrap(float[])}
  **/
 java.nio.FloatBuffer.wrap = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'wrap',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

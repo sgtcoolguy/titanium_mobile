@@ -24,7 +24,9 @@ android.media.session.PlaybackState.CustomAction = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.media.session.PlaybackState$CustomAction') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.media.session.PlaybackState$CustomAction') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -46,6 +48,20 @@ android.media.session.PlaybackState.CustomAction.prototype.constructor = android
 
 android.media.session.PlaybackState.CustomAction.className = "android.media.session.PlaybackState$CustomAction";
 android.media.session.PlaybackState.CustomAction.prototype.className = "android.media.session.PlaybackState$CustomAction";
+
+// class property
+Object.defineProperty(android.media.session.PlaybackState.CustomAction, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.media.session.PlaybackState$CustomAction',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 

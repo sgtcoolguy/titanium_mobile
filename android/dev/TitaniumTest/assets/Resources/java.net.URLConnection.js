@@ -22,15 +22,13 @@ java.net.URLConnection = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.URLConnection') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.URLConnection') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.net.URLConnection',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.net.URLConnection. Create a subclass using java.net.URLConnection.extend();' );
 	}
 
 	this.$native = result;
@@ -45,49 +43,44 @@ java.net.URLConnection.prototype.constructor = java.net.URLConnection;
 java.net.URLConnection.className = "java.net.URLConnection";
 java.net.URLConnection.prototype.className = "java.net.URLConnection";
 
+// class property
+Object.defineProperty(java.net.URLConnection, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.URLConnection',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.net.URLConnection.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.net.URLConnection',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.net.URLConnection.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
-// http://developer.android.com/reference/java/net/URLConnection.html#factory
-Object.defineProperty(java.net.URLConnection, 'factory', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'factory'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.URLConnection') {
-				return new java.net.URLConnection(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return;
-
-		classProxy.setNativeField({
-			field: 'factory',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Instance Fields
 // http://developer.android.com/reference/java/net/URLConnection.html#connected
@@ -323,50 +316,10 @@ Object.defineProperty(java.net.URLConnection.prototype, 'allowUserInteraction', 
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#getDefaultAllowUserInteraction()}
  **/
 java.net.URLConnection.getDefaultAllowUserInteraction = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefaultAllowUserInteraction',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.URLConnection') {
-			return new java.net.URLConnection(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#access$000()}
- **/
-java.net.URLConnection.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -391,15 +344,9 @@ java.net.URLConnection.access$000 = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#setDefaultAllowUserInteraction(boolean)}
  **/
 java.net.URLConnection.setDefaultAllowUserInteraction = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setDefaultAllowUserInteraction',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -425,15 +372,9 @@ java.net.URLConnection.setDefaultAllowUserInteraction = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#guessContentTypeFromName(java.lang.String)}
  **/
 java.net.URLConnection.guessContentTypeFromName = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'guessContentTypeFromName',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -459,15 +400,9 @@ java.net.URLConnection.guessContentTypeFromName = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#guessContentTypeFromStream(java.io.InputStream)}
  **/
 java.net.URLConnection.guessContentTypeFromStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'guessContentTypeFromStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -493,15 +428,9 @@ java.net.URLConnection.guessContentTypeFromStream = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#setDefaultRequestProperty(java.lang.String, java.lang.String)}
  **/
 java.net.URLConnection.setDefaultRequestProperty = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setDefaultRequestProperty',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -527,15 +456,9 @@ java.net.URLConnection.setDefaultRequestProperty = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#getFileNameMap()}
  **/
 java.net.URLConnection.getFileNameMap = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getFileNameMap',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -561,15 +484,9 @@ java.net.URLConnection.getFileNameMap = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#setContentHandlerFactory(java.net.ContentHandlerFactory)}
  **/
 java.net.URLConnection.setContentHandlerFactory = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setContentHandlerFactory',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -595,15 +512,9 @@ java.net.URLConnection.setContentHandlerFactory = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#getDefaultRequestProperty(java.lang.String)}
  **/
 java.net.URLConnection.getDefaultRequestProperty = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefaultRequestProperty',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -629,15 +540,9 @@ java.net.URLConnection.getDefaultRequestProperty = function() {
  * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#setFileNameMap(java.net.FileNameMap)}
  **/
 java.net.URLConnection.setFileNameMap = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setFileNameMap',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -786,35 +691,6 @@ java.net.URLConnection.prototype.getDoInput = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getDoInput',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.URLConnection') {
-			return new java.net.URLConnection(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getContentHandler
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/URLConnection.html#getContentHandler()}
- **/
-java.net.URLConnection.prototype.getContentHandler = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getContentHandler',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

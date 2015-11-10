@@ -32,10 +32,10 @@ java.nio.charset.spi.CharsetProvider = function() {
 			class: 'java.nio.charset.spi.CharsetProvider',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -66,7 +66,7 @@ java.nio.charset.spi.CharsetProvider.prototype.className = "java.nio.charset.spi
 java.nio.charset.spi.CharsetProvider.prototype.charsets = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'charsets',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -95,7 +95,7 @@ java.nio.charset.spi.CharsetProvider.prototype.charsets = function() {
 java.nio.charset.spi.CharsetProvider.prototype.charsetForName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'charsetForName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

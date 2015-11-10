@@ -19,7 +19,7 @@ java.nio.file.WatchService = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.file.WatchService') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.nio.file.WatchService') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.nio.file.WatchService.isInstanceOf = function (self, cls) {
 
 java.nio.file.WatchService.className = "java.nio.file.WatchService";
 java.nio.file.WatchService.prototype.className = "java.nio.file.WatchService";
+
+// class property
+Object.defineProperty(java.nio.file.WatchService, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.file.WatchService',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

@@ -31,10 +31,10 @@ java.lang.ref.ReferenceQueue = function() {
 			class: 'java.lang.ref.ReferenceQueue',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -53,7 +53,7 @@ java.lang.ref.ReferenceQueue.prototype.className = "java.lang.ref.ReferenceQueue
 Object.defineProperty(java.lang.ref.ReferenceQueue, 'ENQUEUED', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -77,7 +77,7 @@ Object.defineProperty(java.lang.ref.ReferenceQueue, 'ENQUEUED', {
 	},
 	set: function(newValue) {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return;
@@ -93,7 +93,7 @@ Object.defineProperty(java.lang.ref.ReferenceQueue, 'ENQUEUED', {
 Object.defineProperty(java.lang.ref.ReferenceQueue, 'NULL', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -117,7 +117,7 @@ Object.defineProperty(java.lang.ref.ReferenceQueue, 'NULL', {
 	},
 	set: function(newValue) {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return;
@@ -133,7 +133,7 @@ Object.defineProperty(java.lang.ref.ReferenceQueue, 'NULL', {
 Object.defineProperty(java.lang.ref.ReferenceQueue, '$assertionsDisabled', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -173,7 +173,7 @@ Object.defineProperty(java.lang.ref.ReferenceQueue, '$assertionsDisabled', {
 java.lang.ref.ReferenceQueue.prototype.enqueue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'enqueue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -202,7 +202,7 @@ java.lang.ref.ReferenceQueue.prototype.enqueue = function() {
 java.lang.ref.ReferenceQueue.prototype.poll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'poll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -232,7 +232,7 @@ java.lang.ref.ReferenceQueue.prototype.poll = function() {
 java.lang.ref.ReferenceQueue.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

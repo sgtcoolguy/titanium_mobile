@@ -22,7 +22,9 @@ java.util.DoubleSummaryStatistics = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.DoubleSummaryStatistics') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.util.DoubleSummaryStatistics') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ java.util.DoubleSummaryStatistics.prototype.constructor = java.util.DoubleSummar
 
 java.util.DoubleSummaryStatistics.className = "java.util.DoubleSummaryStatistics";
 java.util.DoubleSummaryStatistics.prototype.className = "java.util.DoubleSummaryStatistics";
+
+// class property
+Object.defineProperty(java.util.DoubleSummaryStatistics, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.DoubleSummaryStatistics',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.util.DoubleSummaryStatistics.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.util.DoubleSummaryStatistics',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.util.DoubleSummaryStatistics.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

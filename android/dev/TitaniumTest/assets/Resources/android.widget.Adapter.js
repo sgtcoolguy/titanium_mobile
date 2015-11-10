@@ -18,7 +18,7 @@ android.widget.Adapter = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.Adapter') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.Adapter') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.widget.Adapter.isInstanceOf = function (self, cls) {
 
 android.widget.Adapter.className = "android.widget.Adapter";
 android.widget.Adapter.prototype.className = "android.widget.Adapter";
+
+// class property
+Object.defineProperty(android.widget.Adapter, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.Adapter',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/widget/Adapter.html#IGNORE_ITEM_VIEW_TYPE

@@ -30,10 +30,10 @@ java.lang.ClassValue = function() {
 			class: 'java.lang.ClassValue',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -61,7 +61,7 @@ Object.defineProperty(java.lang.ClassValue.prototype, 'hashCodeForCache', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'hashCodeForCache'
 		});
 		if (!result) {
@@ -85,7 +85,7 @@ Object.defineProperty(java.lang.ClassValue.prototype, 'identity', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'identity'
 		});
 		if (!result) {
@@ -114,7 +114,7 @@ Object.defineProperty(java.lang.ClassValue.prototype, 'identity', {
  **/
 java.lang.ClassValue.makeEntry = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -152,7 +152,7 @@ java.lang.ClassValue.makeEntry = function() {
 java.lang.ClassValue.prototype.bumpVersion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'bumpVersion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -181,7 +181,7 @@ java.lang.ClassValue.prototype.bumpVersion = function() {
 java.lang.ClassValue.prototype.castEntry = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'castEntry',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -210,7 +210,7 @@ java.lang.ClassValue.prototype.castEntry = function() {
 java.lang.ClassValue.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -239,7 +239,7 @@ java.lang.ClassValue.prototype.get = function() {
 java.lang.ClassValue.prototype.match = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'match',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -268,7 +268,7 @@ java.lang.ClassValue.prototype.match = function() {
 java.lang.ClassValue.prototype.computeValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'computeValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -297,7 +297,7 @@ java.lang.ClassValue.prototype.computeValue = function() {
 java.lang.ClassValue.prototype.version = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'version',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -326,7 +326,7 @@ java.lang.ClassValue.prototype.version = function() {
 java.lang.ClassValue.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -355,7 +355,7 @@ java.lang.ClassValue.prototype.remove = function() {
 java.lang.ClassValue.prototype.put = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'put',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

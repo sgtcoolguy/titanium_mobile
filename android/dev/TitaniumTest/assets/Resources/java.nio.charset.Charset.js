@@ -23,15 +23,13 @@ java.nio.charset.Charset = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.charset.Charset') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.charset.Charset') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.charset.Charset',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.charset.Charset. Create a subclass using java.nio.charset.Charset.extend();' );
 	}
 
 	this.$native = result;
@@ -45,6 +43,41 @@ java.nio.charset.Charset.prototype.constructor = java.nio.charset.Charset;
 
 java.nio.charset.Charset.className = "java.nio.charset.Charset";
 java.nio.charset.Charset.prototype.className = "java.nio.charset.Charset";
+
+// class property
+Object.defineProperty(java.nio.charset.Charset, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.charset.Charset',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.charset.Charset.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.charset.Charset',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.charset.Charset.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -60,118 +93,10 @@ java.nio.charset.Charset.prototype.className = "java.nio.charset.Charset";
  * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#forName(java.lang.String)}
  **/
 java.nio.charset.Charset.forName = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'forName',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.charset.Charset') {
-			return new java.nio.charset.Charset(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$200
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#access$200(java.util.Iterator, java.util.Map)}
- **/
-java.nio.charset.Charset.access$200 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$200',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.charset.Charset') {
-			return new java.nio.charset.Charset(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#access$100()}
- **/
-java.nio.charset.Charset.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.charset.Charset') {
-			return new java.nio.charset.Charset(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#access$000()}
- **/
-java.nio.charset.Charset.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -196,15 +121,9 @@ java.nio.charset.Charset.access$000 = function() {
  * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#defaultCharset()}
  **/
 java.nio.charset.Charset.defaultCharset = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'defaultCharset',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -230,15 +149,9 @@ java.nio.charset.Charset.defaultCharset = function() {
  * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#isSupported(java.lang.String)}
  **/
 java.nio.charset.Charset.isSupported = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isSupported',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -264,50 +177,10 @@ java.nio.charset.Charset.isSupported = function() {
  * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#availableCharsets()}
  **/
 java.nio.charset.Charset.availableCharsets = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'availableCharsets',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.charset.Charset') {
-			return new java.nio.charset.Charset(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function atBugLevel
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/charset/Charset.html#atBugLevel(java.lang.String)}
- **/
-java.nio.charset.Charset.atBugLevel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'atBugLevel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});

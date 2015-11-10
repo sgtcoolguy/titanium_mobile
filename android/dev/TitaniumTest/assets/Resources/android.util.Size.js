@@ -22,7 +22,9 @@ android.util.Size = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.util.Size') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.util.Size') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.util.Size.prototype.constructor = android.util.Size;
 android.util.Size.className = "android.util.Size";
 android.util.Size.prototype.className = "android.util.Size";
 
+// class property
+Object.defineProperty(android.util.Size, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.util.Size',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
@@ -59,15 +75,9 @@ android.util.Size.prototype.className = "android.util.Size";
  * @see {@link http://developer.android.com/reference/android/util/Size.html#parseSize(java.lang.String)}
  **/
 android.util.Size.parseSize = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseSize',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

@@ -22,7 +22,9 @@ java.lang.Double = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Double') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Double') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Double.prototype.constructor = java.lang.Double;
 
 java.lang.Double.className = "java.lang.Double";
 java.lang.Double.prototype.className = "java.lang.Double";
+
+// class property
+Object.defineProperty(java.lang.Double, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Double',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -147,288 +163,10 @@ Object.defineProperty(java.lang.Double, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#compare(double, double)}
  **/
 java.lang.Double.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function sum
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#sum(double, double)}
- **/
-java.lang.Double.sum = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'sum',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isNaN
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#isNaN(double)}
- **/
-java.lang.Double.isNaN = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isNaN',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function longBitsToDouble
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#longBitsToDouble(long)}
- **/
-java.lang.Double.longBitsToDouble = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'longBitsToDouble',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isFinite
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#isFinite(double)}
- **/
-java.lang.Double.isFinite = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isFinite',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function parseDouble
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#parseDouble(java.lang.String)}
- **/
-java.lang.Double.parseDouble = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'parseDouble',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function min
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#min(double, double)}
- **/
-java.lang.Double.min = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'min',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isInfinite
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#isInfinite(double)}
- **/
-java.lang.Double.isInfinite = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isInfinite',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hashCode
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#hashCode(double)}
- **/
-java.lang.Double.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -453,15 +191,9 @@ java.lang.Double.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#toHexString(double)}
  **/
 java.lang.Double.toHexString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toHexString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -487,15 +219,9 @@ java.lang.Double.toHexString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#max(double, double)}
  **/
 java.lang.Double.max = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'max',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -522,16 +248,66 @@ java.lang.Double.max = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#valueOf(double)}
  **/
 java.lang.Double.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function sum
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#sum(double, double)}
+ **/
+java.lang.Double.sum = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'sum',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isNaN
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#isNaN(double)}
+ **/
+java.lang.Double.isNaN = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isNaN',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -556,16 +332,38 @@ java.lang.Double.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#doubleToLongBits(double)}
  **/
 java.lang.Double.doubleToLongBits = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'doubleToLongBits',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function longBitsToDouble
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#longBitsToDouble(long)}
+ **/
+java.lang.Double.longBitsToDouble = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'longBitsToDouble',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -590,16 +388,150 @@ java.lang.Double.doubleToLongBits = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#doubleToRawLongBits(double)}
  **/
 java.lang.Double.doubleToRawLongBits = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'doubleToRawLongBits',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isFinite
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#isFinite(double)}
+ **/
+java.lang.Double.isFinite = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isFinite',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function parseDouble
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#parseDouble(java.lang.String)}
+ **/
+java.lang.Double.parseDouble = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'parseDouble',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function min
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#min(double, double)}
+ **/
+java.lang.Double.min = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'min',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isInfinite
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#isInfinite(double)}
+ **/
+java.lang.Double.isInfinite = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isInfinite',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function hashCode
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#hashCode(double)}
+ **/
+java.lang.Double.hashCode = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -624,15 +556,9 @@ java.lang.Double.doubleToRawLongBits = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Double.html#toString(double)}
  **/
 java.lang.Double.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -653,6 +579,93 @@ java.lang.Double.toString = function() {
 };
 
 // Instance methods
+/**
+ * TODO Fill out docs more...
+ * @function intValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#intValue()}
+ **/
+java.lang.Double.prototype.intValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'intValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function floatValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#floatValue()}
+ **/
+java.lang.Double.prototype.floatValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'floatValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function doubleValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#doubleValue()}
+ **/
+java.lang.Double.prototype.doubleValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'doubleValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
 /**
  * TODO Fill out docs more...
  * @function compareTo
@@ -801,122 +814,6 @@ java.lang.Double.prototype.hashCode = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function shortValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#shortValue()}
- **/
-java.lang.Double.prototype.shortValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'shortValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function intValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#intValue()}
- **/
-java.lang.Double.prototype.intValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'intValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function floatValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#floatValue()}
- **/
-java.lang.Double.prototype.floatValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'floatValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function doubleValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Double.html#doubleValue()}
- **/
-java.lang.Double.prototype.doubleValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'doubleValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Double') {
-			return new java.lang.Double(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function equals
  * @memberof
  * @instance
@@ -956,6 +853,35 @@ java.lang.Double.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Double') {
+			return new java.lang.Double(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function shortValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Double.html#shortValue()}
+ **/
+java.lang.Double.prototype.shortValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'shortValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

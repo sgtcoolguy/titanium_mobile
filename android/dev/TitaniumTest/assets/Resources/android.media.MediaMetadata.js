@@ -22,7 +22,9 @@ android.media.MediaMetadata = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.media.MediaMetadata') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.media.MediaMetadata') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.media.MediaMetadata.prototype.constructor = android.media.MediaMetadata;
 
 android.media.MediaMetadata.className = "android.media.MediaMetadata";
 android.media.MediaMetadata.prototype.className = "android.media.MediaMetadata";
+
+// class property
+Object.defineProperty(android.media.MediaMetadata, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.media.MediaMetadata',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -246,6 +262,93 @@ Object.defineProperty(android.media.MediaMetadata, 'CREATOR', {
 // Instance methods
 /**
  * TODO Fill out docs more...
+ * @function getLong
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getLong(java.lang.String)}
+ **/
+android.media.MediaMetadata.prototype.getLong = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getLong',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.media.MediaMetadata') {
+			return new android.media.MediaMetadata(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function size
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#size()}
+ **/
+android.media.MediaMetadata.prototype.size = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'size',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.media.MediaMetadata') {
+			return new android.media.MediaMetadata(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getBitmap
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getBitmap(java.lang.String)}
+ **/
+android.media.MediaMetadata.prototype.getBitmap = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getBitmap',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.media.MediaMetadata') {
+			return new android.media.MediaMetadata(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function containsKey
  * @memberof
  * @instance
@@ -362,122 +465,6 @@ android.media.MediaMetadata.prototype.describeContents = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getDescription
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getDescription()}
- **/
-android.media.MediaMetadata.prototype.getDescription = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDescription',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.media.MediaMetadata') {
-			return new android.media.MediaMetadata(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getLong
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getLong(java.lang.String)}
- **/
-android.media.MediaMetadata.prototype.getLong = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getLong',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.media.MediaMetadata') {
-			return new android.media.MediaMetadata(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function size
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#size()}
- **/
-android.media.MediaMetadata.prototype.size = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'size',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.media.MediaMetadata') {
-			return new android.media.MediaMetadata(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getBitmap
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getBitmap(java.lang.String)}
- **/
-android.media.MediaMetadata.prototype.getBitmap = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getBitmap',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.media.MediaMetadata') {
-			return new android.media.MediaMetadata(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function writeToParcel
  * @memberof
  * @instance
@@ -517,6 +504,35 @@ android.media.MediaMetadata.prototype.keySet = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'keySet',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.media.MediaMetadata') {
+			return new android.media.MediaMetadata(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getDescription
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/media/MediaMetadata.html#getDescription()}
+ **/
+android.media.MediaMetadata.prototype.getDescription = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getDescription',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

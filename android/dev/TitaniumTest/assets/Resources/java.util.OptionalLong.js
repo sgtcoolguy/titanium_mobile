@@ -22,7 +22,9 @@ java.util.OptionalLong = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.OptionalLong') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.util.OptionalLong') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ java.util.OptionalLong.prototype.constructor = java.util.OptionalLong;
 java.util.OptionalLong.className = "java.util.OptionalLong";
 java.util.OptionalLong.prototype.className = "java.util.OptionalLong";
 
+// class property
+Object.defineProperty(java.util.OptionalLong, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.OptionalLong',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
@@ -59,15 +75,9 @@ java.util.OptionalLong.prototype.className = "java.util.OptionalLong";
  * @see {@link http://developer.android.com/reference/java/util/OptionalLong.html#of(long)}
  **/
 java.util.OptionalLong.of = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'of',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -93,15 +103,9 @@ java.util.OptionalLong.of = function() {
  * @see {@link http://developer.android.com/reference/java/util/OptionalLong.html#empty()}
  **/
 java.util.OptionalLong.empty = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'empty',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

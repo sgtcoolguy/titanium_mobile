@@ -19,7 +19,7 @@ android.widget.AdapterView.OnItemClickListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.AdapterView$OnItemClickListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.AdapterView$OnItemClickListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.widget.AdapterView.OnItemClickListener.isInstanceOf = function (self, cl
 
 android.widget.AdapterView.OnItemClickListener.className = "android.widget.AdapterView$OnItemClickListener";
 android.widget.AdapterView.OnItemClickListener.prototype.className = "android.widget.AdapterView$OnItemClickListener";
+
+// class property
+Object.defineProperty(android.widget.AdapterView.OnItemClickListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.AdapterView$OnItemClickListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

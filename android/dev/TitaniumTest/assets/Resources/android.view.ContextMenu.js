@@ -18,7 +18,7 @@ android.view.ContextMenu = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ContextMenu') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.ContextMenu') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.view.ContextMenu.isInstanceOf = function (self, cls) {
 
 android.view.ContextMenu.className = "android.view.ContextMenu";
 android.view.ContextMenu.prototype.className = "android.view.ContextMenu";
+
+// class property
+Object.defineProperty(android.view.ContextMenu, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ContextMenu',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

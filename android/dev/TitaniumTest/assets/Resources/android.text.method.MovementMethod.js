@@ -19,7 +19,7 @@ android.text.method.MovementMethod = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.text.method.MovementMethod') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.text.method.MovementMethod') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.text.method.MovementMethod.isInstanceOf = function (self, cls) {
 
 android.text.method.MovementMethod.className = "android.text.method.MovementMethod";
 android.text.method.MovementMethod.prototype.className = "android.text.method.MovementMethod";
+
+// class property
+Object.defineProperty(android.text.method.MovementMethod, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.text.method.MovementMethod',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

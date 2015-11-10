@@ -22,7 +22,9 @@ java.util.Locale = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.Locale') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.util.Locale') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,13 +47,21 @@ java.util.Locale.prototype.constructor = java.util.Locale;
 java.util.Locale.className = "java.util.Locale";
 java.util.Locale.prototype.className = "java.util.Locale";
 
+// class property
+Object.defineProperty(java.util.Locale, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.Locale',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#serialVersionUID}
- */
-java.util.Locale.serialVersionUID = 9149081749638150636;
 /**
  * @constant
  * @default
@@ -122,6 +132,34 @@ Object.defineProperty(java.util.Locale, 'CANADA', {
 	},
 	enumerable: true
 });
+// http://developer.android.com/reference/java/util/Locale.html#ENGLISH
+Object.defineProperty(java.util.Locale, 'ENGLISH', {
+	get: function() {
+		var classProxy = Hyperloop.createProxy({
+			class: this.className,
+			alloc: false
+		});
+		if (!classProxy) return null;
+
+		var result = classProxy.getNativeField({
+			field: 'ENGLISH'
+		});
+		if (!result) {
+			return null;
+		}
+		// Wrap result if it's not a primitive type?
+		if (result.apiName) {
+			if (result.apiName === 'java.util.Locale') {
+				return new java.util.Locale(result);
+			} else {
+				var ctor = require(result.apiName);
+				return new ctor(result);
+			}
+		}
+		return result;
+	},
+	enumerable: true
+});
 // http://developer.android.com/reference/java/util/Locale.html#ROOT
 Object.defineProperty(java.util.Locale, 'ROOT', {
 	get: function() {
@@ -161,6 +199,62 @@ Object.defineProperty(java.util.Locale, 'TAIWAN', {
 
 		var result = classProxy.getNativeField({
 			field: 'TAIWAN'
+		});
+		if (!result) {
+			return null;
+		}
+		// Wrap result if it's not a primitive type?
+		if (result.apiName) {
+			if (result.apiName === 'java.util.Locale') {
+				return new java.util.Locale(result);
+			} else {
+				var ctor = require(result.apiName);
+				return new ctor(result);
+			}
+		}
+		return result;
+	},
+	enumerable: true
+});
+// http://developer.android.com/reference/java/util/Locale.html#CHINA
+Object.defineProperty(java.util.Locale, 'CHINA', {
+	get: function() {
+		var classProxy = Hyperloop.createProxy({
+			class: this.className,
+			alloc: false
+		});
+		if (!classProxy) return null;
+
+		var result = classProxy.getNativeField({
+			field: 'CHINA'
+		});
+		if (!result) {
+			return null;
+		}
+		// Wrap result if it's not a primitive type?
+		if (result.apiName) {
+			if (result.apiName === 'java.util.Locale') {
+				return new java.util.Locale(result);
+			} else {
+				var ctor = require(result.apiName);
+				return new ctor(result);
+			}
+		}
+		return result;
+	},
+	enumerable: true
+});
+// http://developer.android.com/reference/java/util/Locale.html#ITALY
+Object.defineProperty(java.util.Locale, 'ITALY', {
+	get: function() {
+		var classProxy = Hyperloop.createProxy({
+			class: this.className,
+			alloc: false
+		});
+		if (!classProxy) return null;
+
+		var result = classProxy.getNativeField({
+			field: 'ITALY'
 		});
 		if (!result) {
 			return null;
@@ -318,6 +412,34 @@ Object.defineProperty(java.util.Locale, 'TRADITIONAL_CHINESE', {
 	},
 	enumerable: true
 });
+// http://developer.android.com/reference/java/util/Locale.html#CANADA_FRENCH
+Object.defineProperty(java.util.Locale, 'CANADA_FRENCH', {
+	get: function() {
+		var classProxy = Hyperloop.createProxy({
+			class: this.className,
+			alloc: false
+		});
+		if (!classProxy) return null;
+
+		var result = classProxy.getNativeField({
+			field: 'CANADA_FRENCH'
+		});
+		if (!result) {
+			return null;
+		}
+		// Wrap result if it's not a primitive type?
+		if (result.apiName) {
+			if (result.apiName === 'java.util.Locale') {
+				return new java.util.Locale(result);
+			} else {
+				var ctor = require(result.apiName);
+				return new ctor(result);
+			}
+		}
+		return result;
+	},
+	enumerable: true
+});
 // http://developer.android.com/reference/java/util/Locale.html#GERMANY
 Object.defineProperty(java.util.Locale, 'GERMANY', {
 	get: function() {
@@ -430,6 +552,34 @@ Object.defineProperty(java.util.Locale, 'JAPAN', {
 	},
 	enumerable: true
 });
+// http://developer.android.com/reference/java/util/Locale.html#JAPANESE
+Object.defineProperty(java.util.Locale, 'JAPANESE', {
+	get: function() {
+		var classProxy = Hyperloop.createProxy({
+			class: this.className,
+			alloc: false
+		});
+		if (!classProxy) return null;
+
+		var result = classProxy.getNativeField({
+			field: 'JAPANESE'
+		});
+		if (!result) {
+			return null;
+		}
+		// Wrap result if it's not a primitive type?
+		if (result.apiName) {
+			if (result.apiName === 'java.util.Locale') {
+				return new java.util.Locale(result);
+			} else {
+				var ctor = require(result.apiName);
+				return new ctor(result);
+			}
+		}
+		return result;
+	},
+	enumerable: true
+});
 // http://developer.android.com/reference/java/util/Locale.html#SIMPLIFIED_CHINESE
 Object.defineProperty(java.util.Locale, 'SIMPLIFIED_CHINESE', {
 	get: function() {
@@ -514,174 +664,6 @@ Object.defineProperty(java.util.Locale, 'US', {
 	},
 	enumerable: true
 });
-// http://developer.android.com/reference/java/util/Locale.html#ENGLISH
-Object.defineProperty(java.util.Locale, 'ENGLISH', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'ENGLISH'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.html#CHINA
-Object.defineProperty(java.util.Locale, 'CHINA', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'CHINA'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.html#ITALY
-Object.defineProperty(java.util.Locale, 'ITALY', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'ITALY'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.html#$assertionsDisabled
-Object.defineProperty(java.util.Locale, '$assertionsDisabled', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: '$assertionsDisabled'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.html#CANADA_FRENCH
-Object.defineProperty(java.util.Locale, 'CANADA_FRENCH', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'CANADA_FRENCH'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/Locale.html#JAPANESE
-Object.defineProperty(java.util.Locale, 'JAPANESE', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'JAPANESE'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.Locale') {
-				return new java.util.Locale(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 // http://developer.android.com/reference/java/util/Locale.html#KOREAN
 Object.defineProperty(java.util.Locale, 'KOREAN', {
 	get: function() {
@@ -721,15 +703,9 @@ Object.defineProperty(java.util.Locale, 'KOREAN', {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#forLanguageTag(java.lang.String)}
  **/
 java.util.Locale.forLanguageTag = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'forLanguageTag',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -755,15 +731,9 @@ java.util.Locale.forLanguageTag = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#lookupTag(java.util.List, java.util.Collection)}
  **/
 java.util.Locale.lookupTag = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'lookupTag',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -789,15 +759,9 @@ java.util.Locale.lookupTag = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#getISOCountries()}
  **/
 java.util.Locale.getISOCountries = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getISOCountries',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -824,15 +788,9 @@ java.util.Locale.getISOCountries = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#filterTags(java.util.List, java.util.Collection)}
  **/
 java.util.Locale.filterTags = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'filterTags',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -858,15 +816,9 @@ java.util.Locale.filterTags = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#getISOLanguages()}
  **/
 java.util.Locale.getISOLanguages = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getISOLanguages',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -892,50 +844,10 @@ java.util.Locale.getISOLanguages = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#getAvailableLocales()}
  **/
 java.util.Locale.getAvailableLocales = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getAvailableLocales',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$700
- * @static
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#access$700(java.util.Locale)}
- **/
-java.util.Locale.access$700 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$700',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -960,50 +872,10 @@ java.util.Locale.access$700 = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#lookup(java.util.List, java.util.Collection)}
  **/
 java.util.Locale.lookup = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'lookup',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$600
- * @static
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#access$600(java.util.Locale)}
- **/
-java.util.Locale.access$600 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$600',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1029,15 +901,9 @@ java.util.Locale.access$600 = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#getDefault(java.util.Locale$Category)}
  **/
 java.util.Locale.getDefault = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefault',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1064,50 +930,10 @@ java.util.Locale.getDefault = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#setDefault(java.util.Locale$Category, java.util.Locale)}
  **/
 java.util.Locale.setDefault = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setDefault',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$800
- * @static
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#access$800(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
- **/
-java.util.Locale.access$800 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$800',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1133,52 +959,10 @@ java.util.Locale.access$800 = function() {
  * @see {@link http://developer.android.com/reference/java/util/Locale.html#filter(java.util.List, java.util.Collection)}
  **/
 java.util.Locale.filter = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'filter',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getInstance
- * @static
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#getInstance(java.lang.String, java.lang.String, java.lang.String)}
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#getInstance(java.lang.String, java.lang.String, java.lang.String, java.lang.String, sun.util.locale.LocaleExtensions)}
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#getInstance(sun.util.locale.BaseLocale, sun.util.locale.LocaleExtensions)}
- **/
-java.util.Locale.getInstance = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getInstance',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1210,35 +994,6 @@ java.util.Locale.prototype.stripExtensions = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'stripExtensions',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getBaseLocale
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#getBaseLocale()}
- **/
-java.util.Locale.prototype.getBaseLocale = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getBaseLocale',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1355,35 +1110,6 @@ java.util.Locale.prototype.getISO3Country = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getISO3Country',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.Locale') {
-			return new java.util.Locale(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getLocaleExtensions
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/Locale.html#getLocaleExtensions()}
- **/
-java.util.Locale.prototype.getLocaleExtensions = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getLocaleExtensions',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

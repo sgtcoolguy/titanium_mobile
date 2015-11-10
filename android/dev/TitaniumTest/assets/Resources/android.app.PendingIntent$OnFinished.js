@@ -19,7 +19,7 @@ android.app.PendingIntent.OnFinished = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.PendingIntent$OnFinished') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.PendingIntent$OnFinished') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.PendingIntent.OnFinished.isInstanceOf = function (self, cls) {
 
 android.app.PendingIntent.OnFinished.className = "android.app.PendingIntent$OnFinished";
 android.app.PendingIntent.OnFinished.prototype.className = "android.app.PendingIntent$OnFinished";
+
+// class property
+Object.defineProperty(android.app.PendingIntent.OnFinished, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.PendingIntent$OnFinished',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

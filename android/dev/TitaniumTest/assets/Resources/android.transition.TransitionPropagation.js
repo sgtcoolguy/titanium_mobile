@@ -22,15 +22,13 @@ android.transition.TransitionPropagation = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.transition.TransitionPropagation') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.transition.TransitionPropagation') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.transition.TransitionPropagation',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.transition.TransitionPropagation. Create a subclass using android.transition.TransitionPropagation.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.transition.TransitionPropagation.prototype.constructor = android.transit
 
 android.transition.TransitionPropagation.className = "android.transition.TransitionPropagation";
 android.transition.TransitionPropagation.prototype.className = "android.transition.TransitionPropagation";
+
+// class property
+Object.defineProperty(android.transition.TransitionPropagation, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.transition.TransitionPropagation',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.transition.TransitionPropagation.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.transition.TransitionPropagation',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.transition.TransitionPropagation.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

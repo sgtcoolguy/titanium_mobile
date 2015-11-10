@@ -32,10 +32,10 @@ java.util.jar.Manifest.FastInputStream = function() {
 			class: 'java.util.jar.Manifest$FastInputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -67,7 +67,7 @@ java.util.jar.Manifest.FastInputStream.prototype.className = "java.util.jar.Mani
 java.util.jar.Manifest.FastInputStream.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -96,7 +96,7 @@ java.util.jar.Manifest.FastInputStream.prototype.read = function() {
 java.util.jar.Manifest.FastInputStream.prototype.available = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'available',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -125,7 +125,7 @@ java.util.jar.Manifest.FastInputStream.prototype.available = function() {
 java.util.jar.Manifest.FastInputStream.prototype.skip = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skip',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -155,7 +155,7 @@ java.util.jar.Manifest.FastInputStream.prototype.skip = function() {
 java.util.jar.Manifest.FastInputStream.prototype.readLine = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLine',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -184,7 +184,7 @@ java.util.jar.Manifest.FastInputStream.prototype.readLine = function() {
 java.util.jar.Manifest.FastInputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -213,7 +213,7 @@ java.util.jar.Manifest.FastInputStream.prototype.close = function() {
 java.util.jar.Manifest.FastInputStream.prototype.peek = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'peek',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

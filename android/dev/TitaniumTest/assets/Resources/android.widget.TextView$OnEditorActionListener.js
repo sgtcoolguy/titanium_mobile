@@ -19,7 +19,7 @@ android.widget.TextView.OnEditorActionListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.TextView$OnEditorActionListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.TextView$OnEditorActionListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.widget.TextView.OnEditorActionListener.isInstanceOf = function (self, cl
 
 android.widget.TextView.OnEditorActionListener.className = "android.widget.TextView$OnEditorActionListener";
 android.widget.TextView.OnEditorActionListener.prototype.className = "android.widget.TextView$OnEditorActionListener";
+
+// class property
+Object.defineProperty(android.widget.TextView.OnEditorActionListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.TextView$OnEditorActionListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

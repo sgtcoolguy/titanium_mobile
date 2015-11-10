@@ -22,7 +22,9 @@ java.lang.Integer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Integer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Integer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Integer.prototype.constructor = java.lang.Integer;
 
 java.lang.Integer.className = "java.lang.Integer";
 java.lang.Integer.prototype.className = "java.lang.Integer";
+
+// class property
+Object.defineProperty(java.lang.Integer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Integer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -72,118 +88,6 @@ java.lang.Integer.MAX_VALUE = 2147483647;
 java.lang.Integer.MIN_VALUE = -2147483648;
 
 // Static fields
-// http://developer.android.com/reference/java/lang/Integer.html#DigitTens
-Object.defineProperty(java.lang.Integer, 'DigitTens', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'DigitTens'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Integer') {
-				return new java.lang.Integer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Integer.html#DigitOnes
-Object.defineProperty(java.lang.Integer, 'DigitOnes', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'DigitOnes'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Integer') {
-				return new java.lang.Integer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Integer.html#sizeTable
-Object.defineProperty(java.lang.Integer, 'sizeTable', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'sizeTable'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Integer') {
-				return new java.lang.Integer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/lang/Integer.html#digits
-Object.defineProperty(java.lang.Integer, 'digits', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'digits'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Integer') {
-				return new java.lang.Integer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 // http://developer.android.com/reference/java/lang/Integer.html#TYPE
 Object.defineProperty(java.lang.Integer, 'TYPE', {
 	get: function() {
@@ -223,15 +127,9 @@ Object.defineProperty(java.lang.Integer, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#compare(int, int)}
  **/
 java.lang.Integer.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -257,15 +155,9 @@ java.lang.Integer.compare = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toUnsignedLong(int)}
  **/
 java.lang.Integer.toUnsignedLong = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedLong',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -291,15 +183,9 @@ java.lang.Integer.toUnsignedLong = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#rotateLeft(int, int)}
  **/
 java.lang.Integer.rotateLeft = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'rotateLeft',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -327,15 +213,9 @@ java.lang.Integer.rotateLeft = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#getInteger(java.lang.String, java.lang.Integer)}
  **/
 java.lang.Integer.getInteger = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getInteger',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -361,15 +241,9 @@ java.lang.Integer.getInteger = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#sum(int, int)}
  **/
 java.lang.Integer.sum = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'sum',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -395,15 +269,9 @@ java.lang.Integer.sum = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#decode(java.lang.String)}
  **/
 java.lang.Integer.decode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -429,50 +297,10 @@ java.lang.Integer.decode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toOctalString(int)}
  **/
 java.lang.Integer.toOctalString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toOctalString',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Integer') {
-			return new java.lang.Integer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function stringSize
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Integer.html#stringSize(int)}
- **/
-java.lang.Integer.stringSize = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'stringSize',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -498,15 +326,9 @@ java.lang.Integer.stringSize = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#parseUnsignedInt(java.lang.String)}
  **/
 java.lang.Integer.parseUnsignedInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseUnsignedInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -532,15 +354,9 @@ java.lang.Integer.parseUnsignedInt = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#remainderUnsigned(int, int)}
  **/
 java.lang.Integer.remainderUnsigned = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'remainderUnsigned',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -566,15 +382,9 @@ java.lang.Integer.remainderUnsigned = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#min(int, int)}
  **/
 java.lang.Integer.min = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'min',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -600,15 +410,9 @@ java.lang.Integer.min = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#hashCode(int)}
  **/
 java.lang.Integer.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -634,15 +438,9 @@ java.lang.Integer.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#lowestOneBit(int)}
  **/
 java.lang.Integer.lowestOneBit = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'lowestOneBit',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -668,50 +466,10 @@ java.lang.Integer.lowestOneBit = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#signum(int)}
  **/
 java.lang.Integer.signum = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'signum',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Integer') {
-			return new java.lang.Integer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function formatUnsignedInt
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Integer.html#formatUnsignedInt(int, int, char[], int, int)}
- **/
-java.lang.Integer.formatUnsignedInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'formatUnsignedInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -736,15 +494,9 @@ java.lang.Integer.formatUnsignedInt = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toHexString(int)}
  **/
 java.lang.Integer.toHexString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toHexString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -770,15 +522,9 @@ java.lang.Integer.toHexString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#rotateRight(int, int)}
  **/
 java.lang.Integer.rotateRight = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'rotateRight',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -804,50 +550,10 @@ java.lang.Integer.rotateRight = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#max(int, int)}
  **/
 java.lang.Integer.max = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'max',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Integer') {
-			return new java.lang.Integer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getChars
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Integer.html#getChars(int, int, char[])}
- **/
-java.lang.Integer.getChars = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getChars',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -874,15 +580,9 @@ java.lang.Integer.getChars = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#valueOf(int)}
  **/
 java.lang.Integer.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -908,15 +608,9 @@ java.lang.Integer.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#divideUnsigned(int, int)}
  **/
 java.lang.Integer.divideUnsigned = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'divideUnsigned',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -942,15 +636,9 @@ java.lang.Integer.divideUnsigned = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#reverse(int)}
  **/
 java.lang.Integer.reverse = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'reverse',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -976,15 +664,9 @@ java.lang.Integer.reverse = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#numberOfLeadingZeros(int)}
  **/
 java.lang.Integer.numberOfLeadingZeros = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'numberOfLeadingZeros',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1011,15 +693,9 @@ java.lang.Integer.numberOfLeadingZeros = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#parseInt(java.lang.String)}
  **/
 java.lang.Integer.parseInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1045,15 +721,9 @@ java.lang.Integer.parseInt = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#compareUnsigned(int, int)}
  **/
 java.lang.Integer.compareUnsigned = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compareUnsigned',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1079,15 +749,9 @@ java.lang.Integer.compareUnsigned = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toBinaryString(int)}
  **/
 java.lang.Integer.toBinaryString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toBinaryString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1114,15 +778,9 @@ java.lang.Integer.toBinaryString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toString(int)}
  **/
 java.lang.Integer.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1149,15 +807,9 @@ java.lang.Integer.toString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#toUnsignedString(int)}
  **/
 java.lang.Integer.toUnsignedString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1183,15 +835,9 @@ java.lang.Integer.toUnsignedString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#bitCount(int)}
  **/
 java.lang.Integer.bitCount = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'bitCount',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1217,15 +863,9 @@ java.lang.Integer.bitCount = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#highestOneBit(int)}
  **/
 java.lang.Integer.highestOneBit = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'highestOneBit',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1251,15 +891,9 @@ java.lang.Integer.highestOneBit = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#numberOfTrailingZeros(int)}
  **/
 java.lang.Integer.numberOfTrailingZeros = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'numberOfTrailingZeros',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1285,15 +919,9 @@ java.lang.Integer.numberOfTrailingZeros = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Integer.html#reverseBytes(int)}
  **/
 java.lang.Integer.reverseBytes = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'reverseBytes',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

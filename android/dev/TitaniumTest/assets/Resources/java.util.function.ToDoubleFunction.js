@@ -19,7 +19,7 @@ java.util.function.ToDoubleFunction = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.function.ToDoubleFunction') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.function.ToDoubleFunction') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.util.function.ToDoubleFunction.isInstanceOf = function (self, cls) {
 
 java.util.function.ToDoubleFunction.className = "java.util.function.ToDoubleFunction";
 java.util.function.ToDoubleFunction.prototype.className = "java.util.function.ToDoubleFunction";
+
+// class property
+Object.defineProperty(java.util.function.ToDoubleFunction, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.function.ToDoubleFunction',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

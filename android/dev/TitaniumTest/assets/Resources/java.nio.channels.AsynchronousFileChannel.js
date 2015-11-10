@@ -23,15 +23,13 @@ java.nio.channels.AsynchronousFileChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.AsynchronousFileChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.AsynchronousFileChannel') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.AsynchronousFileChannel',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.AsynchronousFileChannel. Create a subclass using java.nio.channels.AsynchronousFileChannel.extend();' );
 	}
 
 	this.$native = result;
@@ -45,6 +43,41 @@ java.nio.channels.AsynchronousFileChannel.prototype.constructor = java.nio.chann
 
 java.nio.channels.AsynchronousFileChannel.className = "java.nio.channels.AsynchronousFileChannel";
 java.nio.channels.AsynchronousFileChannel.prototype.className = "java.nio.channels.AsynchronousFileChannel";
+
+// class property
+Object.defineProperty(java.nio.channels.AsynchronousFileChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.AsynchronousFileChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.AsynchronousFileChannel.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.AsynchronousFileChannel',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.AsynchronousFileChannel.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -61,15 +94,9 @@ java.nio.channels.AsynchronousFileChannel.prototype.className = "java.nio.channe
  * @see {@link http://developer.android.com/reference/java/nio/channels/AsynchronousFileChannel.html#open(java.nio.file.Path, java.nio.file.OpenOption[])}
  **/
 java.nio.channels.AsynchronousFileChannel.open = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'open',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

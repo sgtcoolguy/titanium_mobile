@@ -22,7 +22,9 @@ android.util.SparseBooleanArray = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.util.SparseBooleanArray') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.util.SparseBooleanArray') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.util.SparseBooleanArray.prototype.constructor = android.util.SparseBoole
 
 android.util.SparseBooleanArray.className = "android.util.SparseBooleanArray";
 android.util.SparseBooleanArray.prototype.className = "android.util.SparseBooleanArray";
+
+// class property
+Object.defineProperty(android.util.SparseBooleanArray, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.util.SparseBooleanArray',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.util.SparseBooleanArray.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.util.SparseBooleanArray',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.util.SparseBooleanArray.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

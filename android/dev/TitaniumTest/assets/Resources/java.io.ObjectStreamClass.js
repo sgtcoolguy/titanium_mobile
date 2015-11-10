@@ -30,10 +30,10 @@ java.io.ObjectStreamClass = function() {
 			class: 'java.io.ObjectStreamClass',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -52,7 +52,7 @@ java.io.ObjectStreamClass.prototype.className = "java.io.ObjectStreamClass";
 Object.defineProperty(java.io.ObjectStreamClass, 'NO_FIELDS', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -88,7 +88,7 @@ Object.defineProperty(java.io.ObjectStreamClass, 'NO_FIELDS', {
  **/
 java.io.ObjectStreamClass.lookupAny = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -122,7 +122,7 @@ java.io.ObjectStreamClass.lookupAny = function() {
  **/
 java.io.ObjectStreamClass.access$2002 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -156,7 +156,7 @@ java.io.ObjectStreamClass.access$2002 = function() {
  **/
 java.io.ObjectStreamClass.access$2200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -190,7 +190,7 @@ java.io.ObjectStreamClass.access$2200 = function() {
  **/
 java.io.ObjectStreamClass.access$2400 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -224,7 +224,7 @@ java.io.ObjectStreamClass.access$2400 = function() {
  **/
 java.io.ObjectStreamClass.access$400 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -258,7 +258,7 @@ java.io.ObjectStreamClass.access$400 = function() {
  **/
 java.io.ObjectStreamClass.access$000 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -292,7 +292,7 @@ java.io.ObjectStreamClass.access$000 = function() {
  **/
 java.io.ObjectStreamClass.access$602 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -326,7 +326,7 @@ java.io.ObjectStreamClass.access$602 = function() {
  **/
 java.io.ObjectStreamClass.access$800 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -360,7 +360,7 @@ java.io.ObjectStreamClass.access$800 = function() {
  **/
 java.io.ObjectStreamClass.access$1802 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -394,7 +394,7 @@ java.io.ObjectStreamClass.access$1802 = function() {
  **/
 java.io.ObjectStreamClass.access$1002 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -428,7 +428,7 @@ java.io.ObjectStreamClass.access$1002 = function() {
  **/
 java.io.ObjectStreamClass.access$1200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -462,7 +462,7 @@ java.io.ObjectStreamClass.access$1200 = function() {
  **/
 java.io.ObjectStreamClass.access$1400 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -496,7 +496,7 @@ java.io.ObjectStreamClass.access$1400 = function() {
  **/
 java.io.ObjectStreamClass.access$1600 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -530,7 +530,7 @@ java.io.ObjectStreamClass.access$1600 = function() {
  **/
 java.io.ObjectStreamClass.access$1602 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -564,7 +564,7 @@ java.io.ObjectStreamClass.access$1602 = function() {
  **/
 java.io.ObjectStreamClass.access$2102 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -598,7 +598,7 @@ java.io.ObjectStreamClass.access$2102 = function() {
  **/
 java.io.ObjectStreamClass.access$2302 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -632,7 +632,7 @@ java.io.ObjectStreamClass.access$2302 = function() {
  **/
 java.io.ObjectStreamClass.access$2500 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -666,7 +666,7 @@ java.io.ObjectStreamClass.access$2500 = function() {
  **/
 java.io.ObjectStreamClass.access$502 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -700,7 +700,7 @@ java.io.ObjectStreamClass.access$502 = function() {
  **/
 java.io.ObjectStreamClass.access$700 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -735,7 +735,7 @@ java.io.ObjectStreamClass.access$700 = function() {
  **/
 java.io.ObjectStreamClass.lookup = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -769,7 +769,7 @@ java.io.ObjectStreamClass.lookup = function() {
  **/
 java.io.ObjectStreamClass.access$100 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -803,7 +803,7 @@ java.io.ObjectStreamClass.access$100 = function() {
  **/
 java.io.ObjectStreamClass.processQueue = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -837,7 +837,7 @@ java.io.ObjectStreamClass.processQueue = function() {
  **/
 java.io.ObjectStreamClass.access$900 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -871,7 +871,7 @@ java.io.ObjectStreamClass.access$900 = function() {
  **/
 java.io.ObjectStreamClass.access$1902 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -905,7 +905,7 @@ java.io.ObjectStreamClass.access$1902 = function() {
  **/
 java.io.ObjectStreamClass.access$1102 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -939,7 +939,7 @@ java.io.ObjectStreamClass.access$1102 = function() {
  **/
 java.io.ObjectStreamClass.access$1302 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -973,7 +973,7 @@ java.io.ObjectStreamClass.access$1302 = function() {
  **/
 java.io.ObjectStreamClass.access$1500 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1007,7 +1007,7 @@ java.io.ObjectStreamClass.access$1500 = function() {
  **/
 java.io.ObjectStreamClass.access$1700 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -1045,7 +1045,7 @@ java.io.ObjectStreamClass.access$1700 = function() {
 java.io.ObjectStreamClass.prototype.getNumObjFields = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getNumObjFields',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1074,7 +1074,7 @@ java.io.ObjectStreamClass.prototype.getNumObjFields = function() {
 java.io.ObjectStreamClass.prototype.getName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1103,7 +1103,7 @@ java.io.ObjectStreamClass.prototype.getName = function() {
 java.io.ObjectStreamClass.prototype.hasWriteObjectMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasWriteObjectMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1132,7 +1132,7 @@ java.io.ObjectStreamClass.prototype.hasWriteObjectMethod = function() {
 java.io.ObjectStreamClass.prototype.isExternalizable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isExternalizable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1161,7 +1161,7 @@ java.io.ObjectStreamClass.prototype.isExternalizable = function() {
 java.io.ObjectStreamClass.prototype.setObjFieldValues = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setObjFieldValues',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1190,7 +1190,7 @@ java.io.ObjectStreamClass.prototype.setObjFieldValues = function() {
 java.io.ObjectStreamClass.prototype.hasWriteObjectData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasWriteObjectData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1219,7 +1219,7 @@ java.io.ObjectStreamClass.prototype.hasWriteObjectData = function() {
 java.io.ObjectStreamClass.prototype.invokeReadResolve = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'invokeReadResolve',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1248,7 +1248,7 @@ java.io.ObjectStreamClass.prototype.invokeReadResolve = function() {
 java.io.ObjectStreamClass.prototype.hasReadResolveMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasReadResolveMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1277,7 +1277,7 @@ java.io.ObjectStreamClass.prototype.hasReadResolveMethod = function() {
 java.io.ObjectStreamClass.prototype.invokeWriteObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'invokeWriteObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1306,7 +1306,7 @@ java.io.ObjectStreamClass.prototype.invokeWriteObject = function() {
 java.io.ObjectStreamClass.prototype.getClassDataLayout = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getClassDataLayout',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1336,7 +1336,7 @@ java.io.ObjectStreamClass.prototype.getClassDataLayout = function() {
 java.io.ObjectStreamClass.prototype.getField = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getField',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1365,7 +1365,7 @@ java.io.ObjectStreamClass.prototype.getField = function() {
 java.io.ObjectStreamClass.prototype.newInstance = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'newInstance',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1394,7 +1394,7 @@ java.io.ObjectStreamClass.prototype.newInstance = function() {
 java.io.ObjectStreamClass.prototype.isInstantiable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isInstantiable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1423,7 +1423,7 @@ java.io.ObjectStreamClass.prototype.isInstantiable = function() {
 java.io.ObjectStreamClass.prototype.isProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1453,7 +1453,7 @@ java.io.ObjectStreamClass.prototype.isProxy = function() {
 java.io.ObjectStreamClass.prototype.getFields = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getFields',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1482,7 +1482,7 @@ java.io.ObjectStreamClass.prototype.getFields = function() {
 java.io.ObjectStreamClass.prototype.hasBlockExternalData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasBlockExternalData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1511,7 +1511,7 @@ java.io.ObjectStreamClass.prototype.hasBlockExternalData = function() {
 java.io.ObjectStreamClass.prototype.isSerializable = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isSerializable',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1540,7 +1540,7 @@ java.io.ObjectStreamClass.prototype.isSerializable = function() {
 java.io.ObjectStreamClass.prototype.invokeReadObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'invokeReadObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1569,7 +1569,7 @@ java.io.ObjectStreamClass.prototype.invokeReadObject = function() {
 java.io.ObjectStreamClass.prototype.checkSerialize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'checkSerialize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1598,7 +1598,7 @@ java.io.ObjectStreamClass.prototype.checkSerialize = function() {
 java.io.ObjectStreamClass.prototype.hasWriteReplaceMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasWriteReplaceMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1627,7 +1627,7 @@ java.io.ObjectStreamClass.prototype.hasWriteReplaceMethod = function() {
 java.io.ObjectStreamClass.prototype.hasReadObjectNoDataMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasReadObjectNoDataMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1656,7 +1656,7 @@ java.io.ObjectStreamClass.prototype.hasReadObjectNoDataMethod = function() {
 java.io.ObjectStreamClass.prototype.getPrimDataSize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getPrimDataSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1685,7 +1685,7 @@ java.io.ObjectStreamClass.prototype.getPrimDataSize = function() {
 java.io.ObjectStreamClass.prototype.setPrimFieldValues = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setPrimFieldValues',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1714,7 +1714,7 @@ java.io.ObjectStreamClass.prototype.setPrimFieldValues = function() {
 java.io.ObjectStreamClass.prototype.checkDefaultSerialize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'checkDefaultSerialize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1743,7 +1743,7 @@ java.io.ObjectStreamClass.prototype.checkDefaultSerialize = function() {
 java.io.ObjectStreamClass.prototype.initNonProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'initNonProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1772,7 +1772,7 @@ java.io.ObjectStreamClass.prototype.initNonProxy = function() {
 java.io.ObjectStreamClass.prototype.checkDeserialize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'checkDeserialize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1801,7 +1801,7 @@ java.io.ObjectStreamClass.prototype.checkDeserialize = function() {
 java.io.ObjectStreamClass.prototype.invokeWriteReplace = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'invokeWriteReplace',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1830,7 +1830,7 @@ java.io.ObjectStreamClass.prototype.invokeWriteReplace = function() {
 java.io.ObjectStreamClass.prototype.hasReadObjectMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hasReadObjectMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1859,7 +1859,7 @@ java.io.ObjectStreamClass.prototype.hasReadObjectMethod = function() {
 java.io.ObjectStreamClass.prototype.forClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'forClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1888,7 +1888,7 @@ java.io.ObjectStreamClass.prototype.forClass = function() {
 java.io.ObjectStreamClass.prototype.getResolveException = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getResolveException',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1917,7 +1917,7 @@ java.io.ObjectStreamClass.prototype.getResolveException = function() {
 java.io.ObjectStreamClass.prototype.getObjFieldValues = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getObjFieldValues',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1946,7 +1946,7 @@ java.io.ObjectStreamClass.prototype.getObjFieldValues = function() {
 java.io.ObjectStreamClass.prototype.getPrimFieldValues = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getPrimFieldValues',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1975,7 +1975,7 @@ java.io.ObjectStreamClass.prototype.getPrimFieldValues = function() {
 java.io.ObjectStreamClass.prototype.isEnum = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isEnum',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2004,7 +2004,7 @@ java.io.ObjectStreamClass.prototype.isEnum = function() {
 java.io.ObjectStreamClass.prototype.invokeReadObjectNoData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'invokeReadObjectNoData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2033,7 +2033,7 @@ java.io.ObjectStreamClass.prototype.invokeReadObjectNoData = function() {
 java.io.ObjectStreamClass.prototype.initProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'initProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2062,7 +2062,7 @@ java.io.ObjectStreamClass.prototype.initProxy = function() {
 java.io.ObjectStreamClass.prototype.readNonProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readNonProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2091,7 +2091,7 @@ java.io.ObjectStreamClass.prototype.readNonProxy = function() {
 java.io.ObjectStreamClass.prototype.getSerialVersionUID = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getSerialVersionUID',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2120,7 +2120,7 @@ java.io.ObjectStreamClass.prototype.getSerialVersionUID = function() {
 java.io.ObjectStreamClass.prototype.getLocalDesc = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getLocalDesc',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2149,7 +2149,7 @@ java.io.ObjectStreamClass.prototype.getLocalDesc = function() {
 java.io.ObjectStreamClass.prototype.writeNonProxy = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeNonProxy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2178,7 +2178,7 @@ java.io.ObjectStreamClass.prototype.writeNonProxy = function() {
 java.io.ObjectStreamClass.prototype.getSuperDesc = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getSuperDesc',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -2207,7 +2207,7 @@ java.io.ObjectStreamClass.prototype.getSuperDesc = function() {
 java.io.ObjectStreamClass.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

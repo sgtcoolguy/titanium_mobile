@@ -22,7 +22,9 @@ android.view.MotionEvent = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.MotionEvent') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.MotionEvent') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.view.MotionEvent.prototype.constructor = android.view.MotionEvent;
 
 android.view.MotionEvent.className = "android.view.MotionEvent";
 android.view.MotionEvent.prototype.className = "android.view.MotionEvent";
+
+// class property
+Object.defineProperty(android.view.MotionEvent, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.MotionEvent',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -596,15 +612,9 @@ Object.defineProperty(android.view.MotionEvent, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/view/MotionEvent.html#obtain(android.view.MotionEvent)}
  **/
 android.view.MotionEvent.obtain = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'obtain',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -630,15 +640,9 @@ android.view.MotionEvent.obtain = function() {
  * @see {@link http://developer.android.com/reference/android/view/MotionEvent.html#axisFromString(java.lang.String)}
  **/
 android.view.MotionEvent.axisFromString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'axisFromString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -664,15 +668,9 @@ android.view.MotionEvent.axisFromString = function() {
  * @see {@link http://developer.android.com/reference/android/view/MotionEvent.html#obtainNoHistory(android.view.MotionEvent)}
  **/
 android.view.MotionEvent.obtainNoHistory = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'obtainNoHistory',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -698,15 +696,9 @@ android.view.MotionEvent.obtainNoHistory = function() {
  * @see {@link http://developer.android.com/reference/android/view/MotionEvent.html#actionToString(int)}
  **/
 android.view.MotionEvent.actionToString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'actionToString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -732,15 +724,9 @@ android.view.MotionEvent.actionToString = function() {
  * @see {@link http://developer.android.com/reference/android/view/MotionEvent.html#axisToString(int)}
  **/
 android.view.MotionEvent.axisToString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'axisToString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

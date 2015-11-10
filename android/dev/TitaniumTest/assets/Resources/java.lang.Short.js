@@ -22,7 +22,9 @@ java.lang.Short = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Short') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Short') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Short.prototype.constructor = java.lang.Short;
 
 java.lang.Short.className = "java.lang.Short";
 java.lang.Short.prototype.className = "java.lang.Short";
+
+// class property
+Object.defineProperty(java.lang.Short, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Short',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -111,15 +127,9 @@ Object.defineProperty(java.lang.Short, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#compare(short, short)}
  **/
 java.lang.Short.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -147,15 +157,9 @@ java.lang.Short.compare = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#valueOf(short)}
  **/
 java.lang.Short.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -181,15 +185,9 @@ java.lang.Short.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#toUnsignedLong(short)}
  **/
 java.lang.Short.toUnsignedLong = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedLong',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -215,15 +213,9 @@ java.lang.Short.toUnsignedLong = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#decode(java.lang.String)}
  **/
 java.lang.Short.decode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -249,15 +241,9 @@ java.lang.Short.decode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#toUnsignedInt(short)}
  **/
 java.lang.Short.toUnsignedInt = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toUnsignedInt',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -283,15 +269,9 @@ java.lang.Short.toUnsignedInt = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#hashCode(short)}
  **/
 java.lang.Short.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -318,15 +298,9 @@ java.lang.Short.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#parseShort(java.lang.String)}
  **/
 java.lang.Short.parseShort = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseShort',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -352,15 +326,9 @@ java.lang.Short.parseShort = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#toString(short)}
  **/
 java.lang.Short.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -386,15 +354,9 @@ java.lang.Short.toString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Short.html#reverseBytes(short)}
  **/
 java.lang.Short.reverseBytes = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'reverseBytes',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

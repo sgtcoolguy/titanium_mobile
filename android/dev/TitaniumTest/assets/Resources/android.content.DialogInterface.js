@@ -18,7 +18,7 @@ android.content.DialogInterface = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.content.DialogInterface.isInstanceOf = function (self, cls) {
 
 android.content.DialogInterface.className = "android.content.DialogInterface";
 android.content.DialogInterface.prototype.className = "android.content.DialogInterface";
+
+// class property
+Object.defineProperty(android.content.DialogInterface, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.DialogInterface',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/content/DialogInterface.html#BUTTON1

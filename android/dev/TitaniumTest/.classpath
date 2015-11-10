@@ -33,5 +33,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/titanium-utils"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/titanium-xml"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/titanium-yahoo"/>
+	<classpathentry kind="lib" path="/titanium/lib/dexmaker-1.4.jar"/>
+	<classpathentry kind="lib" path="/titanium/lib/dexmaker-dx-1.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

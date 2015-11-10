@@ -23,15 +23,13 @@ android.graphics.drawable.Drawable = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.drawable.Drawable') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.drawable.Drawable') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.graphics.drawable.Drawable',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.graphics.drawable.Drawable. Create a subclass using android.graphics.drawable.Drawable.extend();' );
 	}
 
 	this.$native = result;
@@ -45,6 +43,41 @@ android.graphics.drawable.Drawable.prototype.constructor = android.graphics.draw
 
 android.graphics.drawable.Drawable.className = "android.graphics.drawable.Drawable";
 android.graphics.drawable.Drawable.prototype.className = "android.graphics.drawable.Drawable";
+
+// class property
+Object.defineProperty(android.graphics.drawable.Drawable, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.drawable.Drawable',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.drawable.Drawable.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.drawable.Drawable',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.drawable.Drawable.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -60,15 +93,9 @@ android.graphics.drawable.Drawable.prototype.className = "android.graphics.drawa
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#resolveOpacity(int, int)}
  **/
 android.graphics.drawable.Drawable.resolveOpacity = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'resolveOpacity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -94,15 +121,9 @@ android.graphics.drawable.Drawable.resolveOpacity = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#createFromStream(java.io.InputStream, java.lang.String)}
  **/
 android.graphics.drawable.Drawable.createFromStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -129,15 +150,9 @@ android.graphics.drawable.Drawable.createFromStream = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#createFromXml(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.content.res.Resources$Theme)}
  **/
 android.graphics.drawable.Drawable.createFromXml = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromXml',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -164,15 +179,9 @@ android.graphics.drawable.Drawable.createFromXml = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#createFromResourceStream(android.content.res.Resources, android.util.TypedValue, java.io.InputStream, java.lang.String, android.graphics.BitmapFactory$Options)}
  **/
 android.graphics.drawable.Drawable.createFromResourceStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromResourceStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -199,15 +208,9 @@ android.graphics.drawable.Drawable.createFromResourceStream = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#createFromXmlInner(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.content.res.Resources$Theme)}
  **/
 android.graphics.drawable.Drawable.createFromXmlInner = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromXmlInner',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -233,15 +236,9 @@ android.graphics.drawable.Drawable.createFromXmlInner = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/drawable/Drawable.html#createFromPath(java.lang.String)}
  **/
 android.graphics.drawable.Drawable.createFromPath = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromPath',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

@@ -22,15 +22,13 @@ java.nio.Buffer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.Buffer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.Buffer') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.Buffer',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.Buffer. Create a subclass using java.nio.Buffer.extend();' );
 	}
 
 	this.$native = result;
@@ -45,85 +43,48 @@ java.nio.Buffer.prototype.constructor = java.nio.Buffer;
 java.nio.Buffer.className = "java.nio.Buffer";
 java.nio.Buffer.prototype.className = "java.nio.Buffer";
 
+// class property
+Object.defineProperty(java.nio.Buffer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.Buffer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.Buffer.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.Buffer',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.Buffer.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#SPLITERATOR_CHARACTERISTICS}
- */
-java.nio.Buffer.SPLITERATOR_CHARACTERISTICS = 16464;
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/nio/Buffer.html#address
-Object.defineProperty(java.nio.Buffer.prototype, 'address', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'address'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.Buffer') {
-				return new java.nio.Buffer(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'address',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function checkBounds
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#checkBounds(int, int, int)}
- **/
-java.nio.Buffer.checkBounds = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'checkBounds',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 
 // Instance methods
 /**
@@ -196,36 +157,6 @@ java.nio.Buffer.prototype.clear = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'clear',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function checkIndex
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#checkIndex(int)}
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#checkIndex(int, int)}
- **/
-java.nio.Buffer.prototype.checkIndex = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'checkIndex',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -361,35 +292,6 @@ java.nio.Buffer.prototype.rewind = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function truncate
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#truncate()}
- **/
-java.nio.Buffer.prototype.truncate = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'truncate',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function array
  * @memberof
  * @instance
@@ -400,36 +302,6 @@ java.nio.Buffer.prototype.array = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'array',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function nextPutIndex
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#nextPutIndex()}
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#nextPutIndex(int)}
- **/
-java.nio.Buffer.prototype.nextPutIndex = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'nextPutIndex',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -537,35 +409,6 @@ java.nio.Buffer.prototype.arrayOffset = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function discardMark
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#discardMark()}
- **/
-java.nio.Buffer.prototype.discardMark = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'discardMark',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function position
  * @memberof
  * @instance
@@ -654,36 +497,6 @@ java.nio.Buffer.prototype.isDirect = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function nextGetIndex
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#nextGetIndex()}
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#nextGetIndex(int)}
- **/
-java.nio.Buffer.prototype.nextGetIndex = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'nextGetIndex',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function mark
  * @memberof
  * @instance
@@ -694,35 +507,6 @@ java.nio.Buffer.prototype.mark = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'mark',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.Buffer') {
-			return new java.nio.Buffer(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function markValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/Buffer.html#markValue()}
- **/
-java.nio.Buffer.prototype.markValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'markValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

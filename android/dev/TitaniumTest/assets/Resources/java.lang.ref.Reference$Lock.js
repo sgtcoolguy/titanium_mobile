@@ -32,10 +32,10 @@ java.lang.ref.Reference.Lock = function() {
 			class: 'java.lang.ref.Reference$Lock',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };

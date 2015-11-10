@@ -31,10 +31,10 @@ java.security.ProtectionDomain.Key = function() {
 			class: 'java.security.ProtectionDomain$Key',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.security.ProtectionDomain.Key.prototype, 'this$0', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'this$0'
 		});
 		if (!result) {

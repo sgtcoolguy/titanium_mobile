@@ -18,7 +18,7 @@ android.animation.TypeEvaluator = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.animation.TypeEvaluator') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.animation.TypeEvaluator') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.animation.TypeEvaluator.isInstanceOf = function (self, cls) {
 
 android.animation.TypeEvaluator.className = "android.animation.TypeEvaluator";
 android.animation.TypeEvaluator.prototype.className = "android.animation.TypeEvaluator";
+
+// class property
+Object.defineProperty(android.animation.TypeEvaluator, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.animation.TypeEvaluator',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

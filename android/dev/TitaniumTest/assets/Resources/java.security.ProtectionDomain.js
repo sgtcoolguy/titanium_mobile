@@ -22,7 +22,9 @@ java.security.ProtectionDomain = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.security.ProtectionDomain') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.security.ProtectionDomain') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,68 +47,50 @@ java.security.ProtectionDomain.prototype.constructor = java.security.ProtectionD
 java.security.ProtectionDomain.className = "java.security.ProtectionDomain";
 java.security.ProtectionDomain.prototype.className = "java.security.ProtectionDomain";
 
+// class property
+Object.defineProperty(java.security.ProtectionDomain, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.security.ProtectionDomain',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.security.ProtectionDomain.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.security.ProtectionDomain',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.security.ProtectionDomain.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/security/ProtectionDomain.html#key
-Object.defineProperty(java.security.ProtectionDomain.prototype, 'key', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'key'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.security.ProtectionDomain') {
-				return new java.security.ProtectionDomain(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 
 // Instance methods
-/**
- * TODO Fill out docs more...
- * @function impliesCreateAccessControlContext
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/security/ProtectionDomain.html#impliesCreateAccessControlContext()}
- **/
-java.security.ProtectionDomain.prototype.impliesCreateAccessControlContext = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'impliesCreateAccessControlContext',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.security.ProtectionDomain') {
-			return new java.security.ProtectionDomain(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function getPermissions

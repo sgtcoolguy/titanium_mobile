@@ -18,7 +18,7 @@ android.database.Cursor = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.database.Cursor') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.database.Cursor') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.database.Cursor.isInstanceOf = function (self, cls) {
 
 android.database.Cursor.className = "android.database.Cursor";
 android.database.Cursor.prototype.className = "android.database.Cursor";
+
+// class property
+Object.defineProperty(android.database.Cursor, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.database.Cursor',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/database/Cursor.html#FIELD_TYPE_FLOAT

@@ -31,10 +31,10 @@ java.io.ObjectInputStream.HandleTable = function() {
 			class: 'java.io.ObjectInputStream$HandleTable',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'entries'
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'entries'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'entries'
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'entries',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'size', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'size'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'size', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'size',
 			value: newValue
 		});
@@ -120,7 +120,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'lowDep',
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'lowDep'
 		});
 		if (!result) {
@@ -140,7 +140,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'lowDep',
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'lowDep',
 			value: newValue
 		});
@@ -152,7 +152,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'deps', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'deps'
 		});
 		if (!result) {
@@ -172,7 +172,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'deps', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'deps',
 			value: newValue
 		});
@@ -184,7 +184,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'status',
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'status'
 		});
 		if (!result) {
@@ -204,7 +204,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'status',
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'status',
 			value: newValue
 		});
@@ -225,7 +225,7 @@ Object.defineProperty(java.io.ObjectInputStream.HandleTable.prototype, 'status',
 java.io.ObjectInputStream.HandleTable.prototype.lookupException = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'lookupException',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -254,7 +254,7 @@ java.io.ObjectInputStream.HandleTable.prototype.lookupException = function() {
 java.io.ObjectInputStream.HandleTable.prototype.size = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'size',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -283,7 +283,7 @@ java.io.ObjectInputStream.HandleTable.prototype.size = function() {
 java.io.ObjectInputStream.HandleTable.prototype.markException = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'markException',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -312,7 +312,7 @@ java.io.ObjectInputStream.HandleTable.prototype.markException = function() {
 java.io.ObjectInputStream.HandleTable.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -341,7 +341,7 @@ java.io.ObjectInputStream.HandleTable.prototype.clear = function() {
 java.io.ObjectInputStream.HandleTable.prototype.finish = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'finish',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -370,7 +370,7 @@ java.io.ObjectInputStream.HandleTable.prototype.finish = function() {
 java.io.ObjectInputStream.HandleTable.prototype.setObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -399,7 +399,7 @@ java.io.ObjectInputStream.HandleTable.prototype.setObject = function() {
 java.io.ObjectInputStream.HandleTable.prototype.assign = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'assign',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -428,7 +428,7 @@ java.io.ObjectInputStream.HandleTable.prototype.assign = function() {
 java.io.ObjectInputStream.HandleTable.prototype.markDependency = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'markDependency',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -457,7 +457,7 @@ java.io.ObjectInputStream.HandleTable.prototype.markDependency = function() {
 java.io.ObjectInputStream.HandleTable.prototype.lookupObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'lookupObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

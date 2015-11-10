@@ -22,7 +22,9 @@ android.os.ParcelFileDescriptor = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.ParcelFileDescriptor') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.ParcelFileDescriptor') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.os.ParcelFileDescriptor.prototype.constructor = android.os.ParcelFileDes
 
 android.os.ParcelFileDescriptor.className = "android.os.ParcelFileDescriptor";
 android.os.ParcelFileDescriptor.prototype.className = "android.os.ParcelFileDescriptor";
+
+// class property
+Object.defineProperty(android.os.ParcelFileDescriptor, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.ParcelFileDescriptor',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.os.ParcelFileDescriptor.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.os.ParcelFileDescriptor',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.os.ParcelFileDescriptor.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -135,84 +172,10 @@ Object.defineProperty(android.os.ParcelFileDescriptor, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#fromFd(int)}
  **/
 android.os.ParcelFileDescriptor.fromFd = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'fromFd',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function parseMode
- * @static
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#parseMode(java.lang.String)}
- **/
-android.os.ParcelFileDescriptor.parseMode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'parseMode',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function createPipe
- * @static
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#createPipe()}
- **/
-android.os.ParcelFileDescriptor.createPipe = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'createPipe',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -237,15 +200,9 @@ android.os.ParcelFileDescriptor.createPipe = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#createReliablePipe()}
  **/
 android.os.ParcelFileDescriptor.createReliablePipe = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createReliablePipe',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -271,15 +228,9 @@ android.os.ParcelFileDescriptor.createReliablePipe = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#createSocketPair()}
  **/
 android.os.ParcelFileDescriptor.createSocketPair = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createSocketPair',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -305,16 +256,38 @@ android.os.ParcelFileDescriptor.createSocketPair = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#fromDatagramSocket(java.net.DatagramSocket)}
  **/
 android.os.ParcelFileDescriptor.fromDatagramSocket = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'fromDatagramSocket',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function parseMode
+ * @static
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#parseMode(java.lang.String)}
+ **/
+android.os.ParcelFileDescriptor.parseMode = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'parseMode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -339,16 +312,38 @@ android.os.ParcelFileDescriptor.fromDatagramSocket = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#fromSocket(java.net.Socket)}
  **/
 android.os.ParcelFileDescriptor.fromSocket = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'fromSocket',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function createPipe
+ * @static
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#createPipe()}
+ **/
+android.os.ParcelFileDescriptor.createPipe = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'createPipe',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -373,15 +368,9 @@ android.os.ParcelFileDescriptor.fromSocket = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#createReliableSocketPair()}
  **/
 android.os.ParcelFileDescriptor.createReliableSocketPair = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createReliableSocketPair',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -408,15 +397,9 @@ android.os.ParcelFileDescriptor.createReliableSocketPair = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#open(java.io.File, int, android.os.Handler, android.os.ParcelFileDescriptor$OnCloseListener)}
  **/
 android.os.ParcelFileDescriptor.open = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'open',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -442,15 +425,9 @@ android.os.ParcelFileDescriptor.open = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#dup(java.io.FileDescriptor)}
  **/
 android.os.ParcelFileDescriptor.dup = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'dup',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -476,15 +453,9 @@ android.os.ParcelFileDescriptor.dup = function() {
  * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#adoptFd(int)}
  **/
 android.os.ParcelFileDescriptor.adoptFd = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'adoptFd',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -536,122 +507,6 @@ android.os.ParcelFileDescriptor.prototype.checkError = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getStatSize
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#getStatSize()}
- **/
-android.os.ParcelFileDescriptor.prototype.getStatSize = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getStatSize',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getFileDescriptor
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#getFileDescriptor()}
- **/
-android.os.ParcelFileDescriptor.prototype.getFileDescriptor = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getFileDescriptor',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function close
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#close()}
- **/
-android.os.ParcelFileDescriptor.prototype.close = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'close',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function canDetectErrors
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#canDetectErrors()}
- **/
-android.os.ParcelFileDescriptor.prototype.canDetectErrors = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'canDetectErrors',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.os.ParcelFileDescriptor') {
-			return new android.os.ParcelFileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function describeContents
  * @memberof
  * @instance
@@ -662,6 +517,35 @@ android.os.ParcelFileDescriptor.prototype.describeContents = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'describeContents',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getStatSize
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#getStatSize()}
+ **/
+android.os.ParcelFileDescriptor.prototype.getStatSize = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getStatSize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -720,6 +604,35 @@ android.os.ParcelFileDescriptor.prototype.detachFd = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'detachFd',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getFileDescriptor
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#getFileDescriptor()}
+ **/
+android.os.ParcelFileDescriptor.prototype.getFileDescriptor = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getFileDescriptor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -807,6 +720,64 @@ android.os.ParcelFileDescriptor.prototype.finalize = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'finalize',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function close
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#close()}
+ **/
+android.os.ParcelFileDescriptor.prototype.close = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'close',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.os.ParcelFileDescriptor') {
+			return new android.os.ParcelFileDescriptor(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function canDetectErrors
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/os/ParcelFileDescriptor.html#canDetectErrors()}
+ **/
+android.os.ParcelFileDescriptor.prototype.canDetectErrors = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'canDetectErrors',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

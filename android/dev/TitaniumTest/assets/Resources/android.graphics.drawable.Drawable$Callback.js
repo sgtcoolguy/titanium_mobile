@@ -20,7 +20,7 @@ android.graphics.drawable.Drawable.Callback = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.drawable.Drawable$Callback') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.graphics.drawable.Drawable$Callback') {
 		result = arguments[0];
 	}
 	else {
@@ -93,6 +93,19 @@ android.graphics.drawable.Drawable.Callback.isInstanceOf = function (self, cls) 
 
 android.graphics.drawable.Drawable.Callback.className = "android.graphics.drawable.Drawable$Callback";
 android.graphics.drawable.Drawable.Callback.prototype.className = "android.graphics.drawable.Drawable$Callback";
+
+// class property
+Object.defineProperty(android.graphics.drawable.Drawable.Callback, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.drawable.Drawable$Callback',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

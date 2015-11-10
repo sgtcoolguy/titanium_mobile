@@ -22,7 +22,9 @@ java.util.HashMap = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.HashMap') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.util.HashMap') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,429 +47,50 @@ java.util.HashMap.prototype.constructor = java.util.HashMap;
 java.util.HashMap.className = "java.util.HashMap";
 java.util.HashMap.prototype.className = "java.util.HashMap";
 
+// class property
+Object.defineProperty(java.util.HashMap, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.HashMap',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.util.HashMap.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.util.HashMap',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.util.HashMap.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#UNTREEIFY_THRESHOLD}
- */
-java.util.HashMap.UNTREEIFY_THRESHOLD = 6;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#TREEIFY_THRESHOLD}
- */
-java.util.HashMap.TREEIFY_THRESHOLD = 8;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#DEFAULT_LOAD_FACTOR}
- */
-java.util.HashMap.DEFAULT_LOAD_FACTOR = 0.75;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#DEFAULT_INITIAL_CAPACITY}
- */
-java.util.HashMap.DEFAULT_INITIAL_CAPACITY = 16;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#MAXIMUM_CAPACITY}
- */
-java.util.HashMap.MAXIMUM_CAPACITY = 1073741824;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#MIN_TREEIFY_CAPACITY}
- */
-java.util.HashMap.MIN_TREEIFY_CAPACITY = 64;
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/util/HashMap.html#modCount
-Object.defineProperty(java.util.HashMap.prototype, 'modCount', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'modCount'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'modCount',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/HashMap.html#size
-Object.defineProperty(java.util.HashMap.prototype, 'size', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'size'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'size',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/HashMap.html#loadFactor
-Object.defineProperty(java.util.HashMap.prototype, 'loadFactor', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'loadFactor'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/HashMap.html#entrySet
-Object.defineProperty(java.util.HashMap.prototype, 'entrySet', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'entrySet'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'entrySet',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/HashMap.html#threshold
-Object.defineProperty(java.util.HashMap.prototype, 'threshold', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'threshold'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'threshold',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/util/HashMap.html#table
-Object.defineProperty(java.util.HashMap.prototype, 'table', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'table'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.util.HashMap') {
-				return new java.util.HashMap(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'table',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function tableSizeFor
- * @static
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#tableSizeFor(int)}
- **/
-java.util.HashMap.tableSizeFor = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'tableSizeFor',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function comparableClassFor
- * @static
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#comparableClassFor(java.lang.Object)}
- **/
-java.util.HashMap.comparableClassFor = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'comparableClassFor',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function compareComparables
- * @static
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#compareComparables(java.lang.Class, java.lang.Object, java.lang.Object)}
- **/
-java.util.HashMap.compareComparables = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'compareComparables',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hash
- * @static
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#hash(java.lang.Object)}
- **/
-java.util.HashMap.hash = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'hash',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 
 // Instance methods
-/**
- * TODO Fill out docs more...
- * @function reinitialize
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#reinitialize()}
- **/
-java.util.HashMap.prototype.reinitialize = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'reinitialize',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function internalWriteEntries
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#internalWriteEntries(java.io.ObjectOutputStream)}
- **/
-java.util.HashMap.prototype.internalWriteEntries = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'internalWriteEntries',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function getOrDefault
@@ -499,16 +122,74 @@ java.util.HashMap.prototype.getOrDefault = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function newTreeNode
+ * @function entrySet
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#newTreeNode(int, java.lang.Object, java.lang.Object, java.util.HashMap$Node)}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#entrySet()}
  **/
-java.util.HashMap.prototype.newTreeNode = function() {
+java.util.HashMap.prototype.entrySet = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'newTreeNode',
+		func: 'entrySet',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.util.HashMap') {
+			return new java.util.HashMap(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function containsKey
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#containsKey(java.lang.Object)}
+ **/
+java.util.HashMap.prototype.containsKey = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'containsKey',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.util.HashMap') {
+			return new java.util.HashMap(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function forEach
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#forEach(java.util.function.BiConsumer)}
+ **/
+java.util.HashMap.prototype.forEach = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'forEach',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -586,17 +267,16 @@ java.util.HashMap.prototype.computeIfAbsent = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function replace
+ * @function isEmpty
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replace(java.lang.Object, java.lang.Object, java.lang.Object)}
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replace(java.lang.Object, java.lang.Object)}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#isEmpty()}
  **/
-java.util.HashMap.prototype.replace = function() {
+java.util.HashMap.prototype.isEmpty = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'replace',
+		func: 'isEmpty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -616,16 +296,46 @@ java.util.HashMap.prototype.replace = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function putMapEntries
+ * @function clear
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#putMapEntries(java.util.Map, boolean)}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#clear()}
  **/
-java.util.HashMap.prototype.putMapEntries = function() {
+java.util.HashMap.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'putMapEntries',
+		func: 'clear',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.util.HashMap') {
+			return new java.util.HashMap(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function replace
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replace(java.lang.Object, java.lang.Object, java.lang.Object)}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replace(java.lang.Object, java.lang.Object)}
+ **/
+java.util.HashMap.prototype.replace = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'replace',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -762,64 +472,6 @@ java.util.HashMap.prototype.containsValue = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function capacity
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#capacity()}
- **/
-java.util.HashMap.prototype.capacity = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'capacity',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function replacementNode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replacementNode(java.util.HashMap$Node, java.util.HashMap$Node)}
- **/
-java.util.HashMap.prototype.replacementNode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'replacementNode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function compute
  * @memberof
  * @instance
@@ -830,412 +482,6 @@ java.util.HashMap.prototype.compute = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'compute',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function get
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#get(java.lang.Object)}
- **/
-java.util.HashMap.prototype.get = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'get',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function putVal
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#putVal(int, java.lang.Object, java.lang.Object, boolean, boolean)}
- **/
-java.util.HashMap.prototype.putVal = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'putVal',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function putAll
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#putAll(java.util.Map)}
- **/
-java.util.HashMap.prototype.putAll = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'putAll',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function merge
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#merge(java.lang.Object, java.lang.Object, java.util.function.BiFunction)}
- **/
-java.util.HashMap.prototype.merge = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'merge',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function keySet
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#keySet()}
- **/
-java.util.HashMap.prototype.keySet = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'keySet',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function removeNode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#removeNode(int, java.lang.Object, java.lang.Object, boolean, boolean)}
- **/
-java.util.HashMap.prototype.removeNode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'removeNode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function entrySet
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#entrySet()}
- **/
-java.util.HashMap.prototype.entrySet = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'entrySet',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function containsKey
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#containsKey(java.lang.Object)}
- **/
-java.util.HashMap.prototype.containsKey = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'containsKey',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function treeifyBin
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#treeifyBin(java.util.HashMap$Node[], int)}
- **/
-java.util.HashMap.prototype.treeifyBin = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'treeifyBin',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function forEach
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#forEach(java.util.function.BiConsumer)}
- **/
-java.util.HashMap.prototype.forEach = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'forEach',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isEmpty
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#isEmpty()}
- **/
-java.util.HashMap.prototype.isEmpty = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isEmpty',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function clear
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#clear()}
- **/
-java.util.HashMap.prototype.clear = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'clear',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function afterNodeRemoval
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#afterNodeRemoval(java.util.HashMap$Node)}
- **/
-java.util.HashMap.prototype.afterNodeRemoval = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'afterNodeRemoval',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function afterNodeAccess
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#afterNodeAccess(java.util.HashMap$Node)}
- **/
-java.util.HashMap.prototype.afterNodeAccess = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'afterNodeAccess',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1313,16 +559,74 @@ java.util.HashMap.prototype.size = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function loadFactor
+ * @function get
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#loadFactor()}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#get(java.lang.Object)}
  **/
-java.util.HashMap.prototype.loadFactor = function() {
+java.util.HashMap.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'loadFactor',
+		func: 'get',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.util.HashMap') {
+			return new java.util.HashMap(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function putAll
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#putAll(java.util.Map)}
+ **/
+java.util.HashMap.prototype.putAll = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'putAll',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.util.HashMap') {
+			return new java.util.HashMap(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function merge
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#merge(java.lang.Object, java.lang.Object, java.util.function.BiFunction)}
+ **/
+java.util.HashMap.prototype.merge = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'merge',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1371,103 +675,16 @@ java.util.HashMap.prototype.clone = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function resize
+ * @function keySet
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#resize()}
+ * @see {@link http://developer.android.com/reference/java/util/HashMap.html#keySet()}
  **/
-java.util.HashMap.prototype.resize = function() {
+java.util.HashMap.prototype.keySet = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'resize',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function newNode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#newNode(int, java.lang.Object, java.lang.Object, java.util.HashMap$Node)}
- **/
-java.util.HashMap.prototype.newNode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'newNode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function replacementTreeNode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#replacementTreeNode(java.util.HashMap$Node, java.util.HashMap$Node)}
- **/
-java.util.HashMap.prototype.replacementTreeNode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'replacementTreeNode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getNode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#getNode(int, java.lang.Object)}
- **/
-java.util.HashMap.prototype.getNode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getNode',
+		func: 'keySet',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1497,35 +714,6 @@ java.util.HashMap.prototype.putIfAbsent = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'putIfAbsent',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.util.HashMap') {
-			return new java.util.HashMap(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function afterNodeInsertion
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/util/HashMap.html#afterNodeInsertion(boolean)}
- **/
-java.util.HashMap.prototype.afterNodeInsertion = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'afterNodeInsertion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

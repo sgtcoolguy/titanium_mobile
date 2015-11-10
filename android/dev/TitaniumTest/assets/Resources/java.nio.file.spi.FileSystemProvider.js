@@ -24,15 +24,13 @@ java.nio.file.spi.FileSystemProvider = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.file.spi.FileSystemProvider') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.file.spi.FileSystemProvider') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.file.spi.FileSystemProvider',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.file.spi.FileSystemProvider. Create a subclass using java.nio.file.spi.FileSystemProvider.extend();' );
 	}
 
 	this.$native = result;
@@ -46,6 +44,41 @@ java.nio.file.spi.FileSystemProvider.prototype.constructor = java.nio.file.spi.F
 
 java.nio.file.spi.FileSystemProvider.className = "java.nio.file.spi.FileSystemProvider";
 java.nio.file.spi.FileSystemProvider.prototype.className = "java.nio.file.spi.FileSystemProvider";
+
+// class property
+Object.defineProperty(java.nio.file.spi.FileSystemProvider, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.file.spi.FileSystemProvider',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.file.spi.FileSystemProvider.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.file.spi.FileSystemProvider',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.file.spi.FileSystemProvider.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -61,50 +94,10 @@ java.nio.file.spi.FileSystemProvider.prototype.className = "java.nio.file.spi.Fi
  * @see {@link http://developer.android.com/reference/java/nio/file/spi/FileSystemProvider.html#installedProviders()}
  **/
 java.nio.file.spi.FileSystemProvider.installedProviders = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'installedProviders',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.file.spi.FileSystemProvider') {
-			return new java.nio.file.spi.FileSystemProvider(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/file/spi/FileSystemProvider.html#access$000()}
- **/
-java.nio.file.spi.FileSystemProvider.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});

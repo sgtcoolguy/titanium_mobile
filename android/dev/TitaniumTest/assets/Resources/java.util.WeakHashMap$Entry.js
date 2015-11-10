@@ -31,10 +31,10 @@ java.util.WeakHashMap.Entry = function() {
 			class: 'java.util.WeakHashMap$Entry',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'next', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'next'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'next', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'next',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'value', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'value'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'value', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'value',
 			value: newValue
 		});
@@ -120,7 +120,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'hash', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'hash'
 		});
 		if (!result) {
@@ -153,7 +153,7 @@ Object.defineProperty(java.util.WeakHashMap.Entry.prototype, 'hash', {
 java.util.WeakHashMap.Entry.prototype.getKey = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getKey',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -182,7 +182,7 @@ java.util.WeakHashMap.Entry.prototype.getKey = function() {
 java.util.WeakHashMap.Entry.prototype.getValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -211,7 +211,7 @@ java.util.WeakHashMap.Entry.prototype.getValue = function() {
 java.util.WeakHashMap.Entry.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -240,7 +240,7 @@ java.util.WeakHashMap.Entry.prototype.hashCode = function() {
 java.util.WeakHashMap.Entry.prototype.setValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -269,7 +269,7 @@ java.util.WeakHashMap.Entry.prototype.setValue = function() {
 java.util.WeakHashMap.Entry.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -298,7 +298,7 @@ java.util.WeakHashMap.Entry.prototype.equals = function() {
 java.util.WeakHashMap.Entry.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -4,9 +4,11 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
+
 package ti.modules.hyperloop;
 
 import org.appcelerator.titanium.TiDimension;
+import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.view.TiUIView;
 
 import android.view.View;
@@ -15,11 +17,12 @@ import android.widget.FrameLayout;
 
 public class HyperloopView extends TiUIView {
 
-    public HyperloopView(View nativeView, HyperloopProxy proxy) {
+    public HyperloopView(View nativeView, TiViewProxy proxy) {
         super(proxy);
         // Create a container for the native View
         FrameLayout comp = new FrameLayout(proxy.getActivity());
-        // Tell Ti UI Composite layout to hold this content at the top left of it's parent
+        // Tell Ti UI Composite layout to hold this content at the top left of
+        // it's parent
         getLayoutParams().optionTop = new TiDimension(0, TiDimension.TYPE_TOP);
         getLayoutParams().optionLeft = new TiDimension(0, TiDimension.TYPE_LEFT);
         // Make this only big enough to hold it's content

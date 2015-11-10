@@ -24,15 +24,13 @@ java.nio.channels.spi.AbstractSelector = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.spi.AbstractSelector') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.spi.AbstractSelector') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.spi.AbstractSelector',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.spi.AbstractSelector. Create a subclass using java.nio.channels.spi.AbstractSelector.extend();' );
 	}
 
 	this.$native = result;
@@ -47,6 +45,41 @@ java.nio.channels.spi.AbstractSelector.prototype.constructor = java.nio.channels
 java.nio.channels.spi.AbstractSelector.className = "java.nio.channels.spi.AbstractSelector";
 java.nio.channels.spi.AbstractSelector.prototype.className = "java.nio.channels.spi.AbstractSelector";
 
+// class property
+Object.defineProperty(java.nio.channels.spi.AbstractSelector, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.spi.AbstractSelector',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.spi.AbstractSelector.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.spi.AbstractSelector',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.spi.AbstractSelector.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -56,35 +89,6 @@ java.nio.channels.spi.AbstractSelector.prototype.className = "java.nio.channels.
 // Static methods
 
 // Instance methods
-/**
- * TODO Fill out docs more...
- * @function cancel
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractSelector.html#cancel(java.nio.channels.SelectionKey)}
- **/
-java.nio.channels.spi.AbstractSelector.prototype.cancel = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'cancel',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractSelector') {
-			return new java.nio.channels.spi.AbstractSelector(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function cancelledKeys

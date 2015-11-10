@@ -22,7 +22,9 @@ java.net.DatagramSocket = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.DatagramSocket') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.DatagramSocket') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,269 +47,46 @@ java.net.DatagramSocket.prototype.constructor = java.net.DatagramSocket;
 java.net.DatagramSocket.className = "java.net.DatagramSocket";
 java.net.DatagramSocket.prototype.className = "java.net.DatagramSocket";
 
+// class property
+Object.defineProperty(java.net.DatagramSocket, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.DatagramSocket',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.net.DatagramSocket.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.net.DatagramSocket',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.net.DatagramSocket.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#ST_CONNECTED_NO_IMPL}
- */
-java.net.DatagramSocket.ST_CONNECTED_NO_IMPL = 2;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#ST_NOT_CONNECTED}
- */
-java.net.DatagramSocket.ST_NOT_CONNECTED = 0;
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#ST_CONNECTED}
- */
-java.net.DatagramSocket.ST_CONNECTED = 1;
 
 // Static fields
-// http://developer.android.com/reference/java/net/DatagramSocket.html#implClass
-Object.defineProperty(java.net.DatagramSocket, 'implClass', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'implClass'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return;
-
-		classProxy.setNativeField({
-			field: 'implClass',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocket.html#factory
-Object.defineProperty(java.net.DatagramSocket, 'factory', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: 'factory'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return;
-
-		classProxy.setNativeField({
-			field: 'factory',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Instance Fields
-// http://developer.android.com/reference/java/net/DatagramSocket.html#impl
-Object.defineProperty(java.net.DatagramSocket.prototype, 'impl', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'impl'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'impl',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocket.html#connectedAddress
-Object.defineProperty(java.net.DatagramSocket.prototype, 'connectedAddress', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'connectedAddress'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'connectedAddress',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocket.html#oldImpl
-Object.defineProperty(java.net.DatagramSocket.prototype, 'oldImpl', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'oldImpl'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'oldImpl',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocket.html#connectedPort
-Object.defineProperty(java.net.DatagramSocket.prototype, 'connectedPort', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'connectedPort'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'connectedPort',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocket.html#connectState
-Object.defineProperty(java.net.DatagramSocket.prototype, 'connectState', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'connectState'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocket') {
-				return new java.net.DatagramSocket(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'connectState',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
 /**
@@ -317,15 +96,9 @@ Object.defineProperty(java.net.DatagramSocket.prototype, 'connectState', {
  * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#setDatagramSocketImplFactory(java.net.DatagramSocketImplFactory)}
  **/
 java.net.DatagramSocket.setDatagramSocketImplFactory = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setDatagramSocketImplFactory',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -561,35 +334,6 @@ java.net.DatagramSocket.prototype.getChannel = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getChannel',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocket') {
-			return new java.net.DatagramSocket(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getImpl
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#getImpl()}
- **/
-java.net.DatagramSocket.prototype.getImpl = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getImpl',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -958,35 +702,6 @@ java.net.DatagramSocket.prototype.setSoTimeout = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function createImpl
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#createImpl()}
- **/
-java.net.DatagramSocket.prototype.createImpl = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'createImpl',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocket') {
-			return new java.net.DatagramSocket(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getPort
  * @memberof
  * @instance
@@ -1055,35 +770,6 @@ java.net.DatagramSocket.prototype.isBound = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'isBound',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocket') {
-			return new java.net.DatagramSocket(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function checkAddress
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocket.html#checkAddress(java.net.InetAddress, java.lang.String)}
- **/
-java.net.DatagramSocket.prototype.checkAddress = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'checkAddress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

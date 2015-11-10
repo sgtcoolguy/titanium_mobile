@@ -31,10 +31,10 @@ java.lang.ClassValue.Version = function() {
 			class: 'java.lang.ClassValue$Version',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.lang.ClassValue.Version.prototype.className = "java.lang.ClassValue$Version
 java.lang.ClassValue.Version.prototype.classValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'classValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -94,7 +94,7 @@ java.lang.ClassValue.Version.prototype.classValue = function() {
 java.lang.ClassValue.Version.prototype.isLive = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isLive',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -123,7 +123,7 @@ java.lang.ClassValue.Version.prototype.isLive = function() {
 java.lang.ClassValue.Version.prototype.promise = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'promise',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

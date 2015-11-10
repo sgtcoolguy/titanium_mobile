@@ -19,7 +19,7 @@ android.text.method.TransformationMethod = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.text.method.TransformationMethod') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.text.method.TransformationMethod') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.text.method.TransformationMethod.isInstanceOf = function (self, cls) {
 
 android.text.method.TransformationMethod.className = "android.text.method.TransformationMethod";
 android.text.method.TransformationMethod.prototype.className = "android.text.method.TransformationMethod";
+
+// class property
+Object.defineProperty(android.text.method.TransformationMethod, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.text.method.TransformationMethod',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

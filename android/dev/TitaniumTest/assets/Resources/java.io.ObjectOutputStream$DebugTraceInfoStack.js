@@ -31,10 +31,10 @@ java.io.ObjectOutputStream.DebugTraceInfoStack = function() {
 			class: 'java.io.ObjectOutputStream$DebugTraceInfoStack',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.className = "java.io.Ob
 java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.pop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'pop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -94,7 +94,7 @@ java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.pop = function() {
 java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -123,7 +123,7 @@ java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.clear = function() {
 java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -152,7 +152,7 @@ java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.toString = function() {
 java.io.ObjectOutputStream.DebugTraceInfoStack.prototype.push = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'push',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -22,7 +22,9 @@ java.lang.StringBuilder = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.StringBuilder') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.StringBuilder') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,13 +47,21 @@ java.lang.StringBuilder.prototype.constructor = java.lang.StringBuilder;
 java.lang.StringBuilder.className = "java.lang.StringBuilder";
 java.lang.StringBuilder.prototype.className = "java.lang.StringBuilder";
 
+// class property
+Object.defineProperty(java.lang.StringBuilder, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.StringBuilder',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
-/**
- * @constant
- * @default
- * @see {@link http://developer.android.com/reference/java/lang/StringBuilder.html#serialVersionUID}
- */
-java.lang.StringBuilder.serialVersionUID = 4383685877147921099;
 
 // Static fields
 

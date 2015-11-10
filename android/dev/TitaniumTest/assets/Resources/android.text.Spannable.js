@@ -18,7 +18,7 @@ android.text.Spannable = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.text.Spannable') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.text.Spannable') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.text.Spannable.isInstanceOf = function (self, cls) {
 
 android.text.Spannable.className = "android.text.Spannable";
 android.text.Spannable.prototype.className = "android.text.Spannable";
+
+// class property
+Object.defineProperty(android.text.Spannable, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.text.Spannable',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

@@ -19,7 +19,7 @@ android.view.View.OnApplyWindowInsetsListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnApplyWindowInsetsListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnApplyWindowInsetsListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnApplyWindowInsetsListener.isInstanceOf = function (self, cls
 
 android.view.View.OnApplyWindowInsetsListener.className = "android.view.View$OnApplyWindowInsetsListener";
 android.view.View.OnApplyWindowInsetsListener.prototype.className = "android.view.View$OnApplyWindowInsetsListener";
+
+// class property
+Object.defineProperty(android.view.View.OnApplyWindowInsetsListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnApplyWindowInsetsListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

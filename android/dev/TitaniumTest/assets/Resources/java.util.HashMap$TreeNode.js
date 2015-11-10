@@ -31,10 +31,10 @@ java.util.HashMap.TreeNode = function() {
 			class: 'java.util.HashMap$TreeNode',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -53,7 +53,7 @@ java.util.HashMap.TreeNode.prototype.className = "java.util.HashMap$TreeNode";
 Object.defineProperty(java.util.HashMap.TreeNode, '$assertionsDisabled', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -84,7 +84,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'red', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'red'
 		});
 		if (!result) {
@@ -104,7 +104,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'red', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'red',
 			value: newValue
 		});
@@ -116,7 +116,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'parent', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'parent'
 		});
 		if (!result) {
@@ -136,7 +136,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'parent', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'parent',
 			value: newValue
 		});
@@ -148,7 +148,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'left', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'left'
 		});
 		if (!result) {
@@ -168,7 +168,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'left', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'left',
 			value: newValue
 		});
@@ -180,7 +180,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'prev', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'prev'
 		});
 		if (!result) {
@@ -200,7 +200,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'prev', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'prev',
 			value: newValue
 		});
@@ -212,7 +212,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'right', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'right'
 		});
 		if (!result) {
@@ -232,7 +232,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'right', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'right',
 			value: newValue
 		});
@@ -249,7 +249,7 @@ Object.defineProperty(java.util.HashMap.TreeNode.prototype, 'right', {
  **/
 java.util.HashMap.TreeNode.rotateRight = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -283,7 +283,7 @@ java.util.HashMap.TreeNode.rotateRight = function() {
  **/
 java.util.HashMap.TreeNode.tieBreakOrder = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -317,7 +317,7 @@ java.util.HashMap.TreeNode.tieBreakOrder = function() {
  **/
 java.util.HashMap.TreeNode.rotateLeft = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -351,7 +351,7 @@ java.util.HashMap.TreeNode.rotateLeft = function() {
  **/
 java.util.HashMap.TreeNode.balanceDeletion = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -385,7 +385,7 @@ java.util.HashMap.TreeNode.balanceDeletion = function() {
  **/
 java.util.HashMap.TreeNode.balanceInsertion = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -419,7 +419,7 @@ java.util.HashMap.TreeNode.balanceInsertion = function() {
  **/
 java.util.HashMap.TreeNode.checkInvariants = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -453,7 +453,7 @@ java.util.HashMap.TreeNode.checkInvariants = function() {
  **/
 java.util.HashMap.TreeNode.moveRootToFront = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -491,7 +491,7 @@ java.util.HashMap.TreeNode.moveRootToFront = function() {
 java.util.HashMap.TreeNode.prototype.getTreeNode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getTreeNode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -520,7 +520,7 @@ java.util.HashMap.TreeNode.prototype.getTreeNode = function() {
 java.util.HashMap.TreeNode.prototype.treeify = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'treeify',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -549,7 +549,7 @@ java.util.HashMap.TreeNode.prototype.treeify = function() {
 java.util.HashMap.TreeNode.prototype.untreeify = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'untreeify',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -578,7 +578,7 @@ java.util.HashMap.TreeNode.prototype.untreeify = function() {
 java.util.HashMap.TreeNode.prototype.split = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'split',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -607,7 +607,7 @@ java.util.HashMap.TreeNode.prototype.split = function() {
 java.util.HashMap.TreeNode.prototype.find = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'find',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -636,7 +636,7 @@ java.util.HashMap.TreeNode.prototype.find = function() {
 java.util.HashMap.TreeNode.prototype.putTreeVal = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'putTreeVal',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -665,7 +665,7 @@ java.util.HashMap.TreeNode.prototype.putTreeVal = function() {
 java.util.HashMap.TreeNode.prototype.root = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'root',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -694,7 +694,7 @@ java.util.HashMap.TreeNode.prototype.root = function() {
 java.util.HashMap.TreeNode.prototype.removeTreeNode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'removeTreeNode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -31,10 +31,10 @@ java.io.ObjectStreamClass.ExceptionInfo = function() {
 			class: 'java.io.ObjectStreamClass$ExceptionInfo',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.io.ObjectStreamClass.ExceptionInfo.prototype.className = "java.io.ObjectStr
 java.io.ObjectStreamClass.ExceptionInfo.prototype.newInvalidClassException = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'newInvalidClassException',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

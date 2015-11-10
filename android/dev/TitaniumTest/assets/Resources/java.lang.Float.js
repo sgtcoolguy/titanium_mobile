@@ -22,7 +22,9 @@ java.lang.Float = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Float') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Float') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.lang.Float.prototype.constructor = java.lang.Float;
 
 java.lang.Float.className = "java.lang.Float";
 java.lang.Float.prototype.className = "java.lang.Float";
+
+// class property
+Object.defineProperty(java.lang.Float, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Float',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -147,15 +163,9 @@ Object.defineProperty(java.lang.Float, 'TYPE', {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#parseFloat(java.lang.String)}
  **/
 java.lang.Float.parseFloat = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseFloat',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -181,322 +191,10 @@ java.lang.Float.parseFloat = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#compare(float, float)}
  **/
 java.lang.Float.compare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compare',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function intBitsToFloat
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#intBitsToFloat(int)}
- **/
-java.lang.Float.intBitsToFloat = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'intBitsToFloat',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function sum
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#sum(float, float)}
- **/
-java.lang.Float.sum = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'sum',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isNaN
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#isNaN(float)}
- **/
-java.lang.Float.isNaN = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isNaN',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isFinite
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#isFinite(float)}
- **/
-java.lang.Float.isFinite = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isFinite',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function floatToIntBits
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatToIntBits(float)}
- **/
-java.lang.Float.floatToIntBits = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'floatToIntBits',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function floatToRawIntBits
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatToRawIntBits(float)}
- **/
-java.lang.Float.floatToRawIntBits = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'floatToRawIntBits',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function min
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#min(float, float)}
- **/
-java.lang.Float.min = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'min',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isInfinite
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#isInfinite(float)}
- **/
-java.lang.Float.isInfinite = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'isInfinite',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hashCode
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#hashCode(float)}
- **/
-java.lang.Float.hashCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -521,15 +219,9 @@ java.lang.Float.hashCode = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#toHexString(float)}
  **/
 java.lang.Float.toHexString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toHexString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -555,15 +247,9 @@ java.lang.Float.toHexString = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#max(float, float)}
  **/
 java.lang.Float.max = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'max',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -590,16 +276,262 @@ java.lang.Float.max = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#valueOf(float)}
  **/
 java.lang.Float.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function intBitsToFloat
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#intBitsToFloat(int)}
+ **/
+java.lang.Float.intBitsToFloat = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'intBitsToFloat',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function sum
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#sum(float, float)}
+ **/
+java.lang.Float.sum = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'sum',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isNaN
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#isNaN(float)}
+ **/
+java.lang.Float.isNaN = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isNaN',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isFinite
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#isFinite(float)}
+ **/
+java.lang.Float.isFinite = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isFinite',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function floatToIntBits
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatToIntBits(float)}
+ **/
+java.lang.Float.floatToIntBits = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'floatToIntBits',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function floatToRawIntBits
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatToRawIntBits(float)}
+ **/
+java.lang.Float.floatToRawIntBits = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'floatToRawIntBits',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function min
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#min(float, float)}
+ **/
+java.lang.Float.min = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'min',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function isInfinite
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#isInfinite(float)}
+ **/
+java.lang.Float.isInfinite = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'isInfinite',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function hashCode
+ * @static
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#hashCode(float)}
+ **/
+java.lang.Float.hashCode = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'hashCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -624,15 +556,9 @@ java.lang.Float.valueOf = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Float.html#toString(float)}
  **/
 java.lang.Float.toString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'toString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -653,6 +579,93 @@ java.lang.Float.toString = function() {
 };
 
 // Instance methods
+/**
+ * TODO Fill out docs more...
+ * @function intValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#intValue()}
+ **/
+java.lang.Float.prototype.intValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'intValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function floatValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatValue()}
+ **/
+java.lang.Float.prototype.floatValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'floatValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function doubleValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#doubleValue()}
+ **/
+java.lang.Float.prototype.doubleValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'doubleValue',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
 /**
  * TODO Fill out docs more...
  * @function compareTo
@@ -801,122 +814,6 @@ java.lang.Float.prototype.hashCode = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function shortValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#shortValue()}
- **/
-java.lang.Float.prototype.shortValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'shortValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function intValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#intValue()}
- **/
-java.lang.Float.prototype.intValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'intValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function floatValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#floatValue()}
- **/
-java.lang.Float.prototype.floatValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'floatValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function doubleValue
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Float.html#doubleValue()}
- **/
-java.lang.Float.prototype.doubleValue = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'doubleValue',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Float') {
-			return new java.lang.Float(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function equals
  * @memberof
  * @instance
@@ -956,6 +853,35 @@ java.lang.Float.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.lang.Float') {
+			return new java.lang.Float(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function shortValue
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/lang/Float.html#shortValue()}
+ **/
+java.lang.Float.prototype.shortValue = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'shortValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

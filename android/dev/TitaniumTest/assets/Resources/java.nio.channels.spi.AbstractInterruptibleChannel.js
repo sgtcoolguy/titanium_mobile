@@ -24,15 +24,13 @@ java.nio.channels.spi.AbstractInterruptibleChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.spi.AbstractInterruptibleChannel',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.spi.AbstractInterruptibleChannel. Create a subclass using java.nio.channels.spi.AbstractInterruptibleChannel.extend();' );
 	}
 
 	this.$native = result;
@@ -47,6 +45,41 @@ java.nio.channels.spi.AbstractInterruptibleChannel.prototype.constructor = java.
 java.nio.channels.spi.AbstractInterruptibleChannel.className = "java.nio.channels.spi.AbstractInterruptibleChannel";
 java.nio.channels.spi.AbstractInterruptibleChannel.prototype.className = "java.nio.channels.spi.AbstractInterruptibleChannel";
 
+// class property
+Object.defineProperty(java.nio.channels.spi.AbstractInterruptibleChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.spi.AbstractInterruptibleChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.spi.AbstractInterruptibleChannel.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.spi.AbstractInterruptibleChannel',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.spi.AbstractInterruptibleChannel.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -54,176 +87,6 @@ java.nio.channels.spi.AbstractInterruptibleChannel.prototype.className = "java.n
 // Instance Fields
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function blockedOn
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractInterruptibleChannel.html#blockedOn(sun.nio.ch.Interruptible)}
- **/
-java.nio.channels.spi.AbstractInterruptibleChannel.blockedOn = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'blockedOn',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
-			return new java.nio.channels.spi.AbstractInterruptibleChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$202
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractInterruptibleChannel.html#access$202(java.nio.channels.spi.AbstractInterruptibleChannel, java.lang.Thread)}
- **/
-java.nio.channels.spi.AbstractInterruptibleChannel.access$202 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$202',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
-			return new java.nio.channels.spi.AbstractInterruptibleChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$102
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractInterruptibleChannel.html#access$102(java.nio.channels.spi.AbstractInterruptibleChannel, boolean)}
- **/
-java.nio.channels.spi.AbstractInterruptibleChannel.access$102 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$102',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
-			return new java.nio.channels.spi.AbstractInterruptibleChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractInterruptibleChannel.html#access$100(java.nio.channels.spi.AbstractInterruptibleChannel)}
- **/
-java.nio.channels.spi.AbstractInterruptibleChannel.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
-			return new java.nio.channels.spi.AbstractInterruptibleChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractInterruptibleChannel.html#access$000(java.nio.channels.spi.AbstractInterruptibleChannel)}
- **/
-java.nio.channels.spi.AbstractInterruptibleChannel.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractInterruptibleChannel') {
-			return new java.nio.channels.spi.AbstractInterruptibleChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 
 // Instance methods
 /**

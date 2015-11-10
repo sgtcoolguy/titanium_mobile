@@ -19,7 +19,7 @@ java.lang.reflect.AnnotatedType = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.reflect.AnnotatedType') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.lang.reflect.AnnotatedType') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.lang.reflect.AnnotatedType.isInstanceOf = function (self, cls) {
 
 java.lang.reflect.AnnotatedType.className = "java.lang.reflect.AnnotatedType";
 java.lang.reflect.AnnotatedType.prototype.className = "java.lang.reflect.AnnotatedType";
+
+// class property
+Object.defineProperty(java.lang.reflect.AnnotatedType, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.reflect.AnnotatedType',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

@@ -19,7 +19,7 @@ android.content.DialogInterface.OnMultiChoiceClickListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface$OnMultiChoiceClickListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.content.DialogInterface$OnMultiChoiceClickListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.content.DialogInterface.OnMultiChoiceClickListener.isInstanceOf = functi
 
 android.content.DialogInterface.OnMultiChoiceClickListener.className = "android.content.DialogInterface$OnMultiChoiceClickListener";
 android.content.DialogInterface.OnMultiChoiceClickListener.prototype.className = "android.content.DialogInterface$OnMultiChoiceClickListener";
+
+// class property
+Object.defineProperty(android.content.DialogInterface.OnMultiChoiceClickListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.DialogInterface$OnMultiChoiceClickListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

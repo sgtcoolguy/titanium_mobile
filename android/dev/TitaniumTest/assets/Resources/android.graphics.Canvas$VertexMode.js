@@ -23,7 +23,9 @@ android.graphics.Canvas.VertexMode = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Canvas$VertexMode') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Canvas$VertexMode') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.graphics.Canvas.VertexMode.prototype.constructor = android.graphics.Canv
 
 android.graphics.Canvas.VertexMode.className = "android.graphics.Canvas$VertexMode";
 android.graphics.Canvas.VertexMode.prototype.className = "android.graphics.Canvas$VertexMode";
+
+// class property
+Object.defineProperty(android.graphics.Canvas.VertexMode, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Canvas$VertexMode',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -144,15 +160,9 @@ Object.defineProperty(android.graphics.Canvas.VertexMode, 'TRIANGLE_STRIP', {
  * @see {@link http://developer.android.com/reference/android/graphics/Canvas.VertexMode.html#valueOf(java.lang.String)}
  **/
 android.graphics.Canvas.VertexMode.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -178,15 +188,9 @@ android.graphics.Canvas.VertexMode.valueOf = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Canvas.VertexMode.html#values()}
  **/
 android.graphics.Canvas.VertexMode.values = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'values',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

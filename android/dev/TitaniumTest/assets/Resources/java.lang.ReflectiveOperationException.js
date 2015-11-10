@@ -30,10 +30,10 @@ java.lang.ReflectiveOperationException = function() {
 			class: 'java.lang.ReflectiveOperationException',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };

@@ -31,10 +31,10 @@ java.lang.ThreadLocal.ThreadLocalMap$Entry = function() {
 			class: 'java.lang.ThreadLocal$ThreadLocalMap$Entry',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.lang.ThreadLocal.ThreadLocalMap$Entry.prototype, 'val
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'value'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.lang.ThreadLocal.ThreadLocalMap$Entry.prototype, 'val
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'value',
 			value: newValue
 		});

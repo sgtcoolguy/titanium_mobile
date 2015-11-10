@@ -22,15 +22,13 @@ java.io.Reader = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.io.Reader') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.io.Reader') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.io.Reader',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.io.Reader. Create a subclass using java.io.Reader.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ java.io.Reader.prototype.constructor = java.io.Reader;
 
 java.io.Reader.className = "java.io.Reader";
 java.io.Reader.prototype.className = "java.io.Reader";
+
+// class property
+Object.defineProperty(java.io.Reader, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.io.Reader',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.io.Reader.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.io.Reader',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.io.Reader.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

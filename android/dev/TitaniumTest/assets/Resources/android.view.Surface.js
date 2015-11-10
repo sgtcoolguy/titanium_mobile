@@ -22,7 +22,9 @@ android.view.Surface = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.Surface') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.Surface') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.view.Surface.prototype.constructor = android.view.Surface;
 
 android.view.Surface.className = "android.view.Surface";
 android.view.Surface.prototype.className = "android.view.Surface";
+
+// class property
+Object.defineProperty(android.view.Surface, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.Surface',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.Surface.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.Surface',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.Surface.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -108,6 +145,35 @@ Object.defineProperty(android.view.Surface, 'CREATOR', {
 // Instance methods
 /**
  * TODO Fill out docs more...
+ * @function lockCanvas
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/view/Surface.html#lockCanvas(android.graphics.Rect)}
+ **/
+android.view.Surface.prototype.lockCanvas = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'lockCanvas',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.view.Surface') {
+			return new android.view.Surface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function release
  * @memberof
  * @instance
@@ -147,93 +213,6 @@ android.view.Surface.prototype.isValid = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'isValid',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.view.Surface') {
-			return new android.view.Surface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function readFromParcel
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/view/Surface.html#readFromParcel(android.os.Parcel)}
- **/
-android.view.Surface.prototype.readFromParcel = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'readFromParcel',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.view.Surface') {
-			return new android.view.Surface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function describeContents
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/view/Surface.html#describeContents()}
- **/
-android.view.Surface.prototype.describeContents = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'describeContents',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.view.Surface') {
-			return new android.view.Surface(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function lockCanvas
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/view/Surface.html#lockCanvas(android.graphics.Rect)}
- **/
-android.view.Surface.prototype.lockCanvas = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'lockCanvas',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -350,6 +329,64 @@ android.view.Surface.prototype.toString = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.view.Surface') {
+			return new android.view.Surface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function readFromParcel
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/view/Surface.html#readFromParcel(android.os.Parcel)}
+ **/
+android.view.Surface.prototype.readFromParcel = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'readFromParcel',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.view.Surface') {
+			return new android.view.Surface(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function describeContents
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/view/Surface.html#describeContents()}
+ **/
+android.view.Surface.prototype.describeContents = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'describeContents',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

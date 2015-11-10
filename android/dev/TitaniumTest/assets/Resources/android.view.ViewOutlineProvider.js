@@ -22,15 +22,13 @@ android.view.ViewOutlineProvider = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewOutlineProvider') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.ViewOutlineProvider') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.view.ViewOutlineProvider',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.view.ViewOutlineProvider. Create a subclass using android.view.ViewOutlineProvider.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.view.ViewOutlineProvider.prototype.constructor = android.view.ViewOutlin
 
 android.view.ViewOutlineProvider.className = "android.view.ViewOutlineProvider";
 android.view.ViewOutlineProvider.prototype.className = "android.view.ViewOutlineProvider";
+
+// class property
+Object.defineProperty(android.view.ViewOutlineProvider, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ViewOutlineProvider',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.ViewOutlineProvider.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.ViewOutlineProvider',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.ViewOutlineProvider.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

@@ -19,7 +19,7 @@ android.os.MessageQueue.IdleHandler = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.MessageQueue$IdleHandler') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.os.MessageQueue$IdleHandler') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.os.MessageQueue.IdleHandler.isInstanceOf = function (self, cls) {
 
 android.os.MessageQueue.IdleHandler.className = "android.os.MessageQueue$IdleHandler";
 android.os.MessageQueue.IdleHandler.prototype.className = "android.os.MessageQueue$IdleHandler";
+
+// class property
+Object.defineProperty(android.os.MessageQueue.IdleHandler, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.MessageQueue$IdleHandler',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

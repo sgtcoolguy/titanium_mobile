@@ -22,7 +22,9 @@ android.app.PendingIntent = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.PendingIntent') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.app.PendingIntent') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.app.PendingIntent.prototype.constructor = android.app.PendingIntent;
 
 android.app.PendingIntent.className = "android.app.PendingIntent";
 android.app.PendingIntent.prototype.className = "android.app.PendingIntent";
+
+// class property
+Object.defineProperty(android.app.PendingIntent, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.PendingIntent',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -117,15 +133,9 @@ Object.defineProperty(android.app.PendingIntent, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#writePendingIntentOrNullToParcel(android.app.PendingIntent, android.os.Parcel)}
  **/
 android.app.PendingIntent.writePendingIntentOrNullToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writePendingIntentOrNullToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -152,15 +162,9 @@ android.app.PendingIntent.writePendingIntentOrNullToParcel = function() {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#getActivity(android.content.Context, int, android.content.Intent, int, android.os.Bundle)}
  **/
 android.app.PendingIntent.getActivity = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getActivity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -186,15 +190,9 @@ android.app.PendingIntent.getActivity = function() {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#getBroadcast(android.content.Context, int, android.content.Intent, int)}
  **/
 android.app.PendingIntent.getBroadcast = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getBroadcast',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -220,15 +218,9 @@ android.app.PendingIntent.getBroadcast = function() {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#getService(android.content.Context, int, android.content.Intent, int)}
  **/
 android.app.PendingIntent.getService = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getService',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -254,15 +246,9 @@ android.app.PendingIntent.getService = function() {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#readPendingIntentOrNullFromParcel(android.os.Parcel)}
  **/
 android.app.PendingIntent.readPendingIntentOrNullFromParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'readPendingIntentOrNullFromParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -289,15 +275,9 @@ android.app.PendingIntent.readPendingIntentOrNullFromParcel = function() {
  * @see {@link http://developer.android.com/reference/android/app/PendingIntent.html#getActivities(android.content.Context, int, android.content.Intent[], int, android.os.Bundle)}
  **/
 android.app.PendingIntent.getActivities = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getActivities',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

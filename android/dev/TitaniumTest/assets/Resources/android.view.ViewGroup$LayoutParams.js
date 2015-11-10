@@ -23,7 +23,9 @@ android.view.ViewGroup.LayoutParams = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewGroup$LayoutParams') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.ViewGroup$LayoutParams') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ android.view.ViewGroup.LayoutParams.prototype.constructor = android.view.ViewGro
 
 android.view.ViewGroup.LayoutParams.className = "android.view.ViewGroup$LayoutParams";
 android.view.ViewGroup.LayoutParams.prototype.className = "android.view.ViewGroup$LayoutParams";
+
+// class property
+Object.defineProperty(android.view.ViewGroup.LayoutParams, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ViewGroup$LayoutParams',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.ViewGroup.LayoutParams.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.ViewGroup$LayoutParams',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.ViewGroup.LayoutParams.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**

@@ -19,7 +19,7 @@ android.view.View.OnScrollChangeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnScrollChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnScrollChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnScrollChangeListener.isInstanceOf = function (self, cls) {
 
 android.view.View.OnScrollChangeListener.className = "android.view.View$OnScrollChangeListener";
 android.view.View.OnScrollChangeListener.prototype.className = "android.view.View$OnScrollChangeListener";
+
+// class property
+Object.defineProperty(android.view.View.OnScrollChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnScrollChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

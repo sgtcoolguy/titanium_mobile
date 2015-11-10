@@ -19,7 +19,7 @@ android.app.FragmentManager.OnBackStackChangedListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.FragmentManager$OnBackStackChangedListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.FragmentManager$OnBackStackChangedListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.FragmentManager.OnBackStackChangedListener.isInstanceOf = function (
 
 android.app.FragmentManager.OnBackStackChangedListener.className = "android.app.FragmentManager$OnBackStackChangedListener";
 android.app.FragmentManager.OnBackStackChangedListener.prototype.className = "android.app.FragmentManager$OnBackStackChangedListener";
+
+// class property
+Object.defineProperty(android.app.FragmentManager.OnBackStackChangedListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.FragmentManager$OnBackStackChangedListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

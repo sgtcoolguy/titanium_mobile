@@ -30,10 +30,10 @@ java.util.Stack = function() {
 			class: 'java.util.Stack',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ java.util.Stack.prototype.className = "java.util.Stack";
 java.util.Stack.prototype.pop = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'pop',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -93,7 +93,7 @@ java.util.Stack.prototype.pop = function() {
 java.util.Stack.prototype.search = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'search',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -122,7 +122,7 @@ java.util.Stack.prototype.search = function() {
 java.util.Stack.prototype.push = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'push',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -151,7 +151,7 @@ java.util.Stack.prototype.push = function() {
 java.util.Stack.prototype.peek = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'peek',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -180,7 +180,7 @@ java.util.Stack.prototype.peek = function() {
 java.util.Stack.prototype.empty = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'empty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

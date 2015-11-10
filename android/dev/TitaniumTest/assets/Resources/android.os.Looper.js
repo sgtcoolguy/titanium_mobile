@@ -22,7 +22,9 @@ android.os.Looper = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.Looper') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.Looper') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.os.Looper.prototype.constructor = android.os.Looper;
 android.os.Looper.className = "android.os.Looper";
 android.os.Looper.prototype.className = "android.os.Looper";
 
+// class property
+Object.defineProperty(android.os.Looper, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.Looper',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
@@ -59,15 +75,9 @@ android.os.Looper.prototype.className = "android.os.Looper";
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#prepare()}
  **/
 android.os.Looper.prepare = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'prepare',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -93,15 +103,9 @@ android.os.Looper.prepare = function() {
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#myQueue()}
  **/
 android.os.Looper.myQueue = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'myQueue',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -127,15 +131,9 @@ android.os.Looper.myQueue = function() {
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#myLooper()}
  **/
 android.os.Looper.myLooper = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'myLooper',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -161,15 +159,9 @@ android.os.Looper.myLooper = function() {
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#loop()}
  **/
 android.os.Looper.loop = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'loop',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -195,15 +187,9 @@ android.os.Looper.loop = function() {
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#prepareMainLooper()}
  **/
 android.os.Looper.prepareMainLooper = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'prepareMainLooper',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -229,15 +215,9 @@ android.os.Looper.prepareMainLooper = function() {
  * @see {@link http://developer.android.com/reference/android/os/Looper.html#getMainLooper()}
  **/
 android.os.Looper.getMainLooper = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getMainLooper',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

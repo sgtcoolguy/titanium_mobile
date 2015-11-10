@@ -22,7 +22,9 @@ java.io.FileDescriptor = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.io.FileDescriptor') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.io.FileDescriptor') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ java.io.FileDescriptor.prototype.constructor = java.io.FileDescriptor;
 
 java.io.FileDescriptor.className = "java.io.FileDescriptor";
 java.io.FileDescriptor.prototype.className = "java.io.FileDescriptor";
+
+// class property
+Object.defineProperty(java.io.FileDescriptor, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.io.FileDescriptor',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -136,74 +152,6 @@ Object.defineProperty(java.io.FileDescriptor, 'out', {
 // Instance Fields
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function access$002
- * @static
- * @see {@link http://developer.android.com/reference/java/io/FileDescriptor.html#access$002(java.io.FileDescriptor, int)}
- **/
-java.io.FileDescriptor.access$002 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$002',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.FileDescriptor') {
-			return new java.io.FileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/io/FileDescriptor.html#access$000(java.io.FileDescriptor)}
- **/
-java.io.FileDescriptor.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.FileDescriptor') {
-			return new java.io.FileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 
 // Instance methods
 /**
@@ -218,64 +166,6 @@ java.io.FileDescriptor.prototype.valid = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'valid',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.FileDescriptor') {
-			return new java.io.FileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function attach
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/io/FileDescriptor.html#attach(java.io.Closeable)}
- **/
-java.io.FileDescriptor.prototype.attach = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'attach',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.FileDescriptor') {
-			return new java.io.FileDescriptor(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function closeAll
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/io/FileDescriptor.html#closeAll(java.io.Closeable)}
- **/
-java.io.FileDescriptor.prototype.closeAll = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'closeAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

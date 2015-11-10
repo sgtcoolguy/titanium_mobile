@@ -24,15 +24,13 @@ java.nio.channels.spi.AbstractSelectableChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.spi.AbstractSelectableChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.spi.AbstractSelectableChannel') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.spi.AbstractSelectableChannel',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.spi.AbstractSelectableChannel. Create a subclass using java.nio.channels.spi.AbstractSelectableChannel.extend();' );
 	}
 
 	this.$native = result;
@@ -47,71 +45,46 @@ java.nio.channels.spi.AbstractSelectableChannel.prototype.constructor = java.nio
 java.nio.channels.spi.AbstractSelectableChannel.className = "java.nio.channels.spi.AbstractSelectableChannel";
 java.nio.channels.spi.AbstractSelectableChannel.prototype.className = "java.nio.channels.spi.AbstractSelectableChannel";
 
+// class property
+Object.defineProperty(java.nio.channels.spi.AbstractSelectableChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.spi.AbstractSelectableChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.spi.AbstractSelectableChannel.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.spi.AbstractSelectableChannel',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.spi.AbstractSelectableChannel.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
-// http://developer.android.com/reference/java/nio/channels/spi/AbstractSelectableChannel.html#$assertionsDisabled
-Object.defineProperty(java.nio.channels.spi.AbstractSelectableChannel, '$assertionsDisabled', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: '$assertionsDisabled'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.channels.spi.AbstractSelectableChannel') {
-				return new java.nio.channels.spi.AbstractSelectableChannel(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Instance Fields
-// http://developer.android.com/reference/java/nio/channels/spi/AbstractSelectableChannel.html#blocking
-Object.defineProperty(java.nio.channels.spi.AbstractSelectableChannel.prototype, 'blocking', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'blocking'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.channels.spi.AbstractSelectableChannel') {
-				return new java.nio.channels.spi.AbstractSelectableChannel(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'blocking',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
 
@@ -128,35 +101,6 @@ java.nio.channels.spi.AbstractSelectableChannel.prototype.implCloseSelectableCha
 
 	var result = this.$native.callNativeFunction({
 		func: 'implCloseSelectableChannel',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.nio.channels.spi.AbstractSelectableChannel') {
-			return new java.nio.channels.spi.AbstractSelectableChannel(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function isBlocking
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractSelectableChannel.html#isBlocking()}
- **/
-java.nio.channels.spi.AbstractSelectableChannel.prototype.isBlocking = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'isBlocking',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -205,16 +149,16 @@ java.nio.channels.spi.AbstractSelectableChannel.prototype.implCloseChannel = fun
 };
 /**
  * TODO Fill out docs more...
- * @function removeKey
+ * @function isBlocking
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractSelectableChannel.html#removeKey(java.nio.channels.SelectionKey)}
+ * @see {@link http://developer.android.com/reference/java/nio/channels/spi/AbstractSelectableChannel.html#isBlocking()}
  **/
-java.nio.channels.spi.AbstractSelectableChannel.prototype.removeKey = function() {
+java.nio.channels.spi.AbstractSelectableChannel.prototype.isBlocking = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'removeKey',
+		func: 'isBlocking',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

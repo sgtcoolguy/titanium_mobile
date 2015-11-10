@@ -23,7 +23,9 @@ android.graphics.Path.FillType = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Path$FillType') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Path$FillType') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.graphics.Path.FillType.prototype.constructor = android.graphics.Path.Fil
 
 android.graphics.Path.FillType.className = "android.graphics.Path$FillType";
 android.graphics.Path.FillType.prototype.className = "android.graphics.Path$FillType";
+
+// class property
+Object.defineProperty(android.graphics.Path.FillType, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Path$FillType',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -172,15 +188,9 @@ Object.defineProperty(android.graphics.Path.FillType, 'INVERSE_EVEN_ODD', {
  * @see {@link http://developer.android.com/reference/android/graphics/Path.FillType.html#valueOf(java.lang.String)}
  **/
 android.graphics.Path.FillType.valueOf = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'valueOf',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -206,15 +216,9 @@ android.graphics.Path.FillType.valueOf = function() {
  * @see {@link http://developer.android.com/reference/android/graphics/Path.FillType.html#values()}
  **/
 android.graphics.Path.FillType.values = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'values',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

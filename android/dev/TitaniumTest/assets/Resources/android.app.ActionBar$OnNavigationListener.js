@@ -19,7 +19,7 @@ android.app.ActionBar.OnNavigationListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.ActionBar$OnNavigationListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.ActionBar$OnNavigationListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.ActionBar.OnNavigationListener.isInstanceOf = function (self, cls) {
 
 android.app.ActionBar.OnNavigationListener.className = "android.app.ActionBar$OnNavigationListener";
 android.app.ActionBar.OnNavigationListener.prototype.className = "android.app.ActionBar$OnNavigationListener";
+
+// class property
+Object.defineProperty(android.app.ActionBar.OnNavigationListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.ActionBar$OnNavigationListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

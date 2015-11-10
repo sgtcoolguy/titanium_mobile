@@ -30,10 +30,10 @@ java.io.ObjectStreamException = function() {
 			class: 'java.io.ObjectStreamException',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };

@@ -19,7 +19,7 @@ android.widget.AbsListView.MultiChoiceModeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.AbsListView$MultiChoiceModeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.AbsListView$MultiChoiceModeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.widget.AbsListView.MultiChoiceModeListener.isInstanceOf = function (self
 
 android.widget.AbsListView.MultiChoiceModeListener.className = "android.widget.AbsListView$MultiChoiceModeListener";
 android.widget.AbsListView.MultiChoiceModeListener.prototype.className = "android.widget.AbsListView$MultiChoiceModeListener";
+
+// class property
+Object.defineProperty(android.widget.AbsListView.MultiChoiceModeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.AbsListView$MultiChoiceModeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

@@ -22,7 +22,9 @@ android.graphics.Picture = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.graphics.Picture') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.graphics.Picture') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ android.graphics.Picture.prototype.constructor = android.graphics.Picture;
 android.graphics.Picture.className = "android.graphics.Picture";
 android.graphics.Picture.prototype.className = "android.graphics.Picture";
 
+// class property
+Object.defineProperty(android.graphics.Picture, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.graphics.Picture',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.graphics.Picture.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.graphics.Picture',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.graphics.Picture.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -59,15 +96,9 @@ android.graphics.Picture.prototype.className = "android.graphics.Picture";
  * @see {@link http://developer.android.com/reference/android/graphics/Picture.html#createFromStream(java.io.InputStream)}
  **/
 android.graphics.Picture.createFromStream = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createFromStream',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

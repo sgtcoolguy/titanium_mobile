@@ -23,7 +23,9 @@ android.view.accessibility.AccessibilityRecord = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.accessibility.AccessibilityRecord') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.accessibility.AccessibilityRecord') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -46,6 +48,41 @@ android.view.accessibility.AccessibilityRecord.prototype.constructor = android.v
 android.view.accessibility.AccessibilityRecord.className = "android.view.accessibility.AccessibilityRecord";
 android.view.accessibility.AccessibilityRecord.prototype.className = "android.view.accessibility.AccessibilityRecord";
 
+// class property
+Object.defineProperty(android.view.accessibility.AccessibilityRecord, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.accessibility.AccessibilityRecord',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.accessibility.AccessibilityRecord.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.accessibility.AccessibilityRecord',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.accessibility.AccessibilityRecord.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -61,15 +98,9 @@ android.view.accessibility.AccessibilityRecord.prototype.className = "android.vi
  * @see {@link http://developer.android.com/reference/android/view/accessibility/AccessibilityRecord.html#obtain()}
  **/
 android.view.accessibility.AccessibilityRecord.obtain = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'obtain',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

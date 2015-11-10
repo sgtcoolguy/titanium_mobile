@@ -23,7 +23,9 @@ java.lang.reflect.Field = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.reflect.Field') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.reflect.Field') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ java.lang.reflect.Field.prototype.constructor = java.lang.reflect.Field;
 
 java.lang.reflect.Field.className = "java.lang.reflect.Field";
 java.lang.reflect.Field.prototype.className = "java.lang.reflect.Field";
+
+// class property
+Object.defineProperty(java.lang.reflect.Field, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.reflect.Field',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -502,35 +518,6 @@ java.lang.reflect.Field.prototype.getBoolean = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getBoolean',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.reflect.Field') {
-			return new java.lang.reflect.Field(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function copy
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/reflect/Field.html#copy()}
- **/
-java.lang.reflect.Field.prototype.copy = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'copy',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

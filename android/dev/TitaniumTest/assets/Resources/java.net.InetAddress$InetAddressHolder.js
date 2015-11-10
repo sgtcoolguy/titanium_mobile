@@ -31,10 +31,10 @@ java.net.InetAddress.InetAddressHolder = function() {
 			class: 'java.net.InetAddress$InetAddressHolder',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'hostNam
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'hostName'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'hostNam
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'hostName',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'address
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'address'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'address
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'address',
 			value: newValue
 		});
@@ -120,7 +120,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'family'
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'family'
 		});
 		if (!result) {
@@ -140,7 +140,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'family'
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'family',
 			value: newValue
 		});
@@ -161,7 +161,7 @@ Object.defineProperty(java.net.InetAddress.InetAddressHolder.prototype, 'family'
 java.net.InetAddress.InetAddressHolder.prototype.init = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'init',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -190,7 +190,7 @@ java.net.InetAddress.InetAddressHolder.prototype.init = function() {
 java.net.InetAddress.InetAddressHolder.prototype.getHostName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getHostName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -219,7 +219,7 @@ java.net.InetAddress.InetAddressHolder.prototype.getHostName = function() {
 java.net.InetAddress.InetAddressHolder.prototype.getFamily = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getFamily',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -248,7 +248,7 @@ java.net.InetAddress.InetAddressHolder.prototype.getFamily = function() {
 java.net.InetAddress.InetAddressHolder.prototype.getOriginalHostName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getOriginalHostName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -277,7 +277,7 @@ java.net.InetAddress.InetAddressHolder.prototype.getOriginalHostName = function(
 java.net.InetAddress.InetAddressHolder.prototype.getAddress = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getAddress',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

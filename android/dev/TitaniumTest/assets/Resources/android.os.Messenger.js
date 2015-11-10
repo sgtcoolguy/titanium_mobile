@@ -22,7 +22,9 @@ android.os.Messenger = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.Messenger') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.Messenger') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.os.Messenger.prototype.constructor = android.os.Messenger;
 
 android.os.Messenger.className = "android.os.Messenger";
 android.os.Messenger.prototype.className = "android.os.Messenger";
+
+// class property
+Object.defineProperty(android.os.Messenger, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.Messenger',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -87,15 +103,9 @@ Object.defineProperty(android.os.Messenger, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/os/Messenger.html#writeMessengerOrNullToParcel(android.os.Messenger, android.os.Parcel)}
  **/
 android.os.Messenger.writeMessengerOrNullToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writeMessengerOrNullToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -121,15 +131,9 @@ android.os.Messenger.writeMessengerOrNullToParcel = function() {
  * @see {@link http://developer.android.com/reference/android/os/Messenger.html#readMessengerOrNullFromParcel(android.os.Parcel)}
  **/
 android.os.Messenger.readMessengerOrNullFromParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'readMessengerOrNullFromParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

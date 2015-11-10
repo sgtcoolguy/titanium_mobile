@@ -19,7 +19,7 @@ android.view.View.OnClickListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnClickListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnClickListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnClickListener.isInstanceOf = function (self, cls) {
 
 android.view.View.OnClickListener.className = "android.view.View$OnClickListener";
 android.view.View.OnClickListener.prototype.className = "android.view.View$OnClickListener";
+
+// class property
+Object.defineProperty(android.view.View.OnClickListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnClickListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

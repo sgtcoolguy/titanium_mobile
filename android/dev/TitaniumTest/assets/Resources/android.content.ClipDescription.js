@@ -22,7 +22,9 @@ android.content.ClipDescription = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.ClipDescription') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.ClipDescription') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.ClipDescription.prototype.constructor = android.content.ClipDesc
 
 android.content.ClipDescription.className = "android.content.ClipDescription";
 android.content.ClipDescription.prototype.className = "android.content.ClipDescription";
+
+// class property
+Object.defineProperty(android.content.ClipDescription, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.ClipDescription',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.ClipDescription.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.ClipDescription',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.ClipDescription.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -111,15 +148,9 @@ Object.defineProperty(android.content.ClipDescription, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/content/ClipDescription.html#compareMimeTypes(java.lang.String, java.lang.String)}
  **/
 android.content.ClipDescription.compareMimeTypes = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'compareMimeTypes',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

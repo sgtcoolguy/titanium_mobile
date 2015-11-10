@@ -23,15 +23,13 @@ android.view.accessibility.AccessibilityNodeProvider = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.accessibility.AccessibilityNodeProvider') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.accessibility.AccessibilityNodeProvider') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.view.accessibility.AccessibilityNodeProvider',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.view.accessibility.AccessibilityNodeProvider. Create a subclass using android.view.accessibility.AccessibilityNodeProvider.extend();' );
 	}
 
 	this.$native = result;
@@ -45,6 +43,41 @@ android.view.accessibility.AccessibilityNodeProvider.prototype.constructor = and
 
 android.view.accessibility.AccessibilityNodeProvider.className = "android.view.accessibility.AccessibilityNodeProvider";
 android.view.accessibility.AccessibilityNodeProvider.prototype.className = "android.view.accessibility.AccessibilityNodeProvider";
+
+// class property
+Object.defineProperty(android.view.accessibility.AccessibilityNodeProvider, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.accessibility.AccessibilityNodeProvider',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.accessibility.AccessibilityNodeProvider.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.accessibility.AccessibilityNodeProvider',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.accessibility.AccessibilityNodeProvider.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**

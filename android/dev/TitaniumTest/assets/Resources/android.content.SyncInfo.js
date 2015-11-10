@@ -22,7 +22,9 @@ android.content.SyncInfo = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.SyncInfo') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.SyncInfo') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.SyncInfo.prototype.constructor = android.content.SyncInfo;
 
 android.content.SyncInfo.className = "android.content.SyncInfo";
 android.content.SyncInfo.prototype.className = "android.content.SyncInfo";
+
+// class property
+Object.defineProperty(android.content.SyncInfo, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.SyncInfo',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.SyncInfo.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.SyncInfo',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.SyncInfo.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

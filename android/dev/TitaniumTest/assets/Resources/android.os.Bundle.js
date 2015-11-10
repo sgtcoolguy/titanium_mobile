@@ -22,7 +22,9 @@ android.os.Bundle = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.Bundle') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.Bundle') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.os.Bundle.prototype.constructor = android.os.Bundle;
 
 android.os.Bundle.className = "android.os.Bundle";
 android.os.Bundle.prototype.className = "android.os.Bundle";
+
+// class property
+Object.defineProperty(android.os.Bundle, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.Bundle',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 

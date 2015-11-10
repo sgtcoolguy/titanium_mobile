@@ -19,7 +19,7 @@ android.view.ViewTreeObserver.OnScrollChangedListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewTreeObserver$OnScrollChangedListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewTreeObserver$OnScrollChangedListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.ViewTreeObserver.OnScrollChangedListener.isInstanceOf = function (s
 
 android.view.ViewTreeObserver.OnScrollChangedListener.className = "android.view.ViewTreeObserver$OnScrollChangedListener";
 android.view.ViewTreeObserver.OnScrollChangedListener.prototype.className = "android.view.ViewTreeObserver$OnScrollChangedListener";
+
+// class property
+Object.defineProperty(android.view.ViewTreeObserver.OnScrollChangedListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ViewTreeObserver$OnScrollChangedListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

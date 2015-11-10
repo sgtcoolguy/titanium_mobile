@@ -18,7 +18,7 @@ android.database.DatabaseErrorHandler = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.database.DatabaseErrorHandler') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.database.DatabaseErrorHandler') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.database.DatabaseErrorHandler.isInstanceOf = function (self, cls) {
 
 android.database.DatabaseErrorHandler.className = "android.database.DatabaseErrorHandler";
 android.database.DatabaseErrorHandler.prototype.className = "android.database.DatabaseErrorHandler";
+
+// class property
+Object.defineProperty(android.database.DatabaseErrorHandler, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.database.DatabaseErrorHandler',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

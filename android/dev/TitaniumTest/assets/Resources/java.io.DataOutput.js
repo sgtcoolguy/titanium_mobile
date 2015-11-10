@@ -25,7 +25,7 @@ java.io.DataOutput = function() {
 		var instance = this,
 			copy = Array.prototype.slice.call(arguments)[0],
 			modified = {};
-
+		
 		function _wrapArg(arg) {
 			if (arg.apiName && arg.callNativeFunction) { // Assume hyperloop proxy, wrap in JS wrapper
 				var other = require(arg.apiName);
@@ -33,7 +33,7 @@ java.io.DataOutput = function() {
 			}
 			return arg;
 		}
-
+		
 		function _wrapArgs() {
 			var newArgs = [];
 			for (var i = 0; i < arguments.length; i++) {
@@ -46,7 +46,7 @@ java.io.DataOutput = function() {
 			instance[each] = function() {
 				return copy[each].apply(this, arguments);
 			};
-
+			
 			// Hang a delegate on the "overrides" object we pass into Java.
 			// This one wraps hyperloop proxies from Java in their JS wrapper before forwarding on
 			modified[each] = function() {
@@ -62,7 +62,7 @@ java.io.DataOutput = function() {
 		});
 	}
 
-	this.$native = result;
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };

@@ -23,7 +23,9 @@ android.view.Display.Mode = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.Display$Mode') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.Display$Mode') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.view.Display.Mode.prototype.constructor = android.view.Display.Mode;
 
 android.view.Display.Mode.className = "android.view.Display$Mode";
 android.view.Display.Mode.prototype.className = "android.view.Display$Mode";
+
+// class property
+Object.defineProperty(android.view.Display.Mode, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.Display$Mode',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 

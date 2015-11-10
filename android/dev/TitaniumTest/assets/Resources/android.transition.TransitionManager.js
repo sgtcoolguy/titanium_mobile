@@ -22,7 +22,9 @@ android.transition.TransitionManager = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.transition.TransitionManager') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.transition.TransitionManager') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ android.transition.TransitionManager.prototype.constructor = android.transition.
 android.transition.TransitionManager.className = "android.transition.TransitionManager";
 android.transition.TransitionManager.prototype.className = "android.transition.TransitionManager";
 
+// class property
+Object.defineProperty(android.transition.TransitionManager, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.transition.TransitionManager',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.transition.TransitionManager.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.transition.TransitionManager',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.transition.TransitionManager.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -60,15 +97,9 @@ android.transition.TransitionManager.prototype.className = "android.transition.T
  * @see {@link http://developer.android.com/reference/android/transition/TransitionManager.html#go(android.transition.Scene, android.transition.Transition)}
  **/
 android.transition.TransitionManager.go = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'go',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -95,15 +126,9 @@ android.transition.TransitionManager.go = function() {
  * @see {@link http://developer.android.com/reference/android/transition/TransitionManager.html#beginDelayedTransition(android.view.ViewGroup, android.transition.Transition)}
  **/
 android.transition.TransitionManager.beginDelayedTransition = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'beginDelayedTransition',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -129,15 +154,9 @@ android.transition.TransitionManager.beginDelayedTransition = function() {
  * @see {@link http://developer.android.com/reference/android/transition/TransitionManager.html#endTransitions(android.view.ViewGroup)}
  **/
 android.transition.TransitionManager.endTransitions = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'endTransitions',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

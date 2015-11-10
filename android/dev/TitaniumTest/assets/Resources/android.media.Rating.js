@@ -22,7 +22,9 @@ android.media.Rating = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.media.Rating') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.media.Rating') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.media.Rating.prototype.constructor = android.media.Rating;
 
 android.media.Rating.className = "android.media.Rating";
 android.media.Rating.prototype.className = "android.media.Rating";
+
+// class property
+Object.defineProperty(android.media.Rating, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.media.Rating',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -129,15 +145,9 @@ Object.defineProperty(android.media.Rating, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/media/Rating.html#newThumbRating(boolean)}
  **/
 android.media.Rating.newThumbRating = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newThumbRating',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -163,15 +173,9 @@ android.media.Rating.newThumbRating = function() {
  * @see {@link http://developer.android.com/reference/android/media/Rating.html#newUnratedRating(int)}
  **/
 android.media.Rating.newUnratedRating = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newUnratedRating',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -197,15 +201,9 @@ android.media.Rating.newUnratedRating = function() {
  * @see {@link http://developer.android.com/reference/android/media/Rating.html#newStarRating(int, float)}
  **/
 android.media.Rating.newStarRating = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newStarRating',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -231,15 +229,9 @@ android.media.Rating.newStarRating = function() {
  * @see {@link http://developer.android.com/reference/android/media/Rating.html#newHeartRating(boolean)}
  **/
 android.media.Rating.newHeartRating = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newHeartRating',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -265,15 +257,9 @@ android.media.Rating.newHeartRating = function() {
  * @see {@link http://developer.android.com/reference/android/media/Rating.html#newPercentageRating(float)}
  **/
 android.media.Rating.newPercentageRating = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newPercentageRating',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

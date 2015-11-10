@@ -19,7 +19,7 @@ android.view.ViewTreeObserver.OnGlobalLayoutListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewTreeObserver$OnGlobalLayoutListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewTreeObserver$OnGlobalLayoutListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.ViewTreeObserver.OnGlobalLayoutListener.isInstanceOf = function (se
 
 android.view.ViewTreeObserver.OnGlobalLayoutListener.className = "android.view.ViewTreeObserver$OnGlobalLayoutListener";
 android.view.ViewTreeObserver.OnGlobalLayoutListener.prototype.className = "android.view.ViewTreeObserver$OnGlobalLayoutListener";
+
+// class property
+Object.defineProperty(android.view.ViewTreeObserver.OnGlobalLayoutListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ViewTreeObserver$OnGlobalLayoutListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

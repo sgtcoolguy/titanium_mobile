@@ -30,10 +30,10 @@ java.lang.ThreadLocal = function() {
 			class: 'java.lang.ThreadLocal',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -60,7 +60,7 @@ java.lang.ThreadLocal.prototype.className = "java.lang.ThreadLocal";
  **/
 java.lang.ThreadLocal.access$400 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -94,7 +94,7 @@ java.lang.ThreadLocal.access$400 = function() {
  **/
 java.lang.ThreadLocal.createInheritedMap = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -128,7 +128,7 @@ java.lang.ThreadLocal.createInheritedMap = function() {
  **/
 java.lang.ThreadLocal.withInitial = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -166,7 +166,7 @@ java.lang.ThreadLocal.withInitial = function() {
 java.lang.ThreadLocal.prototype.set = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'set',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -195,7 +195,7 @@ java.lang.ThreadLocal.prototype.set = function() {
 java.lang.ThreadLocal.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -224,7 +224,7 @@ java.lang.ThreadLocal.prototype.get = function() {
 java.lang.ThreadLocal.prototype.createMap = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'createMap',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -253,7 +253,7 @@ java.lang.ThreadLocal.prototype.createMap = function() {
 java.lang.ThreadLocal.prototype.childValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'childValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -282,7 +282,7 @@ java.lang.ThreadLocal.prototype.childValue = function() {
 java.lang.ThreadLocal.prototype.initialValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'initialValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -311,7 +311,7 @@ java.lang.ThreadLocal.prototype.initialValue = function() {
 java.lang.ThreadLocal.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -340,7 +340,7 @@ java.lang.ThreadLocal.prototype.remove = function() {
 java.lang.ThreadLocal.prototype.getMap = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getMap',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

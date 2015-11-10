@@ -19,7 +19,7 @@ android.content.IntentSender.OnFinished = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.IntentSender$OnFinished') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.content.IntentSender$OnFinished') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.content.IntentSender.OnFinished.isInstanceOf = function (self, cls) {
 
 android.content.IntentSender.OnFinished.className = "android.content.IntentSender$OnFinished";
 android.content.IntentSender.OnFinished.prototype.className = "android.content.IntentSender$OnFinished";
+
+// class property
+Object.defineProperty(android.content.IntentSender.OnFinished, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.IntentSender$OnFinished',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

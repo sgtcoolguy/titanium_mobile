@@ -18,7 +18,7 @@ java.net.SocketOption = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.SocketOption') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.net.SocketOption') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ java.net.SocketOption.isInstanceOf = function (self, cls) {
 
 java.net.SocketOption.className = "java.net.SocketOption";
 java.net.SocketOption.prototype.className = "java.net.SocketOption";
+
+// class property
+Object.defineProperty(java.net.SocketOption, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.SocketOption',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

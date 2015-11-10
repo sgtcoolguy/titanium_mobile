@@ -18,7 +18,7 @@ android.animation.TimeInterpolator = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.animation.TimeInterpolator') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.animation.TimeInterpolator') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.animation.TimeInterpolator.isInstanceOf = function (self, cls) {
 
 android.animation.TimeInterpolator.className = "android.animation.TimeInterpolator";
 android.animation.TimeInterpolator.prototype.className = "android.animation.TimeInterpolator";
+
+// class property
+Object.defineProperty(android.animation.TimeInterpolator, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.animation.TimeInterpolator',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

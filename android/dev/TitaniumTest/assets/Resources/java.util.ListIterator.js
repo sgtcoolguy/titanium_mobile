@@ -18,7 +18,7 @@ java.util.ListIterator = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.ListIterator') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.ListIterator') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ java.util.ListIterator.isInstanceOf = function (self, cls) {
 
 java.util.ListIterator.className = "java.util.ListIterator";
 java.util.ListIterator.prototype.className = "java.util.ListIterator";
+
+// class property
+Object.defineProperty(java.util.ListIterator, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.ListIterator',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

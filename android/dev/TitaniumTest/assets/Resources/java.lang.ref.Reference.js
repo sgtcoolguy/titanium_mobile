@@ -31,10 +31,10 @@ java.lang.ref.Reference = function() {
 			class: 'java.lang.ref.Reference',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.lang.ref.Reference.prototype, 'next', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'next'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.lang.ref.Reference.prototype, 'next', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'next',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(java.lang.ref.Reference.prototype, 'queue', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'queue'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(java.lang.ref.Reference.prototype, 'queue', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'queue',
 			value: newValue
 		});
@@ -125,7 +125,7 @@ Object.defineProperty(java.lang.ref.Reference.prototype, 'queue', {
  **/
 java.lang.ref.Reference.access$302 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -159,7 +159,7 @@ java.lang.ref.Reference.access$302 = function() {
  **/
 java.lang.ref.Reference.access$202 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -193,7 +193,7 @@ java.lang.ref.Reference.access$202 = function() {
  **/
 java.lang.ref.Reference.access$300 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -227,7 +227,7 @@ java.lang.ref.Reference.access$300 = function() {
  **/
 java.lang.ref.Reference.access$200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -261,7 +261,7 @@ java.lang.ref.Reference.access$200 = function() {
  **/
 java.lang.ref.Reference.access$100 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -299,7 +299,7 @@ java.lang.ref.Reference.access$100 = function() {
 java.lang.ref.Reference.prototype.enqueue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'enqueue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -328,7 +328,7 @@ java.lang.ref.Reference.prototype.enqueue = function() {
 java.lang.ref.Reference.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -357,7 +357,7 @@ java.lang.ref.Reference.prototype.get = function() {
 java.lang.ref.Reference.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -386,7 +386,7 @@ java.lang.ref.Reference.prototype.clear = function() {
 java.lang.ref.Reference.prototype.isEnqueued = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isEnqueued',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -19,7 +19,7 @@ java.util.function.ObjIntConsumer = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.function.ObjIntConsumer') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.function.ObjIntConsumer') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.util.function.ObjIntConsumer.isInstanceOf = function (self, cls) {
 
 java.util.function.ObjIntConsumer.className = "java.util.function.ObjIntConsumer";
 java.util.function.ObjIntConsumer.prototype.className = "java.util.function.ObjIntConsumer";
+
+// class property
+Object.defineProperty(java.util.function.ObjIntConsumer, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.function.ObjIntConsumer',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

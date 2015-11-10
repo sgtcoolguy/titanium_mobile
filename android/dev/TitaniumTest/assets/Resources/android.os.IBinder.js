@@ -18,7 +18,7 @@ android.os.IBinder = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.IBinder') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.os.IBinder') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.os.IBinder.isInstanceOf = function (self, cls) {
 
 android.os.IBinder.className = "android.os.IBinder";
 android.os.IBinder.prototype.className = "android.os.IBinder";
+
+// class property
+Object.defineProperty(android.os.IBinder, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.IBinder',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/android/os/IBinder.html#FIRST_CALL_TRANSACTION

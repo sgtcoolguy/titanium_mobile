@@ -19,7 +19,7 @@ android.view.View.OnAttachStateChangeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnAttachStateChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.View$OnAttachStateChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.View.OnAttachStateChangeListener.isInstanceOf = function (self, cls
 
 android.view.View.OnAttachStateChangeListener.className = "android.view.View$OnAttachStateChangeListener";
 android.view.View.OnAttachStateChangeListener.prototype.className = "android.view.View$OnAttachStateChangeListener";
+
+// class property
+Object.defineProperty(android.view.View.OnAttachStateChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View$OnAttachStateChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

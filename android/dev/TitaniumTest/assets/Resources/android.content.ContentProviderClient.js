@@ -22,7 +22,9 @@ android.content.ContentProviderClient = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.ContentProviderClient') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.ContentProviderClient') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.ContentProviderClient.prototype.constructor = android.content.Co
 
 android.content.ContentProviderClient.className = "android.content.ContentProviderClient";
 android.content.ContentProviderClient.prototype.className = "android.content.ContentProviderClient";
+
+// class property
+Object.defineProperty(android.content.ContentProviderClient, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.ContentProviderClient',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.ContentProviderClient.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.ContentProviderClient',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.ContentProviderClient.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

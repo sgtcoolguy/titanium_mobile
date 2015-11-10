@@ -23,7 +23,9 @@ android.content.pm.ResolveInfo = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.pm.ResolveInfo') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.pm.ResolveInfo') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ android.content.pm.ResolveInfo.prototype.constructor = android.content.pm.Resolv
 
 android.content.pm.ResolveInfo.className = "android.content.pm.ResolveInfo";
 android.content.pm.ResolveInfo.prototype.className = "android.content.pm.ResolveInfo";
+
+// class property
+Object.defineProperty(android.content.pm.ResolveInfo, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.pm.ResolveInfo',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.pm.ResolveInfo.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.pm.ResolveInfo',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.pm.ResolveInfo.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 

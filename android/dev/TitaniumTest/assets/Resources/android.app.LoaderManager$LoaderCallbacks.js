@@ -19,7 +19,7 @@ android.app.LoaderManager.LoaderCallbacks = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.LoaderManager$LoaderCallbacks') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.LoaderManager$LoaderCallbacks') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.LoaderManager.LoaderCallbacks.isInstanceOf = function (self, cls) {
 
 android.app.LoaderManager.LoaderCallbacks.className = "android.app.LoaderManager$LoaderCallbacks";
 android.app.LoaderManager.LoaderCallbacks.prototype.className = "android.app.LoaderManager$LoaderCallbacks";
+
+// class property
+Object.defineProperty(android.app.LoaderManager.LoaderCallbacks, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.LoaderManager$LoaderCallbacks',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

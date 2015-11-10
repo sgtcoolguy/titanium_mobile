@@ -19,7 +19,7 @@ android.view.ViewGroup.OnHierarchyChangeListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewGroup$OnHierarchyChangeListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.ViewGroup$OnHierarchyChangeListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.ViewGroup.OnHierarchyChangeListener.isInstanceOf = function (self, 
 
 android.view.ViewGroup.OnHierarchyChangeListener.className = "android.view.ViewGroup$OnHierarchyChangeListener";
 android.view.ViewGroup.OnHierarchyChangeListener.prototype.className = "android.view.ViewGroup$OnHierarchyChangeListener";
+
+// class property
+Object.defineProperty(android.view.ViewGroup.OnHierarchyChangeListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ViewGroup$OnHierarchyChangeListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

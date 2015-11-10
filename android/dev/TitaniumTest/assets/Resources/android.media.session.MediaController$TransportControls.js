@@ -24,7 +24,9 @@ android.media.session.MediaController.TransportControls = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.media.session.MediaController$TransportControls') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.media.session.MediaController$TransportControls') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -47,35 +49,25 @@ android.media.session.MediaController.TransportControls.prototype.constructor = 
 android.media.session.MediaController.TransportControls.className = "android.media.session.MediaController$TransportControls";
 android.media.session.MediaController.TransportControls.prototype.className = "android.media.session.MediaController$TransportControls";
 
+// class property
+Object.defineProperty(android.media.session.MediaController.TransportControls, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.media.session.MediaController$TransportControls',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/android/media/session/MediaController.TransportControls.html#this$0
-Object.defineProperty(android.media.session.MediaController.TransportControls.prototype, 'this$0', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'this$0'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'android.media.session.MediaController$TransportControls') {
-				return new android.media.session.MediaController.TransportControls(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Static methods
 

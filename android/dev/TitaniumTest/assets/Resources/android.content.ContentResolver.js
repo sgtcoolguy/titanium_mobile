@@ -22,15 +22,13 @@ android.content.ContentResolver = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.ContentResolver') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.ContentResolver') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.content.ContentResolver',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.content.ContentResolver. Create a subclass using android.content.ContentResolver.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.content.ContentResolver.prototype.constructor = android.content.ContentR
 
 android.content.ContentResolver.className = "android.content.ContentResolver";
 android.content.ContentResolver.prototype.className = "android.content.ContentResolver";
+
+// class property
+Object.defineProperty(android.content.ContentResolver, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.ContentResolver',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.ContentResolver.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.ContentResolver',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.ContentResolver.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -186,15 +219,9 @@ android.content.ContentResolver.SCHEME_FILE = "file";
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#requestSync(android.content.SyncRequest)}
  **/
 android.content.ContentResolver.requestSync = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'requestSync',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -220,15 +247,9 @@ android.content.ContentResolver.requestSync = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#addPeriodicSync(android.accounts.Account, java.lang.String, android.os.Bundle, long)}
  **/
 android.content.ContentResolver.addPeriodicSync = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'addPeriodicSync',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -254,15 +275,9 @@ android.content.ContentResolver.addPeriodicSync = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getMasterSyncAutomatically()}
  **/
 android.content.ContentResolver.getMasterSyncAutomatically = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getMasterSyncAutomatically',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -288,15 +303,9 @@ android.content.ContentResolver.getMasterSyncAutomatically = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#setMasterSyncAutomatically(boolean)}
  **/
 android.content.ContentResolver.setMasterSyncAutomatically = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setMasterSyncAutomatically',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -322,15 +331,9 @@ android.content.ContentResolver.setMasterSyncAutomatically = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getCurrentSync()}
  **/
 android.content.ContentResolver.getCurrentSync = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getCurrentSync',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -356,15 +359,9 @@ android.content.ContentResolver.getCurrentSync = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#isSyncActive(android.accounts.Account, java.lang.String)}
  **/
 android.content.ContentResolver.isSyncActive = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isSyncActive',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -390,15 +387,9 @@ android.content.ContentResolver.isSyncActive = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#validateSyncExtrasBundle(android.os.Bundle)}
  **/
 android.content.ContentResolver.validateSyncExtrasBundle = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'validateSyncExtrasBundle',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -424,15 +415,9 @@ android.content.ContentResolver.validateSyncExtrasBundle = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getSyncAutomatically(android.accounts.Account, java.lang.String)}
  **/
 android.content.ContentResolver.getSyncAutomatically = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSyncAutomatically',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -458,15 +443,9 @@ android.content.ContentResolver.getSyncAutomatically = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#removeStatusChangeListener(java.lang.Object)}
  **/
 android.content.ContentResolver.removeStatusChangeListener = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'removeStatusChangeListener',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -492,15 +471,9 @@ android.content.ContentResolver.removeStatusChangeListener = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getSyncAdapterTypes()}
  **/
 android.content.ContentResolver.getSyncAdapterTypes = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getSyncAdapterTypes',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -526,15 +499,9 @@ android.content.ContentResolver.getSyncAdapterTypes = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#setSyncAutomatically(android.accounts.Account, java.lang.String, boolean)}
  **/
 android.content.ContentResolver.setSyncAutomatically = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setSyncAutomatically',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -560,15 +527,9 @@ android.content.ContentResolver.setSyncAutomatically = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#isSyncPending(android.accounts.Account, java.lang.String)}
  **/
 android.content.ContentResolver.isSyncPending = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isSyncPending',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -595,15 +556,9 @@ android.content.ContentResolver.isSyncPending = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#cancelSync(android.content.SyncRequest)}
  **/
 android.content.ContentResolver.cancelSync = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'cancelSync',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -629,15 +584,9 @@ android.content.ContentResolver.cancelSync = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#setIsSyncable(android.accounts.Account, java.lang.String, int)}
  **/
 android.content.ContentResolver.setIsSyncable = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'setIsSyncable',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -663,15 +612,9 @@ android.content.ContentResolver.setIsSyncable = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getCurrentSyncs()}
  **/
 android.content.ContentResolver.getCurrentSyncs = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getCurrentSyncs',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -697,15 +640,9 @@ android.content.ContentResolver.getCurrentSyncs = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getPeriodicSyncs(android.accounts.Account, java.lang.String)}
  **/
 android.content.ContentResolver.getPeriodicSyncs = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getPeriodicSyncs',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -731,15 +668,9 @@ android.content.ContentResolver.getPeriodicSyncs = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#getIsSyncable(android.accounts.Account, java.lang.String)}
  **/
 android.content.ContentResolver.getIsSyncable = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getIsSyncable',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -765,15 +696,9 @@ android.content.ContentResolver.getIsSyncable = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#removePeriodicSync(android.accounts.Account, java.lang.String, android.os.Bundle)}
  **/
 android.content.ContentResolver.removePeriodicSync = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'removePeriodicSync',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -799,15 +724,9 @@ android.content.ContentResolver.removePeriodicSync = function() {
  * @see {@link http://developer.android.com/reference/android/content/ContentResolver.html#addStatusChangeListener(int, android.content.SyncStatusObserver)}
  **/
 android.content.ContentResolver.addStatusChangeListener = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'addStatusChangeListener',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

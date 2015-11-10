@@ -18,7 +18,7 @@ java.util.SortedMap = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.SortedMap') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.SortedMap') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ java.util.SortedMap.isInstanceOf = function (self, cls) {
 
 java.util.SortedMap.className = "java.util.SortedMap";
 java.util.SortedMap.prototype.className = "java.util.SortedMap";
+
+// class property
+Object.defineProperty(java.util.SortedMap, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.SortedMap',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

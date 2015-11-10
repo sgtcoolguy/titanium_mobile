@@ -20,7 +20,7 @@ java.util.stream.DoubleStream.Builder = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.stream.DoubleStream$Builder') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.stream.DoubleStream$Builder') {
 		result = arguments[0];
 	}
 	else {
@@ -93,6 +93,19 @@ java.util.stream.DoubleStream.Builder.isInstanceOf = function (self, cls) {
 
 java.util.stream.DoubleStream.Builder.className = "java.util.stream.DoubleStream$Builder";
 java.util.stream.DoubleStream.Builder.prototype.className = "java.util.stream.DoubleStream$Builder";
+
+// class property
+Object.defineProperty(java.util.stream.DoubleStream.Builder, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.stream.DoubleStream$Builder',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

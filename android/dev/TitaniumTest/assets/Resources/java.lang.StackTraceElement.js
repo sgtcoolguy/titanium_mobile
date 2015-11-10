@@ -30,10 +30,10 @@ java.lang.StackTraceElement = function() {
 			class: 'java.lang.StackTraceElement',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ java.lang.StackTraceElement.prototype.className = "java.lang.StackTraceElement";
 java.lang.StackTraceElement.prototype.getLineNumber = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getLineNumber',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -93,7 +93,7 @@ java.lang.StackTraceElement.prototype.getLineNumber = function() {
 java.lang.StackTraceElement.prototype.getMethodName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getMethodName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -122,7 +122,7 @@ java.lang.StackTraceElement.prototype.getMethodName = function() {
 java.lang.StackTraceElement.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -151,7 +151,7 @@ java.lang.StackTraceElement.prototype.hashCode = function() {
 java.lang.StackTraceElement.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -180,7 +180,7 @@ java.lang.StackTraceElement.prototype.equals = function() {
 java.lang.StackTraceElement.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -209,7 +209,7 @@ java.lang.StackTraceElement.prototype.toString = function() {
 java.lang.StackTraceElement.prototype.getClassName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getClassName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -238,7 +238,7 @@ java.lang.StackTraceElement.prototype.getClassName = function() {
 java.lang.StackTraceElement.prototype.getFileName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getFileName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -267,7 +267,7 @@ java.lang.StackTraceElement.prototype.getFileName = function() {
 java.lang.StackTraceElement.prototype.isNativeMethod = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isNativeMethod',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -30,10 +30,10 @@ java.io.FilterInputStream = function() {
 			class: 'java.io.FilterInputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -55,7 +55,7 @@ Object.defineProperty(java.io.FilterInputStream.prototype, 'in', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'in'
 		});
 		if (!result) {
@@ -75,7 +75,7 @@ Object.defineProperty(java.io.FilterInputStream.prototype, 'in', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'in',
 			value: newValue
 		});
@@ -98,7 +98,7 @@ Object.defineProperty(java.io.FilterInputStream.prototype, 'in', {
 java.io.FilterInputStream.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -127,7 +127,7 @@ java.io.FilterInputStream.prototype.read = function() {
 java.io.FilterInputStream.prototype.markSupported = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'markSupported',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -156,7 +156,7 @@ java.io.FilterInputStream.prototype.markSupported = function() {
 java.io.FilterInputStream.prototype.available = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'available',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -185,7 +185,7 @@ java.io.FilterInputStream.prototype.available = function() {
 java.io.FilterInputStream.prototype.reset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'reset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -214,7 +214,7 @@ java.io.FilterInputStream.prototype.reset = function() {
 java.io.FilterInputStream.prototype.skip = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skip',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -243,7 +243,7 @@ java.io.FilterInputStream.prototype.skip = function() {
 java.io.FilterInputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -272,7 +272,7 @@ java.io.FilterInputStream.prototype.close = function() {
 java.io.FilterInputStream.prototype.mark = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'mark',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

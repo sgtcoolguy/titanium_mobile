@@ -19,7 +19,7 @@ android.app.Application.ActivityLifecycleCallbacks = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.Application$ActivityLifecycleCallbacks') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.Application$ActivityLifecycleCallbacks') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.Application.ActivityLifecycleCallbacks.isInstanceOf = function (self
 
 android.app.Application.ActivityLifecycleCallbacks.className = "android.app.Application$ActivityLifecycleCallbacks";
 android.app.Application.ActivityLifecycleCallbacks.prototype.className = "android.app.Application$ActivityLifecycleCallbacks";
+
+// class property
+Object.defineProperty(android.app.Application.ActivityLifecycleCallbacks, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.Application$ActivityLifecycleCallbacks',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

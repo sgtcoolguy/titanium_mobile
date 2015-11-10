@@ -22,7 +22,9 @@ android.view.KeyEvent = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.KeyEvent') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.KeyEvent') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.view.KeyEvent.prototype.constructor = android.view.KeyEvent;
 
 android.view.KeyEvent.className = "android.view.KeyEvent";
 android.view.KeyEvent.prototype.className = "android.view.KeyEvent";
+
+// class property
+Object.defineProperty(android.view.KeyEvent, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.KeyEvent',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.KeyEvent.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.KeyEvent',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.KeyEvent.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -1911,15 +1948,9 @@ Object.defineProperty(android.view.KeyEvent, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#getModifierMetaStateMask()}
  **/
 android.view.KeyEvent.getModifierMetaStateMask = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getModifierMetaStateMask',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1945,15 +1976,9 @@ android.view.KeyEvent.getModifierMetaStateMask = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#isModifierKey(int)}
  **/
 android.view.KeyEvent.isModifierKey = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isModifierKey',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1979,15 +2004,9 @@ android.view.KeyEvent.isModifierKey = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#keyCodeToString(int)}
  **/
 android.view.KeyEvent.keyCodeToString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'keyCodeToString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2013,15 +2032,9 @@ android.view.KeyEvent.keyCodeToString = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#normalizeMetaState(int)}
  **/
 android.view.KeyEvent.normalizeMetaState = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'normalizeMetaState',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2047,15 +2060,9 @@ android.view.KeyEvent.normalizeMetaState = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#getDeadChar(int, int)}
  **/
 android.view.KeyEvent.getDeadChar = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDeadChar',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2081,15 +2088,9 @@ android.view.KeyEvent.getDeadChar = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#metaStateHasModifiers(int, int)}
  **/
 android.view.KeyEvent.metaStateHasModifiers = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'metaStateHasModifiers',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2115,15 +2116,9 @@ android.view.KeyEvent.metaStateHasModifiers = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#metaStateHasNoModifiers(int)}
  **/
 android.view.KeyEvent.metaStateHasNoModifiers = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'metaStateHasNoModifiers',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2150,15 +2145,9 @@ android.view.KeyEvent.metaStateHasNoModifiers = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#changeTimeRepeat(android.view.KeyEvent, long, int, int)}
  **/
 android.view.KeyEvent.changeTimeRepeat = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'changeTimeRepeat',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2184,15 +2173,9 @@ android.view.KeyEvent.changeTimeRepeat = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#getMaxKeyCode()}
  **/
 android.view.KeyEvent.getMaxKeyCode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getMaxKeyCode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2218,15 +2201,9 @@ android.view.KeyEvent.getMaxKeyCode = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#changeFlags(android.view.KeyEvent, int)}
  **/
 android.view.KeyEvent.changeFlags = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'changeFlags',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2252,15 +2229,9 @@ android.view.KeyEvent.changeFlags = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#keyCodeFromString(java.lang.String)}
  **/
 android.view.KeyEvent.keyCodeFromString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'keyCodeFromString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2286,15 +2257,9 @@ android.view.KeyEvent.keyCodeFromString = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#changeAction(android.view.KeyEvent, int)}
  **/
 android.view.KeyEvent.changeAction = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'changeAction',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2320,15 +2285,9 @@ android.view.KeyEvent.changeAction = function() {
  * @see {@link http://developer.android.com/reference/android/view/KeyEvent.html#isGamepadButton(int)}
  **/
 android.view.KeyEvent.isGamepadButton = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'isGamepadButton',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

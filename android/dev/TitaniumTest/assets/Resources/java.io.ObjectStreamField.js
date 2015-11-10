@@ -30,10 +30,10 @@ java.io.ObjectStreamField = function() {
 			class: 'java.io.ObjectStreamField',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ java.io.ObjectStreamField.prototype.className = "java.io.ObjectStreamField";
 java.io.ObjectStreamField.prototype.getName = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getName',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -93,7 +93,7 @@ java.io.ObjectStreamField.prototype.getName = function() {
 java.io.ObjectStreamField.prototype.getOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -122,7 +122,7 @@ java.io.ObjectStreamField.prototype.getOffset = function() {
 java.io.ObjectStreamField.prototype.getField = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getField',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -151,7 +151,7 @@ java.io.ObjectStreamField.prototype.getField = function() {
 java.io.ObjectStreamField.prototype.getSignature = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getSignature',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -180,7 +180,7 @@ java.io.ObjectStreamField.prototype.getSignature = function() {
 java.io.ObjectStreamField.prototype.compareTo = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'compareTo',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -209,7 +209,7 @@ java.io.ObjectStreamField.prototype.compareTo = function() {
 java.io.ObjectStreamField.prototype.getTypeString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getTypeString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -238,7 +238,7 @@ java.io.ObjectStreamField.prototype.getTypeString = function() {
 java.io.ObjectStreamField.prototype.getType = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -267,7 +267,7 @@ java.io.ObjectStreamField.prototype.getType = function() {
 java.io.ObjectStreamField.prototype.setOffset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setOffset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -296,7 +296,7 @@ java.io.ObjectStreamField.prototype.setOffset = function() {
 java.io.ObjectStreamField.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -325,7 +325,7 @@ java.io.ObjectStreamField.prototype.toString = function() {
 java.io.ObjectStreamField.prototype.isUnshared = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isUnshared',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -354,7 +354,7 @@ java.io.ObjectStreamField.prototype.isUnshared = function() {
 java.io.ObjectStreamField.prototype.isPrimitive = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isPrimitive',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -383,7 +383,7 @@ java.io.ObjectStreamField.prototype.isPrimitive = function() {
 java.io.ObjectStreamField.prototype.getTypeCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getTypeCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

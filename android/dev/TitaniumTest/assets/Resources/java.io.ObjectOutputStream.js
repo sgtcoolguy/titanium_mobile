@@ -30,10 +30,10 @@ java.io.ObjectOutputStream = function() {
 			class: 'java.io.ObjectOutputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -60,7 +60,7 @@ java.io.ObjectOutputStream.prototype.className = "java.io.ObjectOutputStream";
  **/
 java.io.ObjectOutputStream.access$500 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -94,7 +94,7 @@ java.io.ObjectOutputStream.access$500 = function() {
  **/
 java.io.ObjectOutputStream.access$400 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -128,7 +128,7 @@ java.io.ObjectOutputStream.access$400 = function() {
  **/
 java.io.ObjectOutputStream.access$300 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -162,7 +162,7 @@ java.io.ObjectOutputStream.access$300 = function() {
  **/
 java.io.ObjectOutputStream.access$200 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -196,7 +196,7 @@ java.io.ObjectOutputStream.access$200 = function() {
  **/
 java.io.ObjectOutputStream.access$100 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -230,7 +230,7 @@ java.io.ObjectOutputStream.access$100 = function() {
  **/
 java.io.ObjectOutputStream.access$000 = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -268,7 +268,7 @@ java.io.ObjectOutputStream.access$000 = function() {
 java.io.ObjectOutputStream.prototype.writeFloat = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeFloat',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -297,7 +297,7 @@ java.io.ObjectOutputStream.prototype.writeFloat = function() {
 java.io.ObjectOutputStream.prototype.useProtocolVersion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'useProtocolVersion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -326,7 +326,7 @@ java.io.ObjectOutputStream.prototype.useProtocolVersion = function() {
 java.io.ObjectOutputStream.prototype.drain = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'drain',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -355,7 +355,7 @@ java.io.ObjectOutputStream.prototype.drain = function() {
 java.io.ObjectOutputStream.prototype.enableReplaceObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'enableReplaceObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -384,7 +384,7 @@ java.io.ObjectOutputStream.prototype.enableReplaceObject = function() {
 java.io.ObjectOutputStream.prototype.writeLong = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeLong',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -413,7 +413,7 @@ java.io.ObjectOutputStream.prototype.writeLong = function() {
 java.io.ObjectOutputStream.prototype.writeUnshared = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeUnshared',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -442,7 +442,7 @@ java.io.ObjectOutputStream.prototype.writeUnshared = function() {
 java.io.ObjectOutputStream.prototype.flush = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'flush',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -471,7 +471,7 @@ java.io.ObjectOutputStream.prototype.flush = function() {
 java.io.ObjectOutputStream.prototype.writeTypeString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeTypeString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -500,7 +500,7 @@ java.io.ObjectOutputStream.prototype.writeTypeString = function() {
 java.io.ObjectOutputStream.prototype.writeObjectOverride = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeObjectOverride',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -529,7 +529,7 @@ java.io.ObjectOutputStream.prototype.writeObjectOverride = function() {
 java.io.ObjectOutputStream.prototype.writeStreamHeader = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeStreamHeader',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -558,7 +558,7 @@ java.io.ObjectOutputStream.prototype.writeStreamHeader = function() {
 java.io.ObjectOutputStream.prototype.defaultWriteObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'defaultWriteObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -587,7 +587,7 @@ java.io.ObjectOutputStream.prototype.defaultWriteObject = function() {
 java.io.ObjectOutputStream.prototype.annotateProxyClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'annotateProxyClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -618,7 +618,7 @@ java.io.ObjectOutputStream.prototype.annotateProxyClass = function() {
 java.io.ObjectOutputStream.prototype.write = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'write',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -647,7 +647,7 @@ java.io.ObjectOutputStream.prototype.write = function() {
 java.io.ObjectOutputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -676,7 +676,7 @@ java.io.ObjectOutputStream.prototype.close = function() {
 java.io.ObjectOutputStream.prototype.writeDouble = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeDouble',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -705,7 +705,7 @@ java.io.ObjectOutputStream.prototype.writeDouble = function() {
 java.io.ObjectOutputStream.prototype.writeInt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeInt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -734,7 +734,7 @@ java.io.ObjectOutputStream.prototype.writeInt = function() {
 java.io.ObjectOutputStream.prototype.writeByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -763,7 +763,7 @@ java.io.ObjectOutputStream.prototype.writeByte = function() {
 java.io.ObjectOutputStream.prototype.writeFields = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeFields',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -792,7 +792,7 @@ java.io.ObjectOutputStream.prototype.writeFields = function() {
 java.io.ObjectOutputStream.prototype.replaceObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'replaceObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -821,7 +821,7 @@ java.io.ObjectOutputStream.prototype.replaceObject = function() {
 java.io.ObjectOutputStream.prototype.writeObject = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeObject',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -850,7 +850,7 @@ java.io.ObjectOutputStream.prototype.writeObject = function() {
 java.io.ObjectOutputStream.prototype.writeClassDescriptor = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeClassDescriptor',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -879,7 +879,7 @@ java.io.ObjectOutputStream.prototype.writeClassDescriptor = function() {
 java.io.ObjectOutputStream.prototype.writeChar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeChar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -908,7 +908,7 @@ java.io.ObjectOutputStream.prototype.writeChar = function() {
 java.io.ObjectOutputStream.prototype.getProtocolVersion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getProtocolVersion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -937,7 +937,7 @@ java.io.ObjectOutputStream.prototype.getProtocolVersion = function() {
 java.io.ObjectOutputStream.prototype.writeBytes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeBytes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -966,7 +966,7 @@ java.io.ObjectOutputStream.prototype.writeBytes = function() {
 java.io.ObjectOutputStream.prototype.annotateClass = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'annotateClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -995,7 +995,7 @@ java.io.ObjectOutputStream.prototype.annotateClass = function() {
 java.io.ObjectOutputStream.prototype.writeUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1024,7 +1024,7 @@ java.io.ObjectOutputStream.prototype.writeUTF = function() {
 java.io.ObjectOutputStream.prototype.reset = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'reset',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1053,7 +1053,7 @@ java.io.ObjectOutputStream.prototype.reset = function() {
 java.io.ObjectOutputStream.prototype.writeShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1082,7 +1082,7 @@ java.io.ObjectOutputStream.prototype.writeShort = function() {
 java.io.ObjectOutputStream.prototype.writeChars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeChars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1111,7 +1111,7 @@ java.io.ObjectOutputStream.prototype.writeChars = function() {
 java.io.ObjectOutputStream.prototype.writeBoolean = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeBoolean',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -1140,7 +1140,7 @@ java.io.ObjectOutputStream.prototype.writeBoolean = function() {
 java.io.ObjectOutputStream.prototype.putFields = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'putFields',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

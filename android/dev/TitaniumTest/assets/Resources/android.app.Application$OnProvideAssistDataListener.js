@@ -19,7 +19,7 @@ android.app.Application.OnProvideAssistDataListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.Application$OnProvideAssistDataListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.Application$OnProvideAssistDataListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.Application.OnProvideAssistDataListener.isInstanceOf = function (sel
 
 android.app.Application.OnProvideAssistDataListener.className = "android.app.Application$OnProvideAssistDataListener";
 android.app.Application.OnProvideAssistDataListener.prototype.className = "android.app.Application$OnProvideAssistDataListener";
+
+// class property
+Object.defineProperty(android.app.Application.OnProvideAssistDataListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.Application$OnProvideAssistDataListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

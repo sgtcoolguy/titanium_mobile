@@ -31,10 +31,10 @@ java.io.ObjectInputStream.BlockDataInputStream = function() {
 			class: 'java.io.ObjectInputStream$BlockDataInputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.io.ObjectInputStream.BlockDataInputStream.prototype, 
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'this$0'
 		});
 		if (!result) {
@@ -89,7 +89,7 @@ Object.defineProperty(java.io.ObjectInputStream.BlockDataInputStream.prototype, 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readFloats = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFloats',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -118,7 +118,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readFloats = function()
 java.io.ObjectInputStream.BlockDataInputStream.prototype.available = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'available',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -147,7 +147,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.available = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.skip = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skip',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -176,7 +176,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.skip = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readChar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readChar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -205,7 +205,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readChar = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readBooleans = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readBooleans',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -234,7 +234,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readBooleans = function
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -263,7 +263,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readUTF = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readLongs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLongs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -294,7 +294,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readLongs = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readFully = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFully',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -323,7 +323,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readFully = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readDouble = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readDouble',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -352,7 +352,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readDouble = function()
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readFloat = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readFloat',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -381,7 +381,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readFloat = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readInt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readInt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -410,7 +410,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readInt = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -439,7 +439,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.close = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readUnsignedByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUnsignedByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -468,7 +468,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readUnsignedByte = func
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readInts = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readInts',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -499,7 +499,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readInts = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -528,7 +528,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.read = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readLongUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLongUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -557,7 +557,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readLongUTF = function(
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readShorts = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readShorts',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -586,7 +586,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readShorts = function()
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readDoubles = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readDoubles',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -615,7 +615,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readDoubles = function(
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readLine = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLine',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -644,7 +644,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readLine = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.setBlockDataMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setBlockDataMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -673,7 +673,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.setBlockDataMode = func
 java.io.ObjectInputStream.BlockDataInputStream.prototype.skipBlockData = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skipBlockData',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -702,7 +702,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.skipBlockData = functio
 java.io.ObjectInputStream.BlockDataInputStream.prototype.peek = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'peek',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -731,7 +731,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.peek = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.skipBytes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'skipBytes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -760,7 +760,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.skipBytes = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readLong = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readLong',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -789,7 +789,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readLong = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.peekByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'peekByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -818,7 +818,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.peekByte = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -847,7 +847,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readShort = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readChars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readChars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -876,7 +876,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readChars = function() 
 java.io.ObjectInputStream.BlockDataInputStream.prototype.currentBlockRemaining = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'currentBlockRemaining',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -905,7 +905,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.currentBlockRemaining =
 java.io.ObjectInputStream.BlockDataInputStream.prototype.getBlockDataMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getBlockDataMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -934,7 +934,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.getBlockDataMode = func
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readBoolean = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readBoolean',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -963,7 +963,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readBoolean = function(
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -992,7 +992,7 @@ java.io.ObjectInputStream.BlockDataInputStream.prototype.readByte = function() {
 java.io.ObjectInputStream.BlockDataInputStream.prototype.readUnsignedShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'readUnsignedShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

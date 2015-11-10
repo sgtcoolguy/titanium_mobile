@@ -30,10 +30,10 @@ java.lang.ClassNotFoundException = function() {
 			class: 'java.lang.ClassNotFoundException',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -64,7 +64,7 @@ java.lang.ClassNotFoundException.prototype.className = "java.lang.ClassNotFoundE
 java.lang.ClassNotFoundException.prototype.getException = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getException',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -93,7 +93,7 @@ java.lang.ClassNotFoundException.prototype.getException = function() {
 java.lang.ClassNotFoundException.prototype.getCause = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getCause',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

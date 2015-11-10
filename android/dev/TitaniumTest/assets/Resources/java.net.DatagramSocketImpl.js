@@ -22,15 +22,13 @@ java.net.DatagramSocketImpl = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.net.DatagramSocketImpl') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.net.DatagramSocketImpl') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.net.DatagramSocketImpl',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.net.DatagramSocketImpl. Create a subclass using java.net.DatagramSocketImpl.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ java.net.DatagramSocketImpl.prototype.constructor = java.net.DatagramSocketImpl;
 
 java.net.DatagramSocketImpl.className = "java.net.DatagramSocketImpl";
 java.net.DatagramSocketImpl.prototype.className = "java.net.DatagramSocketImpl";
+
+// class property
+Object.defineProperty(java.net.DatagramSocketImpl, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.net.DatagramSocketImpl',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.net.DatagramSocketImpl.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.net.DatagramSocketImpl',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.net.DatagramSocketImpl.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -77,38 +110,6 @@ Object.defineProperty(java.net.DatagramSocketImpl.prototype, 'localPort', {
 
 		this.$native.setNativeField({
 			field: 'localPort',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
-// http://developer.android.com/reference/java/net/DatagramSocketImpl.html#socket
-Object.defineProperty(java.net.DatagramSocketImpl.prototype, 'socket', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'socket'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.net.DatagramSocketImpl') {
-				return new java.net.DatagramSocketImpl(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'socket',
 			value: newValue
 		});
 	},
@@ -181,6 +182,35 @@ java.net.DatagramSocketImpl.prototype.disconnect = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function receive
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#receive(java.net.DatagramPacket)}
+ **/
+java.net.DatagramSocketImpl.prototype.receive = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'receive',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.DatagramSocketImpl') {
+			return new java.net.DatagramSocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getLocalPort
  * @memberof
  * @instance
@@ -210,16 +240,16 @@ java.net.DatagramSocketImpl.prototype.getLocalPort = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getOption
+ * @function setTTL
  * @memberof
  * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#getOption(java.net.SocketOption)}
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#setTTL(byte)}
  **/
-java.net.DatagramSocketImpl.prototype.getOption = function() {
+java.net.DatagramSocketImpl.prototype.setTTL = function() {
 	if (!this._hasPointer) return null;
 
 	var result = this.$native.callNativeFunction({
-		func: 'getOption',
+		func: 'setTTL',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -278,6 +308,64 @@ java.net.DatagramSocketImpl.prototype.joinGroup = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'joinGroup',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.DatagramSocketImpl') {
+			return new java.net.DatagramSocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function leaveGroup
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#leaveGroup(java.net.SocketAddress, java.net.NetworkInterface)}
+ **/
+java.net.DatagramSocketImpl.prototype.leaveGroup = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'leaveGroup',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.DatagramSocketImpl') {
+			return new java.net.DatagramSocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function peek
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#peek(java.net.InetAddress)}
+ **/
+java.net.DatagramSocketImpl.prototype.peek = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'peek',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -413,64 +501,6 @@ java.net.DatagramSocketImpl.prototype.getFileDescriptor = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getDatagramSocket
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#getDatagramSocket()}
- **/
-java.net.DatagramSocketImpl.prototype.getDatagramSocket = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDatagramSocket',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function dataAvailable
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#dataAvailable()}
- **/
-java.net.DatagramSocketImpl.prototype.dataAvailable = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'dataAvailable',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function create
  * @memberof
  * @instance
@@ -529,238 +559,6 @@ java.net.DatagramSocketImpl.prototype.join = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function close
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#close()}
- **/
-java.net.DatagramSocketImpl.prototype.close = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'close',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function connect
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#connect(java.net.InetAddress, int)}
- **/
-java.net.DatagramSocketImpl.prototype.connect = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'connect',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setDatagramSocket
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#setDatagramSocket(java.net.DatagramSocket)}
- **/
-java.net.DatagramSocketImpl.prototype.setDatagramSocket = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setDatagramSocket',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function receive
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#receive(java.net.DatagramPacket)}
- **/
-java.net.DatagramSocketImpl.prototype.receive = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'receive',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setOption
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#setOption(java.net.SocketOption, java.lang.Object)}
- **/
-java.net.DatagramSocketImpl.prototype.setOption = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setOption',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setTTL
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#setTTL(byte)}
- **/
-java.net.DatagramSocketImpl.prototype.setTTL = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setTTL',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function leaveGroup
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#leaveGroup(java.net.SocketAddress, java.net.NetworkInterface)}
- **/
-java.net.DatagramSocketImpl.prototype.leaveGroup = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'leaveGroup',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function peek
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#peek(java.net.InetAddress)}
- **/
-java.net.DatagramSocketImpl.prototype.peek = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'peek',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.net.DatagramSocketImpl') {
-			return new java.net.DatagramSocketImpl(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function setTimeToLive
  * @memberof
  * @instance
@@ -800,6 +598,64 @@ java.net.DatagramSocketImpl.prototype.send = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'send',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.DatagramSocketImpl') {
+			return new java.net.DatagramSocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function close
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#close()}
+ **/
+java.net.DatagramSocketImpl.prototype.close = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'close',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'java.net.DatagramSocketImpl') {
+			return new java.net.DatagramSocketImpl(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function connect
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/java/net/DatagramSocketImpl.html#connect(java.net.InetAddress, int)}
+ **/
+java.net.DatagramSocketImpl.prototype.connect = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'connect',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

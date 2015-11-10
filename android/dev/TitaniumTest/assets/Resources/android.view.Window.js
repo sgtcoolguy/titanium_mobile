@@ -22,15 +22,13 @@ android.view.Window = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.Window') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.Window') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.view.Window',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.view.Window. Create a subclass using android.view.Window.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.view.Window.prototype.constructor = android.view.Window;
 
 android.view.Window.className = "android.view.Window";
 android.view.Window.prototype.className = "android.view.Window";
+
+// class property
+Object.defineProperty(android.view.Window, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.Window',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.Window.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.Window',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.Window.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -215,15 +248,9 @@ android.view.Window.FEATURE_LEFT_ICON = 3;
  * @see {@link http://developer.android.com/reference/android/view/Window.html#getDefaultFeatures(android.content.Context)}
  **/
 android.view.Window.getDefaultFeatures = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefaultFeatures',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

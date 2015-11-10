@@ -22,15 +22,13 @@ android.app.FragmentTransaction = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.FragmentTransaction') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.app.FragmentTransaction') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.app.FragmentTransaction',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.app.FragmentTransaction. Create a subclass using android.app.FragmentTransaction.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.app.FragmentTransaction.prototype.constructor = android.app.FragmentTran
 
 android.app.FragmentTransaction.className = "android.app.FragmentTransaction";
 android.app.FragmentTransaction.prototype.className = "android.app.FragmentTransaction";
+
+// class property
+Object.defineProperty(android.app.FragmentTransaction, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.FragmentTransaction',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.app.FragmentTransaction.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.app.FragmentTransaction',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.app.FragmentTransaction.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**

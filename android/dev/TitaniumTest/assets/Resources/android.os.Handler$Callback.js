@@ -19,7 +19,7 @@ android.os.Handler.Callback = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.Handler$Callback') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.os.Handler$Callback') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.os.Handler.Callback.isInstanceOf = function (self, cls) {
 
 android.os.Handler.Callback.className = "android.os.Handler$Callback";
 android.os.Handler.Callback.prototype.className = "android.os.Handler$Callback";
+
+// class property
+Object.defineProperty(android.os.Handler.Callback, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.Handler$Callback',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

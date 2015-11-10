@@ -31,10 +31,10 @@ java.io.ObjectOutputStream.BlockDataOutputStream = function() {
 			class: 'java.io.ObjectOutputStream$BlockDataOutputStream',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -65,7 +65,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.className = "java.io.
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.getUTFLength = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getUTFLength',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -95,7 +95,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.getUTFLength = functi
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLongUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeLongUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -124,7 +124,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLongUTF = functi
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeInts = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeInts',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -153,7 +153,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeInts = function(
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeFloat = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeFloat',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -182,7 +182,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeFloat = function
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.drain = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'drain',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -211,7 +211,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.drain = function() {
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeBooleans = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeBooleans',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -240,7 +240,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeBooleans = funct
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLong = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeLong',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -269,7 +269,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLong = function(
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.flush = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'flush',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -301,7 +301,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.flush = function() {
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.write = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'write',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -330,7 +330,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.write = function() {
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.close = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'close',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -359,7 +359,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.close = function() {
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeFloats = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeFloats',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -388,7 +388,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeFloats = functio
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeDouble = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeDouble',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -417,7 +417,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeDouble = functio
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLongs = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeLongs',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -446,7 +446,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeLongs = function
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeInt = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeInt',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -475,7 +475,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeInt = function()
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeByte = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeByte',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -504,7 +504,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeByte = function(
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.setBlockDataMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'setBlockDataMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -533,7 +533,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.setBlockDataMode = fu
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeChar = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeChar',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -562,7 +562,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeChar = function(
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeBytes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeBytes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -591,7 +591,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeBytes = function
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeShorts = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeShorts',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -620,7 +620,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeShorts = functio
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeDoubles = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeDoubles',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -650,7 +650,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeDoubles = functi
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeUTF = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeUTF',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -679,7 +679,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeUTF = function()
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.getBlockDataMode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getBlockDataMode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -708,7 +708,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.getBlockDataMode = fu
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeShort = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeShort',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -738,7 +738,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeShort = function
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeChars = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeChars',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -767,7 +767,7 @@ java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeChars = function
 java.io.ObjectOutputStream.BlockDataOutputStream.prototype.writeBoolean = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeBoolean',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

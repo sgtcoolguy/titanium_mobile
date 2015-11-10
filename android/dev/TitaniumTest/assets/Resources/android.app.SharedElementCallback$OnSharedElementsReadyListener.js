@@ -19,7 +19,7 @@ android.app.SharedElementCallback.OnSharedElementsReadyListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.app.SharedElementCallback$OnSharedElementsReadyListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.app.SharedElementCallback$OnSharedElementsReadyListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.app.SharedElementCallback.OnSharedElementsReadyListener.isInstanceOf = f
 
 android.app.SharedElementCallback.OnSharedElementsReadyListener.className = "android.app.SharedElementCallback$OnSharedElementsReadyListener";
 android.app.SharedElementCallback.OnSharedElementsReadyListener.prototype.className = "android.app.SharedElementCallback$OnSharedElementsReadyListener";
+
+// class property
+Object.defineProperty(android.app.SharedElementCallback.OnSharedElementsReadyListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.app.SharedElementCallback$OnSharedElementsReadyListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

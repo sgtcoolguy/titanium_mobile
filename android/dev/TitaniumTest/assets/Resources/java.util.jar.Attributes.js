@@ -31,10 +31,10 @@ java.util.jar.Attributes = function() {
 			class: 'java.util.jar.Attributes',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.util.jar.Attributes.prototype, 'map', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'map'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.util.jar.Attributes.prototype, 'map', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'map',
 			value: newValue
 		});
@@ -97,7 +97,7 @@ Object.defineProperty(java.util.jar.Attributes.prototype, 'map', {
 java.util.jar.Attributes.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -126,7 +126,7 @@ java.util.jar.Attributes.prototype.read = function() {
 java.util.jar.Attributes.prototype.entrySet = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'entrySet',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -155,7 +155,7 @@ java.util.jar.Attributes.prototype.entrySet = function() {
 java.util.jar.Attributes.prototype.containsKey = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'containsKey',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -184,7 +184,7 @@ java.util.jar.Attributes.prototype.containsKey = function() {
 java.util.jar.Attributes.prototype.values = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'values',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -213,7 +213,7 @@ java.util.jar.Attributes.prototype.values = function() {
 java.util.jar.Attributes.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -242,7 +242,7 @@ java.util.jar.Attributes.prototype.clear = function() {
 java.util.jar.Attributes.prototype.isEmpty = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isEmpty',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -271,7 +271,7 @@ java.util.jar.Attributes.prototype.isEmpty = function() {
 java.util.jar.Attributes.prototype.put = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'put',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -300,7 +300,7 @@ java.util.jar.Attributes.prototype.put = function() {
 java.util.jar.Attributes.prototype.remove = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'remove',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -329,7 +329,7 @@ java.util.jar.Attributes.prototype.remove = function() {
 java.util.jar.Attributes.prototype.containsValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'containsValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -359,7 +359,7 @@ java.util.jar.Attributes.prototype.containsValue = function() {
 java.util.jar.Attributes.prototype.getValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -388,7 +388,7 @@ java.util.jar.Attributes.prototype.getValue = function() {
 java.util.jar.Attributes.prototype.writeMain = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'writeMain',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -417,7 +417,7 @@ java.util.jar.Attributes.prototype.writeMain = function() {
 java.util.jar.Attributes.prototype.size = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'size',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -446,7 +446,7 @@ java.util.jar.Attributes.prototype.size = function() {
 java.util.jar.Attributes.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -475,7 +475,7 @@ java.util.jar.Attributes.prototype.hashCode = function() {
 java.util.jar.Attributes.prototype.get = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'get',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -504,7 +504,7 @@ java.util.jar.Attributes.prototype.get = function() {
 java.util.jar.Attributes.prototype.putAll = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'putAll',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -533,7 +533,7 @@ java.util.jar.Attributes.prototype.putAll = function() {
 java.util.jar.Attributes.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -562,7 +562,7 @@ java.util.jar.Attributes.prototype.equals = function() {
 java.util.jar.Attributes.prototype.clone = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clone',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -591,7 +591,7 @@ java.util.jar.Attributes.prototype.clone = function() {
 java.util.jar.Attributes.prototype.putValue = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'putValue',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -620,7 +620,7 @@ java.util.jar.Attributes.prototype.putValue = function() {
 java.util.jar.Attributes.prototype.keySet = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'keySet',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -649,7 +649,7 @@ java.util.jar.Attributes.prototype.keySet = function() {
 java.util.jar.Attributes.prototype.write = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'write',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

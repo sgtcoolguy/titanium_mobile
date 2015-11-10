@@ -22,7 +22,9 @@ android.content.ClipData = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.ClipData') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.ClipData') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.ClipData.prototype.constructor = android.content.ClipData;
 
 android.content.ClipData.className = "android.content.ClipData";
 android.content.ClipData.prototype.className = "android.content.ClipData";
+
+// class property
+Object.defineProperty(android.content.ClipData, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.ClipData',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.ClipData.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.ClipData',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.ClipData.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -87,15 +124,9 @@ Object.defineProperty(android.content.ClipData, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/content/ClipData.html#newPlainText(java.lang.CharSequence, java.lang.CharSequence)}
  **/
 android.content.ClipData.newPlainText = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newPlainText',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -121,15 +152,9 @@ android.content.ClipData.newPlainText = function() {
  * @see {@link http://developer.android.com/reference/android/content/ClipData.html#newIntent(java.lang.CharSequence, android.content.Intent)}
  **/
 android.content.ClipData.newIntent = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newIntent',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -155,15 +180,9 @@ android.content.ClipData.newIntent = function() {
  * @see {@link http://developer.android.com/reference/android/content/ClipData.html#newHtmlText(java.lang.CharSequence, java.lang.CharSequence, java.lang.String)}
  **/
 android.content.ClipData.newHtmlText = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newHtmlText',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -189,15 +208,9 @@ android.content.ClipData.newHtmlText = function() {
  * @see {@link http://developer.android.com/reference/android/content/ClipData.html#newUri(android.content.ContentResolver, java.lang.CharSequence, android.net.Uri)}
  **/
 android.content.ClipData.newUri = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newUri',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -223,15 +236,9 @@ android.content.ClipData.newUri = function() {
  * @see {@link http://developer.android.com/reference/android/content/ClipData.html#newRawUri(java.lang.CharSequence, android.net.Uri)}
  **/
 android.content.ClipData.newRawUri = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'newRawUri',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

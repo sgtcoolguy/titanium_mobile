@@ -19,7 +19,7 @@ android.database.sqlite.SQLiteTransactionListener = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.database.sqlite.SQLiteTransactionListener') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.database.sqlite.SQLiteTransactionListener') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.database.sqlite.SQLiteTransactionListener.isInstanceOf = function (self,
 
 android.database.sqlite.SQLiteTransactionListener.className = "android.database.sqlite.SQLiteTransactionListener";
 android.database.sqlite.SQLiteTransactionListener.prototype.className = "android.database.sqlite.SQLiteTransactionListener";
+
+// class property
+Object.defineProperty(android.database.sqlite.SQLiteTransactionListener, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.database.sqlite.SQLiteTransactionListener',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

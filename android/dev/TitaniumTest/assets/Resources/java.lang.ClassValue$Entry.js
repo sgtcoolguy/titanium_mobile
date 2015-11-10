@@ -31,10 +31,10 @@ java.lang.ClassValue.Entry = function() {
 			class: 'java.lang.ClassValue$Entry',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -53,7 +53,7 @@ java.lang.ClassValue.Entry.prototype.className = "java.lang.ClassValue$Entry";
 Object.defineProperty(java.lang.ClassValue.Entry, 'DEAD_ENTRY', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -81,7 +81,7 @@ Object.defineProperty(java.lang.ClassValue.Entry, 'DEAD_ENTRY', {
 Object.defineProperty(java.lang.ClassValue.Entry, '$assertionsDisabled', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -112,7 +112,7 @@ Object.defineProperty(java.lang.ClassValue.Entry.prototype, 'value', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'value'
 		});
 		if (!result) {
@@ -145,7 +145,7 @@ Object.defineProperty(java.lang.ClassValue.Entry.prototype, 'value', {
 java.lang.ClassValue.Entry.prototype.isPromise = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isPromise',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -174,7 +174,7 @@ java.lang.ClassValue.Entry.prototype.isPromise = function() {
 java.lang.ClassValue.Entry.prototype.isLive = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isLive',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -203,7 +203,7 @@ java.lang.ClassValue.Entry.prototype.isLive = function() {
 java.lang.ClassValue.Entry.prototype.refreshVersion = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'refreshVersion',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -232,7 +232,7 @@ java.lang.ClassValue.Entry.prototype.refreshVersion = function() {
 java.lang.ClassValue.Entry.prototype.value = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'value',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -261,7 +261,7 @@ java.lang.ClassValue.Entry.prototype.value = function() {
 java.lang.ClassValue.Entry.prototype.version = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'version',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -290,7 +290,7 @@ java.lang.ClassValue.Entry.prototype.version = function() {
 java.lang.ClassValue.Entry.prototype.classValueOrNull = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'classValueOrNull',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

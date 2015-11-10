@@ -19,7 +19,7 @@ android.view.ActionMode.Callback = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.ActionMode$Callback') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.view.ActionMode$Callback') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ android.view.ActionMode.Callback.isInstanceOf = function (self, cls) {
 
 android.view.ActionMode.Callback.className = "android.view.ActionMode$Callback";
 android.view.ActionMode.Callback.prototype.className = "android.view.ActionMode$Callback";
+
+// class property
+Object.defineProperty(android.view.ActionMode.Callback, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.ActionMode$Callback',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

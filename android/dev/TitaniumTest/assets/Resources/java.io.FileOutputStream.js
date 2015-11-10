@@ -22,7 +22,9 @@ java.io.FileOutputStream = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.io.FileOutputStream') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.io.FileOutputStream') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,41 @@ java.io.FileOutputStream.prototype.constructor = java.io.FileOutputStream;
 java.io.FileOutputStream.className = "java.io.FileOutputStream";
 java.io.FileOutputStream.prototype.className = "java.io.FileOutputStream";
 
+// class property
+Object.defineProperty(java.io.FileOutputStream, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.io.FileOutputStream',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.io.FileOutputStream.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.io.FileOutputStream',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.io.FileOutputStream.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
@@ -52,40 +89,6 @@ java.io.FileOutputStream.prototype.className = "java.io.FileOutputStream";
 // Instance Fields
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function access$000
- * @static
- * @see {@link http://developer.android.com/reference/java/io/FileOutputStream.html#access$000(java.io.FileOutputStream)}
- **/
-java.io.FileOutputStream.access$000 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$000',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.io.FileOutputStream') {
-			return new java.io.FileOutputStream(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 
 // Instance methods
 /**

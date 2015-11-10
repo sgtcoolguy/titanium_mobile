@@ -22,7 +22,9 @@ android.util.TypedValue = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.util.TypedValue') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.util.TypedValue') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.util.TypedValue.prototype.constructor = android.util.TypedValue;
 
 android.util.TypedValue.className = "android.util.TypedValue";
 android.util.TypedValue.prototype.className = "android.util.TypedValue";
+
+// class property
+Object.defineProperty(android.util.TypedValue, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.util.TypedValue',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.util.TypedValue.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.util.TypedValue',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.util.TypedValue.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -523,15 +560,9 @@ Object.defineProperty(android.util.TypedValue.prototype, 'changingConfigurations
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#complexToFloat(int)}
  **/
 android.util.TypedValue.complexToFloat = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'complexToFloat',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -557,15 +588,9 @@ android.util.TypedValue.complexToFloat = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#applyDimension(int, float, android.util.DisplayMetrics)}
  **/
 android.util.TypedValue.applyDimension = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'applyDimension',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -591,15 +616,9 @@ android.util.TypedValue.applyDimension = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#complexToDimensionPixelSize(int, android.util.DisplayMetrics)}
  **/
 android.util.TypedValue.complexToDimensionPixelSize = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'complexToDimensionPixelSize',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -625,15 +644,9 @@ android.util.TypedValue.complexToDimensionPixelSize = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#complexToFraction(int, float, float)}
  **/
 android.util.TypedValue.complexToFraction = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'complexToFraction',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -659,15 +672,9 @@ android.util.TypedValue.complexToFraction = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#complexToDimensionPixelOffset(int, android.util.DisplayMetrics)}
  **/
 android.util.TypedValue.complexToDimensionPixelOffset = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'complexToDimensionPixelOffset',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -693,15 +700,9 @@ android.util.TypedValue.complexToDimensionPixelOffset = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#coerceToString(int, int)}
  **/
 android.util.TypedValue.coerceToString = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'coerceToString',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -727,15 +728,9 @@ android.util.TypedValue.coerceToString = function() {
  * @see {@link http://developer.android.com/reference/android/util/TypedValue.html#complexToDimension(int, android.util.DisplayMetrics)}
  **/
 android.util.TypedValue.complexToDimension = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'complexToDimension',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

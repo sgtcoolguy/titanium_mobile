@@ -22,7 +22,9 @@ android.content.Intent = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.Intent') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.Intent') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.content.Intent.prototype.constructor = android.content.Intent;
 
 android.content.Intent.className = "android.content.Intent";
 android.content.Intent.prototype.className = "android.content.Intent";
+
+// class property
+Object.defineProperty(android.content.Intent, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.Intent',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.content.Intent.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.content.Intent',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.content.Intent.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -1599,15 +1636,9 @@ Object.defineProperty(android.content.Intent, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#parseIntent(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet)}
  **/
 android.content.Intent.parseIntent = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseIntent',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1633,16 +1664,38 @@ android.content.Intent.parseIntent = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntentOld(java.lang.String)}
  **/
 android.content.Intent.getIntentOld = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getIntentOld',
+		instanceMethod: false,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function makeMainActivity
+ * @static
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#makeMainActivity(android.content.ComponentName)}
+ **/
+android.content.Intent.makeMainActivity = function() {
+	if (!this.class) return null;
+
+	var result = this.class.callNativeFunction({
+		func: 'makeMainActivity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1667,15 +1720,9 @@ android.content.Intent.getIntentOld = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntent(java.lang.String)}
  **/
 android.content.Intent.getIntent = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getIntent',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1701,15 +1748,9 @@ android.content.Intent.getIntent = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#normalizeMimeType(java.lang.String)}
  **/
 android.content.Intent.normalizeMimeType = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'normalizeMimeType',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1736,15 +1777,9 @@ android.content.Intent.normalizeMimeType = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#createChooser(android.content.Intent, java.lang.CharSequence, android.content.IntentSender)}
  **/
 android.content.Intent.createChooser = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'createChooser',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1770,15 +1805,9 @@ android.content.Intent.createChooser = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#makeRestartActivityTask(android.content.ComponentName)}
  **/
 android.content.Intent.makeRestartActivityTask = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'makeRestartActivityTask',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1804,15 +1833,9 @@ android.content.Intent.makeRestartActivityTask = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#makeMainSelectorActivity(java.lang.String, java.lang.String)}
  **/
 android.content.Intent.makeMainSelectorActivity = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'makeMainSelectorActivity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1838,50 +1861,10 @@ android.content.Intent.makeMainSelectorActivity = function() {
  * @see {@link http://developer.android.com/reference/android/content/Intent.html#parseUri(java.lang.String, int)}
  **/
 android.content.Intent.parseUri = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parseUri',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function makeMainActivity
- * @static
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#makeMainActivity(android.content.ComponentName)}
- **/
-android.content.Intent.makeMainActivity = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'makeMainActivity',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1932,6 +1915,93 @@ android.content.Intent.prototype.fillIn = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getCharSequenceArrayListExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharSequenceArrayListExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getCharSequenceArrayListExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getCharSequenceArrayListExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCharExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharExtra(java.lang.String, char)}
+ **/
+android.content.Intent.prototype.getCharExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getCharExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getByteExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getByteExtra(java.lang.String, byte)}
+ **/
+android.content.Intent.prototype.getByteExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getByteExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getDataString
  * @memberof
  * @instance
@@ -1961,6 +2031,35 @@ android.content.Intent.prototype.getDataString = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function resolveActivity
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#resolveActivity(android.content.pm.PackageManager)}
+ **/
+android.content.Intent.prototype.resolveActivity = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'resolveActivity',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getByteArrayExtra
  * @memberof
  * @instance
@@ -1971,6 +2070,93 @@ android.content.Intent.prototype.getByteArrayExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getByteArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function addFlags
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#addFlags(int)}
+ **/
+android.content.Intent.prototype.addFlags = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'addFlags',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCategories
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCategories()}
+ **/
+android.content.Intent.prototype.getCategories = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getCategories',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getDoubleArrayExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getDoubleArrayExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getDoubleArrayExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getDoubleArrayExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2048,6 +2234,93 @@ android.content.Intent.prototype.getExtras = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getParcelableArrayExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getParcelableArrayExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getParcelableArrayExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getParcelableArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getLongExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getLongExtra(java.lang.String, long)}
+ **/
+android.content.Intent.prototype.getLongExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getLongExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getBooleanExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getBooleanExtra(java.lang.String, boolean)}
+ **/
+android.content.Intent.prototype.getBooleanExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getBooleanExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function putCharSequenceArrayListExtra
  * @memberof
  * @instance
@@ -2106,6 +2379,35 @@ android.content.Intent.prototype.setExtrasClassLoader = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getPackage
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getPackage()}
+ **/
+android.content.Intent.prototype.getPackage = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getPackage',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function resolveType
  * @memberof
  * @instance
@@ -2136,6 +2438,35 @@ android.content.Intent.prototype.resolveType = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function setClipData
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClipData(android.content.ClipData)}
+ **/
+android.content.Intent.prototype.setClipData = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'setClipData',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getShortArrayExtra
  * @memberof
  * @instance
@@ -2146,6 +2477,35 @@ android.content.Intent.prototype.getShortArrayExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getShortArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setPackage
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setPackage(java.lang.String)}
+ **/
+android.content.Intent.prototype.setPackage = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'setPackage',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2368,6 +2728,151 @@ android.content.Intent.prototype.getType = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getSelector
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getSelector()}
+ **/
+android.content.Intent.prototype.getSelector = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getSelector',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getBundleExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getBundleExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getBundleExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getBundleExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getLongArrayExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getLongArrayExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getLongArrayExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getLongArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getComponent
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getComponent()}
+ **/
+android.content.Intent.prototype.getComponent = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getComponent',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getFlags
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getFlags()}
+ **/
+android.content.Intent.prototype.getFlags = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getFlags',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function resolveActivityInfo
  * @memberof
  * @instance
@@ -2407,6 +2912,93 @@ android.content.Intent.prototype.getFloatArrayExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getFloatArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function writeToParcel
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#writeToParcel(android.os.Parcel, int)}
+ **/
+android.content.Intent.prototype.writeToParcel = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'writeToParcel',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setFlags
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setFlags(int)}
+ **/
+android.content.Intent.prototype.setFlags = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'setFlags',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getShortExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getShortExtra(java.lang.String, short)}
+ **/
+android.content.Intent.prototype.getShortExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getShortExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2484,6 +3076,65 @@ android.content.Intent.prototype.filterEquals = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function setClassName
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClassName(android.content.Context, java.lang.String)}
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClassName(java.lang.String, java.lang.String)}
+ **/
+android.content.Intent.prototype.setClassName = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'setClassName',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getIntExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntExtra(java.lang.String, int)}
+ **/
+android.content.Intent.prototype.getIntExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getIntExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function putStringArrayListExtra
  * @memberof
  * @instance
@@ -2542,6 +3193,35 @@ android.content.Intent.prototype.addCategory = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function hasFileDescriptors
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#hasFileDescriptors()}
+ **/
+android.content.Intent.prototype.hasFileDescriptors = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'hasFileDescriptors',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function putParcelableArrayListExtra
  * @memberof
  * @instance
@@ -2552,6 +3232,36 @@ android.content.Intent.prototype.putParcelableArrayListExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'putParcelableArrayListExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function replaceExtras
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#replaceExtras(android.content.Intent)}
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#replaceExtras(android.os.Bundle)}
+ **/
+android.content.Intent.prototype.replaceExtras = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'replaceExtras',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2668,6 +3378,35 @@ android.content.Intent.prototype.getBooleanArrayExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getBooleanArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getStringArrayListExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getStringArrayListExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getStringArrayListExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getStringArrayListExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2832,6 +3571,35 @@ android.content.Intent.prototype.getIntegerArrayListExtra = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function getIntArrayExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntArrayExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getIntArrayExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getIntArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function setData
  * @memberof
  * @instance
@@ -2842,6 +3610,35 @@ android.content.Intent.prototype.setData = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'setData',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function setClass
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClass(android.content.Context, java.lang.Class)}
+ **/
+android.content.Intent.prototype.setClass = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'setClass',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -3006,994 +3803,6 @@ android.content.Intent.prototype.getAction = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function hasExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#hasExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.hasExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'hasExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getDoubleExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getDoubleExtra(java.lang.String, double)}
- **/
-android.content.Intent.prototype.getDoubleExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDoubleExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getCharSequenceArrayExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharSequenceArrayExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getCharSequenceArrayExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getCharSequenceArrayExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function filterHashCode
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#filterHashCode()}
- **/
-android.content.Intent.prototype.filterHashCode = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'filterHashCode',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function toString
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#toString()}
- **/
-android.content.Intent.prototype.toString = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'toString',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getParcelableArrayListExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getParcelableArrayListExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getParcelableArrayListExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getParcelableArrayListExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getCharSequenceArrayListExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharSequenceArrayListExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getCharSequenceArrayListExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getCharSequenceArrayListExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getCharExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharExtra(java.lang.String, char)}
- **/
-android.content.Intent.prototype.getCharExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getCharExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getByteExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getByteExtra(java.lang.String, byte)}
- **/
-android.content.Intent.prototype.getByteExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getByteExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function resolveActivity
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#resolveActivity(android.content.pm.PackageManager)}
- **/
-android.content.Intent.prototype.resolveActivity = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'resolveActivity',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function addFlags
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#addFlags(int)}
- **/
-android.content.Intent.prototype.addFlags = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'addFlags',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getCategories
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCategories()}
- **/
-android.content.Intent.prototype.getCategories = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getCategories',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getDoubleArrayExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getDoubleArrayExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getDoubleArrayExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDoubleArrayExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getParcelableArrayExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getParcelableArrayExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getParcelableArrayExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getParcelableArrayExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getLongExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getLongExtra(java.lang.String, long)}
- **/
-android.content.Intent.prototype.getLongExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getLongExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getBooleanExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getBooleanExtra(java.lang.String, boolean)}
- **/
-android.content.Intent.prototype.getBooleanExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getBooleanExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getPackage
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getPackage()}
- **/
-android.content.Intent.prototype.getPackage = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getPackage',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setClipData
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClipData(android.content.ClipData)}
- **/
-android.content.Intent.prototype.setClipData = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setClipData',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setPackage
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setPackage(java.lang.String)}
- **/
-android.content.Intent.prototype.setPackage = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setPackage',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getSelector
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getSelector()}
- **/
-android.content.Intent.prototype.getSelector = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getSelector',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getBundleExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getBundleExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getBundleExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getBundleExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getLongArrayExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getLongArrayExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getLongArrayExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getLongArrayExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getComponent
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getComponent()}
- **/
-android.content.Intent.prototype.getComponent = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getComponent',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getFlags
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getFlags()}
- **/
-android.content.Intent.prototype.getFlags = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getFlags',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function writeToParcel
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#writeToParcel(android.os.Parcel, int)}
- **/
-android.content.Intent.prototype.writeToParcel = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'writeToParcel',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setFlags
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setFlags(int)}
- **/
-android.content.Intent.prototype.setFlags = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setFlags',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getShortExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getShortExtra(java.lang.String, short)}
- **/
-android.content.Intent.prototype.getShortExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getShortExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setClassName
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClassName(android.content.Context, java.lang.String)}
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClassName(java.lang.String, java.lang.String)}
- **/
-android.content.Intent.prototype.setClassName = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setClassName',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getIntExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntExtra(java.lang.String, int)}
- **/
-android.content.Intent.prototype.getIntExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getIntExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function hasFileDescriptors
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#hasFileDescriptors()}
- **/
-android.content.Intent.prototype.hasFileDescriptors = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'hasFileDescriptors',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function replaceExtras
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#replaceExtras(android.content.Intent)}
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#replaceExtras(android.os.Bundle)}
- **/
-android.content.Intent.prototype.replaceExtras = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'replaceExtras',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getStringArrayListExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getStringArrayListExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getStringArrayListExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getStringArrayListExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getIntArrayExtra
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#getIntArrayExtra(java.lang.String)}
- **/
-android.content.Intent.prototype.getIntArrayExtra = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getIntArrayExtra',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function setClass
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/android/content/Intent.html#setClass(android.content.Context, java.lang.Class)}
- **/
-android.content.Intent.prototype.setClass = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setClass',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'android.content.Intent') {
-			return new android.content.Intent(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function setComponent
  * @memberof
  * @instance
@@ -4110,6 +3919,35 @@ android.content.Intent.prototype.describeContents = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function hasExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#hasExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.hasExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'hasExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function putExtras
  * @memberof
  * @instance
@@ -4202,6 +4040,64 @@ android.content.Intent.prototype.putExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'putExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getDoubleExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getDoubleExtra(java.lang.String, double)}
+ **/
+android.content.Intent.prototype.getDoubleExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getDoubleExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getCharSequenceArrayExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getCharSequenceArrayExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getCharSequenceArrayExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getCharSequenceArrayExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -4366,6 +4262,64 @@ android.content.Intent.prototype.setSelector = function() {
 };
 /**
  * TODO Fill out docs more...
+ * @function filterHashCode
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#filterHashCode()}
+ **/
+android.content.Intent.prototype.filterHashCode = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'filterHashCode',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function toString
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#toString()}
+ **/
+android.content.Intent.prototype.toString = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'toString',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
  * @function getParcelableExtra
  * @memberof
  * @instance
@@ -4405,6 +4359,35 @@ android.content.Intent.prototype.getCharArrayExtra = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getCharArrayExtra',
+		instanceMethod: true,
+		args: Array.prototype.slice.call(arguments)
+	});
+	if (!result) {
+		return null;
+	}
+	// Wrap result if it's not a primitive type?
+	if (result.apiName) {
+		if (result.apiName === 'android.content.Intent') {
+			return new android.content.Intent(result);
+		} else {
+			var ctor = require(result.apiName);
+			return new ctor(result);
+		}
+	}
+	return result;
+};
+/**
+ * TODO Fill out docs more...
+ * @function getParcelableArrayListExtra
+ * @memberof
+ * @instance
+ * @see {@link http://developer.android.com/reference/android/content/Intent.html#getParcelableArrayListExtra(java.lang.String)}
+ **/
+android.content.Intent.prototype.getParcelableArrayListExtra = function() {
+	if (!this._hasPointer) return null;
+
+	var result = this.$native.callNativeFunction({
+		func: 'getParcelableArrayListExtra',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

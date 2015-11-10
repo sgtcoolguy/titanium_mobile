@@ -22,15 +22,13 @@ android.net.Uri = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.net.Uri') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.net.Uri') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'android.net.Uri',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: android.net.Uri. Create a subclass using android.net.Uri.extend();' );
 	}
 
 	this.$native = result;
@@ -44,6 +42,41 @@ android.net.Uri.prototype.constructor = android.net.Uri;
 
 android.net.Uri.className = "android.net.Uri";
 android.net.Uri.prototype.className = "android.net.Uri";
+
+// class property
+Object.defineProperty(android.net.Uri, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.net.Uri',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.net.Uri.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.net.Uri',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.net.Uri.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 
@@ -116,15 +149,9 @@ Object.defineProperty(android.net.Uri, 'EMPTY', {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#encode(java.lang.String, java.lang.String)}
  **/
 android.net.Uri.encode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'encode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -150,15 +177,9 @@ android.net.Uri.encode = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#decode(java.lang.String)}
  **/
 android.net.Uri.decode = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'decode',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -184,15 +205,9 @@ android.net.Uri.decode = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#fromFile(java.io.File)}
  **/
 android.net.Uri.fromFile = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'fromFile',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -218,15 +233,9 @@ android.net.Uri.fromFile = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#fromParts(java.lang.String, java.lang.String, java.lang.String)}
  **/
 android.net.Uri.fromParts = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'fromParts',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -252,15 +261,9 @@ android.net.Uri.fromParts = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#withAppendedPath(android.net.Uri, java.lang.String)}
  **/
 android.net.Uri.withAppendedPath = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'withAppendedPath',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -286,15 +289,9 @@ android.net.Uri.withAppendedPath = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#parse(java.lang.String)}
  **/
 android.net.Uri.parse = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'parse',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -320,15 +317,9 @@ android.net.Uri.parse = function() {
  * @see {@link http://developer.android.com/reference/android/net/Uri.html#writeToParcel(android.os.Parcel, android.net.Uri)}
  **/
 android.net.Uri.writeToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writeToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

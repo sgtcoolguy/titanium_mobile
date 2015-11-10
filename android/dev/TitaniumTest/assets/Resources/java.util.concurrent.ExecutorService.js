@@ -19,7 +19,7 @@ java.util.concurrent.ExecutorService = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.concurrent.ExecutorService') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.concurrent.ExecutorService') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ java.util.concurrent.ExecutorService.isInstanceOf = function (self, cls) {
 
 java.util.concurrent.ExecutorService.className = "java.util.concurrent.ExecutorService";
 java.util.concurrent.ExecutorService.prototype.className = "java.util.concurrent.ExecutorService";
+
+// class property
+Object.defineProperty(java.util.concurrent.ExecutorService, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.concurrent.ExecutorService',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

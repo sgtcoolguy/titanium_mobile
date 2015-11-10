@@ -31,10 +31,10 @@ java.util.jar.Manifest = function() {
 			class: 'java.util.jar.Manifest',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -61,7 +61,7 @@ java.util.jar.Manifest.prototype.className = "java.util.jar.Manifest";
  **/
 java.util.jar.Manifest.make72Safe = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -99,7 +99,7 @@ java.util.jar.Manifest.make72Safe = function() {
 java.util.jar.Manifest.prototype.getAttributes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getAttributes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -128,7 +128,7 @@ java.util.jar.Manifest.prototype.getAttributes = function() {
 java.util.jar.Manifest.prototype.read = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'read',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -157,7 +157,7 @@ java.util.jar.Manifest.prototype.read = function() {
 java.util.jar.Manifest.prototype.getEntries = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getEntries',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -186,7 +186,7 @@ java.util.jar.Manifest.prototype.getEntries = function() {
 java.util.jar.Manifest.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -215,7 +215,7 @@ java.util.jar.Manifest.prototype.hashCode = function() {
 java.util.jar.Manifest.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -244,7 +244,7 @@ java.util.jar.Manifest.prototype.equals = function() {
 java.util.jar.Manifest.prototype.clear = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clear',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -273,7 +273,7 @@ java.util.jar.Manifest.prototype.clear = function() {
 java.util.jar.Manifest.prototype.clone = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'clone',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -302,7 +302,7 @@ java.util.jar.Manifest.prototype.clone = function() {
 java.util.jar.Manifest.prototype.getMainAttributes = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getMainAttributes',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -331,7 +331,7 @@ java.util.jar.Manifest.prototype.getMainAttributes = function() {
 java.util.jar.Manifest.prototype.write = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'write',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

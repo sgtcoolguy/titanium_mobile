@@ -23,15 +23,13 @@ java.nio.channels.SocketChannel = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.nio.channels.SocketChannel') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.nio.channels.SocketChannel') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
-		result = Hyperloop.createProxy({
-			class: 'java.nio.channels.SocketChannel',
-			alloc: true,
-			args: Array.prototype.slice.call(arguments)
-		});
+		Ti.API.error('Cannot instantiate instance of abstract class: java.nio.channels.SocketChannel. Create a subclass using java.nio.channels.SocketChannel.extend();' );
 	}
 
 	this.$native = result;
@@ -46,37 +44,44 @@ java.nio.channels.SocketChannel.prototype.constructor = java.nio.channels.Socket
 java.nio.channels.SocketChannel.className = "java.nio.channels.SocketChannel";
 java.nio.channels.SocketChannel.prototype.className = "java.nio.channels.SocketChannel";
 
+// class property
+Object.defineProperty(java.nio.channels.SocketChannel, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.nio.channels.SocketChannel',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+java.nio.channels.SocketChannel.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'java.nio.channels.SocketChannel',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(java.nio.channels.SocketChannel.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
+
 // Constants
 
 // Static fields
-// http://developer.android.com/reference/java/nio/channels/SocketChannel.html#$assertionsDisabled
-Object.defineProperty(java.nio.channels.SocketChannel, '$assertionsDisabled', {
-	get: function() {
-		var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-		});
-		if (!classProxy) return null;
-
-		var result = classProxy.getNativeField({
-			field: '$assertionsDisabled'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.nio.channels.SocketChannel') {
-				return new java.nio.channels.SocketChannel(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	enumerable: true
-});
 
 // Instance Fields
 
@@ -89,15 +94,9 @@ Object.defineProperty(java.nio.channels.SocketChannel, '$assertionsDisabled', {
  * @see {@link http://developer.android.com/reference/java/nio/channels/SocketChannel.html#open(java.net.SocketAddress)}
  **/
 java.nio.channels.SocketChannel.open = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'open',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

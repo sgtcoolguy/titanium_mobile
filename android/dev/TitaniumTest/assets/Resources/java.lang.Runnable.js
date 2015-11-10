@@ -18,7 +18,7 @@ java.lang.Runnable = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Runnable') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.lang.Runnable') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ java.lang.Runnable.isInstanceOf = function (self, cls) {
 
 java.lang.Runnable.className = "java.lang.Runnable";
 java.lang.Runnable.prototype.className = "java.lang.Runnable";
+
+// class property
+Object.defineProperty(java.lang.Runnable, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Runnable',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

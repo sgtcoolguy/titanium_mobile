@@ -32,10 +32,10 @@ java.util.jar.Attributes.Name = function() {
 			class: 'java.util.jar.Attributes$Name',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -54,7 +54,7 @@ java.util.jar.Attributes.Name.prototype.className = "java.util.jar.Attributes$Na
 Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_NAME', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -82,7 +82,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_NAME', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_INSTALLATION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -110,7 +110,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_INSTALLATION', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VERSION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -138,7 +138,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VERSION', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_TITLE', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -166,7 +166,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_TITLE', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'SIGNATURE_VERSION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -194,7 +194,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'SIGNATURE_VERSION', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'CLASS_PATH', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -222,7 +222,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'CLASS_PATH', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'MAIN_CLASS', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -250,7 +250,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'MAIN_CLASS', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'SEALED', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -278,7 +278,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'SEALED', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_URL', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -306,7 +306,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_URL', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VENDOR_ID', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -334,7 +334,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VENDOR_ID',
 Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_VERSION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -362,7 +362,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_VERSION', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_LIST', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -390,7 +390,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'EXTENSION_LIST', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_VENDOR', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -418,7 +418,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_VENDOR', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'CONTENT_TYPE', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -446,7 +446,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'CONTENT_TYPE', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_TITLE', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -474,7 +474,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'SPECIFICATION_TITLE', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'MANIFEST_VERSION', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -502,7 +502,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'MANIFEST_VERSION', {
 Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VENDOR', {
 	get: function() {
 		var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 		});
 		if (!classProxy) return null;
@@ -542,7 +542,7 @@ Object.defineProperty(java.util.jar.Attributes.Name, 'IMPLEMENTATION_VENDOR', {
 java.util.jar.Attributes.Name.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -571,7 +571,7 @@ java.util.jar.Attributes.Name.prototype.hashCode = function() {
 java.util.jar.Attributes.Name.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -600,7 +600,7 @@ java.util.jar.Attributes.Name.prototype.equals = function() {
 java.util.jar.Attributes.Name.prototype.toString = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'toString',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

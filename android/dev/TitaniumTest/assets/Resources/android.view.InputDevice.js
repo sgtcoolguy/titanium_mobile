@@ -22,7 +22,9 @@ android.view.InputDevice = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.InputDevice') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.InputDevice') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.view.InputDevice.prototype.constructor = android.view.InputDevice;
 
 android.view.InputDevice.className = "android.view.InputDevice";
 android.view.InputDevice.prototype.className = "android.view.InputDevice";
+
+// class property
+Object.defineProperty(android.view.InputDevice, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.InputDevice',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -285,15 +301,9 @@ Object.defineProperty(android.view.InputDevice, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/view/InputDevice.html#getDeviceIds()}
  **/
 android.view.InputDevice.getDeviceIds = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDeviceIds',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -319,15 +329,9 @@ android.view.InputDevice.getDeviceIds = function() {
  * @see {@link http://developer.android.com/reference/android/view/InputDevice.html#getDevice(int)}
  **/
 android.view.InputDevice.getDevice = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDevice',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

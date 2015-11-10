@@ -30,10 +30,10 @@ java.security.AccessControlContext = function() {
 			class: 'java.security.AccessControlContext',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -60,7 +60,7 @@ java.security.AccessControlContext.prototype.className = "java.security.AccessCo
  **/
 java.security.AccessControlContext.getDebug = function() {
 	var classProxy = Hyperloop.createProxy({
-			class: this.className,
+			class: this.className,			
 			alloc: false
 	});
 	if (!classProxy) return null;
@@ -98,7 +98,7 @@ java.security.AccessControlContext.getDebug = function() {
 java.security.AccessControlContext.prototype.getAssignedCombiner = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getAssignedCombiner',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -127,7 +127,7 @@ java.security.AccessControlContext.prototype.getAssignedCombiner = function() {
 java.security.AccessControlContext.prototype.getCombiner = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getCombiner',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -156,7 +156,7 @@ java.security.AccessControlContext.prototype.getCombiner = function() {
 java.security.AccessControlContext.prototype.checkPermission = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'checkPermission',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -185,7 +185,7 @@ java.security.AccessControlContext.prototype.checkPermission = function() {
 java.security.AccessControlContext.prototype.isAuthorized = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isAuthorized',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -214,7 +214,7 @@ java.security.AccessControlContext.prototype.isAuthorized = function() {
 java.security.AccessControlContext.prototype.isPrivileged = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'isPrivileged',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -243,7 +243,7 @@ java.security.AccessControlContext.prototype.isPrivileged = function() {
 java.security.AccessControlContext.prototype.optimize = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'optimize',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -272,7 +272,7 @@ java.security.AccessControlContext.prototype.optimize = function() {
 java.security.AccessControlContext.prototype.hashCode = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'hashCode',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -301,7 +301,7 @@ java.security.AccessControlContext.prototype.hashCode = function() {
 java.security.AccessControlContext.prototype.equals = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'equals',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -330,7 +330,7 @@ java.security.AccessControlContext.prototype.equals = function() {
 java.security.AccessControlContext.prototype.getDomainCombiner = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getDomainCombiner',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
@@ -359,7 +359,7 @@ java.security.AccessControlContext.prototype.getDomainCombiner = function() {
 java.security.AccessControlContext.prototype.getContext = function() {
 	if (!this._hasPointer) return null;
 
-	var result = this.$native.callNativeFunction({
+	var result = this.native.callNativeFunction({
 		func: 'getContext',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)

@@ -22,7 +22,9 @@ android.view.View = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.view.View') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.view.View') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,41 @@ android.view.View.prototype.constructor = android.view.View;
 
 android.view.View.className = "android.view.View";
 android.view.View.prototype.className = "android.view.View";
+
+// class property
+Object.defineProperty(android.view.View, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.view.View',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+// Allow subclassing
+android.view.View.extend = function (overrides) {
+	var subclassProxy = Hyperloop.extend({
+		class: 'android.view.View',
+		overrides: overrides
+	});
+
+	// Generate a JS wrapper for our dynamic subclass
+	var whatever = function() {
+		var result = subclassProxy.newInstance(arguments);
+		this.$native = result;
+		this._hasPointer = result != null;
+		this._private = {};
+
+		// TODO Set up super?!
+	};
+	// it extends the JS wrapper for the parent type
+	whatever.prototype = Object.create(android.view.View.prototype);
+	whatever.prototype.constructor = whatever;
+	return whatever;
+};
 
 // Constants
 /**
@@ -1819,15 +1856,9 @@ Object.defineProperty(android.view.View, 'PRESSED_FOCUSED_SELECTED_STATE_SET', {
  * @see {@link http://developer.android.com/reference/android/view/View.html#resolveSize(int, int)}
  **/
 android.view.View.resolveSize = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'resolveSize',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1853,15 +1884,9 @@ android.view.View.resolveSize = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#resolveSizeAndState(int, int, int)}
  **/
 android.view.View.resolveSizeAndState = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'resolveSizeAndState',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1887,15 +1912,9 @@ android.view.View.resolveSizeAndState = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#combineMeasuredStates(int, int)}
  **/
 android.view.View.combineMeasuredStates = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'combineMeasuredStates',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1921,15 +1940,9 @@ android.view.View.combineMeasuredStates = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#inflate(android.content.Context, int, android.view.ViewGroup)}
  **/
 android.view.View.inflate = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'inflate',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1955,15 +1968,9 @@ android.view.View.inflate = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#generateViewId()}
  **/
 android.view.View.generateViewId = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'generateViewId',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -1989,15 +1996,9 @@ android.view.View.generateViewId = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#getDefaultSize(int, int)}
  **/
 android.view.View.getDefaultSize = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'getDefaultSize',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -2023,15 +2024,9 @@ android.view.View.getDefaultSize = function() {
  * @see {@link http://developer.android.com/reference/android/view/View.html#mergeDrawableStates(int[], int[])}
  **/
 android.view.View.mergeDrawableStates = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'mergeDrawableStates',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

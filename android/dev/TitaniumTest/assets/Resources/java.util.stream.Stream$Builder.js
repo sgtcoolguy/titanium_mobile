@@ -20,7 +20,7 @@ java.util.stream.Stream.Builder = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.util.stream.Stream$Builder') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'java.util.stream.Stream$Builder') {
 		result = arguments[0];
 	}
 	else {
@@ -93,6 +93,19 @@ java.util.stream.Stream.Builder.isInstanceOf = function (self, cls) {
 
 java.util.stream.Stream.Builder.className = "java.util.stream.Stream$Builder";
 java.util.stream.Stream.Builder.prototype.className = "java.util.stream.Stream$Builder";
+
+// class property
+Object.defineProperty(java.util.stream.Stream.Builder, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.util.stream.Stream$Builder',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 

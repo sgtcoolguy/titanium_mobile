@@ -22,7 +22,9 @@ java.lang.Class = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'java.lang.Class') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'java.lang.Class') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,181 +47,27 @@ java.lang.Class.prototype.constructor = java.lang.Class;
 java.lang.Class.className = "java.lang.Class";
 java.lang.Class.prototype.className = "java.lang.Class";
 
+// class property
+Object.defineProperty(java.lang.Class, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'java.lang.Class',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
+
 // Constants
 
 // Static fields
 
 // Instance Fields
-// http://developer.android.com/reference/java/lang/Class.html#classValueMap
-Object.defineProperty(java.lang.Class.prototype, 'classValueMap', {
-	get: function() {
-		if (!this._hasPointer) return null;
-
-		var result = this.$native.getNativeField({
-			field: 'classValueMap'
-		});
-		if (!result) {
-			return null;
-		}
-		// Wrap result if it's not a primitive type?
-		if (result.apiName) {
-			if (result.apiName === 'java.lang.Class') {
-				return new java.lang.Class(result);
-			} else {
-				var ctor = require(result.apiName);
-				return new ctor(result);
-			}
-		}
-		return result;
-	},
-	set: function(newValue) {
-		if (!this._hasPointer) return;
-
-		this.$native.setNativeField({
-			field: 'classValueMap',
-			value: newValue
-		});
-	},
-	enumerable: true
-});
 
 // Static methods
-/**
- * TODO Fill out docs more...
- * @function access$402
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#access$402(boolean)}
- **/
-java.lang.Class.access$402 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$402',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$200
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#access$200(java.lang.reflect.Field[], java.lang.String)}
- **/
-java.lang.Class.access$200 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$200',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getPrimitiveClass
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getPrimitiveClass(java.lang.String)}
- **/
-java.lang.Class.getPrimitiveClass = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getPrimitiveClass',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$502
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#access$502(boolean)}
- **/
-java.lang.Class.access$502 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$502',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
 /**
  * TODO Fill out docs more...
  * @function forName
@@ -228,118 +76,10 @@ java.lang.Class.access$502 = function() {
  * @see {@link http://developer.android.com/reference/java/lang/Class.html#forName(java.lang.String, boolean, java.lang.ClassLoader)}
  **/
 java.lang.Class.forName = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'forName',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$300
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#access$300(java.lang.Object[], java.lang.Object[])}
- **/
-java.lang.Class.access$300 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$300',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function access$100
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#access$100(java.lang.Class, boolean)}
- **/
-java.lang.Class.access$100 = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'access$100',
-		instanceMethod: false,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getExecutableTypeAnnotationBytes
- * @static
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getExecutableTypeAnnotationBytes(java.lang.reflect.Executable)}
- **/
-java.lang.Class.getExecutableTypeAnnotationBytes = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
-
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
-		func: 'getExecutableTypeAnnotationBytes',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1318,64 +1058,6 @@ java.lang.Class.prototype.desiredAssertionStatus = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getAnnotationType
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getAnnotationType()}
- **/
-java.lang.Class.prototype.getAnnotationType = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getAnnotationType',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getConstantPool
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getConstantPool()}
- **/
-java.lang.Class.prototype.getConstantPool = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getConstantPool',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getGenericInterfaces
  * @memberof
  * @instance
@@ -1386,35 +1068,6 @@ java.lang.Class.prototype.getGenericInterfaces = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getGenericInterfaces',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getDeclaredAnnotationMap
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getDeclaredAnnotationMap()}
- **/
-java.lang.Class.prototype.getDeclaredAnnotationMap = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getDeclaredAnnotationMap',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1502,35 +1155,6 @@ java.lang.Class.prototype.getDeclaredAnnotations = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getDeclaredAnnotations',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function casAnnotationType
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#casAnnotationType(sun.reflect.annotation.AnnotationType, sun.reflect.annotation.AnnotationType)}
- **/
-java.lang.Class.prototype.casAnnotationType = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'casAnnotationType',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -1898,35 +1522,6 @@ java.lang.Class.prototype.getDeclaredField = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function enumConstantDirectory
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#enumConstantDirectory()}
- **/
-java.lang.Class.prototype.enumConstantDirectory = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'enumConstantDirectory',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getResourceAsStream
  * @memberof
  * @instance
@@ -1966,35 +1561,6 @@ java.lang.Class.prototype.getDeclaredMethod = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getDeclaredMethod',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getRawTypeAnnotations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getRawTypeAnnotations()}
- **/
-java.lang.Class.prototype.getRawTypeAnnotations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getRawTypeAnnotations',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});
@@ -2159,35 +1725,6 @@ java.lang.Class.prototype.getEnumConstants = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function setSigners
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#setSigners(java.lang.Object[])}
- **/
-java.lang.Class.prototype.setSigners = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'setSigners',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function getDeclaredAnnotationsByType
  * @memberof
  * @instance
@@ -2275,35 +1812,6 @@ java.lang.Class.prototype.isAnonymousClass = function() {
 };
 /**
  * TODO Fill out docs more...
- * @function getClassLoader0
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getClassLoader0()}
- **/
-java.lang.Class.prototype.getClassLoader0 = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getClassLoader0',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
  * @function toString
  * @memberof
  * @instance
@@ -2372,64 +1880,6 @@ java.lang.Class.prototype.getGenericSuperclass = function() {
 
 	var result = this.$native.callNativeFunction({
 		func: 'getGenericSuperclass',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getEnumConstantsShared
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getEnumConstantsShared()}
- **/
-java.lang.Class.prototype.getEnumConstantsShared = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getEnumConstantsShared',
-		instanceMethod: true,
-		args: Array.prototype.slice.call(arguments)
-	});
-	if (!result) {
-		return null;
-	}
-	// Wrap result if it's not a primitive type?
-	if (result.apiName) {
-		if (result.apiName === 'java.lang.Class') {
-			return new java.lang.Class(result);
-		} else {
-			var ctor = require(result.apiName);
-			return new ctor(result);
-		}
-	}
-	return result;
-};
-/**
- * TODO Fill out docs more...
- * @function getRawAnnotations
- * @memberof
- * @instance
- * @see {@link http://developer.android.com/reference/java/lang/Class.html#getRawAnnotations()}
- **/
-java.lang.Class.prototype.getRawAnnotations = function() {
-	if (!this._hasPointer) return null;
-
-	var result = this.$native.callNativeFunction({
-		func: 'getRawAnnotations',
 		instanceMethod: true,
 		args: Array.prototype.slice.call(arguments)
 	});

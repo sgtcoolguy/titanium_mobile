@@ -22,7 +22,9 @@ android.os.UserHandle = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.UserHandle') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.UserHandle') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.os.UserHandle.prototype.constructor = android.os.UserHandle;
 
 android.os.UserHandle.className = "android.os.UserHandle";
 android.os.UserHandle.prototype.className = "android.os.UserHandle";
+
+// class property
+Object.defineProperty(android.os.UserHandle, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.UserHandle',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 
@@ -87,15 +103,9 @@ Object.defineProperty(android.os.UserHandle, 'CREATOR', {
  * @see {@link http://developer.android.com/reference/android/os/UserHandle.html#readFromParcel(android.os.Parcel)}
  **/
 android.os.UserHandle.readFromParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'readFromParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)
@@ -121,15 +131,9 @@ android.os.UserHandle.readFromParcel = function() {
  * @see {@link http://developer.android.com/reference/android/os/UserHandle.html#writeToParcel(android.os.UserHandle, android.os.Parcel)}
  **/
 android.os.UserHandle.writeToParcel = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'writeToParcel',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

@@ -22,7 +22,9 @@ android.os.MessageQueue = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.os.MessageQueue') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.os.MessageQueue') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -44,6 +46,20 @@ android.os.MessageQueue.prototype.constructor = android.os.MessageQueue;
 
 android.os.MessageQueue.className = "android.os.MessageQueue";
 android.os.MessageQueue.prototype.className = "android.os.MessageQueue";
+
+// class property
+Object.defineProperty(android.os.MessageQueue, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.os.MessageQueue',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 

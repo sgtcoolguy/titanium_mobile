@@ -23,7 +23,9 @@ android.content.res.Configuration = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.content.res.Configuration') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName === 'android.content.res.Configuration') {
+		// TODO We should verify it's an _instance_ proxy.
+        // if it's a class proxy, then we could call newInstance() on it, too. Not sure when that would ever happen...
 		result = arguments[0];
 	}
 	else {
@@ -45,6 +47,20 @@ android.content.res.Configuration.prototype.constructor = android.content.res.Co
 
 android.content.res.Configuration.className = "android.content.res.Configuration";
 android.content.res.Configuration.prototype.className = "android.content.res.Configuration";
+
+// class property
+Object.defineProperty(android.content.res.Configuration, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.content.res.Configuration',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
+
 
 // Constants
 /**
@@ -1010,15 +1026,9 @@ Object.defineProperty(android.content.res.Configuration.prototype, 'navigationHi
  * @see {@link http://developer.android.com/reference/android/content/res/Configuration.html#needNewResources(int, int)}
  **/
 android.content.res.Configuration.needNewResources = function() {
-	var classProxy = Hyperloop.createProxy({
-			class: this.className,
-			alloc: false
-	});
-	if (!classProxy) return null;
+	if (!this.class) return null;
 
-	// FIXME If it's not a "known" type, we need to wrap the result in JS wrapper
-	// TODO If return type is void, return null/undefined?
-	var result = classProxy.callNativeFunction({
+	var result = this.class.callNativeFunction({
 		func: 'needNewResources',
 		instanceMethod: false,
 		args: Array.prototype.slice.call(arguments)

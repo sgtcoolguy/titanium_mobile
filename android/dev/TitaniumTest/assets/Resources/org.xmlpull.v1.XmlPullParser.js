@@ -19,7 +19,7 @@ org.xmlpull.v1.XmlPullParser = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'org.xmlpull.v1.XmlPullParser') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'org.xmlpull.v1.XmlPullParser') {
 		result = arguments[0];
 	}
 	else {
@@ -92,6 +92,19 @@ org.xmlpull.v1.XmlPullParser.isInstanceOf = function (self, cls) {
 
 org.xmlpull.v1.XmlPullParser.className = "org.xmlpull.v1.XmlPullParser";
 org.xmlpull.v1.XmlPullParser.prototype.className = "org.xmlpull.v1.XmlPullParser";
+
+// class property
+Object.defineProperty(org.xmlpull.v1.XmlPullParser, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'org.xmlpull.v1.XmlPullParser',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 // http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html#FEATURE_VALIDATION

@@ -31,10 +31,10 @@ java.util.LinkedHashMap.Entry = function() {
 			class: 'java.util.LinkedHashMap$Entry',
 			alloc: true,
 			args: Array.prototype.slice.call(arguments)
-		});
+		}); 
 	}
-
-	this.$native = result;
+	
+	this.native = result;
 	this._hasPointer = result != null;
 	this._private = {};
 };
@@ -56,7 +56,7 @@ Object.defineProperty(java.util.LinkedHashMap.Entry.prototype, 'before', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'before'
 		});
 		if (!result) {
@@ -76,7 +76,7 @@ Object.defineProperty(java.util.LinkedHashMap.Entry.prototype, 'before', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'before',
 			value: newValue
 		});
@@ -88,7 +88,7 @@ Object.defineProperty(java.util.LinkedHashMap.Entry.prototype, 'after', {
 	get: function() {
 		if (!this._hasPointer) return null;
 
-		var result = this.$native.getNativeField({
+		var result = this.native.getNativeField({
 			field: 'after'
 		});
 		if (!result) {
@@ -108,7 +108,7 @@ Object.defineProperty(java.util.LinkedHashMap.Entry.prototype, 'after', {
 	set: function(newValue) {
 		if (!this._hasPointer) return;
 
-		this.$native.setNativeField({
+		this.native.setNativeField({
 			field: 'after',
 			value: newValue
 		});

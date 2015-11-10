@@ -18,7 +18,7 @@ android.widget.SpinnerAdapter = function() {
 	var result;
 	// Allow the constructor to either invoke the real java constructor, or function as a "wrapping" method that will take
 	// a single argument that is a native hyperloop proxy for this class type and just wraps it in our JS type.
-	if (arguments.length == 1 && arguments[0].apiName && arguments[0].apiName === 'android.widget.SpinnerAdapter') {
+	if (arguments.length == 1 && arguments[0].isNativeProxy && arguments[0].apiName && arguments[0].apiName === 'android.widget.SpinnerAdapter') {
 		result = arguments[0];
 	}
 	else {
@@ -91,6 +91,19 @@ android.widget.SpinnerAdapter.isInstanceOf = function (self, cls) {
 
 android.widget.SpinnerAdapter.className = "android.widget.SpinnerAdapter";
 android.widget.SpinnerAdapter.prototype.className = "android.widget.SpinnerAdapter";
+
+// class property
+Object.defineProperty(android.widget.SpinnerAdapter, 'class', {
+	get: function() {
+		return Hyperloop.createProxy({
+			class: 'android.widget.SpinnerAdapter',
+			alloc: false,
+			args: []
+		});
+	},
+	enumerable: true,
+	configurable: false
+});
 
 // Constants
 
