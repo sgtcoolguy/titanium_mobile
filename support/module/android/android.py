@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Android Module Project Create Script
@@ -19,7 +19,7 @@ import module, androidsdk
 class android(module.ModulePlatform):
 	def __init__(self, project_dir, config, module_project):
 		super(android, self).__init__(project_dir, config, module_project)
-		
+
 		self.sdk = androidsdk.AndroidSDK(module_project.sdk)
 		if self.sdk.get_platform_dir() == None:
 			print "[ERROR] Couldn't find the Android API r%s platform directory" % androidsdk.DEFAULT_API_LEVEL
@@ -28,7 +28,7 @@ class android(module.ModulePlatform):
 			print "[ERROR] Couldn't find the Google APIs r%s add-on directory" % androidsdk.DEFAULT_API_LEVEL
 			sys.exit(1)
 		self.init_classpath()
-	
+
 	def init_classpath(self):
 		classpath_libs = [
 			self.sdk.get_android_jar(),
@@ -48,21 +48,21 @@ class android(module.ModulePlatform):
 		elif to_file == "eclipse_project":
 			to_file = ".project"
 		return os.path.join(to_dir, to_file)
-	
+
 	# escape win32 directories for ant build properties
 	def escape_dir(self, dir):
 		return dir.replace('\\', '\\\\')
-	
+
 	def replace_tokens(self, string):
 		string = string.replace('__SDK_ANDROID__', self.escape_dir(sdk_android_dir))
 		string = string.replace('___CLASSPATH_ENTRIES___', self.classpath)
 		string = string.replace('___ANDROID_PLATFORM___', self.escape_dir(self.sdk.get_platform_dir()))
 		string = string.replace('___GOOGLE_APIS___', self.escape_dir(self.sdk.get_google_apis_dir()))
 		return string
-	
+
 	def get_gitignore(self):
 		return ['.apt_generated']
-	
+
 	def finished(self):
 		os.mkdir(os.path.join(self.project_dir, 'lib'))
 		os.makedirs(os.path.join(self.project_dir, 'build', '.apt_generated'))
@@ -121,7 +121,7 @@ def prepare_commonjs(module_dir):
 		source_provider_template = Template(f.read())
 		f.close()
 		source_provider_class = source_provider_template.substitute(moduleid=moduleid)
-		output_folder = os.path.join(module_dir, "build", "generated", "java")
+		output_folder = os.path.join(module_dir, "build", "generated", "java", *moduleid.split("."))
 		if not os.path.exists(output_folder):
 			os.makedirs(output_folder)
 		f = open(os.path.join(output_folder, "CommonJsSourceProvider.java"), "w")
@@ -206,4 +206,3 @@ if __name__ == "__main__":
 		# nothing to do.
 		parser.print_help()
 		sys.exit(1)
-

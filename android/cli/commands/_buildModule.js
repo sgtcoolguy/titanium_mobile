@@ -935,7 +935,7 @@ AndroidModuleBuilder.prototype.compileJS = function (next) {
 				);
 
 				fs.writeFileSync(
-					path.join(this.buildGenJavaDir, 'CommonJsSourceProvider.java'),
+					path.join(this.buildGenJavaDir, this.moduleIdSubDir, 'CommonJsSourceProvider.java'),
 					ejs.render(fs.readFileSync(this.commonJsSourceTemplateFile).toString(), { moduleid: this.manifest.moduleid })
 				);
 

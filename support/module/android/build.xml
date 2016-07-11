@@ -540,6 +540,7 @@ timodule.xml.
 		<sequential>
 			<exec executable="${python.exec}" dir="${basedir}">
 				<env key="ANT_HOME" file="${ant.home}"/>
+				<env key="JAVA_HOME" value="${java.home}"/>
 				<arg value="@{file}"/>
 				<args/>
 			</exec>
