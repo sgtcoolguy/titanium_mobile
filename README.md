@@ -1,6 +1,6 @@
 # Appcelerator Titanium [![Build Status](https://jenkins.appcelerator.org/buildStatus/icon?job=titanium-sdk/titanium_mobile/master)](https://jenkins.appcelerator.org/job/titanium-sdk/job/titanium_mobile/job/master/)
 
-Welcome to the Titanium open source project. Titanium provides a mature platform for developers to build 
+Welcome to the Titanium open source project. Titanium provides a mature platform for developers to build
 completely native cross-platform mobile applications using JavaScript.
 
 Currently supported native platforms are iOS, Android and Windows Phone / Windows Desktop.
@@ -46,10 +46,10 @@ And much, much more (see our [Documentation](http://docs.appcelerator.com/platfo
 
 ## Hyperloop
 
-Use Hyperloop, our latest addition to the Appcelerator Platform, to extend your Titanium apps by native API's using 
+Use Hyperloop, our latest addition to the Appcelerator Platform, to extend your Titanium apps by native API's using
 JavaScript. Prior to Hyperloop, you would use [native modules](http://docs.appcelerator.com/platform/latest/#!/guide/Titanium_Module_Concepts) to extend the Titanium API. With
-Hyperloop, you are no able to implement native classes, 3rd-Party libraries (Cocoapods, local frameworks, .aar files) 
-and more directly into your apps. Hyperloop is available for iOS, Android and Windows Phone (Tech Preview). 
+Hyperloop, you are no able to implement native classes, 3rd-Party libraries (Cocoapods, local frameworks, .aar files)
+and more directly into your apps. Hyperloop is available for iOS, Android and Windows Phone (Tech Preview).
 
 ### Features
 
@@ -98,8 +98,8 @@ Check out our [Hyperloop Sample App](https://github.com/appcelerator/hyperloop-e
 
 ## Alloy
 
-[Alloy](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Quick_Start) is the MVC application framework built 
-on top of Titanium. It is optional. It rocks. Check it out if you're considering using Titanium. 
+[Alloy](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Quick_Start) is the MVC application framework built
+on top of Titanium. It is optional. It rocks. Check it out if you're considering using Titanium.
 It is also a separate [open source project](https://github.com/appcelerator/alloy) available under Apache Public License.
 
 ### Example
@@ -186,7 +186,7 @@ To protect the interests of the Titanium contributors, Appcelerator, customers a
 Previously Titanium used scons and python scripts to build the SDK.
 If you'd like to build the SDK locally, we've replaced scons with some Node.JS scripts. Typical usage would be:
 
-	npm install
+	yarn install
 	cd build
 	node scons.js cleanbuild --android-ndk /opt/android-ndk --android-sdk /opt/android-sdk
 
@@ -197,7 +197,7 @@ The build command will look for Android NDK and SDK using $ANDROID_NDK and $ANDR
 
 You can use the `-h` flag to display the full list of comands and options.
 
-	npm install
+	yarn install
 	cd build
 	node scons.js cleanbuild [platform1] [platform2] --android-ndk /opt/android-ndk --android-sdk /opt/android-sdk /Users/build/android-sdk-macosx
 

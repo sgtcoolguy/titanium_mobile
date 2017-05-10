@@ -35,7 +35,7 @@ def unitTests(os, nodeVersion, testSuiteBranch) {
 				// Now run the unit test suite
 				dir('titanium-mobile-mocha-suite/scripts') {
 					nodejs(nodeJSInstallationName: "node ${nodeVersion}") {
-						sh 'npm install .'
+						sh 'yarn install'
 						try {
 							sh "node test.js -b ../../${zipName} -p ${os}"
 						} catch (e) {
@@ -113,12 +113,11 @@ timestamps {
 				echo "BASENAME:        ${basename}"
 
 				nodejs(nodeJSInstallationName: "node ${nodeVersion}") {
-					// Install dev dependencies
+					// Install dependencies
 					timeout(5) {
-						// We already check in our production dependencies, so only install devDependencies
-						sh(returnStatus: true, script: 'npm install --only=dev') // ignore PEERINVALID grunt issue for now
+						sh 'yarn install'
 					}
-					sh 'npm test' // Run linting first
+					sh 'yarn test' // Run linting first
 					// Then validate docs
 					dir('apidoc') {
 						sh 'node validate.js'

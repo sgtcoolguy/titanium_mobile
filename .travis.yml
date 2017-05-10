@@ -34,10 +34,10 @@ script:
   - "export VERSION=`sed -n 's/^ *\"version\": *\"//p' package.json | tr -d '\"' | tr -d ','`"
   - export TIMESTAMP=`date +'%Y%m%d%H%M%S'`
   - export VTAG=$VERSION.v$TIMESTAMP
-  - npm install .
+  - yarn install
   - cd build
   - node scons.js build
   - node scons.js package --version-tag $VTAG
   - cd ..
   - ls dist
-  - npm test
+  - yarn test
