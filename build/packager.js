@@ -224,10 +224,10 @@ Packager.prototype.package = function (next) {
 		function (cb) {
 			fs.remove(path.join(this.zipSDKDir, 'node_modules', '.bin'), cb);
 		}.bind(this),
-		// Now run 'npm prune --production' on the zipSDKDir, so we retain only production dependencies
+		// Now run equivalent of 'npm prune --production' on the zipSDKDir, so we retain only production dependencies
 		function (cb) {
-			console.log('Pruning to production npm dependencies');
-			exec('npm prune --production', {cwd: this.zipSDKDir}, function (err, stdout, stderr) {
+			console.log('Pruning to production dependencies');
+			exec('yarn install --production --ignore-scripts --prefer-offline --force', {cwd: this.zipSDKDir}, function (err, stdout, stderr) {
 				if (err) {
 					console.log(stdout);
 					console.error(stderr);
