@@ -33,7 +33,7 @@ install:
   -
   - # Install yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$PATH:`yarn global bin`"
+  - export PATH="$HOME/.yarn/bin:$PATH"
 
 script:
   - cd $TRAVIS_BUILD_DIR
