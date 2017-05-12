@@ -237,7 +237,7 @@ Packager.prototype.package = function (next) {
 			});
 		}.bind(this),
 		// Download all the pre-built node-ios-device binaries!
-		unction (cb) {
+		function (cb) {
 			console.log('Pruning to production dependencies');
 			exec('node ./node_modules/node-ios-device/bin/download-all.js', {cwd: this.zipSDKDir}, function (err, stdout, stderr) {
 				if (err) {
