@@ -236,10 +236,22 @@ Packager.prototype.package = function (next) {
 				cb();
 			});
 		}.bind(this),
+		// Download all the pre-built node-ios-device binaries!
+		unction (cb) {
+			console.log('Pruning to production dependencies');
+			exec('node ./node_modules/node-ios-device/bin/download-all.js', {cwd: this.zipSDKDir}, function (err, stdout, stderr) {
+				if (err) {
+					console.log(stdout);
+					console.error(stderr);
+					return cb(err);
+				}
+				cb();
+			});
+		}.bind(this),
 		// FIXME Remove these hacks for titanium-sdk when titanium-cli has been released and the tisdk3fixes.js hook is gone!
 		// Now copy over hacked titanium-sdk fake node_module
 		function (cb) {
-			console.log('Copying titanium-sdk node_mdoule stub for backwards compatability with titanium-cli');
+			console.log('Copying titanium-sdk node_module stub for backwards compatability with titanium-cli');
 			fs.copy(path.join(__dirname, 'titanium-sdk'), path.join(this.zipSDKDir, 'node_modules', 'titanium-sdk'), cb);
 		}.bind(this),
 		// Hack the package.json to include "titanium-sdk": "*" in dependencies
