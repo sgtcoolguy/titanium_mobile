@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2016 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2016-2017 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -9,6 +9,7 @@
 #include "JSDebugger.h"
 #include "JNIUtil.h"
 #include "TypeConverter.h"
+#include "InspectorClient.h"
 
 #include "org_appcelerator_kroll_runtime_v8_JSDebugger.h"
 
@@ -22,6 +23,21 @@ JSDebugger::JSDebugger()
 
 void JSDebugger::init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger)
 {
+	// TODO Create a subclass of v8_inspector::V8Inspector::Channel
+	// - override sendResponse and sendNotification to pass messages from inspector to debugger (outward bound messages)
+	// - equivalent to MessageHandler below
+	// TODO Create a subclass of v8_inspector::V8InspectorClient
+	// - This is where we send the commands from debugger to inspector via code like:
+	// int length = message->Length();
+  // std::unique_ptr<uint16_t[]> buffer(new uint16_t[length]);
+  // message->Write(buffer.get(), 0, length);
+  // v8_inspector::StringView message_view(buffer.get(), length);
+  // session->dispatchProtocolMessage(message_view);
+  // - equivalent to sendCommand below
+	//
+	// References:
+	// https://medium.com/@hyperandroid/v8-inspector-from-an-embedder-standpoint-7f9c0472e2b7
+	// https://github.com/v8/v8/wiki/Debugging-over-the-V8-Inspector-API
 	isolate__ = isolate;
 
 	debugger__ = env->NewGlobalRef(jsDebugger);
@@ -35,19 +51,22 @@ void JSDebugger::init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger)
 
 void JSDebugger::enable()
 {
-	v8::Debug::SetMessageHandler(isolate__, MessageHandler);
+	v8::Local<v8::Context> context = isolate__->GetCurrentContext();
+	client__ = new InspectorClient(context);
+	client__->connect();
 	enabled__ = true;
 }
 
 void JSDebugger::disable()
 {
 	enabled__ = false;
-	v8::Debug::SetMessageHandler(isolate__, nullptr);
+	client__ = nullptr;
 }
 
 void JSDebugger::debugBreak()
 {
-	v8::Debug::DebugBreak(isolate__);
+	// v8::Debug::DebugBreak(isolate__);
+	// TODO Send break command ourselves!
 }
 
 bool JSDebugger::isDebuggerActive()
@@ -57,7 +76,7 @@ bool JSDebugger::isDebuggerActive()
 
 void JSDebugger::processDebugMessages()
 {
-	v8::Debug::ProcessDebugMessages(isolate__);
+	// no-op
 }
 
 void JSDebugger::sendCommand(JNIEnv *env, jbyteArray command, jint length)
@@ -66,14 +85,15 @@ void JSDebugger::sendCommand(JNIEnv *env, jbyteArray command, jint length)
 	env->GetByteArrayRegion(command, 0, length, buf);
 
 	int len = length / sizeof(uint16_t);
-	v8::Debug::SendCommand(isolate__, reinterpret_cast<uint16_t*>(buf), len, nullptr);
+	v8_inspector::StringView message_view(reinterpret_cast<uint16_t*>(buf), len);
+	client__->sendMessage(message_view);
 
 	delete[] buf;
 
 	isActive__ = true;
 }
 
-void JSDebugger::MessageHandler(const v8::Debug::Message& message)
+void JSDebugger::receive(v8::Local<v8::String> message)
 {
 	if (debugger__ == nullptr)
 	{
@@ -83,8 +103,7 @@ void JSDebugger::MessageHandler(const v8::Debug::Message& message)
 	JNIEnv *env = JNIUtil::getJNIEnv();
 	ASSERT(env != NULL);
 
-	auto json = message.GetJSON();
-	jstring s = TypeConverter::jsStringToJavaString(env, json);
+	jstring s = TypeConverter::jsStringToJavaString(env, message);
 	env->CallVoidMethod(debugger__, handleMessage__, s);
 	env->DeleteLocalRef(s);
 }
@@ -94,6 +113,7 @@ v8::Isolate* JSDebugger::isolate__ = nullptr;
 jobject JSDebugger::debugger__ = nullptr;
 jclass JSDebugger::debuggerClass__ = nullptr;
 jmethodID JSDebugger::handleMessage__ = nullptr;
+InspectorClient* JSDebugger::client__ = nullptr;
 bool JSDebugger::isActive__ = false;
 
 } // namespace titanium

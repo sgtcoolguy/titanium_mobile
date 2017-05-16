@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2016 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2016-2017 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -8,10 +8,13 @@
 #define JSDEBUGGER_H_
 
 #include <v8.h>
-#include <v8-debug.h>
 #include <jni.h>
 
+
 namespace titanium {
+
+class InspectorClient;
+
 class JSDebugger
 {
 public:
@@ -22,17 +25,17 @@ public:
 	static void debugBreak();
 	static bool isDebuggerActive();
 	static void sendCommand(JNIEnv *env, jbyteArray command, jint length);
+	static void receive(v8::Local<v8::String>);
 
 private:
 	JSDebugger();
-
-	static void MessageHandler(const v8::Debug::Message& message);
 
 	static bool enabled__;
 	static jclass debuggerClass__;
 	static jobject debugger__;
 	static jmethodID handleMessage__;
 	static v8::Isolate *isolate__;
+	static InspectorClient* client__;
 	static bool isActive__;
 };
 }
