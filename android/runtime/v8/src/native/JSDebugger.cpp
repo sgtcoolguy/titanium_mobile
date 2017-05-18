@@ -10,6 +10,7 @@
 #include "JNIUtil.h"
 #include "TypeConverter.h"
 #include "InspectorClient.h"
+#include "V8Runtime.h"
 
 #include "org_appcelerator_kroll_runtime_v8_JSDebugger.h"
 
@@ -51,10 +52,13 @@ void JSDebugger::init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger)
 
 void JSDebugger::enable()
 {
+	LOGE(TAG, "Enabling debugger");
+	HandleScope scope(isolate__);
 	v8::Local<v8::Context> context = isolate__->GetCurrentContext();
 	client__ = new InspectorClient(context);
 	client__->connect();
 	enabled__ = true;
+	LOGE(TAG, "Debugger enabled");
 }
 
 void JSDebugger::disable()
@@ -79,16 +83,27 @@ void JSDebugger::processDebugMessages()
 	// no-op
 }
 
-void JSDebugger::sendCommand(JNIEnv *env, jbyteArray command, jint length)
+void JSDebugger::sendCommand(JNIEnv *env, jstring command)
 {
-	auto buf = new jbyte[length];
-	env->GetByteArrayRegion(command, 0, length, buf);
+	LOGE(TAG, "Sending command to v8 inspector");
+	HandleScope scope(isolate__);
+	v8::Local<v8::Context> context = isolate__->GetCurrentContext();
 
-	int len = length / sizeof(uint16_t);
-	v8_inspector::StringView message_view(reinterpret_cast<uint16_t*>(buf), len);
+	v8::Local<v8::Value> stringValue = TypeConverter::javaStringToJsString(isolate__, env, command);
+	v8::Local<v8::String> message = stringValue->ToString(context).ToLocalChecked();
+	int length = message->Length();
+	std::unique_ptr<uint16_t[]> buffer(new uint16_t[length]);
+	message->Write(buffer.get(), 0, length);
+	v8_inspector::StringView message_view(buffer.get(), length);
 	client__->sendMessage(message_view);
 
-	delete[] buf;
+	// const jsize length = env->GetStringLength(command);
+	// const jchar* chars = env->GetStringChars(command, NULL);
+	//
+	// v8_inspector::StringView message_view(chars, length);
+	// client__->sendMessage(message_view);
+	//
+	// env->ReleaseStringChars(command, chars);
 
 	isActive__ = true;
 }
@@ -182,11 +197,11 @@ JNIEXPORT jboolean JNICALL Java_org_appcelerator_kroll_runtime_v8_JSDebugger_nat
 /*
  * Class:     org_appcelerator_kroll_runtime_v8_JSDebugger
  * Method:    nativeSendCommand
- * Signature: ([BI)V
+ * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_appcelerator_kroll_runtime_v8_JSDebugger_nativeSendCommand(JNIEnv *env, jobject self, jbyteArray command, jint length)
+JNIEXPORT void JNICALL Java_org_appcelerator_kroll_runtime_v8_JSDebugger_nativeSendCommand(JNIEnv *env, jobject self, jstring command)
 {
-	JSDebugger::sendCommand(env, command, length);
+	JSDebugger::sendCommand(env, command);
 	// TODO Wrap in try/catch and throw up to Java?
 }
 

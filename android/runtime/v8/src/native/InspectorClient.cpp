@@ -6,6 +6,7 @@
  */
 #include "InspectorClient.h"
 #include "InspectorFrontend.h"
+#include "AndroidUtil.h"
 
 #define TAG "InspectorClient"
 
@@ -25,7 +26,8 @@ namespace titanium {
         context_.Get(isolate_), kContextGroupId, v8_inspector::StringView()));
   }
 
-  void InspectorClient::sendMessage(v8_inspector::StringView message_view) {
+  void InspectorClient::sendMessage(const v8_inspector::StringView& message_view) {
+    LOGE(TAG, "dispatching protocol message to inspector session");
     session_->dispatchProtocolMessage(message_view);
   }
 }

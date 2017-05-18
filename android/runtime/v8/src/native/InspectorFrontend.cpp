@@ -7,6 +7,7 @@
 // #include <assert.h>
 #include "InspectorFrontend.h"
 #include "JSDebugger.h"
+#include "AndroidUtil.h"
 
 #define TAG "InspectorClient"
 
@@ -17,6 +18,7 @@ namespace titanium {
   }
 
   void InspectorFrontend::Send(const v8_inspector::StringView& string) {
+    LOGE(TAG, "Received message from v8 inspector, relaying to JSDebugger...");
     int length = static_cast<int>(string.length());
     // DCHECK(length < v8::String::kMaxLength);
     v8::Local<v8::String> message =

@@ -9,7 +9,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-V8_VERSION=5.7.492.71
+V8_VERSION=5.7.492.65
 LIBV8_DIR := ../../../../../../dist/android/libv8/$(V8_VERSION)
 
 # https://jira.appcelerator.org/browse/TIMOB-15263

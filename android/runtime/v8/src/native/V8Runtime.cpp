@@ -235,6 +235,7 @@ JNIEXPORT void JNICALL Java_org_appcelerator_kroll_runtime_v8_V8Runtime_nativeIn
 
 	V8Runtime::globalContext.Reset(isolate, context);
 
+	LOGE(TAG, "Initializing debugger");
 	JSDebugger::init(env, isolate, debugger);
 	if (debugger != nullptr) {
 		V8Runtime::debuggerEnabled = true;

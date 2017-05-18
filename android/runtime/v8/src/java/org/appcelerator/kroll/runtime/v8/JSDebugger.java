@@ -43,7 +43,7 @@ public final class JSDebugger
 
 	// The handshake message
 	// FIXME Grab the v8 version from the system!
-	private static final String HANDSHAKE_MESSAGE = "Type: connect\r\nV8-Version: 5.7.492.71\r\nProtocol-Version: 1\r\nEmbedding-Host: Titanium v%s\r\nContent-Length: 0\r\n\r\n";
+	private static final String HANDSHAKE_MESSAGE = "Type: connect\r\nV8-Version: 5.7.492.65\r\nProtocol-Version: 1\r\nEmbedding-Host: Titanium v%s\r\nContent-Length: 0\r\n\r\n";
 
 	// The port to listen to for debugger connections
 	private final int port;
@@ -81,18 +81,8 @@ public final class JSDebugger
 
 	public void sendMessage(String message)
 	{
-		byte[] cmdBytes = null;
-		try
-		{
-			cmdBytes = message.getBytes("UTF-16LE");
-		}
-		catch (UnsupportedEncodingException e)
-		{
-			// ignore, should never happen
-		}
-
 		// Send the command to V8 via C++
-		nativeSendCommand(cmdBytes, cmdBytes.length);
+		nativeSendCommand(message);
 
 		// Tell V8 to process the message (on the runtime thread)
 		TiMessenger.postOnRuntime(processDebugMessagesRunnable);
@@ -124,7 +114,7 @@ public final class JSDebugger
 	private native void nativeDisable();
 	private native void nativeDebugBreak();
 	private native boolean nativeIsDebuggerActive();
-	private native void nativeSendCommand(byte[] command, int length);
+	private native void nativeSendCommand(String command);
 
 	/**
 	 * This replaces what used to be built into V8 before. We listen on a port
@@ -143,13 +133,17 @@ public final class JSDebugger
 
 		public void run() {
 			try {
+				Log.w(TAG, "Creating server socket...");
 				serverSocket = new ServerSocket();
 				serverSocket.setReuseAddress(true);
+				Log.w(TAG, "Binding to port " + port);
 				serverSocket.bind(new InetSocketAddress(port));
 				while (true) {
 					Socket socket = null;
+					Log.w(TAG, "Waiting for debugger to connect...");
 					try {
 						socket = serverSocket.accept();
+						Log.w(TAG, "Debugger connected to SDK server socket...");
 
 						// handle messages coming from V8 -> Debugger
 						this.v8MessageHandler = new V8MessageHandler(socket);
@@ -168,8 +162,10 @@ public final class JSDebugger
 						this.v8MessageHandler.stop();
 					} catch (Throwable t) {
 						// TODO We should at least log this...
+						Log.e(TAG, "Failed to connect debugger.", t);
 					} finally {
 						try {
+							Log.w(TAG, "Closing socket to debugger...");
 							// Close our connection to the debugger
 							if (socket != null) {
 								socket.close();
@@ -184,7 +180,9 @@ public final class JSDebugger
 				}
 			} catch (Throwable t) {
 				// TODO Log it? Do something?
+				Log.e(TAG, "Failed!", t);
 			} finally {
+				Log.w(TAG, "Shutting down JSDebugger on Java side...");
 				try {
 					if (serverSocket != null) {
 						serverSocket.close();
@@ -229,6 +227,7 @@ public final class JSDebugger
 					{
 						break;
 					}
+					Log.w(TAG, "Sending message from v8 -> debugger: " + message);
 
 					this.sendMessageToDebugger(message);
 				}
@@ -252,6 +251,7 @@ public final class JSDebugger
 		{
 			try
 			{
+				Log.w(TAG, "Sending handshake to debugger");
 				output.write(String.format(HANDSHAKE_MESSAGE, JSDebugger.this.sdkVersion).getBytes("UTF8"));
 				output.flush();
 			}
@@ -325,7 +325,7 @@ public final class JSDebugger
 					if (length == -1) {
 						break; // assume we hit EOF or got told to stop
 					}
-					//Log.w(TAG, "Message length: " + length);
+					Log.w(TAG, "Message length from debugger: " + length);
 
 					String message = readMessage(length);
 					if (message == null) {
@@ -334,13 +334,13 @@ public final class JSDebugger
 					}
 
 					// send along the message to the debugger
-					//Log.w(TAG, "Forwarding Message: " + message);
+					Log.w(TAG, "Forwarding Message from debugger -> V8 inspector: " + message);
 					JSDebugger.this.sendMessage(message);
 				}
 			}
 			catch (IOException e)
 			{
-				//e.printStackTrace();
+				e.printStackTrace();
 
 				// TODO Stop the V8MessageHandler too!
 			}

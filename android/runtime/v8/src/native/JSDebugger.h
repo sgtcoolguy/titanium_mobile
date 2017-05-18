@@ -24,7 +24,7 @@ public:
 	static void disable();
 	static void debugBreak();
 	static bool isDebuggerActive();
-	static void sendCommand(JNIEnv *env, jbyteArray command, jint length);
+	static void sendCommand(JNIEnv *env, jstring command);
 	static void receive(v8::Local<v8::String>);
 
 private:

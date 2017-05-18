@@ -15,7 +15,7 @@ class InspectorClient : public v8_inspector::V8InspectorClient {
  public:
   InspectorClient(v8::Local<v8::Context> context);
   void connect();
-  void sendMessage(v8_inspector::StringView);
+  void sendMessage(const v8_inspector::StringView&);
 
  private:
   static const int kContextGroupId = 1;
