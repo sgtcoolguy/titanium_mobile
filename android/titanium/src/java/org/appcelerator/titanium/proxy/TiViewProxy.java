@@ -59,7 +59,7 @@ import android.view.ViewAnimationUtils;
 	"borderColor", "borderRadius", "borderWidth",
 
 	// layout / dimension (size/width/height have custom accessors)
-	"left", "top", "right", "bottom", "layout", "zIndex", TiC.PROPERTY_CENTER,
+	"left", "top", "right", "bottom", "layout", "zIndex",
 
 	// accessibility
 	TiC.PROPERTY_ACCESSIBILITY_HINT, TiC.PROPERTY_ACCESSIBILITY_LABEL, TiC.PROPERTY_ACCESSIBILITY_VALUE,
@@ -422,6 +422,12 @@ public abstract class TiViewProxy extends KrollProxy implements Handler.Callback
 		return dict;
 	}
 
+	@Kroll.setProperty(retain=false) @Kroll.method
+	public void setCenter(Object center)
+	{
+		setPropertyAndFire(TiC.PROPERTY_CENTER, center);
+	}
+
 	public void clearView()
 	{
 		if (view != null) {
@@ -741,7 +747,7 @@ public abstract class TiViewProxy extends KrollProxy implements Handler.Callback
 			}
 		}
 	}
-	
+
 	/**
 	* Returns the view by the given ID.
 	* @module.api
@@ -766,7 +772,7 @@ public abstract class TiViewProxy extends KrollProxy implements Handler.Callback
 
 		return null;
 	}
-	
+
 	public void handleRemove(TiViewProxy child)
 	{
 		if (children != null) {
