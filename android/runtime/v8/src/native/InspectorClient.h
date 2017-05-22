@@ -15,16 +15,18 @@ class InspectorClient : public v8_inspector::V8InspectorClient {
  public:
   InspectorClient(v8::Local<v8::Context> context);
   void connect();
-  void sendMessage(const v8_inspector::StringView&);
+  void sendMessage(v8::Local<v8::String>);
 
  private:
   static const int kContextGroupId = 1;
+  const int kInspectorClientIndex = v8::Context::kDebugIdIndex + 1;
 
   std::unique_ptr<v8_inspector::V8Inspector> inspector_;
   std::unique_ptr<v8_inspector::V8InspectorSession> session_;
   std::unique_ptr<v8_inspector::V8Inspector::Channel> channel_;
-  v8::Global<v8::Context> context_;
-  v8::Isolate* isolate_;
+  v8::Platform* platform_;
+  bool terminated_;
+  bool running_nested_loop_;
 };
 }
 #endif /* INSPECTORCLIENT_H_ */

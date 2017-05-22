@@ -10,7 +10,6 @@
 #include <v8.h>
 #include <jni.h>
 
-
 namespace titanium {
 
 class InspectorClient;
@@ -18,13 +17,13 @@ class InspectorClient;
 class JSDebugger
 {
 public:
-	static void init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger);
+	static void init(JNIEnv*, jobject jsDebugger, v8::Local<v8::Context>);
 	static void processDebugMessages();
 	static void enable();
 	static void disable();
 	static void debugBreak();
 	static bool isDebuggerActive();
-	static void sendCommand(JNIEnv *env, jstring command);
+	static void sendCommand(JNIEnv*, jstring command);
 	static void receive(v8::Local<v8::String>);
 
 private:
@@ -34,7 +33,6 @@ private:
 	static jclass debuggerClass__;
 	static jobject debugger__;
 	static jmethodID handleMessage__;
-	static v8::Isolate *isolate__;
 	static InspectorClient* client__;
 	static bool isActive__;
 };

@@ -4,23 +4,21 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-// #include <assert.h>
 #include "InspectorFrontend.h"
 #include "JSDebugger.h"
-#include "AndroidUtil.h"
+#include <cassert>
 
-#define TAG "InspectorClient"
+#define TAG "InspectorFrontend"
 
 namespace titanium {
   InspectorFrontend::InspectorFrontend(v8::Local<v8::Context> context) {
     isolate_ = context->GetIsolate();
-    context_.Reset(isolate_, context);
   }
 
   void InspectorFrontend::Send(const v8_inspector::StringView& string) {
     LOGE(TAG, "Received message from v8 inspector, relaying to JSDebugger...");
     int length = static_cast<int>(string.length());
-    // DCHECK(length < v8::String::kMaxLength);
+    assert(length < v8::String::kMaxLength);
     v8::Local<v8::String> message =
         (string.is8Bit()
              ? v8::String::NewFromOneByte(
@@ -33,6 +31,6 @@ namespace titanium {
                    v8::NewStringType::kNormal, length))
             .ToLocalChecked();
 
-  	JSDebugger::receive(message);
+    JSDebugger::receive(message);
   }
 }

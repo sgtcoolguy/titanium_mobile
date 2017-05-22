@@ -1,6 +1,6 @@
 /**
  * Appcelerator Titanium Mobile
- * Copyright (c) 2016 by Appcelerator, Inc. All Rights Reserved.
+ * Copyright (c) 2016-2017 by Appcelerator, Inc. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -20,6 +20,19 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.util.Collections;
+
+import org.java_websocket.WebSocket;
+import org.java_websocket.WebSocketImpl;
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.framing.FrameBuilder;
+import org.java_websocket.framing.Framedata;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
 
 import android.net.LocalSocket;
 import android.os.Handler;
@@ -55,15 +68,19 @@ public final class JSDebugger
 	private LinkedBlockingQueue<String> v8Messages = new LinkedBlockingQueue<String>();
 
 	// The thread which acts as the main agent for listening to debugger and V8 messages
-	private DebugAgentThread agentThread;
+	private InspectorAgent agentThread;
 
 	// The runnable used to tell V8 to process the debug messages on the main thread.
-	private final Runnable processDebugMessagesRunnable = new Runnable() {
-		@Override
-		public void run() {
-			nativeProcessDebugMessages();
+	private class DebugMessageRunnable implements Runnable {
+		private final String msg;
+		DebugMessageRunnable(String msg) {
+			this.msg = msg;
 		}
-	};
+
+		public void run() {
+			nativeSendCommand(msg);
+		}
+	}
 
 	public JSDebugger(int port, String sdkVersion) {
 		this.port = port;
@@ -82,15 +99,17 @@ public final class JSDebugger
 	public void sendMessage(String message)
 	{
 		// Send the command to V8 via C++
-		nativeSendCommand(message);
-
 		// Tell V8 to process the message (on the runtime thread)
-		TiMessenger.postOnRuntime(processDebugMessagesRunnable);
+		TiMessenger.postOnRuntime(new DebugMessageRunnable(message));
 	}
 
 	public void start() {
-		this.agentThread = new DebugAgentThread("titanium-debug");
-		this.agentThread.start();
+		try {
+			this.agentThread = new InspectorAgent(this.port);
+			this.agentThread.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// Tell C++ side to hook up the debug message handler
 		nativeEnable();
@@ -116,95 +135,82 @@ public final class JSDebugger
 	private native boolean nativeIsDebuggerActive();
 	private native void nativeSendCommand(String command);
 
-	/**
-	 * This replaces what used to be built into V8 before. We listen on a port
-	 * for debugger connections and act as a go-between to shuttle messages back
-	 * and forth between the debugger and V8.
-	 */
-	private class DebugAgentThread extends Thread {
+	private class InspectorAgent extends WebSocketServer {
+		private int counter = 0;
+		private V8MessageHandler handler;
 
-		private ServerSocket serverSocket;
-		private V8MessageHandler v8MessageHandler;
-		private DebuggerMessageHandler debuggerMessageHandler;
-
-		private DebugAgentThread(String name) {
-			super(name);
+		public InspectorAgent(int port) throws UnknownHostException {
+			super(new InetSocketAddress( port ));
 		}
 
-		public void run() {
+		@Override
+		public void onOpen( WebSocket conn, ClientHandshake handshake ) {
+			counter++;
+			Log.w(TAG, "///////////Opened connection number" + counter );
+			// Start up V8MessageHandler to process responses we get
 			try {
-				Log.w(TAG, "Creating server socket...");
-				serverSocket = new ServerSocket();
-				serverSocket.setReuseAddress(true);
-				Log.w(TAG, "Binding to port " + port);
-				serverSocket.bind(new InetSocketAddress(port));
-				while (true) {
-					Socket socket = null;
-					Log.w(TAG, "Waiting for debugger to connect...");
-					try {
-						socket = serverSocket.accept();
-						Log.w(TAG, "Debugger connected to SDK server socket...");
+				handler = new V8MessageHandler(conn);
+				new Thread(handler).start();
+			} catch (Exception e) {
 
-						// handle messages coming from V8 -> Debugger
-						this.v8MessageHandler = new V8MessageHandler(socket);
-						Thread v8MessageThread = new Thread(this.v8MessageHandler);
-						v8MessageThread.start();
-
-						// handle messages coming from Debugger -> V8
-						this.debuggerMessageHandler = new DebuggerMessageHandler(socket);
-						Thread debuggerMessageThread = new Thread(this.debuggerMessageHandler);
-						debuggerMessageThread.start();
-
-						// Wait until the debugger thread dies (because debugger says it's done)
-						debuggerMessageThread.join();
-
-						// Stop listening to V8
-						this.v8MessageHandler.stop();
-					} catch (Throwable t) {
-						// TODO We should at least log this...
-						Log.e(TAG, "Failed to connect debugger.", t);
-					} finally {
-						try {
-							Log.w(TAG, "Closing socket to debugger...");
-							// Close our connection to the debugger
-							if (socket != null) {
-								socket.close();
-							}
-						} catch (Throwable t) {
-							// ignore
-						}
-
-						// Wipe the messages from V8
-						JSDebugger.this.clearMessages();
-					}
-				}
-			} catch (Throwable t) {
-				// TODO Log it? Do something?
-				Log.e(TAG, "Failed!", t);
-			} finally {
-				Log.w(TAG, "Shutting down JSDebugger on Java side...");
-				try {
-					if (serverSocket != null) {
-						serverSocket.close();
-					}
-				} catch (IOException e) {
-					// ignore
-				}
 			}
+		}
+
+		@Override
+		public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
+			Log.w(TAG, "closed" );
+			// Kill the V8MessageHandler!
+			if (handler != null) {
+				handler.stop();
+				handler = null;
+			}
+		}
+
+		@Override
+		public void onError( WebSocket conn, Exception ex ) {
+			Log.w(TAG, "Error:" );
+			ex.printStackTrace();
+		}
+
+		@Override
+		public void onStart() {
+			Log.w(TAG, "Server started!" );
+		}
+
+		@Override
+		public void onMessage( WebSocket conn, String message ) {
+			Log.w(TAG, "Received string message:" + message);
+			// Pass along to native code
+			JSDebugger.this.sendMessage(message);
+		}
+
+		@Override
+		public void onMessage( WebSocket conn, ByteBuffer blob ) {
+			Log.w(TAG, "Received binary message");
+			// TODO How do we handle binary messages?
+		}
+
+		@Override
+		public void onWebsocketMessageFragment( WebSocket conn, Framedata frame ) {
+			// FrameBuilder builder = (FrameBuilder) frame;
+			// builder.setTransferemasked( false );
+			// conn.sendFrame( frame );
+
+			Log.w(TAG, "Received fragmented message");
 		}
 	}
 
 	private class V8MessageHandler implements Runnable
 	{
-		private OutputStream output;
+		private WebSocket conn;
 		private AtomicBoolean stop = new AtomicBoolean(false);
 
 		// Dummy message used to stop the sentinel loop if it was waiting on v8Messages.take() while stop() got called.
 		private static final String STOP_MESSAGE = "STOP_MESSAGE";
 
-		public V8MessageHandler(Socket socket) throws IOException
+		public V8MessageHandler(WebSocket conn) throws IOException
 		{
-			this.output = socket.getOutputStream();
+			this.conn = conn;
 		}
 
 		public void stop()
@@ -217,7 +223,6 @@ public final class JSDebugger
 		@Override
 		public void run()
 		{
-			this.sendHandshake();
 			while (!stop.get())
 			{
 				try
@@ -229,7 +234,7 @@ public final class JSDebugger
 					}
 					Log.w(TAG, "Sending message from v8 -> debugger: " + message);
 
-					this.sendMessageToDebugger(message);
+					conn.send(message);
 				}
 				catch (Throwable t)
 				{
@@ -237,162 +242,7 @@ public final class JSDebugger
 				}
 			}
 
-			try
-			{
-				this.output.close();
-			}
-			catch (IOException e)
-			{
-				// ignore
-			}
-		}
-
-		private void sendHandshake()
-		{
-			try
-			{
-				Log.w(TAG, "Sending handshake to debugger");
-				output.write(String.format(HANDSHAKE_MESSAGE, JSDebugger.this.sdkVersion).getBytes("UTF8"));
-				output.flush();
-			}
-			catch (IOException e)
-			{
-				// FIXME Stop the DebuggerMessageHandler too!
-			}
-		}
-
-		private void sendMessageToDebugger(String msg)
-		{
-			byte[] utf8;
-			try
-			{
-				utf8 = msg.getBytes("UTF8");
-			}
-			catch (UnsupportedEncodingException e)
-			{
-				// should never happen...
-				return;
-			}
-
-			try
-			{
-				String s = "Content-Length: " + utf8.length;
-				output.write(s.getBytes("UTF8"));
-				output.write(LINE_END_BYTES);
-
-				output.write(LINE_END_BYTES);
-
-				output.write(utf8);
-				output.flush();
-			}
-			catch (IOException e)
-			{
-				// FIXME Stop the DebuggerMessageHandler too!
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private class DebuggerMessageHandler implements Runnable
-	{
-		private BufferedReader input;
-		private AtomicBoolean stop = new AtomicBoolean(false);
-
-		public DebuggerMessageHandler(Socket socket) throws IOException
-		{
-			this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		}
-
-		public void stop()
-		{
-			this.stop.set(true);
-			try
-			{
-				this.input.close();
-			}
-			catch (IOException e1)
-			{
-				// ignore
-			}
-		}
-
-		public void run()
-		{
-			try
-			{
-				while (!stop.get()) {
-					int length = readHeaders();
-					if (length == -1) {
-						break; // assume we hit EOF or got told to stop
-					}
-					Log.w(TAG, "Message length from debugger: " + length);
-
-					String message = readMessage(length);
-					if (message == null) {
-						// we return null if told to stop, or reading didn't give us the number of characters we expected
-						break;
-					}
-
-					// send along the message to the debugger
-					Log.w(TAG, "Forwarding Message from debugger -> V8 inspector: " + message);
-					JSDebugger.this.sendMessage(message);
-				}
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-
-				// TODO Stop the V8MessageHandler too!
-			}
-			finally
-			{
-				this.stop.set(true);
-				JSDebugger.this.sendMessage(DISCONNECT_MESSAGE);
-				try
-				{
-					this.input.close();
-				}
-				catch (IOException e1)
-				{
-					// ignore
-				}
-			}
-		}
-
-		private int readHeaders() throws IOException
-		{
-			int messageLength = -1;
-			String line;
-			while (!stop.get() && ((line = this.input.readLine()) != null))
-			{
-				final int lineLength = line.length();
-				// empty line means end of headers
-				if (lineLength == 0)
-				{
-					return messageLength;
-				}
-				// if it's telling us the message length, record that
-				if (line.startsWith("Content-Length:"))
-				{
-					String strLen = line.substring(15).trim();
-					messageLength = Integer.parseInt(strLen);
-				}
-				// otherwise, ignore the other headers - BUT MAKE SURE TO CONSUME THEM!
-			}
-			return messageLength;
-		}
-
-		private String readMessage(int length) throws IOException
-		{
-			if (stop.get()) {
-				return null;
-			}
-			char[] buf = new char[length];
-			int result = this.input.read(buf, 0, length);
-			if (result != length) {
-				return null;
-			}
-			return new String(buf);
+			this.conn.close();
 		}
 	}
 }

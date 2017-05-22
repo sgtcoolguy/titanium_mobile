@@ -9,6 +9,7 @@
 
 #include <v8.h>
 #include <v8-inspector.h>
+#include "AndroidUtil.h"
 
 namespace titanium {
 class InspectorFrontend : public v8_inspector::V8Inspector::Channel {
@@ -20,10 +21,12 @@ public:
   void sendResponse(
       int callId,
       std::unique_ptr<v8_inspector::StringBuffer> message) override {
+    LOGE("InspectorFrontend", "sendResponse");
     Send(message->string());
   }
   void sendNotification(
       std::unique_ptr<v8_inspector::StringBuffer> message) override {
+    LOGE("InspectorFrontend", "sendNotification");
     Send(message->string());
   }
   void flushProtocolNotifications() override {}
@@ -31,7 +34,6 @@ public:
   void Send(const v8_inspector::StringView& string);
 
   v8::Isolate* isolate_;
-  v8::Global<v8::Context> context_;
 };
 }
 

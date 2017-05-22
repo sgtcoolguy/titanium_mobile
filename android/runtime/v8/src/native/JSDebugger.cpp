@@ -11,6 +11,7 @@
 #include "TypeConverter.h"
 #include "InspectorClient.h"
 #include "V8Runtime.h"
+#include "V8Util.h"
 
 #include "org_appcelerator_kroll_runtime_v8_JSDebugger.h"
 
@@ -22,25 +23,8 @@ JSDebugger::JSDebugger()
 {
 }
 
-void JSDebugger::init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger)
+void JSDebugger::init(JNIEnv *env, jobject jsDebugger, v8::Local<v8::Context> context)
 {
-	// TODO Create a subclass of v8_inspector::V8Inspector::Channel
-	// - override sendResponse and sendNotification to pass messages from inspector to debugger (outward bound messages)
-	// - equivalent to MessageHandler below
-	// TODO Create a subclass of v8_inspector::V8InspectorClient
-	// - This is where we send the commands from debugger to inspector via code like:
-	// int length = message->Length();
-  // std::unique_ptr<uint16_t[]> buffer(new uint16_t[length]);
-  // message->Write(buffer.get(), 0, length);
-  // v8_inspector::StringView message_view(buffer.get(), length);
-  // session->dispatchProtocolMessage(message_view);
-  // - equivalent to sendCommand below
-	//
-	// References:
-	// https://medium.com/@hyperandroid/v8-inspector-from-an-embedder-standpoint-7f9c0472e2b7
-	// https://github.com/v8/v8/wiki/Debugging-over-the-V8-Inspector-API
-	isolate__ = isolate;
-
 	debugger__ = env->NewGlobalRef(jsDebugger);
 
 	debuggerClass__ = env->FindClass("org/appcelerator/kroll/runtime/v8/JSDebugger");
@@ -48,14 +32,14 @@ void JSDebugger::init(JNIEnv *env, v8::Isolate *isolate, jobject jsDebugger)
 
 	handleMessage__ = env->GetMethodID(debuggerClass__, "handleMessage", "(Ljava/lang/String;)V");
 	assert(handleMessage__ != nullptr);
+
+	client__ = new InspectorClient(context);
 }
 
 void JSDebugger::enable()
 {
+	if (enabled__) return;
 	LOGE(TAG, "Enabling debugger");
-	HandleScope scope(isolate__);
-	v8::Local<v8::Context> context = isolate__->GetCurrentContext();
-	client__ = new InspectorClient(context);
 	client__->connect();
 	enabled__ = true;
 	LOGE(TAG, "Debugger enabled");
@@ -64,13 +48,13 @@ void JSDebugger::enable()
 void JSDebugger::disable()
 {
 	enabled__ = false;
-	client__ = nullptr;
+	client__ = nullptr; // TODO disconnect?
 }
 
 void JSDebugger::debugBreak()
 {
-	// v8::Debug::DebugBreak(isolate__);
-	// TODO Send break command ourselves!
+	v8::Debug::DebugBreak(V8Runtime::v8_isolate);
+	// TODO Send break command ourselves?
 }
 
 bool JSDebugger::isDebuggerActive()
@@ -86,16 +70,13 @@ void JSDebugger::processDebugMessages()
 void JSDebugger::sendCommand(JNIEnv *env, jstring command)
 {
 	LOGE(TAG, "Sending command to v8 inspector");
-	HandleScope scope(isolate__);
-	v8::Local<v8::Context> context = isolate__->GetCurrentContext();
+	v8::HandleScope scope(V8Runtime::v8_isolate);
+	v8::Local<v8::Context> context = V8Runtime::GlobalContext();
 
-	v8::Local<v8::Value> stringValue = TypeConverter::javaStringToJsString(isolate__, env, command);
+	v8::Local<v8::Value> stringValue = TypeConverter::javaStringToJsString(V8Runtime::v8_isolate, env, command);
 	v8::Local<v8::String> message = stringValue->ToString(context).ToLocalChecked();
-	int length = message->Length();
-	std::unique_ptr<uint16_t[]> buffer(new uint16_t[length]);
-	message->Write(buffer.get(), 0, length);
-	v8_inspector::StringView message_view(buffer.get(), length);
-	client__->sendMessage(message_view);
+	LOGE(TAG, *titanium::Utf8Value(message));
+	client__->sendMessage(message);
 
 	// const jsize length = env->GetStringLength(command);
 	// const jchar* chars = env->GetStringChars(command, NULL);
@@ -118,13 +99,13 @@ void JSDebugger::receive(v8::Local<v8::String> message)
 	JNIEnv *env = JNIUtil::getJNIEnv();
 	ASSERT(env != NULL);
 
+	LOGE(TAG, *titanium::Utf8Value(message));
 	jstring s = TypeConverter::jsStringToJavaString(env, message);
 	env->CallVoidMethod(debugger__, handleMessage__, s);
 	env->DeleteLocalRef(s);
 }
 
 bool JSDebugger::enabled__ = false;
-v8::Isolate* JSDebugger::isolate__ = nullptr;
 jobject JSDebugger::debugger__ = nullptr;
 jclass JSDebugger::debuggerClass__ = nullptr;
 jmethodID JSDebugger::handleMessage__ = nullptr;
