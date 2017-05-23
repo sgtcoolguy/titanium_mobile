@@ -4,9 +4,10 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
+#include <cassert>
 #include "InspectorFrontend.h"
 #include "JSDebugger.h"
-#include <cassert>
+#include "V8Util.h"
 
 #define TAG "InspectorFrontend"
 
@@ -16,10 +17,14 @@ namespace titanium {
   }
 
   void InspectorFrontend::Send(const v8_inspector::StringView& string) {
-    LOGE(TAG, "Received message from v8 inspector, relaying to JSDebugger...");
+    v8::HandleScope scope(isolate_);
+    LOGE(TAG, "--> Received message from v8 inspector, relaying to JSDebugger...");
     int length = static_cast<int>(string.length());
     assert(length < v8::String::kMaxLength);
-    v8::Local<v8::String> message =
+    {
+      v8::TryCatch tryCatch(isolate_);
+      v8::Local<v8::String> message;
+      v8::MaybeLocal<v8::String> maybeString =
         (string.is8Bit()
              ? v8::String::NewFromOneByte(
                    isolate_,
@@ -28,9 +33,12 @@ namespace titanium {
              : v8::String::NewFromTwoByte(
                    isolate_,
                    reinterpret_cast<const uint16_t*>(string.characters16()),
-                   v8::NewStringType::kNormal, length))
-            .ToLocalChecked();
-
-    JSDebugger::receive(message);
+                   v8::NewStringType::kNormal, length));
+      if (!maybeString.ToLocal(&message)) {
+        V8Util::fatalException(isolate_, tryCatch);
+        return;
+      }
+      JSDebugger::receive(message);
+    }
   }
 }

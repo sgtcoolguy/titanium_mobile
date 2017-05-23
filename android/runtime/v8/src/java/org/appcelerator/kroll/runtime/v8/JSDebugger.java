@@ -71,6 +71,15 @@ public final class JSDebugger
 	private InspectorAgent agentThread;
 
 	// The runnable used to tell V8 to process the debug messages on the main thread.
+	private final Runnable processDebugMessagesRunnable = new Runnable() {
+		@Override
+		public void run() {
+			nativeProcessDebugMessages();
+		}
+	};
+	// FIXME We had crashes due to empty debug context when we just sent messages through JNI off main thread.
+	// But now we may *need* to do so and then in JNI/C++ code handle forking off a Task to fire on the foreground thread to send the message to the inspector!
+	// They use an incoming and outgoing queue.
 	private class DebugMessageRunnable implements Runnable {
 		private final String msg;
 		DebugMessageRunnable(String msg) {
@@ -99,8 +108,10 @@ public final class JSDebugger
 	public void sendMessage(String message)
 	{
 		// Send the command to V8 via C++
+		nativeSendCommand(message);
 		// Tell V8 to process the message (on the runtime thread)
-		TiMessenger.postOnRuntime(new DebugMessageRunnable(message));
+		TiMessenger.postOnRuntime(processDebugMessagesRunnable);
+		// TiMessenger.postOnRuntime(new DebugMessageRunnable(message));
 	}
 
 	public void start() {

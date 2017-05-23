@@ -340,17 +340,17 @@ JNIEXPORT jobject JNICALL Java_org_appcelerator_kroll_runtime_v8_V8Runtime_nativ
 	return TypeConverter::jsValueToJavaObject(V8Runtime::v8_isolate, env, result);
 }
 
-JNIEXPORT void JNICALL Java_org_appcelerator_kroll_runtime_v8_V8Runtime_nativeProcessDebugMessages(JNIEnv *env, jobject self)
-{
-	v8::Debug::ProcessDebugMessages(V8Runtime::v8_isolate);
-}
-
 JNIEXPORT jboolean JNICALL Java_org_appcelerator_kroll_runtime_v8_V8Runtime_nativeIdle(JNIEnv *env, jobject self)
 {
 	// If we're closing up shop, return true, which is equivalent to V8 GC saying there's no more work to do
 	//if (V8Runtime::disposed) {
 	//	return true;
 	//}
+
+	// TODO Pump the message loop/queues until it's empty?
+	// while (v8::platform::PumpMessageLoop(V8Runtime::platform, V8Runtime:v8_isolate)) continue;
+    // v8::platform::RunIdleTasks(g_platform, isolate,
+    //                            50.0 / base::Time::kMillisecondsPerSecond);
 
 	// FIXME What is a good value to use here? We're basically giving it 100 ms to run right now
 	double deadline_in_s = V8Runtime::platform->MonotonicallyIncreasingTime() + 0.1;

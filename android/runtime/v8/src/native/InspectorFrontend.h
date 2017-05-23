@@ -31,6 +31,7 @@ public:
   }
   void flushProtocolNotifications() override {}
 
+  // FIXME Node places the messages in a queue. It then schedules a Task to run on foreground thread to dispatch 
   void Send(const v8_inspector::StringView& string);
 
   v8::Isolate* isolate_;

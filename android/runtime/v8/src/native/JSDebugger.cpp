@@ -6,6 +6,8 @@
  */
 #include <assert.h>
 #include <sstream>
+#include <v8-debug.h>
+#include <libplatform/libplatform.h>
 #include "JSDebugger.h"
 #include "JNIUtil.h"
 #include "TypeConverter.h"
@@ -33,7 +35,7 @@ void JSDebugger::init(JNIEnv *env, jobject jsDebugger, v8::Local<v8::Context> co
 	handleMessage__ = env->GetMethodID(debuggerClass__, "handleMessage", "(Ljava/lang/String;)V");
 	assert(handleMessage__ != nullptr);
 
-	client__ = new InspectorClient(context);
+	client__ = new InspectorClient(context, V8Runtime::platform);
 }
 
 void JSDebugger::enable()
@@ -64,27 +66,25 @@ bool JSDebugger::isDebuggerActive()
 
 void JSDebugger::processDebugMessages()
 {
-	// no-op
+	// Pump the message loop! This lets the task we scheduled in InspectorClient get run to dispatch the messages to the inspector
+	while (v8::platform::PumpMessageLoop(V8Runtime::platform, V8Runtime::v8_isolate)) {
+		LOGE(TAG, "Pumped Message Loop");
+	}
+	LOGE(TAG, "Done processing debug messages");
 }
 
 void JSDebugger::sendCommand(JNIEnv *env, jstring command)
 {
-	LOGE(TAG, "Sending command to v8 inspector");
+	LOGE(TAG, "<-- forward command to InspectorClient");
 	v8::HandleScope scope(V8Runtime::v8_isolate);
 	v8::Local<v8::Context> context = V8Runtime::GlobalContext();
 
 	v8::Local<v8::Value> stringValue = TypeConverter::javaStringToJsString(V8Runtime::v8_isolate, env, command);
 	v8::Local<v8::String> message = stringValue->ToString(context).ToLocalChecked();
-	LOGE(TAG, *titanium::Utf8Value(message));
-	client__->sendMessage(message);
-
-	// const jsize length = env->GetStringLength(command);
-	// const jchar* chars = env->GetStringChars(command, NULL);
-	//
-	// v8_inspector::StringView message_view(chars, length);
-	// client__->sendMessage(message_view);
-	//
-	// env->ReleaseStringChars(command, chars);
+	titanium::TwoByteValue buffer(message);
+	// LOGE(TAG, *buffer);
+	v8_inspector::StringView message_view(*buffer, buffer.length());
+	client__->PostIncomingMessage(message_view);
 
 	isActive__ = true;
 }
@@ -99,7 +99,7 @@ void JSDebugger::receive(v8::Local<v8::String> message)
 	JNIEnv *env = JNIUtil::getJNIEnv();
 	ASSERT(env != NULL);
 
-	LOGE(TAG, *titanium::Utf8Value(message));
+	LOGE(TAG, "--> forward response to debugger: %s", *titanium::Utf8Value(message));
 	jstring s = TypeConverter::jsStringToJavaString(env, message);
 	env->CallVoidMethod(debugger__, handleMessage__, s);
 	env->DeleteLocalRef(s);
