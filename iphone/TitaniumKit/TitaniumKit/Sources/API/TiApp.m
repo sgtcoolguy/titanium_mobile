@@ -288,7 +288,7 @@ TI_INLINE void waitForMemoryPanicCleared(); //WARNING: This must never be run on
 {
   [TiExceptionHandler defaultExceptionHandler];
 #ifndef DISABLE_TI_LOG_SERVER
-  [TiLogServer startServer];
+  [[TiLogServer defaultLogServer] start];
 #endif
   [self initController];
   [self launchToUrl];
@@ -358,7 +358,7 @@ TI_INLINE void waitForMemoryPanicCleared(); //WARNING: This must never be run on
   started = [NSDate timeIntervalSinceReferenceDate];
   [TiExceptionHandler defaultExceptionHandler];
 #ifndef DISABLE_TI_LOG_SERVER
-  [TiLogServer startServer];
+  [[TiLogServer defaultLogServer] start];
 #endif
 
   // Initialize the root-window
@@ -989,7 +989,7 @@ TI_INLINE void waitForMemoryPanicCleared(); //WARNING: This must never be run on
   [kjsBridge shutdown:condition];
 
 #ifndef DISABLE_TI_LOG_SERVER
-  [TiLogServer stopServer];
+  [[TiLogServer defaultLogServer] start];
 #endif
 
   // THE CODE BELOW IS WRONG.
