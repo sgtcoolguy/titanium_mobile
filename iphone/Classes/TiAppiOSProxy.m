@@ -623,10 +623,12 @@
   id badge = [args objectForKey:@"badge"];
   id userInfo = [args objectForKey:@"userInfo"];
   id sound = [args objectForKey:@"sound"];
+  id timezone = [args objectForKey:@"timezone"];
+#if IS_XCODE_10
   id summaryArgument = [args objectForKey:@"summaryArgument"];
   id summaryArgumentCount = [args objectForKey:@"summaryArgumentCount"];
   id threadIdentifier = [args objectForKey:@"threadIdentifier"];
-  id timezone = [args objectForKey:@"timezone"];
+#endif
 
   // Construct a new local notification proxy from our current context
   TiAppiOSLocalNotificationProxy *notification = [[[TiAppiOSLocalNotificationProxy alloc] _initWithPageContext:[self executionContext]] autorelease];
