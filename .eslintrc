@@ -20,5 +20,12 @@
         "sourceType": "module"
       },
     },
+    {
+      "files": [ "build/*.js" ],
+      "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "script"
+      },
+    },
   ]
 }

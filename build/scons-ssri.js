@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-const async = require('async'),
-	program = require('commander'),
-	utils = require('./utils');
+const async = require('async');
+const program = require('commander');
+const utils = require('./utils');
 
 program.parse(process.argv);
 

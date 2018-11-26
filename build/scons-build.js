@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
-const path = require('path'),
-	async = require('async'),
-	program = require('commander'),
-	version = require('../package.json').version,
-	git = require('./git'),
-	utils = require('./utils'),
-	ALL_PLATFORMS = [ 'ios', 'android', 'windows' ];
+const path = require('path');
+const program = require('commander');
+const version = require('../package.json').version;
+const git = require('./git');
+const utils = require('./utils');
+const ALL_PLATFORMS = [ 'ios', 'android', 'windows' ];
 
 program
 	.option('-v, --sdk-version [version]', 'Override the SDK version we report', process.env.PRODUCT_VERSION || version)
@@ -24,29 +23,37 @@ if (!platforms.length || (platforms.length === 1 && platforms[0] === 'full')) {
 
 // TODO Allow iphone/ipad alias for ios!
 
-async.series([
-	function (next) {
-		git.getHash(path.join(__dirname, '..'), function (err, hash) {
-			program.gitHash = hash || 'n/a';
-			program.timestamp = utils.timestamp();
-			console.log('Building MobileSDK version %s, githash %s', program.sdkVersion, program.gitHash);
-			next();
+/**
+ * [buildPlatform description]
+ * @param  {string} platformName [description]
+ * @param  {object} program
+ * @return {Promise}              [description]
+ */
+function buildPlatform(platformName, program) {
+	return new Promise((resolve, reject) => {
+		const Platform = require(`./${platformName}`); // eslint-disable-line security/detect-non-literal-require
+		new Platform(program).build(err => {
+			if (err) {
+				return reject(err);
+			}
+			resolve();
 		});
-	}
-], function (err) {
-	if (err) {
-		process.exit(1);
-		return;
-	}
-
-	// TODO Run in parallel? Output will get messy, but no reason we couldn't grab ios prereqs while Android compiles
-	async.eachSeries(platforms, function (item, next) {
-		const Platform = require('./' + item); // eslint-disable-line security/detect-non-literal-require
-		new Platform(program).build(next);
-	}, function (err) {
-		if (err) {
-			process.exit(1);
-		}
-		process.exit(0);
 	});
-});
+}
+
+async function build(program) {
+	const hash = await git.getHash(path.join(__dirname, '..'));
+	program.gitHash = hash || 'n/a';
+	program.timestamp = utils.timestamp();
+	console.log('Building MobileSDK version %s, githash %s', program.sdkVersion, program.gitHash);
+
+	for (const platformName of platforms) {
+		await buildPlatform(platformName, program);
+	}
+}
+build(program)
+	.then(() => process.exit(0))
+	.catch(err => {
+		console.error(err);
+		process.exit(1);
+	});

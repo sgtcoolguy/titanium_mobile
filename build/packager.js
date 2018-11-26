@@ -67,10 +67,11 @@ function unzip(zipfile, dest, next) {
  * @param {string} moduleApiVersion module api version
  * @param {string} gitHash git commit SHA
  * @param {string} timestamp build date/timestamp
+ * @param {boolean} generatedDocs Did we generate docs?
  * @param {boolean} [skipZip] Optionally skip zipping up the result
  * @constructor
  */
-function Packager(outputDir, targetOS, platforms, version, versionTag, moduleApiVersion, gitHash, timestamp, skipZip) {
+function Packager(outputDir, targetOS, platforms, version, versionTag, moduleApiVersion, gitHash, timestamp, generatedDocs, skipZip) {
 	this.srcDir = ROOT_DIR;
 	this.outputDir = outputDir; // root folder where output is placed
 	this.targetOS = targetOS;
@@ -89,6 +90,7 @@ function Packager(outputDir, targetOS, platforms, version, versionTag, moduleApi
 	// Location where we build up the zip file contents
 	this.zipDir = path.join(this.outputDir, `mobilesdk-${this.versionTag}-${this.targetOS}`);
 	this.zipSDKDir = path.join(this.zipDir, 'mobilesdk', this.targetOS, this.versionTag);
+	this.generatedDocs = generatedDocs;
 	this.skipZip = skipZip;
 }
 
@@ -255,6 +257,9 @@ Packager.prototype.package = function (next) {
 		this.cleanZipDir.bind(this),
 		this.generateManifestJSON.bind(this),
 		function (cb) {
+			if (!this.generatedDocs) {
+				return next();
+			}
 			console.log('Writing JSCA');
 			fs.copy(path.join(this.outputDir, 'api.jsca'), path.join(this.zipSDKDir, 'api.jsca'), cb);
 		}.bind(this),
