@@ -6,12 +6,18 @@ const exec = require('child_process').exec; // eslint-disable-line security/dete
 const spawn = require('child_process').spawn; // eslint-disable-line security/detect-child-process
 const async = require('async');
 const fs = require('fs-extra');
+const gulp = require('gulp');
+const changed = require('gulp-changed');
+const gulpBabel = require('gulp-babel');
+const appc = require('node-appc');
+const version = appc.version;
 const utils = require('./utils');
 const copyFile = utils.copyFile;
 const copyFiles = utils.copyFiles;
 const downloadURL = utils.downloadURL;
 const ROOT_DIR = path.join(__dirname, '..');
 const SUPPORT_DIR = path.join(ROOT_DIR, 'support');
+const V8_STRING_VERSION_REGEXP = /(\d+)\.(\d+)\.\d+\.\d+/;
 
 /**
  * Given a folder we'd like to zip up and the destination filename, this will zip up the directory contents.
@@ -257,12 +263,46 @@ Packager.prototype.package = function (next) {
 		this.generateManifestJSON.bind(this),
 		function (cb) {
 			console.log('Writing JSCA');
-			fs.copy(path.join(this.outputDir, 'api.jsca'), path.join(this.zipSDKDir, 'api.jsca'), cb);
+			gulp.src(path.join(this.outputDir, 'api.jsca'))
+				.pipe(changed(this.zipSDKDir))
+				.pipe(gulp.dest(this.zipSDKDir))
+				.on('end', cb);
 		}.bind(this),
 		function (cb) {
 			console.log('Copying SDK files');
-			// Copy some root files, cli/, common/, templates/, node_modules minus .bin sub-dir
-			this.copy([ 'CREDITS', 'README.md', 'package.json', 'cli', 'common', 'node_modules', 'templates' ], cb);
+			// Copy some root files, cli/, templates/, node_modules
+			gulp.src([ 'CREDITS', 'README.md', 'package.json', 'cli/**', 'node_modules/**', 'templates/**' ], {
+				cwd: this.srcDir,
+				base: '.'
+			})
+				.pipe(changed(this.zipSDKDir))
+				.pipe(gulp.dest(this.zipSDKDir))
+				.on('end', cb);
+		}.bind(this),
+		function (cb) {
+			console.log('Transpiling common SDK JS');
+			const destDir = path.join(this.zipSDKDir, 'common');
+			// Pull out android's V8 target (and transform into equivalent chrome version)
+			const v8Version = require('../android/package.json').v8.version;
+			const found = v8Version.match(V8_STRING_VERSION_REGEXP);
+			const chromeVersion = parseInt(found[1] + found[2]); // concat the first two numbers as string, then turn to int
+			// Now pull out min IOS target
+			const minSupportedIosSdk = version.parseMin(require('../iphone/package.json').vendorDependencies['ios sdk']);
+			gulp.src(this.srcDir + '/common/**/*.js')
+				.pipe(changed(destDir))
+				.pipe(gulpBabel({
+					presets: [
+						[ '@babel/env', {
+							targets: {
+								// TODO: filter to only targets relevant for platforms we're building?
+								ios: minSupportedIosSdk,
+								chrome: chromeVersion
+							}
+						} ]
+					]
+				}))
+				.pipe(gulp.dest(destDir))
+				.on('end', cb);
 		}.bind(this),
 		// Now run 'npm prune --production' on the zipSDKDir, so we retain only production dependencies
 		function (cb) {
