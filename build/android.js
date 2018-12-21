@@ -1,14 +1,16 @@
 'use strict';
 
-const path = require('path'),
-	async = require('async'),
-	fs = require('fs-extra'),
-	ant = require('./ant'),
-	utils = require('./utils'),
-	copyFile = utils.copyFile,
-	copyFiles = utils.copyFiles,
-	copyAndModifyFile = utils.copyAndModifyFile,
-	globCopy = utils.globCopy;
+const path = require('path');
+const async = require('async');
+const fs = require('fs-extra');
+const ant = require('./ant');
+const promisify = require('util').promisify;
+const utils = require('./utils');
+const copyFile = promisify(utils.copyFile);
+const copyFiles = promisify(utils.copyFiles);
+const globCopy = promisify(utils.globCopy);
+
+const BUILD_XML = path.join(__dirname, '..', 'android', 'build.xml');
 
 /**
  * @param {Object} options options object
@@ -27,14 +29,28 @@ function Android(options) {
 	this.gitHash = options.gitHash;
 }
 
-Android.prototype.clean = function (next) {
-	ant.build(path.join(__dirname, '..', 'android', 'build.xml'), [ 'clean' ], {}, next);
+/**
+ * @returns {Promise<void>}
+ */
+Android.prototype.clean = function () {
+	return new Promise((resolve, reject) => {
+		ant.build(BUILD_XML, [ 'clean' ], {}, function (err) {
+			if (err) {
+				return reject(err);
+			}
+			resolve();
+		});
+	});
 };
 
-Android.prototype.build = function (next) {
-	var AndroidSDK = require('./androidsdk'),
-		sdk = new AndroidSDK(this.androidSDK, this.apiLevel),
-		properties = {
+/**
+ * @returns {Promise<void>}
+ */
+Android.prototype.build = function () {
+	return new Promise((resolve, reject) => {
+		const AndroidSDK = require('./androidsdk');
+		const sdk = new AndroidSDK(this.androidSDK, this.apiLevel);
+		const properties = {
 			'build.version': this.sdkVersion,
 			'build.githash': this.gitHash,
 			'android.sdk': sdk.getAndroidSDK(),
@@ -43,95 +59,94 @@ Android.prototype.build = function (next) {
 			'kroll.v8.build.x86': 1,
 			'android.ndk': this.androidNDK
 		};
-	ant.build(path.join(__dirname, '..', 'android', 'build.xml'), [ 'full.build' ], properties, next);
+		ant.build(BUILD_XML, [ 'full.build' ], properties, function (err) {
+			if (err) {
+				return reject(err);
+			}
+			resolve();
+		});
+	});
 };
 
-Android.prototype.package = function (packager, next) {
+/**
+ * @returns {Promise<void>}
+ */
+Android.prototype.package = async function (packager) {
 	console.log('Zipping Android platform...');
 	// FIXME This is a hot mess. Why can't we place artifacts in their proper location already like Windows?
-	const DIST_ANDROID = path.join(packager.outputDir, 'android'),
-		ANDROID_ROOT = path.join(packager.srcDir, 'android'),
-		ANDROID_DEST = path.join(packager.zipSDKDir, 'android'),
-		MODULE_ANDROID = path.join(packager.zipSDKDir, 'module', 'android'),
-		ANDROID_MODULES = path.join(ANDROID_DEST, 'modules');
+	const DIST_ANDROID = path.join(packager.outputDir, 'android');
+	const ANDROID_ROOT = path.join(packager.srcDir, 'android');
+	const ANDROID_DEST = path.join(packager.zipSDKDir, 'android');
+	const MODULE_ANDROID = path.join(packager.zipSDKDir, 'module', 'android');
+	const ANDROID_MODULES = path.join(ANDROID_DEST, 'modules');
 
-	// TODO parallelize some
-	async.series([
+	// ensure some of our destination folders:
+	await Promise.all([
+		fs.ensureDir(path.join(ANDROID_DEST, 'native', 'include')),
+		fs.ensureDir(MODULE_ANDROID),
+	]);
+
+	// android/
+	await Promise.all([
 		// Copy dist/android/*.jar, dist/android/modules.json
-		function (cb) {
-			copyFiles(DIST_ANDROID, ANDROID_DEST, [ 'titanium.jar', 'kroll-apt.jar', 'kroll-common.jar', 'kroll-v8.jar', 'java_websocket.jar', 'modules.json' ], cb);
-		},
+		copyFiles(DIST_ANDROID, ANDROID_DEST, [ 'titanium.jar', 'kroll-apt.jar', 'kroll-common.jar', 'kroll-v8.jar', 'java_websocket.jar', 'modules.json' ]),
+
 		// Copy android/dependency.json, android/cli/, and android/templates/
-		function (cb) {
-			copyFiles(ANDROID_ROOT, ANDROID_DEST, [ 'cli', 'templates', 'dependency.json' ], cb);
-		},
-		// copy android/package.json, but replace __VERSION__ with our version!
-		function (cb) {
-			copyAndModifyFile(ANDROID_ROOT, ANDROID_DEST, 'package.json', { __VERSION__: this.sdkVersion }, cb);
-		}.bind(this),
-		// include headers for v8 3rd party module building
-		function (cb) {
-			fs.mkdirsSync(path.join(ANDROID_DEST, 'native', 'include'));
-			globCopy('**/*.h', path.join(ANDROID_ROOT, 'runtime', 'v8', 'src', 'native'), path.join(ANDROID_DEST, 'native', 'include'), cb);
-		},
-		function (cb) {
-			globCopy('**/*.h', path.join(ANDROID_ROOT, 'runtime', 'v8', 'generated'), path.join(ANDROID_DEST, 'native', 'include'), cb);
-		},
-		function (cb) {
-			const v8Props = require(path.join(ANDROID_ROOT, 'package.json')).v8, // eslint-disable-line security/detect-non-literal-require
-				src = path.join(DIST_ANDROID, 'libv8', v8Props.version, v8Props.mode, 'include');
-			globCopy('**/*.h', src, path.join(ANDROID_DEST, 'native', 'include'), cb);
-		},
-		// add js2c.py for js -> C embedding
-		function (cb) {
-			copyFiles(path.join(ANDROID_ROOT, 'runtime', 'v8', 'tools'), MODULE_ANDROID, [ 'js2c.py', 'jsmin.py' ], cb);
-		},
-		// include all native shared libraries TODO Adjust to only copy *.so files, filter doesn't work well for that
-		function (cb) {
-			fs.copy(path.join(DIST_ANDROID, 'libs'), path.join(ANDROID_DEST, 'native', 'libs'), cb);
-		},
-		function (cb) {
-			copyFile(DIST_ANDROID, MODULE_ANDROID, 'ant-tasks.jar', cb);
-		},
-		function (cb) {
-			copyFile(path.join(ANDROID_ROOT, 'build', 'lib'), MODULE_ANDROID, 'ant-contrib-1.0b3.jar', cb);
-		},
+		copyFiles(ANDROID_ROOT, ANDROID_DEST, [ 'cli', 'templates', 'dependency.json' ]),
+
 		// Copy JARs from android/kroll-apt/lib
-		function (cb) {
-			globCopy('**/*.jar', path.join(ANDROID_ROOT, 'kroll-apt', 'lib'), ANDROID_DEST, cb);
-		},
+		globCopy('**/*.jar', path.join(ANDROID_ROOT, 'kroll-apt', 'lib'), ANDROID_DEST),
+
 		// Copy JARs from android/titanium/lib
-		function (cb) {
-			fs.copy(path.join(ANDROID_ROOT, 'titanium', 'lib'), ANDROID_DEST, { filter: function (src) {
-				// Don't copy commons-logging-1.1.1.jar
-				return src.indexOf('commons-logging-1.1.1') === -1;
-			} }, cb);
-		},
-		// Copy android/modules/*/lib/*.jar
-		function (cb) {
-			const moduleDirs = fs.readdirSync(path.join(ANDROID_ROOT, 'modules'));
-			async.each(moduleDirs, function (dir, callback) {
+		fs.copy(path.join(ANDROID_ROOT, 'titanium', 'lib'), ANDROID_DEST, {
+			filter: src => src.indexOf('commons-logging-1.1.1') === -1 // Don't copy commons-logging-1.1.1.jar
+		}),
+	]);
 
-				// skip geolocation
-				if ([ 'geolocation' ].includes(dir)) {
-					callback();
-					return;
-				}
+	// copy android/package.json, but replace __VERSION__ with our version!
+	const packageJSON = fs.readJson(path.join(ANDROID_ROOT, 'package.json'));
+	packageJSON.version = this.sdkVersion;
+	await fs.writeJson(path.join(ANDROID_DEST, 'package.json'), packageJSON);
 
-				const moduleLibDir = path.join(ANDROID_ROOT, 'modules', dir, 'lib');
-				if (fs.existsSync(moduleLibDir)) {
-					globCopy('*.jar', moduleLibDir, ANDROID_DEST, callback);
-				} else {
-					callback();
-				}
-			}, cb);
-		},
-		// Copy over module resources
-		function (cb) {
-			const filterRegExp = new RegExp('\\' + path.sep  + 'android(\\' + path.sep + 'titanium-(.+)?.(jar|res.zip|respackage))?$'); // eslint-disable-line security/detect-non-literal-regexp
-			fs.copy(DIST_ANDROID, ANDROID_MODULES, { filter: src => filterRegExp.test(src) }, cb);
+	// android/native/include
+	// include headers for v8 3rd party module building
+	const v8Props = require(path.join(ANDROID_ROOT, 'package.json')).v8; // eslint-disable-line security/detect-non-literal-require
+	const libv8Headers = path.join(ANDROID_ROOT, 'runtime', 'v8', 'libv8', v8Props.version, v8Props.mode, 'include');
+	await Promise.all([
+		globCopy('**/*.h', path.join(ANDROID_ROOT, 'runtime', 'v8', 'src', 'native'), path.join(ANDROID_DEST, 'native', 'include')),
+		globCopy('**/*.h', path.join(ANDROID_ROOT, 'runtime', 'v8', 'generated'), path.join(ANDROID_DEST, 'native', 'include')),
+		globCopy('**/*.h', libv8Headers, path.join(ANDROID_DEST, 'native', 'include')),
+	]);
+	// android/native/libs
+	// include all native shared libraries TODO Adjust to only copy *.so files, filter doesn't work well for that
+	await fs.copy(path.join(DIST_ANDROID, 'libs'), path.join(ANDROID_DEST, 'native', 'libs'));
+
+	// module/android
+	await Promise.all([
+		// add js2c.py for js -> C embedding
+		copyFiles(path.join(ANDROID_ROOT, 'runtime', 'v8', 'tools'), MODULE_ANDROID, [ 'js2c.py', 'jsmin.py' ]),
+		copyFile(DIST_ANDROID, MODULE_ANDROID, 'ant-tasks.jar'),
+		copyFile(path.join(ANDROID_ROOT, 'build', 'lib'), MODULE_ANDROID, 'ant-contrib-1.0b3.jar'),
+	]);
+
+	// android/modules/
+	// Copy android/modules/*/lib/*.jar
+	const moduleDirs = fs.readdirSync(path.join(ANDROID_ROOT, 'modules'));
+	for (const dir of moduleDirs) {
+		// skip geolocation
+		if ([ 'geolocation' ].includes(dir)) {
+			continue;
 		}
-	], next);
+
+		const moduleLibDir = path.join(ANDROID_ROOT, 'modules', dir, 'lib');
+		if (fs.existsSync(moduleLibDir)) {
+			await globCopy('*.jar', moduleLibDir, ANDROID_DEST);
+		}
+	}
+
+	// Copy over module resources
+	const filterRegExp = new RegExp('\\' + path.sep  + 'android(\\' + path.sep + 'titanium-(.+)?.(jar|res.zip|respackage))?$'); // eslint-disable-line security/detect-non-literal-regexp
+	await fs.copy(DIST_ANDROID, ANDROID_MODULES, { filter: src => filterRegExp.test(src) });
 };
 
 module.exports = Android;

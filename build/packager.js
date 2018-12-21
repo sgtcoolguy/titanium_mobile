@@ -2,19 +2,17 @@
 
 const path = require('path');
 const os = require('os');
+const util = require('util');
 const exec = require('child_process').exec; // eslint-disable-line security/detect-child-process
 const spawn = require('child_process').spawn; // eslint-disable-line security/detect-child-process
-const async = require('async');
 const fs = require('fs-extra');
 const gulp = require('gulp');
 const changed = require('gulp-changed');
 const gulpBabel = require('gulp-babel');
-const appc = require('node-appc');
-const version = appc.version;
+const version = require('node-appc').version;
 const utils = require('./utils');
 const copyFile = utils.copyFile;
-const copyFiles = utils.copyFiles;
-const downloadURL = utils.downloadURL;
+const downloadURL = util.promisify(utils.downloadURL);
 const ROOT_DIR = path.join(__dirname, '..');
 const SUPPORT_DIR = path.join(ROOT_DIR, 'support');
 const V8_STRING_VERSION_REGEXP = /(\d+)\.(\d+)\.\d+\.\d+/;
@@ -25,42 +23,55 @@ const V8_STRING_VERSION_REGEXP = /(\d+)\.(\d+)\.\d+\.\d+/;
  *
  * @param  {String}   folder   The folder whose contents will become the zip contents
  * @param  {String}   filename The output zipfile
- * @param  {Function} next     [description]
+ * @returns  {Promise<void>}
  */
-function zip(folder, filename, next) {
-	const command = os.platform() === 'win32' ? path.join(ROOT_DIR, 'build', 'win32', 'zip') : 'zip';
-	exec(command + ' -9 -q -r "' + path.join('..', path.basename(filename)) + '" *', { cwd: folder }, function (err) {
-		if (err) {
-			return next(err);
-		}
+function zip(folder, filename) {
+	return new Promise((resolve, reject) => {
+		const command = os.platform() === 'win32' ? path.join(ROOT_DIR, 'build', 'win32', 'zip') : 'zip';
+		exec(`${command} -9 -q -r "${path.join('..', path.basename(filename))}" *`, { cwd: folder }, err => {
+			if (err) {
+				return reject(err);
+			}
 
-		const outputFolder = path.resolve(folder, '..'),
-			destFolder = path.dirname(filename),
-			outputFile = path.join(outputFolder, path.basename(filename));
+			const outputFolder = path.resolve(folder, '..');
+			const outputFile = path.join(outputFolder, path.basename(filename));
+			if (outputFile == filename) { // eslint-disable-line eqeqeq
+				return resolve();
+			}
 
-		if (outputFile == filename) { // eslint-disable-line eqeqeq
-			return next();
-		}
-		copyFile(outputFolder, destFolder, path.basename(filename), next);
+			const destFolder = path.dirname(filename);
+			copyFile(outputFolder, destFolder, path.basename(filename), err2 => {
+				if (err2) {
+					return reject(err2);
+				}
+				resolve();
+			});
+		});
 	});
 }
 
-function unzip(zipfile, dest, next) {
-	console.log('Unzipping ' + zipfile + ' to ' + dest);
-	const command = os.platform() === 'win32' ? path.join(ROOT_DIR, 'build', 'win32', 'unzip') : 'unzip';
-	const child = spawn(command, [ '-o', zipfile, '-d', dest ], { stdio: [ 'ignore', 'ignore', 'pipe' ] });
-	let err = '';
-	child.stderr.on('data', function (buffer) {
-		err += buffer.toString();
-	});
-	child.on('error', function (err) {
-		return next(err);
-	});
-	child.on('close', function (code) {
-		if (code !== 0) {
-			return next(`Unzipping of ${zipfile} exited with non-zero exit code ${code}. ${err}`);
-		}
-		next();
+/**
+ * 
+ * @param {string} zipfile 
+ * @param {string} dest 
+ * @returns {Promise<void>}
+ */
+function unzip(zipfile, dest) {
+	return new Promise((resolve, reject) => {
+		console.log(`Unzipping ${zipfile} to ${dest}`);
+		const command = os.platform() === 'win32' ? path.join(ROOT_DIR, 'build', 'win32', 'unzip') : 'unzip';
+		const child = spawn(command, [ '-o', zipfile, '-d', dest ], { stdio: [ 'ignore', 'ignore', 'pipe' ] });
+		let err = '';
+		child.stderr.on('data', buffer => {
+			err += buffer.toString();
+		});
+		child.on('error', err => reject(err));
+		child.on('close', code => {
+			if (code !== 0) {
+				return reject(`Unzipping of ${zipfile} exited with non-zero exit code ${code}. ${err}`);
+			}
+			resolve();
+		});
 	});
 }
 
@@ -100,18 +111,18 @@ function Packager(outputDir, targetOS, platforms, version, versionTag, moduleApi
 
 /**
  * generates the manifest.json we ship with the SDK
- * @param  {Function} next callback function
+ * @returns {Promise<void>}
  */
-Packager.prototype.generateManifestJSON = function (next) {
+Packager.prototype.generateManifestJSON = async function () {
 	console.log('Writing manifest.json');
-	const modifiedPlatforms = this.platforms.slice(0), // need to work on a copy!
-		json = {
-			name: this.versionTag,
-			version: this.version,
-			moduleAPIVersion: this.moduleApiVersion,
-			timestamp: this.timestamp,
-			githash: this.gitHash
-		};
+	const modifiedPlatforms = this.platforms.slice(0); // need to work on a copy!
+	const json = {
+		name: this.versionTag,
+		version: this.version,
+		moduleAPIVersion: this.moduleApiVersion,
+		timestamp: this.timestamp,
+		githash: this.gitHash
+	};
 
 	// Replace ios with iphone
 	const index = modifiedPlatforms.indexOf('ios');
@@ -119,61 +130,44 @@ Packager.prototype.generateManifestJSON = function (next) {
 		modifiedPlatforms.splice(index, 1, 'iphone');
 	}
 	json.platforms = modifiedPlatforms;
-	fs.writeJSON(path.join(this.zipSDKDir, 'manifest.json'), json, next);
+	return fs.writeJSON(path.join(this.zipSDKDir, 'manifest.json'), json);
 };
 
 /**
  * Zips up the iOS SDK portion
  * @param  {Function} next callback function
  */
-Packager.prototype.zipIOS = function (next) {
+Packager.prototype.zipIOS = async function () {
 	const IOS = require('./ios');
-	new IOS({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this, next);
+	return new IOS({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this);
 };
 
-Packager.prototype.zipWindows = function (next) {
+Packager.prototype.zipWindows = async function () {
 	const Windows = require('./windows');
-	new Windows({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this, next);
+	return new Windows({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this);
 };
 
 /**
  * Zips up the Android SDK portion
  * @param  {Function} next callback function
  */
-Packager.prototype.zipAndroid = function (next) {
+Packager.prototype.zipAndroid = async function () {
 	const Android = require('./android');
-	new Android({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this, next);
-};
-
-/**
- * Removes existing zip file and tmp dir used to build it
- * @param  {Function} next callback function
- */
-Packager.prototype.cleanZipDir = function (next) {
-	console.log('Cleaning previous zipfile and tmp dir');
-	// IF zipDir exists, wipe it
-	if (fs.existsSync(this.zipDir)) {
-		fs.removeSync(this.zipDir);
-	}
-	// make sure zipSDKDir exists
-	fs.mkdirsSync(this.zipSDKDir);
-
-	// Remove existing zip
-	fs.remove(this.zipFile, next);
+	return new Android({ sdkVersion: this.version, gitHash: this.gitHash, timestamp: this.timestamp }).package(this);
 };
 
 /**
  * Includes the pre-packaged pre-built native modules. We now gather them from a JSON file listing URLs to download.
- * @param  {Function} next callback function
+ * @returns {Promise<void>}
  */
-Packager.prototype.includePackagedModules = function (next) {
+Packager.prototype.includePackagedModules = async function () {
 	console.log('Zipping packaged modules');
 	// Unzip all the zipfiles in support/module/packaged
 	let supportedPlatforms = this.platforms.concat([ 'commonjs' ]);
 	// Include aliases for ios/iphone/ipad
-	if (supportedPlatforms.indexOf('ios') !== -1
-		|| supportedPlatforms.indexOf('iphone') !== -1
-		|| supportedPlatforms.indexOf('ipad') !== -1) {
+	if (supportedPlatforms.includes('ios')
+		|| supportedPlatforms.includes('iphone')
+		|| supportedPlatforms.includes('ipad')) {
 		supportedPlatforms = supportedPlatforms.concat([ 'ios', 'iphone', 'ipad' ]);
 	}
 
@@ -183,10 +177,9 @@ Packager.prototype.includePackagedModules = function (next) {
 
 	let modules = []; // module objects holding url/integrity
 	// Read modules.json, grab the object for each supportedPlatform
-	const contents = fs.readFileSync(path.join(SUPPORT_DIR, 'module', 'packaged', 'modules.json')).toString(),
-		modulesJSON = JSON.parse(contents);
-	for (let x = 0; x < supportedPlatforms.length; x++) {
-		const modulesForPlatform = modulesJSON[supportedPlatforms[x]];
+	const modulesJSON = await fs.readJson(path.join(SUPPORT_DIR, 'module', 'packaged', 'modules.json'));
+	for (const platform of supportedPlatforms) {
+		const modulesForPlatform = modulesJSON[platform];
 		if (modulesForPlatform) {
 			modules = modules.concat(Object.values(modulesForPlatform));
 		}
@@ -195,198 +188,203 @@ Packager.prototype.includePackagedModules = function (next) {
 	modules = Array.from(new Set(modules));
 
 	// Fetch the listed modules from URLs...
-	const outDir = this.zipDir,
-		zipFiles = [];
-	async.each(modules, function (moduleObject, cb) {
-		// FIXME Don't show progress bars, because they clobber each other
-		downloadURL(moduleObject.url, moduleObject.integrity, function (err, file) {
-			if (err) {
-				return cb(err);
-			}
-			zipFiles.push(file);
-			cb();
-		});
-	},
+	// FIXME Don't show progress bars, because they clobber each other
+	const zipFiles = await Promise.all(modules.map(m => downloadURL(m.url, m.integrity)));
 	// ...then unzip them
-	function (err) {
-		if (err) {
-			return next(err);
-		}
+	// MUST RUN IN SERIES or they will clobber each other and unzip will fail mysteriously
+	for (const zipFile of zipFiles) {
+		await unzip(zipFile, this.zipDir);
+	}
 
-		// MUST RUN IN SERIES or they will clobber each other and unzip will fail mysteriously
-		async.eachSeries(zipFiles, function (zipFile, cb) {
-			unzip(zipFile, outDir, function (err) {
-				if (err) {
-					return cb(err);
-				}
-				cb();
-			});
-		}, next);
-	});
-};
-
-/**
- * Copy files from ROOT_DIR to zipDir.
- * @param {string[]} files List of files/folders to copy
- * @param {Function} next callback function
- */
-Packager.prototype.copy = function (files, next) {
-	copyFiles(this.srcDir, this.zipSDKDir, files, next);
+	// Need to wipe out irrelevant dirs inside modules based on target OS!
+	if (!this.platforms.includes('windows')) {
+		await fs.remove(path.join(this.zipDir, 'modules', 'windows'));
+	}
+	if (!this.platforms.includes('android')) {
+		await fs.remove(path.join(this.zipDir, 'modules', 'android'));
+	}
+	if (!this.platforms.includes('ios') && !this.platforms.includes('iphone') && !this.platforms.includes('ipad')) {
+		await fs.remove(path.join(this.zipDir, 'modules', 'iphone'));
+	}
 };
 
 /**
  * Zip it all up and wipe the zip dir
- * @param {Function} next callback function
- * @returns {void}
+ * @returns {Promise<void>}
  */
-Packager.prototype.zip = function (next) {
+Packager.prototype.zip = async function () {
 	if (this.skipZip) {
-		return next();
+		return;
 	}
-	zip(this.zipDir, this.zipFile, function (err) {
-		if (err) {
-			return next(err);
-		}
-		// delete the zipdir!
-		fs.remove(this.zipDir, next);
-	}.bind(this));
+	return zip(this.zipDir, this.zipFile);
 };
+
+Packager.prototype.copyJSCA = async function() {
+	console.log('Writing JSCA');
+	return this.gulpChanged(path.join(this.outputDir, 'api.jsca'), { base: this.outputDir }); // FIXME This is going into mobilesdk/osx/8.0.0/dist/api.jsca rather than mobilesdk/osx/8.0.0/api.jsca
+}
+
+Packager.prototype.gulpChanged = async function (globs, options = {}) {
+	const mergedOptions = Object.assign({
+		cwd: this.srcDir,
+		base: '.'
+	}, options);
+	return new Promise((resolve, reject) => {
+		gulp.src(globs, mergedOptions)
+			.pipe(changed(this.zipSDKDir))
+			.pipe(gulp.dest(this.zipSDKDir))
+			.on('end', () => resolve());
+	});
+}
+
+/**
+ * uses gulp-changed to copy only the changed set of files from the given globs to this.zipSDKDir
+ * @param {string|string[]} globs globs to pass to `gulp.src()`
+ */
+Packager.prototype.copyChanged = async function (globs) {
+	return this.gulpChanged(globs);
+}
+
+Packager.prototype.transpileCommonJS = async function () {
+	return new Promise((resolve, reject) => {
+	console.log('Transpiling common SDK JS');
+	const destDir = path.join(this.zipSDKDir, 'common');
+	// Pull out android's V8 target (and transform into equivalent chrome version)
+	const v8Version = require('../android/package.json').v8.version;
+	const found = v8Version.match(V8_STRING_VERSION_REGEXP);
+	const chromeVersion = parseInt(found[1] + found[2]); // concat the first two numbers as string, then turn to int
+	// Now pull out min IOS target
+	const minSupportedIosSdk = version.parseMin(require('../iphone/package.json').vendorDependencies['ios sdk']);
+	gulp.src(this.srcDir + '/common/**/*.js')
+		.pipe(changed(destDir))
+		.pipe(gulpBabel({
+			presets: [
+				[ '@babel/env', {
+					targets: {
+						// TODO: filter to only targets relevant for platforms we're building?
+						ios: minSupportedIosSdk,
+						chrome: chromeVersion
+					}
+				} ]
+			]
+		}))
+		.pipe(gulp.dest(destDir))
+		.on('end', () => resolve());
+	});
+}
+
+Packager.prototype.pruneToProduction = async function () {
+	return new Promise((resolve, reject) => {
+		console.log('Pruning to production npm dependencies');
+		exec('npm prune --production', { cwd: this.zipSDKDir }, (err, stdout, stderr) => {
+			if (err) {
+				console.log(stdout);
+				console.error(stderr);
+				return reject(err);
+			}
+			resolve();
+		});
+	});
+}
+
+Packager.prototype.removeNPMBinaries = async function () {
+	return fs.remove(path.join(this.zipSDKDir, 'node_modules', '.bin'));
+}
+
+/**
+ * Now include all the pre-built node-ios-device bindings/binaries
+ */
+Packager.prototype.packagePrebuiltNPMBinaries = async function () {
+	if (this.targetOS !== 'osx') {
+		return;
+	}
+	
+	let dir = path.join(this.zipSDKDir, 'node_modules', 'node-ios-device');
+	if (!fs.existsSync(dir)) {
+		dir = path.join(this.zipSDKDir, 'node_modules', 'ioslib', 'node_modules', 'node-ios-device');
+	}
+
+	if (!fs.existsSync(dir)) {
+		throw new Error('Unable to find node-ios-device module');
+	}
+	return new Promise((resolve, reject) => {
+		exec('node bin/download-all.js', { cwd: dir, stdio: 'inherit' }, (err, stdut, stderr) => {
+			if (err) {
+				console.log(stdout);
+				console.error(stderr);
+				return reject(err);
+			}
+			resolve();
+		});
+	});
+}
+
+/**
+ * @returns {Promise<void>}
+ */
+Packager.prototype.hackTitaniumSDKDependency = async function () {
+	// FIXME Remove these hacks for titanium-sdk when titanium-cli has been released and the tisdk3fixes.js hook is gone!
+	// Now copy over hacked titanium-sdk fake node_module	
+	console.log('Copying titanium-sdk node_module stub for backwards compatibility with titanium-cli');
+	await fs.copy(path.join(__dirname, 'titanium-sdk'), path.join(this.zipSDKDir, 'node_modules', 'titanium-sdk'));
+	
+	// Hack the package.json to include "titanium-sdk": "*" in dependencies
+	console.log('Inserting titanium-sdk as production dependency');
+	const packageJSON = await fs.readJson(path.join(this.zipSDKDir, 'package.json'));
+	packageJSON.dependencies['titanium-sdk'] = '*';
+	return fs.writeJson(path.join(this.zipSDKDir, 'package.json'), packageJSON);
+}
+
+Packager.prototype.copySupportFiles = async function () {
+	// FIXME: This isn't placing things in the right place!
+	// i.e. libtiverify.so from support/android/native/libs/*/libtiverify.so should go into dist/android/native/libs/*, but is instead going to:
+	// dist/support/android/native/libs/*
+	const globs = [ 'support/**', '!support/module/packaged/**', '!support/dev/**' ];
+
+	// if on OS that can't do ios, or we're not building ios, don't include it
+	if (this.targetOS === 'win32' || this.targetOS === 'linux' || 
+		!this.platforms.includes('ios') && !this.platforms.includes('iphone') && !this.platforms.includes('ipad')) {
+		globs.push('!support/iphone/**');
+	}
+	// if platforms doesn't contain "android", don't copy it!
+	if (!this.platforms.includes('android')) {
+		globs.push('!support/android/**');
+	}
+	
+	return this.copyChanged(globs);
+}
 
 /**
  * [package description]
- * @param {Function} next callback function
+ * @returns {Promise<void>}
  */
-Packager.prototype.package = function (next) {
+Packager.prototype.package = async function () {
 	console.log('Zipping Mobile SDK');
-	async.series([
-		this.cleanZipDir.bind(this),
-		this.generateManifestJSON.bind(this),
-		function (cb) {
-			console.log('Writing JSCA');
-			gulp.src(path.join(this.outputDir, 'api.jsca'))
-				.pipe(changed(this.zipSDKDir))
-				.pipe(gulp.dest(this.zipSDKDir))
-				.on('end', cb);
-		}.bind(this),
-		function (cb) {
-			console.log('Copying SDK files');
-			// Copy some root files, cli/, templates/, node_modules
-			gulp.src([ 'CREDITS', 'README.md', 'package.json', 'cli/**', 'node_modules/**', 'templates/**' ], {
-				cwd: this.srcDir,
-				base: '.'
-			})
-				.pipe(changed(this.zipSDKDir))
-				.pipe(gulp.dest(this.zipSDKDir))
-				.on('end', cb);
-		}.bind(this),
-		function (cb) {
-			console.log('Transpiling common SDK JS');
-			const destDir = path.join(this.zipSDKDir, 'common');
-			// Pull out android's V8 target (and transform into equivalent chrome version)
-			const v8Version = require('../android/package.json').v8.version;
-			const found = v8Version.match(V8_STRING_VERSION_REGEXP);
-			const chromeVersion = parseInt(found[1] + found[2]); // concat the first two numbers as string, then turn to int
-			// Now pull out min IOS target
-			const minSupportedIosSdk = version.parseMin(require('../iphone/package.json').vendorDependencies['ios sdk']);
-			gulp.src(this.srcDir + '/common/**/*.js')
-				.pipe(changed(destDir))
-				.pipe(gulpBabel({
-					presets: [
-						[ '@babel/env', {
-							targets: {
-								// TODO: filter to only targets relevant for platforms we're building?
-								ios: minSupportedIosSdk,
-								chrome: chromeVersion
-							}
-						} ]
-					]
-				}))
-				.pipe(gulp.dest(destDir))
-				.on('end', cb);
-		}.bind(this),
-		// Now run 'npm prune --production' on the zipSDKDir, so we retain only production dependencies
-		function (cb) {
-			console.log('Pruning to production npm dependencies');
-			exec('npm prune --production', { cwd: this.zipSDKDir }, function (err, stdout, stderr) {
-				if (err) {
-					console.log(stdout);
-					console.error(stderr);
-					return cb(err);
-				}
-				cb();
-			});
-		}.bind(this),
-		// Remove any remaining binary scripts from node_modules
-		function (cb) {
-			fs.remove(path.join(this.zipSDKDir, 'node_modules', '.bin'), cb);
-		}.bind(this),
-		// Now include all the pre-built node-ios-device bindings/binaries
-		function (cb) {
-			if (this.targetOS === 'osx') {
-				let dir = path.join(this.zipSDKDir, 'node_modules', 'node-ios-device');
+	// first let's ensure our output dir exists
+	await fs.ensureDir(this.zipSDKDir);
+	
+	// then in parallel, do a bunch of copying/transpiling, grabbing native modules
+	await Promise.all([
+		this.generateManifestJSON(),
+		this.copyJSCA(),
+		this.copyChanged([ 'CREDITS', 'README.md', 'package.json', 'cli/**', 'node_modules/**', 'templates/**' ]),
+		this.transpileCommonJS(),
+		this.includePackagedModules(),
+		this.copySupportFiles(),
+	]);
 
-				if (!fs.existsSync(dir)) {
-					dir = path.join(this.zipSDKDir, 'node_modules', 'ioslib', 'node_modules', 'node-ios-device');
-				}
-
-				if (!fs.existsSync(dir)) {
-					return cb(new Error('Unable to find node-ios-device module'));
-				}
-
-				exec('node bin/download-all.js', { cwd: dir, stdio: 'inherit' }, cb);
-
-			} else {
-				cb();
-			}
-		}.bind(this),
-		// FIXME Remove these hacks for titanium-sdk when titanium-cli has been released and the tisdk3fixes.js hook is gone!
-		// Now copy over hacked titanium-sdk fake node_module
-		function (cb) {
-			console.log('Copying titanium-sdk node_module stub for backwards compatibility with titanium-cli');
-			fs.copy(path.join(__dirname, 'titanium-sdk'), path.join(this.zipSDKDir, 'node_modules', 'titanium-sdk'), cb);
-		}.bind(this),
-		// Hack the package.json to include "titanium-sdk": "*" in dependencies
-		function (cb) {
-			console.log('Inserting titanium-sdk as production dependency');
-			const contents = fs.readFileSync(path.join(this.zipSDKDir, 'package.json')).toString(),
-				packageJSON = JSON.parse(contents);
-			packageJSON.dependencies['titanium-sdk'] = '*';
-			fs.writeJSON(path.join(this.zipSDKDir, 'package.json'), packageJSON, cb);
-		}.bind(this),
-		this.includePackagedModules.bind(this),
-		function (cb) {
-			var ignoreDirs = [ 'packaged', '.pyc' ];
-			ignoreDirs.push(path.join(SUPPORT_DIR, 'dev'));
-			// Copy support/ into root, but filter out folders based on OS
-			if (this.targetOS === 'win32') {
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'iphone'));
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'osx'));
-			} else if (this.targetOS === 'linux') {
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'iphone'));
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'osx'));
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'win32'));
-			} else if (this.targetOS === 'osx') {
-				ignoreDirs.push(path.join(SUPPORT_DIR, 'win32'));
-			}
-			fs.copy(SUPPORT_DIR, this.zipSDKDir, { filter: function (src) {
-				for (let x = 0; x < ignoreDirs.length; x++) {
-					if (src.indexOf(ignoreDirs[x]) !== -1) {
-						return false;
-					}
-				}
-				return true;
-			} }, cb);
-		}.bind(this),
-		function (cb) {
-			const tasks = [];
-			// Zip up all the platforms!
-			for (let i = 0; i < this.platforms.length; i++) {
-				tasks.push(this.packagers[this.platforms[i]]);
-			}
-			async.series(tasks, cb); // TODO Do parallel?
-		}.bind(this),
-		this.zip.bind(this)
-	], next);
+	// once done with above (specifically copying node_modules), then do in series:
+	await this.pruneToProduction();
+	await this.removeNPMBinaries();
+	await this.packagePrebuiltNPMBinaries();
+	await this.hackTitaniumSDKDependency();
+	
+	// zip the platforms
+	for (const platform of this.platforms) {
+		await this.packagers[platform]();
+	}
+	// zip it all up
+	await this.zip();
 };
 
 module.exports = Packager;

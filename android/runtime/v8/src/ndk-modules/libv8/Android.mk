@@ -13,10 +13,11 @@ endef
 
 include $(CLEAR_VARS)
 
+BASE_V8_DIR := $(LOCAL_PATH)/../../..
 # Read android/package.json to get v8 version and mode (release or debug)
 V8_VERSION=$(call GetFromPkg,v8.version)
 LIBV8_MODE := $(call GetFromPkg,v8.mode)
-LIBV8_DIR := $(TI_DIST_DIR)/android/libv8/$(V8_VERSION)/$(LIBV8_MODE)
+LIBV8_DIR := $(BASE_V8_DIR)/libv8/$(V8_VERSION)/$(LIBV8_MODE)
 
 # https://jira.appcelerator.org/browse/TIMOB-15263
 LOCAL_DISABLE_FORMAT_STRING_CHECKS=true

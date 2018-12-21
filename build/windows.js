@@ -12,21 +12,36 @@ function Windows(options) {
 	this.gitHash = options.gitHash;
 }
 
-Windows.prototype.clean = function (next) {
+/**
+ * @returns {Promise<void>}
+ */
+Windows.prototype.clean = function () {
 	// no-op
-	next();
+	return Promise.resolve();
 };
 
-Windows.prototype.build = function (next) {
+/**
+ * @returns {Promise<void>}
+ */
+Windows.prototype.build = function () {
 	// TODO Pull the zipfile down and extract it?
-	next();
+	return Promise.resolve();
 };
 
-Windows.prototype.package = function (packager, next) {
-	console.log('Zipping Windows platform...');
-	// Windows is already all in place. We should be careful to ignore folders/files that don't apply for OS
-	copyFile(packager.srcDir, packager.zipSDKDir, 'windows', next);
-
+/**
+ * @returns {Promise<void>}
+ */
+Windows.prototype.package = function (packager) {
+	return new Promise((resolve, reject) => {
+		console.log('Zipping Windows platform...');
+		// Windows is already all in place. We should be careful to ignore folders/files that don't apply for OS
+		copyFile(packager.srcDir, packager.zipSDKDir, 'windows', err => {
+			if (err) {
+				return reject(err);
+			}
+			resolve();
+		});
+	});
 };
 
 module.exports = Windows;

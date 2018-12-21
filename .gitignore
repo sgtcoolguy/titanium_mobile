@@ -17,6 +17,8 @@ node_modules/
 
 retirejs.output.json
 
+android/runtime/v8/libv8/
+
 support/ti_mocha_script/testApp
 
 /titanium-mobile-mocha-suite

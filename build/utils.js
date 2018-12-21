@@ -41,6 +41,7 @@ Utils.copyFiles = function (srcFolder, destFolder, files, next) {
 };
 
 Utils.globCopy = function (pattern, srcFolder, destFolder, next) {
+	// TODO Make use of gulp/gulp-changed?
 	glob(pattern, { cwd: srcFolder }, function (err, files) {
 		if (err) {
 			return next(err);
