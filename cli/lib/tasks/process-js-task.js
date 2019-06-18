@@ -2,6 +2,7 @@ const appc = require('node-appc');
 const { IncrementalFileTask } = require('appc-tasks');
 const crypto = require('crypto');
 const fs = require('fs-extra');
+const manifest = require('node-titanium-sdk').manifest;
 const jsanalyze = require('node-titanium-sdk/lib/jsanalyze');
 const path = require('path');
 const pLimit = require('p-limit');
@@ -46,7 +47,43 @@ class ProcessJsTask extends IncrementalFileTask {
 		this.jsFiles = options.jsFiles;
 		this.jsBootstrapFiles = options.jsBootstrapFiles;
 		this.sdkCommonFolder = options.sdkCommonFolder;
-		this.defaultAnalyzeOptions = options.defaultAnalyzeOptions;
+		this.defaultAnalyzeOptions = Object.assign({}, options.defaultAnalyzeOptions, {
+			// These are all the options used by the new transform-titanium plugin
+			platform: this.platform,
+			target: this.builder.target,
+			deploytype: this.builder.deployType,
+			// FIXME: Don't assign properties automatically if they can be undefined/null since that value may be taken literally
+			// i.e. url was not set in tiapp.xml, and became "" in generated code
+			Ti: {
+				App: {
+					copyright: this.builder.cli.tiapp.copyright,
+					deployType: this.builder.deployType,
+					description: this.builder.cli.tiapp.description,
+					guid: this.builder.cli.tiapp.guid,
+					id: this.builder.cli.tiapp.id,
+					name: this.builder.cli.tiapp.name,
+					publisher: this.builder.cli.tiapp.publisher,
+					url: this.builder.cli.tiapp.url,
+					version: this.builder.cli.tiapp.version,
+				},
+				Platform: {
+				// 	name: this.platform, // should be 'android', 'windows' or 'iOS' for iOS 10+, 'iPhone OS' for older?
+				// 	osname: '',
+				},
+				buildDate: manifest.timestamp,
+				buildHash: manifest.githash,
+				version: manifest.version,
+			}
+		});
+
+		if (this.platform === 'android') {
+			this.defaultAnalyzeOptions.Ti.Platform.name = 'android';
+			this.defaultAnalyzeOptions.Ti.Platform.osname = 'android';
+		} else if (this.platform === 'ios') {
+			// if ios, osname is 'ipad' or 'iphone'
+			// name is 'iOS' on iOS 10-12 - or on older versions, may be 'iPhone OS'
+			// what about ios 13+, 'iPadOS'?
+		}
 
 		this.dataFilePath = path.join(this.incrementalDirectory, 'data.json');
 		this.resetTaskData();
