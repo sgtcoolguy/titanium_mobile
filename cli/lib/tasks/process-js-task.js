@@ -52,8 +52,6 @@ class ProcessJsTask extends IncrementalFileTask {
 			platform: this.platform,
 			target: this.builder.target,
 			deploytype: this.builder.deployType,
-			// FIXME: Don't assign properties automatically if they can be undefined/null since that value may be taken literally
-			// i.e. url was not set in tiapp.xml, and became "" in generated code
 			Ti: {
 				App: {
 					copyright: this.builder.cli.tiapp.copyright,
