@@ -54,11 +54,23 @@ async function checkCommitMessages() {
 	const load = require('@commitlint/load');
 	const { rules, parserPreset } = await load();
 	const lint = require('@commitlint/lint');
+
+	let hasReference = false; // enforce at least one commit references at least one JIRA ticket
+	// TODO: Only enforce this if there's a JIRA ticket referenced in the PR body but none of the commits?
+	// What if commits reference tickets but PR body doesn't? Can we auto-insert it?
 	const allWarnings = await Promise.all(danger.git.commits.map(async commit => {
 		const report = await lint(commit.message, rules, parserPreset ? { parserOpts: parserPreset.parserOpts } : {});
 		// Bunch warnings/errors together for same commit!
 		const errorCount = report.errors.length;
-		const warningCount = report.warnings.length;
+		// ignore warnings about references, we will enforce that at the PR-level
+		// i.e. not *every* commit needs one, but at least one commit *must* have one
+		const filteredWarnings = report.warnings.filter(w => w.name !== 'references-empty');
+		const allWarningsCount = report.warnings.length;
+		const warningCount = filteredWarnings.length;
+		if (allWarningsCount === warningCount) {
+			hasReference = true;
+		}
+		// If warning is for 'references-empty', drop it, but enforce as an error if *none* of the commits has one?
 		if ((errorCount + warningCount) === 0) {
 			return [];
 		}
@@ -78,13 +90,16 @@ async function checkCommitMessages() {
 			msg += report.errors.map(e => e.message).join('\n- ');
 		}
 		if (warningCount > 0) {
-			msg += report.warnings.map(w => w.message).join('\n- ');
+			msg += filteredWarnings.map(w => w.message).join('\n- ');
 		}
 
 		return [ msg ];
 	}));
 	const flattened = [].concat(...allWarnings);
 	flattened.forEach(w => warn(w)); // propagate warnings/errors about commit conventions
+	if (!hasReference) {
+		fail('None of the commits has a reference ticket in the footer. Please ensure at least one commit references a JIRA ticket.');
+	}
 	if (flattened.length > 0) {
 		// at least one bad commit message, better to squash this one
 		message(':rotating_light: This PR has one or more commits with warnings/errors for commit messages not matching our configuration. You may want to squash merge this PR and edit the message to match our conventions, or ask the original developer to modify their history.');
@@ -103,6 +118,7 @@ async function checkJIRA() {
 		warn('There is no linked JIRA ticket in the PR body. Please include the URL of the relevant JIRA ticket. If you need to, you may file a ticket on ' + danger.utils.href('https://jira.appcelerator.org/secure/CreateIssue!default.jspa', 'JIRA'));
 	} else {
 		labelsToRemove.add(Label.NEEDS_JIRA);
+		// TODO: Return the JIRA ticket(s) linked in the body!
 	}
 }
 
