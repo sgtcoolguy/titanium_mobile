@@ -6,16 +6,21 @@
  */
 const buffer = Ti.createBuffer({ value: '' });
 const blob = buffer.toBlob();
+const BlobPrototype = Object.getPrototypeOf(blob);
+// FIXME: This doesn't "stick" for iOS. Probably need to implement it natively.
 // Web Blob has an arrayBuffer() method that returns a Promise
 // https://developer.mozilla.org/en-US/docs/Web/API/Blob/arrayBuffer
-blob.constructor.prototype.arrayBuffer = function () {
-	return new Promise((resolve, reject) => {
-		let buf;
-		try {
-			buf = this.toArrayBuffer();
-		} catch (err) {
-			return reject(err);
-		}
-		resolve(buf);
-	});
-};
+Object.defineProperty(BlobPrototype, 'arrayBuffer', {
+	value: function () {
+		return new Promise((resolve, reject) => {
+			let buf;
+			try {
+				buf = this.toArrayBuffer();
+			} catch (err) {
+				return reject(err);
+			}
+			resolve(buf);
+		});
+	},
+	enumerable: true
+});
