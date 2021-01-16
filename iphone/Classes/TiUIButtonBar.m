@@ -180,7 +180,7 @@
 
 - (void)setStyle_:(id)value
 {
-  DebugLog(@"[WARN] The style property has been deprecated in 3.4.2 and no longer has any effect");
+  // Ignore "style" assignment on iOS. (Only supported on Android.)
 }
 
 - (void)setLabels_:(id)value
@@ -231,6 +231,9 @@
   }
 
   if (![segmentedControl isMomentary]) {
+    if ((selectedIndex < 0) && (segmentedControl.numberOfSegments > 0)) {
+      selectedIndex = 0;
+    }
     [segmentedControl setSelectedSegmentIndex:selectedIndex];
   }
 }

@@ -6735,6 +6735,7 @@ iOSBuilder.prototype.processTiSymbols = function processTiSymbols() {
 				'USE_TI_UIMASKEDIMAGE',
 				'USE_TI_UIPROGRESSBAR',
 				'USE_TI_UIACTIVITYINDICATOR',
+				'USE_TI_UIOPTIONBAR',
 				'USE_TI_UISWITCH',
 				'USE_TI_UISLIDER',
 				'USE_TI_UITEXTFIELD',
