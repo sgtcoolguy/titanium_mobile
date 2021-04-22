@@ -23,6 +23,16 @@
       "extends": [ "axway/env-titanium" ]
     },
     {
+      "files": [ "build/lib/test/test.mjs", "build/lib/test/index.mjs", "build/lib/builder.mjs", "build/scons-cleanbuild.mjs" ],
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+      },
+      "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+      }
+    },
+    {
       "files": [ "common/Resources/**/*.js" ],
       "extends": [ "axway/env-titanium" ],
       "parserOptions": {
